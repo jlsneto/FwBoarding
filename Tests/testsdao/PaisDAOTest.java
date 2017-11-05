@@ -1,10 +1,10 @@
-package model.dao;
+package testsdao;
 
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class NavioDAOTest {
+public class PaisDAOTest {
 
 	@Test
 	public void test() {

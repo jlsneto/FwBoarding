@@ -1,4 +1,4 @@
-package model.bo;
+package model;
 
 public class Navio {
 
