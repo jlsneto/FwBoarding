@@ -34,6 +34,7 @@ public class ClassePrincipal extends Application {
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
 			primaryStage.show();
+			
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

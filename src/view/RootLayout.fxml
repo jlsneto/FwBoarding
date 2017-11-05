@@ -11,7 +11,7 @@
         <menus>
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>
-              <MenuItem fx:id="MenuItemCadastrarNavio" mnemonicParsing="false" text="Cadastrar Navio" />
+              <MenuItem fx:id="MenuItemCadastrarNavio" mnemonicParsing="false" onAction="#abrirTelaCadastro" text="Cadastrar Navio" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
