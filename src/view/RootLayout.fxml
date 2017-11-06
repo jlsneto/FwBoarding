@@ -5,9 +5,9 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.ControllerRootLayout">
    <top>
-      <MenuBar BorderPane.alignment="CENTER">
+      <MenuBar prefWidth="666.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="Arquivo">
             <items>

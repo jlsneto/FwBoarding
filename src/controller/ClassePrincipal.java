@@ -30,6 +30,7 @@ public class ClassePrincipal extends Application {
 			loader.setLocation(ClassePrincipal.class.getResource("/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 			
+			
 			//Exibe a scene que contêm o rootlayout
 			Scene scene = new Scene(rootLayout);
 			primaryStage.setScene(scene);
