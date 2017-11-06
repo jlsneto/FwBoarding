@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import model.Navio;
+import model.domain.Navio;
 
 public class NavioTest {
 
