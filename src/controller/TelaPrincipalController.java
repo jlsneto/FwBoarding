@@ -56,6 +56,7 @@ public class TelaPrincipalController implements Initializable {
 
 		// Define a TelaConsultas no centro do root layout.
 		ClassePrincipal.rootLayout.setCenter(navio);
+		
 	}
 
 	public void clickOnNavio(ActionEvent event) throws IOException {
