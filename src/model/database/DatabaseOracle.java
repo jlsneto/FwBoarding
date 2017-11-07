@@ -12,7 +12,7 @@ public class DatabaseOracle implements Database {
 	public Connection conectar() {
 
 		// Param de conexão
-		String server = "255.255.255.255";
+		String server = "localhost";
 		String port = "1521";
 		String database = "XE";
 

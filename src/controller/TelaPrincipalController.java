@@ -1,50 +1,72 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import fwboarding.ClassePrincipal;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
+import javafx.scene.layout.AnchorPane;
 
 public class TelaPrincipalController implements Initializable {
-	
-    @FXML
-    private Menu menuGeral;
 
-    @FXML
-    private MenuItem menuItemGeralNavio;
+	@FXML
+	private Menu menuGeral;
 
-    @FXML
-    private Menu menuGeralGrupoUsuarios;
+	@FXML
+	private MenuItem menuItemGeralNavio;
 
-    @FXML
-    private MenuItem menuItemGrupoUsuariosGrupos;
+	@FXML
+	private Menu menuGeralGrupoUsuarios;
 
-    @FXML
-    private Menu menuGeralUsuarios;
+	@FXML
+	private MenuItem menuItemGrupoUsuariosGrupos;
 
-    @FXML
-    private MenuItem menuItemUsuariosUsuarios;
+	@FXML
+	private Menu menuGeralUsuarios;
 
-    @FXML
-    private MenuItem menuItemUsuariosTrocarUsuario;
+	@FXML
+	private MenuItem menuItemUsuariosUsuarios;
 
-    @FXML
-    private MenuItem menuItemGeralSair;
+	@FXML
+	private MenuItem menuItemUsuariosTrocarUsuario;
 
-    @FXML
-    private Menu menuEmbarques;
+	@FXML
+	private MenuItem menuItemGeralSair;
 
-    @FXML
-    private MenuItem menuItemNovoEmbarque;
+	@FXML
+	private Menu menuEmbarques;
 
-    @FXML
-    private Menu menuRelatorios;
+	@FXML
+	private MenuItem menuItemNovoEmbarque;
+
+	@FXML
+	private Menu menuRelatorios;
+
+	public void initTelaNavio() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("/view/TelaConsultas.fxml"));
+		AnchorPane navio = (AnchorPane) loader.load();
+
+		// Define a TelaConsultas no centro do root layout.
+		ClassePrincipal.rootLayout.setCenter(navio);
+	}
+
+	public void clickOnNavio(ActionEvent event) throws IOException {
+
+		initTelaNavio();
+
+	}
+
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
