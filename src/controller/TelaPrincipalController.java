@@ -12,6 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import jdk.nashorn.internal.ir.CatchNode;
 
 public class TelaPrincipalController implements Initializable {
 
@@ -62,7 +63,7 @@ public class TelaPrincipalController implements Initializable {
 	public void clickOnNavio(ActionEvent event) throws IOException {
 
 		initTelaNavio();
-
+		
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
