@@ -16,7 +16,7 @@ public class ClassePrincipal extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		this.stage = stage;
-
+		
 		initRootLayout();
 
 	}

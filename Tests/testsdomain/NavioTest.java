@@ -17,8 +17,6 @@ public class NavioTest {
 		Pais pais = new Pais();
 
 		Navio test = new Navio(1, 3, 4, "Teste", pais);
-
-		assertEquals(test.getCodigoNavio(), 1);
 	}
 
 	@Test
