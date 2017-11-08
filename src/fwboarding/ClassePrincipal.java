@@ -16,13 +16,15 @@ public class ClassePrincipal extends Application {
 	@Override
 	public void start(Stage stage) throws IOException {
 		this.stage = stage;
-		
+
 		initRootLayout();
 
 	}
 
 	public void initRootLayout() {
 		try {
+			
+			//Carrega Tela Principal
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource("/view/TelaPrincipal.fxml"));
 			rootLayout = (BorderPane) loader.load();
