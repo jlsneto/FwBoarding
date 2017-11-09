@@ -1,18 +1,18 @@
 package model.domain;
 
 public class Pais {
-	private int codigoPais;
+	private long codigoPais;
 	private String ddi;
 	private String iso;
 	private String iso3;
 	private String nome;
 	private String nomeFormal;
 
-	public int getCodigoPais() {
+	public long getCodigoPais() {
 		return codigoPais;
 	}
 
-	public void setCodigoPais(int codigoPais) {
+	public void setCodigoPais(long codigoPais) {
 		this.codigoPais = codigoPais;
 	}
 

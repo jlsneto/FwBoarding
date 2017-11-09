@@ -1,31 +1,31 @@
 package model.domain;
 
 public class Navio {
-
-	private int codigoNavio;
+	
+	private long codigoNavio;
+	private String descricaoNavio;
 	private int qtdPorao;
 	private float capacidadePorao;
-	private String descricaoNavio;
-	private Pais codigoPais;
+	private Pais pais;
 
 	public Navio() {
 
 	}
 
-	public Navio(int codigoNavio, int qtdPorao, float capacidadePorao, String descricaoNavio, Pais codigoPais) {
+	public Navio(long codigoNavio, int qtdPorao, float capacidadePorao, String descricaoNavio, Pais pais) {
 		super();
 		this.codigoNavio = codigoNavio;
 		this.qtdPorao = qtdPorao;
 		this.capacidadePorao = capacidadePorao;
 		this.descricaoNavio = descricaoNavio;
-		this.codigoPais = codigoPais;
+		this.pais = pais;
 	}
 
-	public int getCodigoNavio() {
+	public long getCodigoNavio() {
 		return codigoNavio;
 	}
 
-	public void setCodigoNavio(int codigoNavio) {
+	public void setCodigoNavio(long codigoNavio) {
 		this.codigoNavio = codigoNavio;
 	}
 
@@ -45,12 +45,12 @@ public class Navio {
 		this.descricaoNavio = descricaoNavio;
 	}
 
-	public Pais getCodigoPais() {
-		return codigoPais;
+	public Pais getPais() {
+		return pais;
 	}
 
-	public void setCodigoPais(Pais codigoPais) {
-		this.codigoPais = codigoPais;
+	public void setPais(Pais pais) {
+		this.pais = pais;
 	}
 
 	public float getCapacidadePorao() {
