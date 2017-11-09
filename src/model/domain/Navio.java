@@ -5,14 +5,14 @@ public class Navio {
 	private long codigoNavio;
 	private String descricaoNavio;
 	private int qtdPorao;
-	private float capacidadePorao;
+	private double capacidadePorao;
 	private Pais pais;
 
 	public Navio() {
 
 	}
 
-	public Navio(long codigoNavio, int qtdPorao, float capacidadePorao, String descricaoNavio, Pais pais) {
+	public Navio(long codigoNavio, int qtdPorao, double capacidadePorao, String descricaoNavio, Pais pais) {
 		super();
 		this.codigoNavio = codigoNavio;
 		this.qtdPorao = qtdPorao;
@@ -53,11 +53,11 @@ public class Navio {
 		this.pais = pais;
 	}
 
-	public float getCapacidadePorao() {
+	public double getCapacidadePorao() {
 		return capacidadePorao;
 	}
 
-	public void setCapacidadePorao(float capacidadePorao) {
+	public void setCapacidadePorao(double capacidadePorao) {
 		this.capacidadePorao = capacidadePorao;
 	}
 

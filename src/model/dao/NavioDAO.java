@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+
 import model.domain.Navio;
+import model.domain.Pais;
 
 public class NavioDAO {
 
@@ -36,7 +38,7 @@ public class NavioDAO {
 
 			stmt.setString(1, navio.getDescricaoNavio());
 			stmt.setLong(2, navio.getQtdPorao());
-			stmt.setFloat(3, navio.getCapacidadePorao());
+			stmt.setDouble(3, navio.getCapacidadePorao());
 			stmt.setLong(4, navio.getPais().getCodigoPais());
 			stmt.execute();
 			return true;
@@ -50,7 +52,9 @@ public class NavioDAO {
 
 	public List<Navio> listar() {
 
-		String sql = "SELECT * FROM CADNAVIO";
+		String sql = "SELECT * FROM CADNAVIO "
+				   + "INNER JOIN CADPAIS "
+				   + "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS";
 
 		List<Navio> lista = new ArrayList<>();
 
@@ -62,12 +66,16 @@ public class NavioDAO {
 			while (listaResultado.next()) {
 
 				Navio navio = new Navio();
-
-				navio.setCodigoNavio(listaResultado.getLong("CODIGOPAIS"));
+				Pais pais = new Pais();
+				
+				navio.setCodigoNavio(listaResultado.getLong("CODIGONAVIO"));
 				navio.setDescricaoNavio(listaResultado.getString("DESCRICAO"));
 				navio.setQtdPorao(listaResultado.getInt("QTDPORAO"));
-				navio.setCapacidadePorao(listaResultado.getFloat("CAPACIDADEPORAO"));
-				navio.getPais().setCodigoPais(listaResultado.getLong("CODIGOPAISORIGEM"));
+				navio.setCapacidadePorao(listaResultado.getDouble("CAPACIDADEPORAO"));
+				pais.setCodigoPais(listaResultado.getInt("CODIGOPAIS"));
+				pais.setNome(listaResultado.getString("NOME"));
+				navio.setPais(pais);
+				
 				lista.add(navio);
 			}
 
