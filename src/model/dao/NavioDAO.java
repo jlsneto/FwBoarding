@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import model.domain.Navio;
 import model.domain.Pais;
 
+
 public class NavioDAO {
 
 	private Connection conn;
@@ -35,7 +36,7 @@ public class NavioDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
 
 			// Verificar Questão do autoincremento do oracle
-
+			
 			stmt.setString(1, navio.getDescricaoNavio());
 			stmt.setLong(2, navio.getQtdPorao());
 			stmt.setDouble(3, navio.getCapacidadePorao());

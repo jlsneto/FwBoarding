@@ -4,6 +4,8 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import view.DialogAlerta;
+
 public class DatabaseOracle implements Database {
 
 	private Connection conn;
@@ -28,7 +30,10 @@ public class DatabaseOracle implements Database {
 			this.conn = DriverManager.getConnection(url, user, passwd);
 			return this.conn;
 		} catch (SQLException ex) {
-			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, null, ex);
+			DialogAlerta Error = new DialogAlerta();
+			Error.DialogError("Erro ", getClass().getName(), "teste");
+			String msg = "Erro ao conectar no Banco";
+			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, msg, ex);
 			return null;
 		}
 
