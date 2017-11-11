@@ -79,6 +79,8 @@ public class TelaConsultasController implements Initializable {
 			// Setar conexão no objeto navioDao que foi aberta
 			navioDAO.setConnection(conn);
 			carregarTableViewNavio();
+			DialogAlerta dialogErro = new DialogAlerta();
+			dialogErro.DialogError("Erro de Inserção", "Erro ao tentar gravar Navio!", "Melhorar esse erro!");
 
 
 	}
