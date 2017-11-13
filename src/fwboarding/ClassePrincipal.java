@@ -5,8 +5,10 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import view.DialogErro;
 
 public class ClassePrincipal extends Application {
 
@@ -33,7 +35,9 @@ public class ClassePrincipal extends Application {
 
 			stage.setScene(scene);
 			stage.setTitle("FwBoarding");
-			stage.setMaximized(true);
+			//stage.setMaximized(true);
+			stage.getIcons().add(new Image(this.getClass().getResource("/view/images/icons/IconNavio.png").toString()));
+
 			stage.show();
 
 		} catch (Exception e) {

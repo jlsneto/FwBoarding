@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -12,7 +11,7 @@ import java.util.logging.Logger;
 
 import model.domain.Navio;
 import model.domain.Pais;
-import view.DialogAlerta;
+import view.DialogErro;
 
 public class NavioDAO {
 
@@ -41,19 +40,39 @@ public class NavioDAO {
 			stmt.setDouble(3, navio.getCapacidadePorao());
 			stmt.setLong(4, navio.getPais().getCodigoPais());
 			stmt.execute();
+			System.out.println("Inserido!");
 			return true;
 
 		} catch (SQLException e) {
-			
-			String msg = "Erro ao inserir Navio";			
+
+			String msg = "Erro ao inserir Navio";
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, msg, e);
+			return false;
+		}
+	}
+
+	public boolean validaDescricao(String descricao) {
+		String sql = "SELECT DESCRICAO FROM CADNAVIO " + "WHERE DESCRICAO = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, descricao);
+			ResultSet listaResultado = stmt.executeQuery();
+			if (listaResultado.next() == true) {
+				return false;
+			}
+
+			else {
+				return true;
+			}
+		} catch (SQLException e) {
+			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 			return false;
 		}
 	}
 
 	public List<Navio> listar() {
 
-		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "
+		String sql = "SELECT * FROM CADNAVIO" + "INNER JOIN CADPAIS "
 				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS";
 
 		List<Navio> lista = new ArrayList<>();
@@ -80,15 +99,16 @@ public class NavioDAO {
 				pais.setDdi(listaResultado.getString("DDI"));
 				pais.setIso(listaResultado.getString("ISO"));
 				pais.setIso3(listaResultado.getString("ISO3"));
-				
+
 				navio.setPais(pais);
 
 				lista.add(navio);
 			}
 
 		} catch (SQLException e) {
-			String msg = "Erro ao Listar Navios";
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, msg, e);
+			DialogErro erro = new DialogErro();		
+			erro.DialogError("Título", "Header", e.getMessage());
+			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return lista;
 	}

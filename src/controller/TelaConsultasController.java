@@ -25,7 +25,7 @@ import model.database.Database;
 import model.database.DatabaseFactory;
 import model.domain.Navio;
 import model.domain.Pais;
-import view.DialogAlerta;
+import view.DialogErro;
 
 public class TelaConsultasController implements Initializable {
 
@@ -79,8 +79,8 @@ public class TelaConsultasController implements Initializable {
 			// Setar conexão no objeto navioDao que foi aberta
 			navioDAO.setConnection(conn);
 			carregarTableViewNavio();
-			DialogAlerta dialogErro = new DialogAlerta();
-			dialogErro.DialogError("Erro de Inserção", "Erro ao tentar gravar Navio!", "Melhorar esse erro!");
+			//DialogAlerta dialogErro = new DialogAlerta();
+			//dialogErro.DialogError("Erro de Inserção", "Erro ao tentar gravar Navio!", "Melhorar esse erro!");
 
 
 	}
