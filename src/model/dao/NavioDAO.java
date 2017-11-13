@@ -107,7 +107,7 @@ public class NavioDAO {
 
 		} catch (SQLException e) {
 			DialogErro erro = new DialogErro();		
-			erro.DialogError("Título", "Header", e.getMessage());
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getMessage(),sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return lista;

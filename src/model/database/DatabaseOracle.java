@@ -14,26 +14,23 @@ public class DatabaseOracle implements Database {
 	public Connection conectar() {
 
 		// Param de conexão
-		String server = "localhost";
+		String server = "localhos";
 		String port = "1521";
 		String database = "XE";
 
 		// Param de auth
 		String user = "empat";
 		String passwd = "teste123";
-
+		String url = "jdbc:oracle:thin:@" + server + ":" + port + ":" + database;
 		try {
-
-			String url = "jdbc:oracle:thin:@" + server + ":" + port + ":" + database;
-
 			// Abrir conexão com DB
 			this.conn = DriverManager.getConnection(url, user, passwd);
 			return this.conn;
-		} catch (SQLException ex) {
-			DialogErro Error = new DialogErro();
-			Error.DialogError("Erro ", getClass().getName(), "teste");
-			String msg = "Erro ao conectar no Banco";
-			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, msg, ex);
+		} catch (SQLException e) {
+			
+			DialogErro erro = new DialogErro();		
+			erro.DialogError("SQLException", "Erro ao conectar no banco de Dados",e.getMessage(),"Verificar Conexão com o banco de dados!");
+			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
 
