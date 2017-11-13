@@ -19,11 +19,31 @@
 	
 		<mkdir dir="externalLibs" />
 	
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\joab.neto\Documents\Projetos Git\FwBoarding\lib">
+				<filename name="ojdbc6.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\joab.neto\.p2\pool\plugins">
+				<filename name="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\joab.neto\.p2\pool\plugins\org.junit_4.12.0.v201504281640">
+				<filename name="junit.jar"/>
+			</fileset>
+		</copy>
 	
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="C:\Users\SRX\git\ProjetoPOO\Projeto-POO-Time-A">
+			<fileset dir="C:\Users\joab.neto\Documents\Projetos Git\FwBoarding">
 				<include name="src/**" />
+			</fileset>
+		</copy>
+		<copy todir="project">
+			<fileset dir="C:\Users\joab.neto\Documents\Projetos Git\FwBoarding">
+				<include name="Tests/**" />
 			</fileset>
 		</copy>
 	
@@ -38,6 +58,9 @@
 		<!-- Copy project-libs references -->
 		<copy todir="build/libs">
 			<fileset dir="externalLibs">
+				<include name="org.hamcrest.core_1.3.0.v201303031735.jar"/>
+				<include name="junit.jar"/>
+				<include name="ojdbc6.jar"/>
 			</fileset>
 		</copy>
 	
@@ -46,6 +69,11 @@
 		<!-- Copy project sources itself -->
 		<copy todir="build/src">
 			<fileset dir="project/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="project/Tests">
 				<include name="**/*"/>
 			</fileset>
 		</copy>
@@ -61,6 +89,9 @@
 		<!-- Copy over none Java-Files -->
 		<copy todir="build/classes">
 		<fileset dir="project/src">
+			<exclude name="**/*.java"/>
+		</fileset>
+		<fileset dir="project/Tests">
 			<exclude name="**/*.java"/>
 		</fileset>
 		</copy>
@@ -88,7 +119,7 @@
 	
 		<fx:application id="fxApplication"
 			name=""
-			mainClass=""
+			mainClass="fwboarding.ClassePrincipal"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
