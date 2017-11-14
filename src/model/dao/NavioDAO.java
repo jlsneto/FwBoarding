@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 
 import model.domain.Navio;
 import model.domain.Pais;
-import view.DialogErro;
+import view.ConstruirDialog;
 
 public class NavioDAO {
 
@@ -72,7 +72,7 @@ public class NavioDAO {
 
 	public List<Navio> listar() {
 
-		String sql = "SELECT * FROM CADNAVIO" + "INNER JOIN CADPAIS "
+		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "
 				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS";
 
 		List<Navio> lista = new ArrayList<>();
@@ -106,8 +106,8 @@ public class NavioDAO {
 			}
 
 		} catch (SQLException e) {
-			DialogErro erro = new DialogErro();		
-			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getMessage(),sql);
+			ConstruirDialog erro = new ConstruirDialog();		
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getErrorCode(),e.getMessage(),sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
 		return lista;

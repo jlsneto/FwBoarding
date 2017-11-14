@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import view.DialogErro;
+import view.ConstruirDialog;
 
 public class DatabaseOracle implements Database {
 
@@ -28,8 +28,8 @@ public class DatabaseOracle implements Database {
 			return this.conn;
 		} catch (SQLException e) {
 			
-			DialogErro erro = new DialogErro();		
-			erro.DialogError("SQLException", "Erro ao conectar no banco de Dados",e.getMessage(),"Verificar Conexão com o banco de dados!");
+			ConstruirDialog erro = new ConstruirDialog();		
+			erro.DialogError("SQLException", "Erro ao conectar no banco de Dados",e.getErrorCode(),e.getMessage(),"Verificar Conexão com o banco de dados!");
 			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}

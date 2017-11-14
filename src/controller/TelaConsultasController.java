@@ -6,15 +6,14 @@ import java.sql.Connection;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import fwboarding.ClassePrincipal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -25,7 +24,6 @@ import model.database.Database;
 import model.database.DatabaseFactory;
 import model.domain.Navio;
 import model.domain.Pais;
-import view.DialogErro;
 
 public class TelaConsultasController implements Initializable {
 
@@ -75,13 +73,10 @@ public class TelaConsultasController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+			
 			// Setar conexão no objeto navioDao que foi aberta
 			navioDAO.setConnection(conn);
 			carregarTableViewNavio();
-			//DialogAlerta dialogErro = new DialogAlerta();
-			//dialogErro.DialogError("Erro de Inserção", "Erro ao tentar gravar Navio!", "Melhorar esse erro!");
-
 
 	}
 
@@ -94,7 +89,7 @@ public class TelaConsultasController implements Initializable {
 		// TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("nome"));
 
 		listNavio = navioDAO.listar();
-
+		
 		observableListNavio = FXCollections.observableArrayList(listNavio);
 		TableColumnNavio.setItems(observableListNavio);
 

@@ -7,15 +7,15 @@ import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 
-public class DialogErro {
+public class ConstruirDialog {
 
-	public void DialogError(String titulo, String header, String Content, String detalhes) {
+	public void DialogError(String tituloJanela, String tituloErro,int codigoErro, String erro, String detalhes) {
 
 		Alert alert = new Alert(AlertType.ERROR);
-		alert.setTitle(titulo);
-		alert.setHeaderText(header);
-		alert.setContentText(Content);
-		
+		alert.setTitle(tituloJanela);
+		alert.setHeaderText(tituloErro);
+		alert.setContentText("ORA-"+codigoErro+": "+erro);
+
 		Label label = new Label("Detalhes ");
 
 		TextArea textArea = new TextArea(detalhes);
@@ -34,7 +34,7 @@ public class DialogErro {
 
 		// Set expandable Exception into the dialog pane.
 		alert.getDialogPane().setExpandableContent(expContent);
-		
+
 		alert.showAndWait();
 	}
 }

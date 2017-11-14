@@ -5,8 +5,6 @@ import static org.junit.Assert.*;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import org.junit.Test;
 
 import model.dao.NavioDAO;
@@ -14,7 +12,6 @@ import model.database.Database;
 import model.database.DatabaseFactory;
 import model.domain.Navio;
 import model.domain.Pais;
-import view.DialogErro;
 
 public class NavioDAOTest {
 
@@ -34,11 +31,10 @@ public class NavioDAOTest {
 		
 		pais.setCodigoPais(76);
 		boolean inserido = false;
-		
+		Scanner entrada = new Scanner(System.in);
 		
 		do {
 			System.out.println("Descricao do Navio: ");
-			Scanner entrada = new Scanner(System.in);
 			descricaoNavio = entrada.nextLine();
 			descricaoNavio = descricaoNavio.toUpperCase();
 			Navio navio = new Navio(35,3,5000,descricaoNavio,pais);
@@ -52,7 +48,7 @@ public class NavioDAOTest {
 			}
 		}while(inserido == false);
 		
-		
+		entrada.close();
 	}
 	
 	@Test
