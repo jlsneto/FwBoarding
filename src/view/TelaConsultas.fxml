@@ -19,7 +19,7 @@
                     <buttons>
                         <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" text="Excluir" />
                         <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" text="Alterar" />
-                      <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" text="Incluir" />
+                      <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" text="Incluir" />
                     </buttons>
                   </ButtonBar>
                </children>

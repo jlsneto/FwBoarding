@@ -1,11 +1,13 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import fwboarding.ClassePrincipal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -65,12 +67,15 @@ public class TelaConsultasController implements Initializable {
 	private final Connection conn = database.conectar();
 	private final NavioDAO navioDAO = new NavioDAO();
 
+	private List<NavioObservableList> listaNavio;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-			
-			// Setar conexão no objeto navioDao que foi aberta
-			navioDAO.setConnection(conn);
-			carregarTableViewNavio();
+
+		// Setar conexão no objeto navioDao que foi aberta
+		navioDAO.setConnection(conn);
+		listaNavio = listarNavio();
+		carregarTableViewNavio();
 
 	}
 
@@ -78,25 +83,31 @@ public class TelaConsultasController implements Initializable {
 
 		TableColumnNavioCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoNavio"));
 		TableColumnNavioDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
-		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("paisDescricao"));		
-		
-		observableListNavio = FXCollections.observableArrayList(listaNavio());
+		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("paisDescricao"));
+
+		observableListNavio = FXCollections.observableArrayList(listaNavio);
 
 		TableColumnNavio.setItems(observableListNavio);
 
 	}
-	
-    private List<NavioObservableList> listaNavio() {
-    	List<NavioObservableList> listNavio = new ArrayList<>();
-    	
-			for(Navio i : navioDAO.listar()) {
-				
-				NavioObservableList navio = new NavioObservableList(i.getCodigoNavio(), i.getDescricaoNavio(), i.getPais().getNome());
-		
-				listNavio.add(navio);
-				
-			}
+
+	private List<NavioObservableList> listarNavio() {
+		List<NavioObservableList> listNavio = new ArrayList<>();
+
+		for (Navio i : navioDAO.listar()) {
+
+			NavioObservableList navio = new NavioObservableList(i.getCodigoNavio(), i.getDescricaoNavio(),
+					i.getPais().getNome());
+
+			listNavio.add(navio);
+
+		}
 
 		return listNavio;
-    }
+	}
+
+	@FXML
+	public void clickOnIncluir() throws IOException {
+		ClassePrincipal.carregarTelaCadastroNavio();
+	}
 }

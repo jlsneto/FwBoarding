@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
@@ -13,7 +14,7 @@
          <children>
             <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <menus>
-                <Menu fx:id="menuGeral" mnemonicParsing="false" text="Geral">
+                <Menu fx:id="menuGeral" mnemonicParsing="false" text="_Geral">
                   <items>
                     <MenuItem fx:id="menuItemGeralNavio" mnemonicParsing="false" onAction="#clickOnNavio" text="Navio" />
                         <Menu fx:id="menuGeralUsuarios" mnemonicParsing="false" text="Usuários">
@@ -23,7 +24,7 @@
                               <MenuItem fx:id="menuItemUsuariosTrocarUsuario" mnemonicParsing="false" text="Trocar de Usuário" />
                           </items>
                         </Menu>
-                        <MenuItem fx:id="menuItemGeralSair" mnemonicParsing="false" text="Sair" />
+                        <MenuItem fx:id="menuItemGeralSair" mnemonicParsing="false" onAction="#onExit" text="Sair" />
                   </items>
                 </Menu>
                 <Menu fx:id="menuEmbarques" mnemonicParsing="false" text="Embarques">
@@ -48,6 +49,7 @@
       <AnchorPane prefHeight="36.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
             <Separator prefHeight="3.0" prefWidth="600.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+            <Label fx:id="labelCopyright" alignment="CENTER" layoutX="244.0" layoutY="10.0" opacity="0.44" prefHeight="36.0" prefWidth="600.0" text="Copyright: FlowTeam" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
          </children></AnchorPane>
    </bottom>
    <left>

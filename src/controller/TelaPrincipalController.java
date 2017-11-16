@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import fwboarding.ClassePrincipal;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -53,21 +54,26 @@ public class TelaPrincipalController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/view/TelaConsultas.fxml"));
 		AnchorPane navio = (AnchorPane) loader.load();
-
 		// Define a TelaConsultas no centro do root layout.
 		ClassePrincipal.rootLayout.setCenter(navio);
-		
+
 	}
 
 	public void clickOnNavio(ActionEvent event) throws IOException {
-		
+
 		initTelaNavio();
-		
+
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@FXML
+	public void onExit() {
+		//Sair
+		Platform.exit();
 	}
 
 }
