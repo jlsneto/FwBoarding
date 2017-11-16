@@ -1,4 +1,4 @@
-package testsdomain;
+package tetsvo;
 
 import static org.junit.Assert.*;
 
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import model.domain.Navio;
+import model.vo.Navio;
 
 public class NavioTest {
 

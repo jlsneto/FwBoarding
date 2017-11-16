@@ -1,4 +1,4 @@
-package model.domain;
+package model.vo;
 
 public class Pais {
 	private long codigoPais;

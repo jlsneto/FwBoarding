@@ -2,18 +2,16 @@ package controller;
 
 import java.net.URL;
 import java.sql.Connection;
-
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import fwboarding.ClassePrincipal;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
-import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -22,8 +20,9 @@ import javafx.scene.layout.BorderPane;
 import model.dao.NavioDAO;
 import model.database.Database;
 import model.database.DatabaseFactory;
-import model.domain.Navio;
-import model.domain.Pais;
+import model.vo.Navio;
+import model.vo.NavioObservableList;
+import model.vo.Pais;
 
 public class TelaConsultasController implements Initializable {
 
@@ -49,7 +48,7 @@ public class TelaConsultasController implements Initializable {
 	private Button ButtonBarButtonIncluir;
 
 	@FXML
-	private TableView<Navio> TableColumnNavio;
+	private TableView<NavioObservableList> TableColumnNavio;
 
 	@FXML
 	private TableColumn<Navio, String> TableColumnNavioCodigo;
@@ -60,13 +59,8 @@ public class TelaConsultasController implements Initializable {
 	@FXML
 	private TableColumn<Pais, String> TableColumnNavioPais;
 
-	private List<Navio> listNavio;
-	private ObservableList<Navio> observableListNavio;
+	private ObservableList<NavioObservableList> observableListNavio;
 
-	/*
-	 * Verificar como Ficará a listagem de pais na tela navio private List<Pais>
-	 * listPais; private ObservableList<Pais> observableListPais;
-	 */
 	private final Database database = DatabaseFactory.getDatabase("oracle");
 	private final Connection conn = database.conectar();
 	private final NavioDAO navioDAO = new NavioDAO();
@@ -84,14 +78,25 @@ public class TelaConsultasController implements Initializable {
 
 		TableColumnNavioCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoNavio"));
 		TableColumnNavioDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
-
-		// Verificar como deverá listar o nome do pais
-		// TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("nome"));
-
-		listNavio = navioDAO.listar();
+		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("paisDescricao"));		
 		
-		observableListNavio = FXCollections.observableArrayList(listNavio);
+		observableListNavio = FXCollections.observableArrayList(listaNavio());
+
 		TableColumnNavio.setItems(observableListNavio);
 
 	}
+	
+    private List<NavioObservableList> listaNavio() {
+    	List<NavioObservableList> listNavio = new ArrayList<>();
+    	
+			for(Navio i : navioDAO.listar()) {
+				
+				NavioObservableList navio = new NavioObservableList(i.getCodigoNavio(), i.getDescricaoNavio(), i.getPais().getNome());
+		
+				listNavio.add(navio);
+				
+			}
+
+		return listNavio;
+    }
 }

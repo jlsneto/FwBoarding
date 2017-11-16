@@ -10,8 +10,9 @@ import org.junit.Test;
 import model.dao.NavioDAO;
 import model.database.Database;
 import model.database.DatabaseFactory;
-import model.domain.Navio;
-import model.domain.Pais;
+import model.vo.Navio;
+import model.vo.NavioObservableList;
+import model.vo.Pais;
 
 public class NavioDAOTest {
 
@@ -20,7 +21,7 @@ public class NavioDAOTest {
 	private final NavioDAO dao = new NavioDAO();
 	
 	
-	
+	/*
 	@Test
 	public void testeInserir() {
 		
@@ -50,14 +51,13 @@ public class NavioDAOTest {
 		
 		entrada.close();
 	}
-	
+	*/
 	@Test
 	public void testListar() {
 
 		dao.setConnection(conn);
-		
+
 		for(Navio i: dao.listar()){
-			
 			System.out.println("Codigo do Navio: "+ 
 								i.getCodigoNavio()+
 								" Descrição: "+

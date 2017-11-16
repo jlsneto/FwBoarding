@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.domain.Navio;
-import model.domain.Pais;
+import model.vo.Navio;
+import model.vo.Pais;
 import view.ConstruirDialog;
 
 public class NavioDAO {
