@@ -75,7 +75,7 @@ public class NavioDAO {
 		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "
 				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS";
 
-		List<Navio> lista = new ArrayList<>();
+		List<Navio> listaNavio = new ArrayList<>();
 
 		try {
 
@@ -102,7 +102,7 @@ public class NavioDAO {
 
 				navio.setPais(pais);
 
-				lista.add(navio);
+				listaNavio.add(navio);
 			}
 
 		} catch (SQLException e) {
@@ -110,6 +110,6 @@ public class NavioDAO {
 			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getErrorCode(),e.getMessage(),sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
-		return lista;
+		return listaNavio;
 	}
 }

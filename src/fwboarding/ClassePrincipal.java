@@ -13,12 +13,12 @@ import javafx.stage.Stage;
 
 public class ClassePrincipal extends Application {
 
-	private static Stage stage;
+	public static Stage stage;
 	public static BorderPane rootLayout;
 
 	@Override
 	public void start(Stage stage) throws IOException {
-		this.stage = stage;
+		ClassePrincipal.stage = stage;
 
 		initRootLayout();
 
@@ -39,7 +39,6 @@ public class ClassePrincipal extends Application {
 			stage.setMaximized(true);
 			stage.getIcons().add(new Image(this.getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
 			stage.show();
-
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -75,7 +74,7 @@ public class ClassePrincipal extends Application {
 		
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Login");
-		dialogStage.initModality(Modality.NONE);
+		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
 		
@@ -84,22 +83,6 @@ public class ClassePrincipal extends Application {
 		dialogStage.showAndWait();
 	}
 	
-	public static void carregarTelaCadastroNavio() throws IOException {
-		
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(ClassePrincipal.class.getResource("/view/CadastroNavio.fxml"));
-		AnchorPane page = (AnchorPane) loader.load();
-		
-		Stage dialogStage = new Stage();
-		dialogStage.setTitle("Cadastro de Navios");
-		dialogStage.initModality(Modality.NONE);
-		dialogStage.initOwner(stage);
-		dialogStage.setResizable(false);
-		
-		Scene scene = new Scene(page);
-		dialogStage.setScene(scene);
-		dialogStage.showAndWait();
-	}
 	public static void main(String[] args) {
 		launch(args);
 	}
