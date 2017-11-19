@@ -29,13 +29,13 @@
             <Label text="Código" />
             <Label text="Descrição" GridPane.rowIndex="1" />
             <Label text="Pais de Origem" GridPane.rowIndex="2" />
-            <TextField fx:id="textFieldCodigo" GridPane.columnIndex="1" />
             <TextField fx:id="textFieldDescricao" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <ComboBox fx:id="comboBoxPaisOrigem" prefWidth="150.0" promptText="Selecionar Pais" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Quantidade de Porão" GridPane.rowIndex="3" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <Label text="Capacidade do Porão" GridPane.rowIndex="4" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="labelCodigo" prefHeight="17.0" prefWidth="66.0" text="Label" GridPane.columnIndex="1" />
          </children>
       </GridPane>
       <Label layoutX="18.0" layoutY="14.0" text="Informações do Navio" />

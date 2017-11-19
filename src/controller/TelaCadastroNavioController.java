@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,9 +9,11 @@ import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import model.dao.NavioDAO;
@@ -27,7 +30,10 @@ public class TelaCadastroNavioController implements Initializable {
 
     @FXML
     private TextField textFieldDescricao;
-
+    
+    @FXML
+    private Label labelCodigo;
+    
     @FXML
     private ComboBox<String> comboBoxPaisOrigem;
     
@@ -36,16 +42,15 @@ public class TelaCadastroNavioController implements Initializable {
     private final Database database = DatabaseFactory.getDatabase("oracle");
     private final Connection conn = database.conectar();
     private final PaisDAO paisDAO = new PaisDAO();
+    private final NavioDAO navioDAO = new NavioDAO();
     
     private List<String> listaPais;
-    
-    
+    //private int teste = navioDAO.verificaUltimoCodigo();
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		paisDAO.setConnection(conn);
-	//	listaPais = paisDAO.listarPais();
 		listaPais = listarDescricao();
 		
 		observableListPais = FXCollections.observableArrayList(listaPais);
@@ -61,6 +66,11 @@ public class TelaCadastroNavioController implements Initializable {
 		}
 		return listPais;
 		
+	}
+	
+	public void clickOnOK(ActionEvent event) {
+		//teste = teste+1;
+		//labelCodigo.setText(Integer.toString(teste));
 	}
 
 }

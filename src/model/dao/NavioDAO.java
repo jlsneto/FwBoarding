@@ -112,4 +112,27 @@ public class NavioDAO {
 		}
 		return listaNavio;
 	}
+	
+	public int verificaUltimoCodigo() {
+		String sql = "SELECT MAX(CODIGONAVIO) AS CODIGONAVIO FROM CADNAVIO";
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet resultado = stmt.executeQuery();
+			if(resultado.next()) {
+				return resultado.getInt("CODIGONAVIO");
+			}else {
+				return 0;
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			ConstruirDialog erro = new ConstruirDialog();		
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getErrorCode(),e.getMessage(),sql);
+			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return 0;
+
+	}
 }
