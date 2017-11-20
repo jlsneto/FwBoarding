@@ -45,7 +45,6 @@ public class TelaCadastroNavioController implements Initializable {
     private final NavioDAO navioDAO = new NavioDAO();
     
     private List<String> listaPais;
-    //private int teste = navioDAO.verificaUltimoCodigo();
     
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -69,11 +68,6 @@ public class TelaCadastroNavioController implements Initializable {
 		}
 		return listPais;
 		
-	}
-	
-	public void clickOnOK(ActionEvent event) {
-		//teste = teste+1;
-		//labelCodigo.setText(Integer.toString(teste));
 	}
 
 }
