@@ -65,7 +65,7 @@ public class TelaConsultasController implements Initializable {
 	@FXML
 	private TableColumn<Pais, String> TableColumnNavioPais;
 
-	private ObservableList<NavioObservableList> observableListNavio;
+	public static ObservableList<NavioObservableList> observableListNavio;
 
 	private final Database database = DatabaseFactory.getDatabase("oracle");
 	private final Connection conn = database.conectar();

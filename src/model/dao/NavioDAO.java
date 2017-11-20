@@ -40,7 +40,6 @@ public class NavioDAO {
 			stmt.setDouble(3, navio.getCapacidadePorao());
 			stmt.setLong(4, navio.getPais().getCodigoPais());
 			stmt.execute();
-			System.out.println("Inserido!");
 			return true;
 
 		} catch (SQLException e) {

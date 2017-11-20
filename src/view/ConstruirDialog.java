@@ -1,7 +1,10 @@
 package view;
 
+import java.util.Optional;
+
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
@@ -36,5 +39,20 @@ public class ConstruirDialog {
 		alert.getDialogPane().setExpandableContent(expContent);
 
 		alert.showAndWait();
+	}
+	
+	public void DialogInformation() {
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("Look, a Confirmation Dialog");
+		alert.setContentText("Are you ok with this?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    // ... user chose OK
+		} else {
+		    // ... user chose CANCEL or closed the dialog
+		}
 	}
 }

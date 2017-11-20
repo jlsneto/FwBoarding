@@ -36,9 +36,10 @@ public class ClassePrincipal extends Application {
 
 			stage.setScene(scene);
 			stage.setTitle("FwBoarding");
-			stage.setMaximized(true);
+			stage.setMaximized(false);
 			stage.getIcons().add(new Image(this.getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
 			stage.show();
+			
 
 		} catch (Exception e) {
 			e.printStackTrace();
