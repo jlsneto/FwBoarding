@@ -1,24 +1,15 @@
 package view;
 
-<<<<<<< HEAD
-import java.io.IOException;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-=======
 import java.util.Optional;
 
->>>>>>> f227893aedb4d0c4dcd353428143c1bccf2ff2b4
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 
 public class ConstruirDialog {
 
