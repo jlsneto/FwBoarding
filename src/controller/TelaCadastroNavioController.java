@@ -51,8 +51,11 @@ public class TelaCadastroNavioController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		paisDAO.setConnection(conn);
+		navioDAO.setConnection(conn);
+		
 		listaPais = listarDescricao();
 		
+		labelCodigo.setText(Integer.toString(navioDAO.verificaUltimoCodigo()+1));
 		observableListPais = FXCollections.observableArrayList(listaPais);
 		comboBoxPaisOrigem.setValue("Selecionar Pais");
 		comboBoxPaisOrigem.setItems(observableListPais);
