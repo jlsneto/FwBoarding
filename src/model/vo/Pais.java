@@ -55,5 +55,10 @@ public class Pais {
 	public void setNomeFormal(String nomeFormal) {
 		this.nomeFormal = nomeFormal;
 	}
+//Usado para exibir descrição do pais na combobox
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
 
 }

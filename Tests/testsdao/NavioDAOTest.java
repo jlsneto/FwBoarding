@@ -66,5 +66,11 @@ public class NavioDAOTest {
 								i.getPais().getNome());
 		}
 	}
+	
+	@Test
+	public void testVerificaUltimoCodigo() {
+		dao.setConnection(conn);
+		System.out.println(dao.verificaUltimoCodigo());
+	}
 
 }

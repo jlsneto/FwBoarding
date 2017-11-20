@@ -40,7 +40,6 @@ public class NavioDAO {
 			stmt.setDouble(3, navio.getCapacidadePorao());
 			stmt.setLong(4, navio.getPais().getCodigoPais());
 			stmt.execute();
-			System.out.println("Inserido!");
 			return true;
 
 		} catch (SQLException e) {
@@ -75,7 +74,7 @@ public class NavioDAO {
 		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "
 				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS";
 
-		List<Navio> lista = new ArrayList<>();
+		List<Navio> listaNavio = new ArrayList<>();
 
 		try {
 
@@ -102,7 +101,7 @@ public class NavioDAO {
 
 				navio.setPais(pais);
 
-				lista.add(navio);
+				listaNavio.add(navio);
 			}
 
 		} catch (SQLException e) {
@@ -110,6 +109,29 @@ public class NavioDAO {
 			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getErrorCode(),e.getMessage(),sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
-		return lista;
+		return listaNavio;
+	}
+	
+	public int verificaUltimoCodigo() {
+		String sql = "SELECT MAX(CODIGONAVIO) AS CODIGONAVIO FROM CADNAVIO";
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet resultado = stmt.executeQuery();
+			if(resultado.next()) {
+				return resultado.getInt("CODIGONAVIO");
+			}else {
+				return 0;
+			}
+			
+			
+		} catch (SQLException e) {
+			
+			ConstruirDialog erro = new ConstruirDialog();		
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados",e.getErrorCode(),e.getMessage(),sql);
+			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
+		}
+		return 0;
+
 	}
 }

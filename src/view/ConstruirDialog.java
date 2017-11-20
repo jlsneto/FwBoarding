@@ -1,11 +1,17 @@
 package view;
 
+<<<<<<< HEAD
 import java.io.IOException;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+=======
+import java.util.Optional;
+
+>>>>>>> f227893aedb4d0c4dcd353428143c1bccf2ff2b4
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.AnchorPane;
@@ -45,4 +51,18 @@ public class ConstruirDialog {
 		alert.showAndWait();
 	}
 
+	public void DialogInformation() {
+
+		Alert alert = new Alert(AlertType.CONFIRMATION);
+		alert.setTitle("Confirmation Dialog");
+		alert.setHeaderText("Look, a Confirmation Dialog");
+		alert.setContentText("Are you ok with this?");
+
+		Optional<ButtonType> result = alert.showAndWait();
+		if (result.get() == ButtonType.OK){
+		    // ... user chose OK
+		} else {
+		    // ... user chose CANCEL or closed the dialog
+		}
+	}
 }
