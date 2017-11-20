@@ -1,20 +1,27 @@
 package view;
 
+import java.io.IOException;
+
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 public class ConstruirDialog {
 
-	public void DialogError(String tituloJanela, String tituloErro,int codigoErro, String erro, String detalhes) {
+	public void DialogError(String tituloJanela, String tituloErro, int codigoErro, String erro, String detalhes) {
 
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle(tituloJanela);
 		alert.setHeaderText(tituloErro);
-		alert.setContentText("ORA-"+codigoErro+": "+erro);
+		alert.setContentText("ORA-" + codigoErro + ": " + erro);
 
 		Label label = new Label("Detalhes ");
 
@@ -37,4 +44,5 @@ public class ConstruirDialog {
 
 		alert.showAndWait();
 	}
+
 }
