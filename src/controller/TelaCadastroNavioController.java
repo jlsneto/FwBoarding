@@ -81,7 +81,7 @@ public class TelaCadastroNavioController implements Initializable {
 		navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 		navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 		navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
-		
+	  
 		
 		
 		Optional<ButtonType> result = confirm.DialogConfirm();
@@ -96,6 +96,7 @@ public class TelaCadastroNavioController implements Initializable {
 			
 		} else {
 		    // ... Usuário cancelou ou fechou a janela
+			//teste
 			
 		}
 		
