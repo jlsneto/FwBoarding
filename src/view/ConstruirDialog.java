@@ -42,7 +42,7 @@ public class ConstruirDialog {
 		alert.showAndWait();
 	}
 
-	public void DialogInformation() {
+	public Optional<ButtonType> DialogConfirm() {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle("Confirmation Dialog");
@@ -50,10 +50,7 @@ public class ConstruirDialog {
 		alert.setContentText("Are you ok with this?");
 
 		Optional<ButtonType> result = alert.showAndWait();
-		if (result.get() == ButtonType.OK){
-		    // ... user chose OK
-		} else {
-		    // ... user chose CANCEL or closed the dialog
-		}
+		return result;
+
 	}
 }
