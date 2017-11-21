@@ -42,7 +42,7 @@
       <Separator layoutX="14.0" layoutY="40.0" prefHeight="3.0" prefWidth="400.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0" />
       <ButtonBar layoutX="92.0" layoutY="407.0" prefHeight="40.0" prefWidth="200.0">
         <buttons>
-          <Button cancelButton="true" mnemonicParsing="false" text="Cancelar" />
+          <Button cancelButton="true" mnemonicParsing="false" onAction="#clickOnCancelar" text="Cancelar" />
             <Button fx:id="buttonCadastrar" mnemonicParsing="false" onAction="#clickOnCadastrar" text="Cadastrar" />
         </buttons>
       </ButtonBar>

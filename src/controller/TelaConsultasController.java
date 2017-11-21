@@ -116,20 +116,32 @@ public class TelaConsultasController implements Initializable {
 		carregarTelaCadastroNavio();
 	}
 	
+	public static void clickOnAlterar() {
+		//carregarTelaAlterarNavio();
+	}
+	
 	public static void carregarTelaCadastroNavio() throws IOException {
 		
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(ClassePrincipal.class.getResource("/view/CadastroNavio.fxml"));
 		AnchorPane page = (AnchorPane) loader.load();
-		
+	
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Cadastro de Navios");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.initOwner(ClassePrincipal.stage);
 		dialogStage.setResizable(false);
 		
+		//Define Palco deste Dialog
+		TelaCadastroNavioController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+		
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
+		if(dialogStage.isShowing() == false) {
+			//VERIFICAR VIABILIDADE DE HERDAR CONEXÃO DO BANCO
+			controller.desconectarBanco();
+		}
 	}
 }

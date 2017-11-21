@@ -42,15 +42,33 @@ public class ConstruirDialog {
 		alert.showAndWait();
 	}
 
-	public Optional<ButtonType> DialogConfirm() {
+	public Optional<ButtonType> DialogConfirm(String titulo,String Header,String Conteudo) {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
-		alert.setTitle("Confirmation Dialog");
-		alert.setHeaderText("Look, a Confirmation Dialog");
-		alert.setContentText("Are you ok with this?");
-
+		alert.setTitle(titulo);
+		alert.setHeaderText(Header);
+		alert.setContentText(Conteudo);
 		Optional<ButtonType> result = alert.showAndWait();
 		return result;
+		
+		/*
+		 * OBS: Para utilizar a dialog em outra classe
+		
+		//Necessário para criar
+		ConstruirDialog confirm = new ConstruirDialog();	
+		//Chama evento do botão
+		Optional<ButtonType> result = confirm.DialogConfirm();
+		
+		if (result.get() == ButtonType.OK) {
+
+		// ... Usuário clicou ok
+			
+		} else {
+			// ... Usuário cancelou ou fechou a janela
+
+		}
+		*/
+
 
 	}
 }

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,6 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.dao.PaisDAO;
 import model.database.Database;
@@ -43,7 +45,7 @@ public class TelaCadastroNavioController implements Initializable {
 
 	@FXML
 	private ComboBox<Integer> comboBoxQuantidadePorao;
-	
+
 	@FXML
 	private TextField textFieldCapacidadePorao;
 
@@ -53,6 +55,54 @@ public class TelaCadastroNavioController implements Initializable {
 	private final Connection conn = database.conectar();
 	private final PaisDAO paisDAO = new PaisDAO();
 	private final NavioDAO navioDAO = new NavioDAO();
+
+	// Usado para definir palco e poder utilizar seus métodos neste controller
+	private Stage dialogStage;
+
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+
+	}
+
+	@FXML
+	public void clickOnCancelar() {
+		ConstruirDialog confirm = new ConstruirDialog();
+		// Chama evento do botão
+		Optional<ButtonType> result = confirm.DialogConfirm("Confirmar Cancelamento",
+				"Atenção! Você irá Cancelar o Cadastro", "Não terá volta! :(");
+
+		if (result.get() == ButtonType.OK) {
+
+			// ... Usuário clicou ok
+			dialogStage.close();
+		}
+	}
+	
+	@FXML
+	public void clickOnCadastrar() throws SQLException {
+
+		Navio navio = new Navio();
+
+		navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
+		navio.setDescricaoNavio(textFieldDescricao.getText());
+		navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
+		navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
+		navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+
+		navioDAO.inserir(navio);
+
+		// Atualiza Tela de Consulta
+		TelaConsultasController.observableListNavio.add(
+				new NavioObservableList(navio.getCodigoNavio(), navio.getDescricaoNavio(), navio.getPais().getNome()));
+
+		// fechar dialog
+		dialogStage.close();
+	}
+	
+	public void desconectarBanco() {
+		
+		database.desconectar(conn);
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -69,38 +119,4 @@ public class TelaCadastroNavioController implements Initializable {
 
 	}
 
-	@FXML
-	public void clickOnCadastrar() throws SQLException {
-		
-		Navio navio = new Navio();
-		ConstruirDialog confirm = new ConstruirDialog();
-		
-		//System.out.println(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
-		navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
-		navio.setDescricaoNavio(textFieldDescricao.getText());
-		navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
-		navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
-		navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
-	  
-		
-		
-		Optional<ButtonType> result = confirm.DialogConfirm();
-		
-		if (result.get() == ButtonType.OK){
-		    // ... Usuário clicou ok
-			navioDAO.inserir(navio);
-			//Atualiza Tela de Consulta
-			TelaConsultasController.observableListNavio.add(new NavioObservableList(navio.getCodigoNavio(), navio.getDescricaoNavio(),
-					navio.getPais().getNome()));
-			database.desconectar(conn);
-			
-		} else {
-		    // ... Usuário cancelou ou fechou a janela
-			//teste
-			
-		}
-		
-		
-	}
-	
 }

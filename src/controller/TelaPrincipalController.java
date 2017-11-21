@@ -13,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 
 public class TelaPrincipalController implements Initializable {
 
@@ -54,6 +55,7 @@ public class TelaPrincipalController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource("/view/TelaConsultas.fxml"));
 		AnchorPane navio = (AnchorPane) loader.load();
+		
 		// Define a TelaConsultas no centro do root layout.
 		ClassePrincipal.rootLayout.setCenter(navio);
 
