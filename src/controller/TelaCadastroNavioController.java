@@ -84,7 +84,7 @@ public class TelaCadastroNavioController implements Initializable {
 		Navio navio = new Navio();
 
 		navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
-		navio.setDescricaoNavio(textFieldDescricao.getText());
+		navio.setDescricaoNavio(textFieldDescricao.getText().toUpperCase());
 		navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 		navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 		navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));

@@ -14,7 +14,7 @@ public class DatabaseParams {
 		try {
 
 			Properties props = new Properties();
-			FileInputStream file = new FileInputStream("resourcess/config/database.properties");
+			FileInputStream file = new FileInputStream("resources/config/database.properties");
 
 			props.load(file);
 
