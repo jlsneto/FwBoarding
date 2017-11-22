@@ -1,6 +1,7 @@
 package model.database;
 
 import java.sql.*;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -12,24 +13,30 @@ public class DatabaseOracle implements Database {
 
 	@Override
 	public Connection conectar() {
+		
+		Properties props = DatabaseParams.getProp();
+		
+		String host = props.getProperty("database.oracle.host");
+		String port = props.getProperty("database.oracle.port");
+		String sid = props.getProperty("database.oracle.sid");
+		
+		String user = props.getProperty("database.oracle.user");
+		String password = props.getProperty("database.oracle.password");
+		
+		
 
-		// Param de conexão
-		String server = "localhost";
-		String port = "1521";
-		String database = "XE";
-
-		// Param de auth
-		String user = "empat";
-		String passwd = "teste123";
-		String url = "jdbc:oracle:thin:@" + server + ":" + port + ":" + database;
+		String url = "jdbc:oracle:thin:@" + host + ":" + port + ":" + sid;
+		
 		try {
 			// Abrir conexão com DB
-			this.conn = DriverManager.getConnection(url, user, passwd);
+			this.conn = DriverManager.getConnection(url, user, password);
 			return this.conn;
 		} catch (SQLException e) {
 			
 			ConstruirDialog erro = new ConstruirDialog();		
-			erro.DialogError("SQLException", "Erro ao conectar no banco de Dados",e.getErrorCode(),e.getMessage(),"Verificar Conexão com o banco de dados!");
+			erro.DialogError("Erro de Conexão", "A conexão com o banco de dados falhou!",e.getErrorCode(),e.getMessage(),"Possíveis Causas:\n"
+					+ "Endereço do Servidor\n"
+					+ "Serviços do Banco de Dados");
 			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
@@ -39,12 +46,11 @@ public class DatabaseOracle implements Database {
 	@Override
 	public void desconectar(Connection conn) {
 		try {
-			//encerra conexão
+			// encerra conexão
 			this.conn.close();
-		}catch (SQLException ex) {
+		} catch (SQLException ex) {
 			Logger.getLogger(DatabaseOracle.class.getName()).log(Level.SEVERE, null, ex);
 		}
-		
 
 	}
 
