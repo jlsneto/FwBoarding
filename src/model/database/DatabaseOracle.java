@@ -49,3 +49,4 @@ public class DatabaseOracle implements Database {
 	}
 
 }
+
