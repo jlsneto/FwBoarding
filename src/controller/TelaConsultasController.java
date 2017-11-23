@@ -26,9 +26,9 @@ import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.database.Database;
 import model.database.DatabaseFactory;
-import model.vo.Navio;
-import model.vo.NavioObservableList;
-import model.vo.Pais;
+import model.vo.NavioVO;
+import model.vo.NavioObservableListVO;
+import model.vo.PaisVO;
 
 public class TelaConsultasController implements Initializable {
 
@@ -54,24 +54,24 @@ public class TelaConsultasController implements Initializable {
 	private Button ButtonBarButtonIncluir;
 
 	@FXML
-	private TableView<NavioObservableList> TableColumnNavio;
+	private TableView<NavioObservableListVO> TableColumnNavio;
 
 	@FXML
-	private TableColumn<Navio, String> TableColumnNavioCodigo;
+	private TableColumn<NavioVO, String> TableColumnNavioCodigo;
 
 	@FXML
-	private TableColumn<Navio, String> TableColumnNavioDescricao;
+	private TableColumn<NavioVO, String> TableColumnNavioDescricao;
 
 	@FXML
-	private TableColumn<Pais, String> TableColumnNavioPais;
+	private TableColumn<PaisVO, String> TableColumnNavioPais;
 
-	public static ObservableList<NavioObservableList> observableListNavio;
+	public static ObservableList<NavioObservableListVO> observableListNavio;
 
 	private final Database database = DatabaseFactory.getDatabase("oracle");
 	private final Connection conn = database.conectar();
 	private final NavioDAO navioDAO = new NavioDAO();
 
-	private List<NavioObservableList> listaNavio;
+	private List<NavioObservableListVO> listaNavio;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -96,12 +96,12 @@ public class TelaConsultasController implements Initializable {
 
 	}
 
-	private List<NavioObservableList> listarNavio() {
-		List<NavioObservableList> listNavio = new ArrayList<>();
+	private List<NavioObservableListVO> listarNavio() {
+		List<NavioObservableListVO> listNavio = new ArrayList<>();
 
-		for (Navio i : navioDAO.listar()) {
+		for (NavioVO i : navioDAO.listar()) {
 
-			NavioObservableList navio = new NavioObservableList(i.getCodigoNavio(), i.getDescricaoNavio(),
+			NavioObservableListVO navio = new NavioObservableListVO(i.getCodigoNavio(), i.getDescricaoNavio(),
 					i.getPais().getNome());
 
 			listNavio.add(navio);

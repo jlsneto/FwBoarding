@@ -18,7 +18,9 @@ public class ConstruirDialog {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.setTitle(tituloJanela);
 		alert.setHeaderText(tituloErro);
-		alert.setContentText("ORA-" + codigoErro + ": " + erro);
+		alert.setContentText("Codigo: "
+							 +codigoErro
+							 +"\n" + erro);
 
 		Label label = new Label("Detalhes ");
 

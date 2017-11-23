@@ -1,12 +1,12 @@
 package model.vo;
 
-public class NavioObservableList {
+public class NavioObservableListVO {
 
 	private long codigoNavio;
 	private String descricaoNavio;
 	private String paisDescricao;
 
-	public NavioObservableList(long codigoNavio, String descricaoNavio, String paisDescricao){
+	public NavioObservableListVO(long codigoNavio, String descricaoNavio, String paisDescricao){
 		this.codigoNavio = codigoNavio;
 		this.descricaoNavio = descricaoNavio;
 		this.paisDescricao = paisDescricao;

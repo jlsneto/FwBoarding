@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.vo.Pais;
+import model.vo.PaisVO;
 import view.ConstruirDialog;
 
 public class PaisDAO {
@@ -23,11 +23,11 @@ public class PaisDAO {
 		this.conn = conn;
 	}
 
-	public List<Pais> listarPais() {
+	public List<PaisVO> listarPais() {
 
 		String sql = "SELECT * FROM CADPAIS";
 
-		List<Pais> listaPais = new ArrayList<>();
+		List<PaisVO> listaPais = new ArrayList<>();
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -35,7 +35,7 @@ public class PaisDAO {
 
 			while (listaResultado.next()) {
 
-				Pais pais = new Pais();
+				PaisVO pais = new PaisVO();
 
 				pais.setCodigoPais(listaResultado.getLong("CODIGOPAIS"));
 				pais.setDdi(listaResultado.getString("DDI"));

@@ -12,7 +12,7 @@
    <children>
       <BorderPane fx:id="AnchorPaneBorderPane" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
-            <AnchorPane fx:id="BorderPaneTopAnchorPane" prefHeight="71.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <AnchorPane fx:id="BorderPaneTopAnchorPane" prefHeight="32.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
                   <Separator layoutX="158.0" layoutY="13.0" prefHeight="3.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <ButtonBar fx:id="AnchorPaneButtonBar" layoutX="14.0" layoutY="16.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
