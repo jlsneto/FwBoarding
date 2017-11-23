@@ -26,53 +26,54 @@ public class NavioDAO {
 		this.conn = conn;
 	}
 
-	public boolean inserir(Navio navio) {
+	public void inserir(Navio navio) throws SQLException{
 		String sql = "INSERT INTO CADNAVIO(CODIGONAVIO, DESCRICAO, QTDPORAO, CAPACIDADEPORAO, CODIGOPAISORIGEM) VALUES(SEQ_CODIGO_CADNAVIO.NEXTVAL,?,?,?,?)";
 
 		try {
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			// Verificar Questão do autoincremento do oracle
 
 			stmt.setString(1, navio.getDescricaoNavio());
 			stmt.setLong(2, navio.getQtdPorao());
 			stmt.setDouble(3, navio.getCapacidadePorao());
 			stmt.setLong(4, navio.getPais().getCodigoPais());
 			stmt.execute();
-			return true;
 
 		} catch (SQLException e) {
-
-			String msg = "Erro ao inserir Navio";
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, msg, e);
-			return false;
+			ConstruirDialog erro = new ConstruirDialog();		
+			erro.DialogError("Cadastro Erro", "Erro ao tentar inserir os dados",e.getErrorCode(),e.getMessage(),sql);
+			throw new SQLException();
 		}
 	}
 
-	public boolean validaDescricao(String descricao) {
+	public String retornaDescricaoNavio(String descricao) {
 		String sql = "SELECT DESCRICAO FROM CADNAVIO " + "WHERE DESCRICAO = ?";
+		
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, descricao);
 			ResultSet listaResultado = stmt.executeQuery();
-			if (listaResultado.next() == true) {
-				return false;
+			
+			
+			if(listaResultado.next()) {
+				return listaResultado.getString("DESCRICAO");
 			}
-
 			else {
-				return true;
+				return "";
 			}
 		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();		
+			erro.DialogError("Erro de Consulta", "Erro ao consultar o navio no banco de dados",e.getErrorCode(),e.getMessage(),sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
-			return false;
+			return "";
 		}
 	}
 
 	public List<Navio> listar() {
 
 		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "
-				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS";
+				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS ORDER BY CADNAVIO.CODIGONAVIO";
 
 		List<Navio> listaNavio = new ArrayList<>();
 
