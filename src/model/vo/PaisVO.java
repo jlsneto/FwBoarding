@@ -1,6 +1,6 @@
 package model.vo;
 
-public class Pais {
+public class PaisVO {
 	private long codigoPais;
 	private String ddi;
 	private String iso;

@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import org.junit.Test;
 
-import model.vo.Navio;
+import model.vo.NavioVO;
 
 public class NavioTest {
 
@@ -19,7 +19,7 @@ public class NavioTest {
 		System.out.println("Digite o código do Navio: ");
 		int codigo = entrada.nextInt();
 
-		Navio test = new Navio();
+		NavioVO test = new NavioVO();
 
 		test.setCodigoNavio(codigo);
 

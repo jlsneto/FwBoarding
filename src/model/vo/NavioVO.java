@@ -1,18 +1,18 @@
 package model.vo;
 
-public class Navio {
+public class NavioVO {
 	
 	private long codigoNavio;
 	private String descricaoNavio;
 	private int qtdPorao;
 	private double capacidadePorao;
-	private Pais pais;
+	private PaisVO pais;
 
-	public Navio() {
+	public NavioVO() {
 
 	}
 
-	public Navio(long codigoNavio, int qtdPorao, double capacidadePorao, String descricaoNavio, Pais pais) {
+	public NavioVO(long codigoNavio, int qtdPorao, double capacidadePorao, String descricaoNavio, PaisVO pais) {
 		super();
 		this.codigoNavio = codigoNavio;
 		this.qtdPorao = qtdPorao;
@@ -45,11 +45,11 @@ public class Navio {
 		this.descricaoNavio = descricaoNavio;
 	}
 
-	public Pais getPais() {
+	public PaisVO getPais() {
 		return pais;
 	}
 
-	public void setPais(Pais pais) {
+	public void setPais(PaisVO pais) {
 		this.pais = pais;
 	}
 

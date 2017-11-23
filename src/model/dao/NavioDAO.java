@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import model.vo.Navio;
-import model.vo.Pais;
+import model.vo.NavioVO;
+import model.vo.PaisVO;
 import view.ConstruirDialog;
 
 public class NavioDAO {
@@ -26,7 +26,7 @@ public class NavioDAO {
 		this.conn = conn;
 	}
 
-	public void inserir(Navio navio) throws SQLException{
+	public void inserir(NavioVO navio) throws SQLException{
 		String sql = "INSERT INTO CADNAVIO(CODIGONAVIO, DESCRICAO, QTDPORAO, CAPACIDADEPORAO, CODIGOPAISORIGEM) VALUES(SEQ_CODIGO_CADNAVIO.NEXTVAL,?,?,?,?)";
 
 		try {
@@ -70,12 +70,12 @@ public class NavioDAO {
 		}
 	}
 
-	public List<Navio> listar() {
+	public List<NavioVO> listar() {
 
 		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "
 				+ "ON CADNAVIO.CODIGOPAISORIGEM = CADPAIS.CODIGOPAIS ORDER BY CADNAVIO.CODIGONAVIO";
 
-		List<Navio> listaNavio = new ArrayList<>();
+		List<NavioVO> listaNavio = new ArrayList<>();
 
 		try {
 
@@ -84,14 +84,14 @@ public class NavioDAO {
 
 			while (listaResultado.next()) {
 
-				Navio navio = new Navio();
+				NavioVO navio = new NavioVO();
 
 				navio.setCodigoNavio(listaResultado.getLong("CODIGONAVIO"));
 				navio.setDescricaoNavio(listaResultado.getString("DESCRICAO"));
 				navio.setQtdPorao(listaResultado.getInt("QTDPORAO"));
 				navio.setCapacidadePorao(listaResultado.getDouble("CAPACIDADEPORAO"));
 
-				Pais pais = new Pais();
+				PaisVO pais = new PaisVO();
 
 				pais.setCodigoPais(listaResultado.getInt("CODIGOPAIS"));
 				pais.setNome(listaResultado.getString("NOME"));

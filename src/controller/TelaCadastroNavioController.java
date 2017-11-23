@@ -21,9 +21,9 @@ import model.dao.NavioDAO;
 import model.dao.PaisDAO;
 import model.database.Database;
 import model.database.DatabaseFactory;
-import model.vo.Navio;
-import model.vo.NavioObservableList;
-import model.vo.Pais;
+import model.vo.NavioVO;
+import model.vo.NavioObservableListVO;
+import model.vo.PaisVO;
 import view.ConstruirDialog;
 
 public class TelaCadastroNavioController implements Initializable {
@@ -46,7 +46,7 @@ public class TelaCadastroNavioController implements Initializable {
 	private Button buttonCadastrar;
 
 	@FXML
-	private ComboBox<Pais> comboBoxPaisOrigem;
+	private ComboBox<PaisVO> comboBoxPaisOrigem;
 
 	@FXML
 	private ComboBox<Integer> comboBoxQuantidadePorao;
@@ -54,7 +54,7 @@ public class TelaCadastroNavioController implements Initializable {
 	@FXML
 	private TextField textFieldCapacidadePorao;
 
-	private ObservableList<Pais> observableListPais;
+	private ObservableList<PaisVO> observableListPais;
 
 	private final Database database = DatabaseFactory.getDatabase("oracle");
 	private final Connection conn = database.conectar();
@@ -87,7 +87,7 @@ public class TelaCadastroNavioController implements Initializable {
 	public void clickOnCadastrar() {
 
 		if (validarEntrada()) {
-			Navio navio = new Navio();
+			NavioVO navio = new NavioVO();
 			navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
 			navio.setDescricaoNavio(textFieldDescricao.getText());
 			navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
@@ -97,7 +97,7 @@ public class TelaCadastroNavioController implements Initializable {
 			try {
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
-				TelaConsultasController.observableListNavio.add(new NavioObservableList(navio.getCodigoNavio(),
+				TelaConsultasController.observableListNavio.add(new NavioObservableListVO(navio.getCodigoNavio(),
 						navio.getDescricaoNavio(), navio.getPais().getNome()));
 				// fechar dialog
 				dialogStage.close();
