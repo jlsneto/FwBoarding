@@ -81,7 +81,7 @@ public class TelaConsultasController implements Initializable {
 		listaNavio = listarNavio();
 		carregarTableViewNavio();
 		database.desconectar(conn);
-
+		
 	}
 
 	public void carregarTableViewNavio() {
