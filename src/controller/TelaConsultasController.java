@@ -2,7 +2,6 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -24,8 +23,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.dao.NavioDAO;
-import model.database.Database;
-import model.database.DatabaseFactory;
 import model.vo.NavioVO;
 import model.vo.NavioObservableListVO;
 import model.vo.PaisVO;
@@ -67,8 +64,7 @@ public class TelaConsultasController implements Initializable {
 
 	public static ObservableList<NavioObservableListVO> observableListNavio;
 
-	private final Database database = DatabaseFactory.getDatabase("oracle");
-	private final Connection conn = database.conectar();
+
 	private final NavioDAO navioDAO = new NavioDAO();
 
 	private List<NavioObservableListVO> listaNavio;
@@ -77,10 +73,9 @@ public class TelaConsultasController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 
 		// Setar conexão no objeto navioDao que foi aberta
-		navioDAO.setConnection(conn);
+
 		listaNavio = listarNavio();
 		carregarTableViewNavio();
-		database.desconectar(conn);
 		
 	}
 
@@ -140,8 +135,7 @@ public class TelaConsultasController implements Initializable {
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
 		if(dialogStage.isShowing() == false) {
-			//VERIFICAR VIABILIDADE DE HERDAR CONEXÃO DO BANCO
-			controller.desconectarBanco();
+			//pass
 		}
 	}
 }

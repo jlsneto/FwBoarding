@@ -9,18 +9,15 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import model.database.DatabaseFactory;
 import model.vo.PaisVO;
 import view.ConstruirDialog;
 
 public class PaisDAO {
 	private Connection conn;
-
-	public Connection getConnection() {
-		return conn;
-	}
-
-	public void setConnection(Connection conn) {
-		this.conn = conn;
+	
+	public PaisDAO() {
+		conn = DatabaseFactory.getDatabase().getConection();
 	}
 
 	public List<PaisVO> listarPais() {

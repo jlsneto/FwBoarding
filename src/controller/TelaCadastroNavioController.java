@@ -1,7 +1,6 @@
 package controller;
 
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -19,8 +18,6 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.dao.PaisDAO;
-import model.database.Database;
-import model.database.DatabaseFactory;
 import model.vo.NavioVO;
 import model.vo.NavioObservableListVO;
 import model.vo.PaisVO;
@@ -56,8 +53,6 @@ public class TelaCadastroNavioController implements Initializable {
 
 	private ObservableList<PaisVO> observableListPais;
 
-	private final Database database = DatabaseFactory.getDatabase("oracle");
-	private final Connection conn = database.conectar();
 	private final PaisDAO paisDAO = new PaisDAO();
 	private final NavioDAO navioDAO = new NavioDAO();
 
@@ -102,17 +97,12 @@ public class TelaCadastroNavioController implements Initializable {
 				// fechar dialog
 				dialogStage.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
+				// tratar!
 				e.printStackTrace();
 			}
 
 		}
 
-	}
-
-	public void desconectarBanco() {
-
-		database.desconectar(conn);
 	}
 
 	private boolean validarEntrada() {
@@ -158,10 +148,6 @@ public class TelaCadastroNavioController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		paisDAO.setConnection(conn);
-		navioDAO.setConnection(conn);
-
-		// listaPais = listarDescricao();
 		labelCodigo.setText(Integer.toString(navioDAO.verificaUltimoCodigo() + 1));
 		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 

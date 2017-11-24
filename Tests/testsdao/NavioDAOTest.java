@@ -16,8 +16,7 @@ import model.vo.PaisVO;
 
 public class NavioDAOTest {
 
-	private final Database database = DatabaseFactory.getDatabase("oracle");
-	private final Connection conn = database.conectar();
+
 	private final NavioDAO dao = new NavioDAO();
 	
 	
@@ -55,7 +54,6 @@ public class NavioDAOTest {
 	@Test
 	public void testListar() {
 
-		dao.setConnection(conn);
 
 		for(NavioVO i: dao.listar()){
 			System.out.println("Codigo do Navio: "+ 
@@ -69,7 +67,7 @@ public class NavioDAOTest {
 	
 	@Test
 	public void testVerificaUltimoCodigo() {
-		dao.setConnection(conn);
+
 		System.out.println(dao.verificaUltimoCodigo());
 	}
 
