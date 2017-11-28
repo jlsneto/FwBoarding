@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -11,13 +12,12 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane prefHeight="200.0" prefWidth="300.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9">
+<AnchorPane prefHeight="324.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <GridPane layoutX="50.0" layoutY="70.0">
+      <GridPane layoutX="34.0" layoutY="147.0" prefHeight="70.0" prefWidth="233.0" AnchorPane.leftAnchor="34.0" AnchorPane.rightAnchor="33.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="127.0" minWidth="10.0" prefWidth="60.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="204.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -35,11 +35,11 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="60.0" layoutY="146.0" prefHeight="40.0" prefWidth="166.0">
+      <ButtonBar layoutX="108.0" layoutY="243.0" prefHeight="40.0" prefWidth="74.0">
         <buttons>
-          <Button fx:id="buttonCancelar" cancelButton="true" mnemonicParsing="false" onAction="#clickOnCancelar" text="Cancelar" />
             <Button fx:id="buttonConectar" defaultButton="true" mnemonicParsing="false" onAction="#clickOnConectar" text="Conectar" />
         </buttons>
       </ButtonBar>
+      <ComboBox layoutX="100.0" layoutY="76.0" prefHeight="25.0" prefWidth="100.0" />
    </children>
 </AnchorPane>
