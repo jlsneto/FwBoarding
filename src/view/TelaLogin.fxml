@@ -34,9 +34,12 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <ButtonBar layoutX="42.0" layoutY="141.0" prefHeight="40.0" prefWidth="218.0">
+      <ButtonBar layoutX="74.0" layoutY="141.0" prefHeight="40.0" prefWidth="152.0">
         <buttons>
-            <Button fx:id="buttonConectar" defaultButton="true" mnemonicParsing="false" onAction="#clickOnConectar" prefHeight="25.0" prefWidth="207.0" styleClass="confirm" stylesheets="@styles/styles.css" text="Conectar" />
+            <Button fx:id="buttonConectar" defaultButton="true" mnemonicParsing="false" onAction="#clickOnConectar" prefHeight="34.0" prefWidth="143.0" styleClass="confirm" stylesheets="@styles/styles.css" text="Conectar">
+               <font>
+                  <Font size="18.0" />
+               </font></Button>
         </buttons>
       </ButtonBar>
    </children>
