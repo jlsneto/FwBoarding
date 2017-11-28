@@ -2,6 +2,7 @@ package fwboarding;
 
 import java.io.IOException;
 
+import controller.TelaLoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -15,11 +16,12 @@ public class ClassePrincipal extends Application {
 
 	public static Stage stage;
 	public static BorderPane rootLayout;
+	
 
 	@Override
 	public void start(Stage stage) throws IOException {
 		ClassePrincipal.stage = stage;
-
+		carregarTelaLogin();
 		initRootLayout();
 
 	}
@@ -38,8 +40,9 @@ public class ClassePrincipal extends Application {
 			stage.setTitle("FwBoarding");
 			stage.setMaximized(false);
 			stage.getIcons().add(new Image(this.getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
-			stage.show();
 
+			stage.show();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,6 +61,8 @@ public class ClassePrincipal extends Application {
 	        dialogStage.initModality(Modality.WINDOW_MODAL);
 	        dialogStage.initOwner(stage);
 	        dialogStage.setResizable(false);
+	        
+	        
 	        Scene scene = new Scene(page);
 	        dialogStage.setScene(scene);
 
@@ -78,6 +83,9 @@ public class ClassePrincipal extends Application {
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
 		
+		TelaLoginController controller = loader.getController();
+        controller.setDialogStage(dialogStage);
+        
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
