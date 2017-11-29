@@ -9,7 +9,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
+
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+
+import bo.CadastroAutenticacaoBO;
 
 
 public class TelaLoginController implements Initializable {
@@ -39,7 +45,19 @@ public class TelaLoginController implements Initializable {
 	}
 
 	@FXML
-	void clickOnConectar() {
+	void clickOnConectar() throws Exception {
+	
+		
+		CadastroAutenticacaoBO cadastroAutenticacao = new CadastroAutenticacaoBO();
+		
+		byte[] plainText = textSenhaLogin.getText().getBytes(StandardCharsets.UTF_8);
+		byte[] cipherText = cadastroAutenticacao.encrypt(plainText);
+		byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
+
+		System.out.println(new String(plainText));
+		System.out.println(new String(cipherText));
+		System.out.println(new String(decryptedCipherText));
+		
 		dialogStage.close();
 	}
 
