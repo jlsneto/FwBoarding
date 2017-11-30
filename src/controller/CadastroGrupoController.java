@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class TelaCadastroGrupoController implements Initializable {
+public class CadastroGrupoController implements Initializable {
 
 	@FXML
 	private Label labelCodigoGrupo;

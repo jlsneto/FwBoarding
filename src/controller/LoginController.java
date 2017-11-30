@@ -1,6 +1,5 @@
 package controller;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -12,13 +11,9 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
-import javax.crypto.KeyGenerator;
-import javax.crypto.SecretKey;
-
-import bo.CadastroAutenticacaoBO;
 
 
-public class TelaLoginController implements Initializable {
+public class LoginController implements Initializable {
 
 	@FXML
 	private TextField textUsuarioLogin;

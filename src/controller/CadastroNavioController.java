@@ -23,7 +23,7 @@ import model.vo.NavioObservableListVO;
 import model.vo.PaisVO;
 import view.ConstruirDialog;
 
-public class TelaCadastroNavioController implements Initializable {
+public class CadastroNavioController implements Initializable {
 
 	@FXML
 	private GridPane gridPane;
@@ -92,7 +92,7 @@ public class TelaCadastroNavioController implements Initializable {
 			try {
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
-				TelaConsultasController.observableListNavio.add(new NavioObservableListVO(navio.getCodigoNavio(),
+				ConsultasNavioController.observableListNavio.add(new NavioObservableListVO(navio.getCodigoNavio(),
 						navio.getDescricaoNavio(), navio.getPais().getNome()));
 				// fechar dialog
 				dialogStage.close();
@@ -153,6 +153,12 @@ public class TelaCadastroNavioController implements Initializable {
 
 		comboBoxPaisOrigem.setItems(observableListPais);
 		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+	}
+	
+	
+
+	public Stage getDialogStage() {
+		return this.dialogStage;
 	}
 
 }

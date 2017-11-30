@@ -1,20 +1,19 @@
 package controller;
 
-import java.io.IOException;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import fwboarding.ClassePrincipal;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import view.FwBoarding;
 
-public class TelaPrincipalController implements Initializable {
+public class FxBoardingController implements Initializable {
 
 	@FXML
 	private Menu menuGeral;
@@ -49,25 +48,16 @@ public class TelaPrincipalController implements Initializable {
 	@FXML
 	private Menu menuRelatorios;
 
-	public void initTelaNavio() throws IOException {
+	
 
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/view/TelaConsultas.fxml"));
-		AnchorPane navio = (AnchorPane) loader.load();
+	public void clickOnNavio(ActionEvent event) {
 		
-		// Define a TelaConsultas no centro do root layout.
-		ClassePrincipal.rootLayout.setCenter(navio);
-
-	}
-
-	public void clickOnNavio(ActionEvent event) throws IOException {
-
-		initTelaNavio();
+		FwBoarding.carregarTelaNavioConsulta();
 
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
+		// Setup da telaFxBoarding
 
 	}
 

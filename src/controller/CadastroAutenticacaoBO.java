@@ -1,4 +1,4 @@
-package bo;
+package controller;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Random;
