@@ -33,7 +33,7 @@
             <ComboBox fx:id="comboBoxPaisOrigem" prefWidth="150.0" promptText="Selecionar Pais" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Quantidade de Porão" GridPane.rowIndex="3" />
             <Label text="Capacidade do Porão" GridPane.rowIndex="4" />
-            <TextField fx:id="textFieldCapacidadePorao" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="textFieldCapacidadePorao" onInputMethodTextChanged="#mascaraCapacidadePorao" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label fx:id="labelCodigo" prefHeight="17.0" prefWidth="66.0" styleClass="fieldText" text="Label" GridPane.columnIndex="1" />
             <ComboBox fx:id="comboBoxQuantidadePorao" promptText="1" GridPane.columnIndex="1" GridPane.rowIndex="3" />
          </children>

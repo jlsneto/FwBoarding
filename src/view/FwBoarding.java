@@ -80,8 +80,9 @@ public class FwBoarding extends Application {
 
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Login");
-		//dialogStage.initModality(Modality.WINDOW_MODAL);
-		dialogStage.initStyle(StageStyle.UNDECORATED);
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		//dialogStage.initStyle(StageStyle.UNDECORATED);
+		//dialogStage.initStyle(StageStyle.UTILITY);
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
 

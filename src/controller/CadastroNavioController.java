@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -14,6 +16,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.NavioDAO;
@@ -155,6 +158,22 @@ public class CadastroNavioController implements Initializable {
 		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 	
+    @FXML
+    void mascaraCapacidadePorao(InputMethodEvent event) {
+    	System.out.println("Executou");
+    	textFieldCapacidadePorao.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+            newValue = newValue.replaceAll(",",".");
+            if(newValue.length()>0){
+                try{
+                    Double.parseDouble(newValue);
+                    textFieldCapacidadePorao.setText(newValue.replaceAll(",","."));
+                }catch(Exception e){
+                	textFieldCapacidadePorao.setText(oldValue);
+                }
+            }
+        });
+    }
+
 	
 
 	public Stage getDialogStage() {
