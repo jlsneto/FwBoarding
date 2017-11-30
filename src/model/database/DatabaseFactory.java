@@ -21,7 +21,7 @@ public class DatabaseFactory {
 			}
 		}
 		ConstruirDialog erro = new ConstruirDialog();
-		erro.DialogError("Erro ao Fabricar Base da Dados", "Sistema não possui implementação para essa base de dados", 0,
+		erro.DialogError("Erro em databaseFactory", "Sistema não possui implementação para essa base de dados", 0,
 				"A base: "+base+" Não existe!","Contate o admnistrador da sua rede\nVerifique o arquivo de configuração");
 		return null;
 	}
