@@ -79,12 +79,13 @@ public class FwBoarding extends Application {
 		AnchorPane page = (AnchorPane) loader.load();
 
 		Stage dialogStage = new Stage();
-		dialogStage.setTitle("Login");
+		dialogStage.setTitle("FwBoarding Login");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		//dialogStage.initStyle(StageStyle.UNDECORATED);
 		//dialogStage.initStyle(StageStyle.UTILITY);
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
+		dialogStage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
 
 		LoginController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
