@@ -1,0 +1,16 @@
+		this.dialogStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+			public void handle(WindowEvent we) {
+
+					ConstruirDialog confirm = new ConstruirDialog();
+					Optional<ButtonType> result = confirm.DialogConfirm("Confirmar Evento",
+							"Atenção! Você irá Abandonar o sistema", "Não terá volta! :(");
+
+					if (result.get() == ButtonType.OK) {
+						// ... Usuário clicou ok
+						Platform.exit();
+					}
+					else {
+						we.consume();
+					}
+			}
+		});
