@@ -46,5 +46,6 @@
             <Image url="@images/Icons/CadeadoLogin.png" />
          </image>
       </ImageView>
+      <Label fx:id="labelStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="288.0" prefHeight="17.0" prefWidth="289.0" text="status " textAlignment="CENTER" visible="false" />
    </children>
 </AnchorPane>
