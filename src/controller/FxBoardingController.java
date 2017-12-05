@@ -1,6 +1,5 @@
 package controller;
 
-
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import javafx.stage.Stage;
 import view.FwBoarding;
 
 public class FxBoardingController implements Initializable {
@@ -48,23 +46,31 @@ public class FxBoardingController implements Initializable {
 	@FXML
 	private Menu menuRelatorios;
 
-	
-
 	public void clickOnNavio(ActionEvent event) {
-		
 		FwBoarding.carregarTelaNavioConsulta();
 
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
 		// Setup da telaFxBoarding
+		FwBoarding.stage.setOnCloseRequest(event -> {
 
+			if (FwBoarding.confirmouCancelamentoOuFehamento()) {
+				// ... Usuário clicou ok
+				Platform.exit();
+			} else {
+				event.consume();
+			}
+		});
 	}
 
 	@FXML
 	public void onExit() {
-		//Sair
-		Platform.exit();
+		// Sair
+		if (FwBoarding.confirmouCancelamentoOuFehamento()) {
+			// ... Usuário clicou ok
+			Platform.exit();
+		}
 	}
 
 }

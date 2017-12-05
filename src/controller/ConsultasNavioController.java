@@ -17,7 +17,6 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.vo.NavioVO;
 import model.vo.NavioObservableListVO;
@@ -102,7 +101,7 @@ public class ConsultasNavioController implements Initializable {
 
 	@FXML
 	public void clickOnIncluir() throws IOException {
-
+		
 		FwBoarding.carregarTelaCadastroNavio();
 
 	}

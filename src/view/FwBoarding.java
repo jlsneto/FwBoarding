@@ -1,13 +1,14 @@
 package view;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import controller.CadastroNavioController;
-import controller.ConsultasNavioController;
 import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -24,25 +25,23 @@ public class FwBoarding extends Application {
 	public void start(Stage stage) throws IOException {
 		FwBoarding.stage = stage;
 		carregarTelaLogin();
-		carregarRootLayout();
 
 	}
 
-	public void carregarRootLayout() {
+	public static void carregarRootLayout() {
 		try {
 
 			// Carrega Tela Principal
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("/view/TelaPrincipal.fxml"));
+			loader.setLocation(FwBoarding.class.getResource("/view/RootLayout.fxml"));
 			rootLayout = (BorderPane) loader.load();
 
 			Scene scene = new Scene(rootLayout);
-
 			stage.setScene(scene);
 			stage.setTitle("FwBoarding");
-			stage.setMaximized(false);
-			stage.getIcons().add(new Image(this.getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
-
+			stage.setMaximized(true);
+			stage.getIcons()
+					.add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
 			stage.show();
 
 		} catch (Exception e) {
@@ -81,11 +80,12 @@ public class FwBoarding extends Application {
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("FwBoarding Login");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
-		//dialogStage.initStyle(StageStyle.UNDECORATED);
-		//dialogStage.initStyle(StageStyle.UTILITY);
+		// dialogStage.initStyle(StageStyle.UNDECORATED);
+		// dialogStage.initStyle(StageStyle.UTILITY);
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
-		dialogStage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
+		dialogStage.getIcons()
+				.add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
 
 		LoginController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
@@ -110,30 +110,42 @@ public class FwBoarding extends Application {
 		}
 
 	}
-public static void carregarTelaCadastroNavio() throws IOException {
-		
+
+	public static void carregarTelaCadastroNavio() throws IOException {
+
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(FwBoarding.class.getResource("/view/CadastroNavio.fxml"));
 		AnchorPane page = (AnchorPane) loader.load();
-	
+
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Cadastro de Navios");
-		//dialogStage.initModality(Modality.WINDOW_MODAL);
+		// dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.initStyle(StageStyle.UTILITY);
 		dialogStage.initOwner(FwBoarding.stage);
 		dialogStage.setResizable(false);
-		
-		//Define Palco deste Dialog
+
+		// Define Palco deste Dialog
 		CadastroNavioController controller = loader.getController();
-        controller.setDialogStage(dialogStage);
+		controller.setDialogStage(dialogStage);
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
-		if(dialogStage.isShowing() == false) {
-			//pass
+		if (dialogStage.isShowing() == false) {
+			// pass
 		}
+
 	}
 
+	public static boolean confirmouCancelamentoOuFehamento() {
+		ConstruirDialog confirmar = new ConstruirDialog();
+		Optional<ButtonType> result = confirmar.DialogConfirm("Sair do Sistema",
+				"Atenção, deseja realmente sair do sistema?", "Pressione OK para confirmar!");
+		if (result.get() == ButtonType.OK) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
 	public static void main(String[] args) {
 		launch(args);

@@ -5,8 +5,6 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -16,7 +14,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputMethodEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.NavioDAO;
@@ -62,21 +59,9 @@ public class CadastroNavioController implements Initializable {
 	// Usado para definir palco e poder utilizar seus métodos neste controller
 	private Stage dialogStage;
 
-	public void setDialogStage(Stage dialogStage) {
-		this.dialogStage = dialogStage;
-
-	}
-
 	@FXML
 	public void clickOnCancelar() {
-		ConstruirDialog confirm = new ConstruirDialog();
-		// Chama evento do botão
-		Optional<ButtonType> result = confirm.DialogConfirm("Confirmar Cancelamento",
-				"Atenção! Você irá Cancelar o Cadastro", "Não terá volta! :(");
-
-		if (result.get() == ButtonType.OK) {
-
-			// ... Usuário clicou ok
+		if (confirmouCancelamentoOuFehamento()) {
 			dialogStage.close();
 		}
 	}
@@ -148,6 +133,19 @@ public class CadastroNavioController implements Initializable {
 
 	}
 
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+		dialogStage.setOnCloseRequest(event -> {
+			if (confirmouCancelamentoOuFehamento()) {
+				// ... Usuário clicou ok
+				dialogStage.close();
+			} else {
+				event.consume();
+			}
+		});
+
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -158,26 +156,16 @@ public class CadastroNavioController implements Initializable {
 		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 	
-    @FXML
-    void mascaraCapacidadePorao(InputMethodEvent event) {
-    	System.out.println("Executou");
-    	textFieldCapacidadePorao.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
-            newValue = newValue.replaceAll(",",".");
-            if(newValue.length()>0){
-                try{
-                    Double.parseDouble(newValue);
-                    textFieldCapacidadePorao.setText(newValue.replaceAll(",","."));
-                }catch(Exception e){
-                	textFieldCapacidadePorao.setText(oldValue);
-                }
-            }
-        });
-    }
-
-	
-
-	public Stage getDialogStage() {
-		return this.dialogStage;
+	//Caso o usuário click em cancelar ou fechar
+	public boolean confirmouCancelamentoOuFehamento() {
+		ConstruirDialog confirmar = new ConstruirDialog();
+		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Cancelamento",
+				"Atenção, se continuar seus dados serão perdidos!", "Deseja cancelar?");
+		if (result.get() == ButtonType.OK) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

@@ -14,3 +14,7 @@
 					}
 			}
 		});
+
+		this.dialogStage.setOnCloseRequest(event ->{
+                   isAberto = false;
+              });
