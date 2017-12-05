@@ -4,23 +4,32 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.vo.NavioVO;
 import model.vo.NavioObservableListVO;
 import model.vo.PaisVO;
+import view.ConstruirDialog;
 import view.FwBoarding;
 
 public class ConsultasNavioController implements Initializable {
@@ -101,13 +110,43 @@ public class ConsultasNavioController implements Initializable {
 
 	@FXML
 	public void clickOnIncluir() throws IOException {
-		
+
 		FwBoarding.carregarTelaCadastroNavio();
 
 	}
 
-	public static void clickOnAlterar() {
-		// carregarTelaAlterarNavio();
+	public static void clickOnAlterar() throws IOException {
+		// pass
+	}
+
+	public void clickOnExcluir() throws Exception {
+
+		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
+		NavioObservableListVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+
+		if (selectedIndex >= 0) {
+			if (confirmouExcluisaoDoNavio(navio.getDescricaoNavio().toString())) {
+				navioDAO.deletar(navio.getCodigoNavio());
+				navioDAO.verificarSeFoiNavioExcluido(navio.getCodigoNavio());
+				TableColumnNavio.getItems().remove(selectedIndex);
+			}
+
+		} else {
+			// Nada selecionado.
+			ConstruirDialog alerta = new ConstruirDialog();
+			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
+		}
+	}
+
+	public boolean confirmouExcluisaoDoNavio(String descricaoNavio) {
+		ConstruirDialog confirmar = new ConstruirDialog();
+		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Exclusão",
+				"O navio " + descricaoNavio + " será EXCLUÍDO", "Confirma a Exclusão? Pressione OK para concluir!");
+		if (result.get() == ButtonType.OK) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 }

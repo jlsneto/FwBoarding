@@ -119,8 +119,8 @@ public class FwBoarding extends Application {
 
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Cadastro de Navios");
-		// dialogStage.initModality(Modality.WINDOW_MODAL);
-		dialogStage.initStyle(StageStyle.UTILITY);
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		//dialogStage.initStyle(StageStyle.UTILITY);
 		dialogStage.initOwner(FwBoarding.stage);
 		dialogStage.setResizable(false);
 
@@ -130,9 +130,6 @@ public class FwBoarding extends Application {
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
-		if (dialogStage.isShowing() == false) {
-			// pass
-		}
 
 	}
 

@@ -65,6 +65,42 @@ public class NavioDAO {
 		}
 	}
 
+	public void deletar(long codigoNavio) {
+		String sql = "DELETE FROM CADNAVIO" + " WHERE CODIGONAVIO = ?";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, codigoNavio);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+
+	public void verificarSeFoiNavioExcluido(long codigoNavio) throws Exception {
+
+		String sql = "SELECT CODIGONAVIO FROM CADNAVIO WHERE CODIGONAVIO = ?";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, codigoNavio);
+			ResultSet result = stmt.executeQuery();
+			
+			if(result.next()) {
+				throw new Exception();
+			}
+			
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+
 	public List<NavioVO> listar() {
 
 		String sql = "SELECT * FROM CADNAVIO " + "INNER JOIN CADPAIS "

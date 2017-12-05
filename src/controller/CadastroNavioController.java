@@ -145,16 +145,6 @@ public class CadastroNavioController implements Initializable {
 		});
 
 	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		labelCodigo.setText(Integer.toString(navioDAO.verificaUltimoCodigo() + 1));
-		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
-
-		comboBoxPaisOrigem.setItems(observableListPais);
-		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-	}
 	
 	//Caso o usuário click em cancelar ou fechar
 	public boolean confirmouCancelamentoOuFehamento() {
@@ -166,6 +156,16 @@ public class CadastroNavioController implements Initializable {
 		} else {
 			return false;
 		}
+	}
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+
+		labelCodigo.setText(Integer.toString(navioDAO.verificaUltimoCodigo() + 1));
+		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
+
+		comboBoxPaisOrigem.setItems(observableListPais);
+		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 
 }

@@ -43,13 +43,22 @@ public class ConstruirDialog {
 
 		alert.showAndWait();
 	}
+	
+	public void dialogAlert(String titulo, String header, String conteudo) {
+		Alert alert = new Alert(AlertType.WARNING);
+        alert.setTitle(titulo);
+        alert.setHeaderText(header);
+        alert.setContentText(conteudo);
 
-	public Optional<ButtonType> DialogConfirm(String titulo,String Header,String Conteudo) {
+        alert.showAndWait();
+	}
+
+	public Optional<ButtonType> DialogConfirm(String titulo,String header,String conteudo) {
 
 		Alert alert = new Alert(AlertType.CONFIRMATION);
 		alert.setTitle(titulo);
-		alert.setHeaderText(Header);
-		alert.setContentText(Conteudo);
+		alert.setHeaderText(header);
+		alert.setContentText(conteudo);
 		Optional<ButtonType> result = alert.showAndWait();
 		return result;
 		

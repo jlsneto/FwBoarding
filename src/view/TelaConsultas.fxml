@@ -17,7 +17,7 @@
                   <Separator layoutX="158.0" layoutY="13.0" prefHeight="3.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
                   <ButtonBar fx:id="AnchorPaneButtonBar" layoutX="14.0" layoutY="16.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" text="Excluir" />
+                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" onAction="#clickOnExcluir" text="Excluir" />
                         <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" text="Alterar" />
                       <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" text="Incluir" />
                     </buttons>
