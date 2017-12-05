@@ -7,16 +7,12 @@ public class NavioVO {
 	private int qtdPorao;
 	private double capacidadePorao;
 	private PaisVO pais;
-
+	
 	public NavioVO() {
-
+		
 	}
-
-	public NavioVO(long codigoNavio, int qtdPorao, double capacidadePorao, String descricaoNavio, PaisVO pais) {
-		super();
+	public NavioVO(long codigoNavio, String descricaoNavio, PaisVO pais){
 		this.codigoNavio = codigoNavio;
-		this.qtdPorao = qtdPorao;
-		this.capacidadePorao = capacidadePorao;
 		this.descricaoNavio = descricaoNavio;
 		this.pais = pais;
 	}

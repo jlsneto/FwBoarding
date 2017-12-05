@@ -2,19 +2,13 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -23,11 +17,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.vo.NavioVO;
-import model.vo.NavioObservableListVO;
 import model.vo.PaisVO;
 import view.ConstruirDialog;
 import view.FwBoarding;
@@ -56,7 +47,7 @@ public class ConsultasNavioController implements Initializable {
 	private Button ButtonBarButtonIncluir;
 
 	@FXML
-	private TableView<NavioObservableListVO> TableColumnNavio;
+	private TableView<NavioVO> TableColumnNavio;
 
 	@FXML
 	private TableColumn<NavioVO, String> TableColumnNavioCodigo;
@@ -67,16 +58,13 @@ public class ConsultasNavioController implements Initializable {
 	@FXML
 	private TableColumn<PaisVO, String> TableColumnNavioPais;
 
-	public static ObservableList<NavioObservableListVO> observableListNavio;
+	public static ObservableList<NavioVO> observableListNavio;
 
 	private final NavioDAO navioDAO = new NavioDAO();
-
-	private List<NavioObservableListVO> listaNavio;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		listaNavio = listarNavio();
 		carregarTableViewNavio();
 
 	}
@@ -85,28 +73,14 @@ public class ConsultasNavioController implements Initializable {
 
 		TableColumnNavioCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoNavio"));
 		TableColumnNavioDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
-		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("paisDescricao"));
+		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
 
-		observableListNavio = FXCollections.observableArrayList(listaNavio);
+		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
 
 		TableColumnNavio.setItems(observableListNavio);
 
 	}
 
-	private List<NavioObservableListVO> listarNavio() {
-		List<NavioObservableListVO> listNavio = new ArrayList<>();
-
-		for (NavioVO i : navioDAO.listar()) {
-
-			NavioObservableListVO navio = new NavioObservableListVO(i.getCodigoNavio(), i.getDescricaoNavio(),
-					i.getPais().getNome());
-
-			listNavio.add(navio);
-
-		}
-
-		return listNavio;
-	}
 
 	@FXML
 	public void clickOnIncluir() throws IOException {
@@ -122,7 +96,7 @@ public class ConsultasNavioController implements Initializable {
 	public void clickOnExcluir() throws Exception {
 
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
-		NavioObservableListVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
 			if (confirmouExcluisaoDoNavio(navio.getDescricaoNavio().toString())) {

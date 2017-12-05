@@ -1,18 +1,9 @@
 package testsdao;
 
-import static org.junit.Assert.*;
-
-import java.sql.Connection;
-import java.util.Scanner;
-
 import org.junit.Test;
 
 import model.dao.NavioDAO;
-import model.database.Database;
-import model.database.DatabaseFactory;
 import model.vo.NavioVO;
-import model.vo.NavioObservableListVO;
-import model.vo.PaisVO;
 
 public class NavioDAOTest {
 

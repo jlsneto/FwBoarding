@@ -24,7 +24,7 @@ public class NavioDAO {
 	}
 
 	public void inserir(NavioVO navio) throws SQLException {
-		String sql = "INSERT INTO CADNAVIO(CODIGONAVIO, DESCRICAO, QTDPORAO, CAPACIDADEPORAO, CODIGOPAISORIGEM) VALUES(SEQ_CODIGO_CADNAVIO.NEXTVAL,?,?,?,?)";
+		String sql = "INSERT INTO CADNAVIO(DESCRICAO, QTDPORAO, CAPACIDADEPORAO, CODIGOPAISORIGEM) VALUES(?,?,?,?)";
 
 		try {
 
@@ -146,13 +146,13 @@ public class NavioDAO {
 	}
 
 	public int verificaUltimoCodigo() {
-		String sql = "SELECT MAX(CODIGONAVIO) AS CODIGONAVIO FROM CADNAVIO";
+		String sql = "SELECT LAST_VALUE FROM CADNAVIO_CODIGONAVIO_SEQ";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			ResultSet resultado = stmt.executeQuery();
 			if (resultado.next()) {
-				return resultado.getInt("CODIGONAVIO");
+				return resultado.getInt("LAST_VALUE");
 			} else {
 				return 0;
 			}

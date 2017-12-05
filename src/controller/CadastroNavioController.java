@@ -19,7 +19,6 @@ import javafx.stage.Stage;
 import model.dao.NavioDAO;
 import model.dao.PaisDAO;
 import model.vo.NavioVO;
-import model.vo.NavioObservableListVO;
 import model.vo.PaisVO;
 import view.ConstruirDialog;
 
@@ -58,11 +57,11 @@ public class CadastroNavioController implements Initializable {
 
 	// Usado para definir palco e poder utilizar seus métodos neste controller
 	private Stage dialogStage;
-
 	@FXML
 	public void clickOnCancelar() {
 		if (confirmouCancelamentoOuFehamento()) {
 			dialogStage.close();
+			
 		}
 	}
 
@@ -80,8 +79,8 @@ public class CadastroNavioController implements Initializable {
 			try {
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
-				ConsultasNavioController.observableListNavio.add(new NavioObservableListVO(navio.getCodigoNavio(),
-						navio.getDescricaoNavio(), navio.getPais().getNome()));
+				ConsultasNavioController.observableListNavio.add(new NavioVO(navio.getCodigoNavio(),
+					navio.getDescricaoNavio(), navio.getPais()));
 				// fechar dialog
 				dialogStage.close();
 			} catch (SQLException e) {
@@ -167,5 +166,6 @@ public class CadastroNavioController implements Initializable {
 		comboBoxPaisOrigem.setItems(observableListPais);
 		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
+
 
 }
