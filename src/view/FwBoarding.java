@@ -15,6 +15,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.vo.NavioVO;
 
 public class FwBoarding extends Application {
 
@@ -111,7 +112,7 @@ public class FwBoarding extends Application {
 
 	}
 
-	public static void carregarTelaCadastroNavio() throws IOException {
+	public static void carregarTelaCadastroNavio(NavioVO... args) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(FwBoarding.class.getResource("/view/CadastroNavio.fxml"));
@@ -120,13 +121,20 @@ public class FwBoarding extends Application {
 		Stage dialogStage = new Stage();
 		dialogStage.setTitle("Cadastro de Navios");
 		dialogStage.initModality(Modality.WINDOW_MODAL);
-		//dialogStage.initStyle(StageStyle.UTILITY);
+		// dialogStage.initStyle(StageStyle.UTILITY);
 		dialogStage.initOwner(FwBoarding.stage);
 		dialogStage.setResizable(false);
 
 		// Define Palco deste Dialog
 		CadastroNavioController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
+
+
+		if (CadastroNavioController.isAlterarNavio) {
+			dialogStage.setTitle("Alteração de Navio");
+			controller.setNavioAlterar(args);
+		}
+		
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();

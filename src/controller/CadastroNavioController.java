@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -57,11 +59,14 @@ public class CadastroNavioController implements Initializable {
 
 	// Usado para definir palco e poder utilizar seus métodos neste controller
 	private Stage dialogStage;
+	private NavioVO navioAlterar;
+	public static boolean isAlterarNavio;
+
 	@FXML
 	public void clickOnCancelar() {
 		if (confirmouCancelamentoOuFehamento()) {
 			dialogStage.close();
-			
+
 		}
 	}
 
@@ -69,23 +74,32 @@ public class CadastroNavioController implements Initializable {
 	public void clickOnCadastrar() {
 
 		if (validarEntrada()) {
-			NavioVO navio = new NavioVO();
-			navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
-			navio.setDescricaoNavio(textFieldDescricao.getText());
-			navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
-			navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
-			navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
-
-			try {
-				navioDAO.inserir(navio);
-				// Atualiza Tela de Consulta
-				ConsultasNavioController.observableListNavio.add(new NavioVO(navio.getCodigoNavio(),
-					navio.getDescricaoNavio(), navio.getPais()));
-				// fechar dialog
-				dialogStage.close();
-			} catch (SQLException e) {
-				// tratar!
-				e.printStackTrace();
+			if (isAlterarNavio == false) {
+				NavioVO navio = new NavioVO();
+				navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
+				navio.setDescricaoNavio(textFieldDescricao.getText());
+				navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
+				navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
+				navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+				try {
+					navioDAO.inserir(navio);
+					// Atualiza Tela de Consulta
+					ConsultasNavioController.observableListNavio
+							.add(new NavioVO(navio.getCodigoNavio(), navio.getDescricaoNavio(), navio.getPais()));
+					// fechar dialog
+					dialogStage.close();
+				} catch (SQLException e) {
+					// tratar!
+					e.printStackTrace();
+				}
+			} else {
+				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
+				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
+				navioAlterar.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
+				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
+				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+				//ConsultasNavioController.observableListNavio.contains(navioAlterar);
+				//navioDAO.alterar(navioAlterar);
 			}
 
 		}
@@ -94,12 +108,12 @@ public class CadastroNavioController implements Initializable {
 
 	private boolean validarEntrada() {
 		String errorMessage = "";
-
+		
 		if (textFieldDescricao.getText() == null || textFieldDescricao.getText().length() == 0) {
 
 			errorMessage = "Descrição inválida ou nula!\n";
 			textFieldDescricao.requestFocus();
-		} else if (navioDAO.retornaDescricaoNavio(textFieldDescricao.getText()).equals(textFieldDescricao.getText())) {
+		} else if (navioDAO.retornaDescricaoNavio(textFieldDescricao.getText()).equals(textFieldDescricao.getText()) && !textFieldDescricao.getText().equals(navioAlterar.getDescricaoNavio())) {
 
 			errorMessage = "Navio já existe!";
 			textFieldDescricao.requestFocus();
@@ -144,8 +158,8 @@ public class CadastroNavioController implements Initializable {
 		});
 
 	}
-	
-	//Caso o usuário click em cancelar ou fechar
+
+	// Caso o usuário click em cancelar ou fechar
 	public boolean confirmouCancelamentoOuFehamento() {
 		ConstruirDialog confirmar = new ConstruirDialog();
 		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Cancelamento",
@@ -156,7 +170,7 @@ public class CadastroNavioController implements Initializable {
 			return false;
 		}
 	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
@@ -167,5 +181,14 @@ public class CadastroNavioController implements Initializable {
 		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
 	}
 
+	public void setNavioAlterar(NavioVO[] args) {
+		this.navioAlterar = args[0];
+		labelCodigo.setText(Long.toString(navioAlterar.getCodigoNavio()));
+		textFieldDescricao.setText(navioAlterar.getDescricaoNavio());
+		comboBoxPaisOrigem.getSelectionModel().select(navioAlterar.getPais());
+		comboBoxQuantidadePorao.getSelectionModel().select(navioAlterar.getQtdPorao());
+		textFieldCapacidadePorao.setText(Double.toString(navioAlterar.getCapacidadePorao()));
+		buttonCadastrar.setText("Aplicar");
+	}
 
 }

@@ -84,13 +84,27 @@ public class ConsultasNavioController implements Initializable {
 
 	@FXML
 	public void clickOnIncluir() throws IOException {
-
+		
+		CadastroNavioController.isAlterarNavio = false;
 		FwBoarding.carregarTelaCadastroNavio();
 
 	}
 
-	public static void clickOnAlterar() throws IOException {
-		// pass
+	public void clickOnAlterar() throws IOException {
+		
+		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
+		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+
+		if (selectedIndex >= 0) {
+				CadastroNavioController.isAlterarNavio = true;
+				FwBoarding.carregarTelaCadastroNavio(navio);
+
+		} else {
+			// Nada selecionado.
+			ConstruirDialog alerta = new ConstruirDialog();
+			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
+		}
+		
 	}
 
 	public void clickOnExcluir() throws Exception {
