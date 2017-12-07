@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.application.Platform;
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.NavioVO;
@@ -38,12 +39,11 @@ public class NavioDAO {
 			stmt.setLong(2, navio.getQtdPorao());
 			stmt.setDouble(3, navio.getCapacidadePorao());
 			stmt.setLong(4, navio.getPais().getCodigoPais());
-			stmt.execute();
+			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("Cadastro Erro", "Erro ao tentar inserir os dados", e.getErrorCode(), e.getMessage(), sql);
-			throw new SQLException();
 		}
 	}
 
@@ -173,10 +173,31 @@ public class NavioDAO {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
 					sql);
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
+
 		}
 		return 0;
 
+	}
+
+	public void alterar(NavioVO navioAlterar) {
+		String sql = "UPDATE CADNAVIO SET DESCRICAO = ?, QTDPORAO = ?, CAPACIDADEPORAO = ? WHERE CODIGONAVIO = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+
+			stmt.setString(1, navioAlterar.getDescricaoNavio());
+			stmt.setLong(2, navioAlterar.getQtdPorao());
+			stmt.setDouble(3, navioAlterar.getCapacidadePorao());
+			stmt.setLong(4, navioAlterar.getPais().getCodigoPais());
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro ao Atualizar Navio",
+					"Ocorreu um erro no banco de dados ao tentar alterar o Navio:" + navioAlterar.getDescricaoNavio(),
+					e.getErrorCode(), e.getMessage(), sql);
+
+		}
 	}
 
 }

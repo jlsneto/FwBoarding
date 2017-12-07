@@ -112,32 +112,38 @@ public class FwBoarding extends Application {
 
 	}
 
-	public static void carregarTelaCadastroNavio(NavioVO... args) throws IOException {
+	public static void carregarTelaCadastroNavio(NavioVO... args) {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FwBoarding.class.getResource("/view/CadastroNavio.fxml"));
+			AnchorPane page = (AnchorPane) loader.load();
 
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(FwBoarding.class.getResource("/view/CadastroNavio.fxml"));
-		AnchorPane page = (AnchorPane) loader.load();
+			Stage dialogStage = new Stage();
+			dialogStage.setTitle("Cadastro de Navios");
+			dialogStage.initModality(Modality.WINDOW_MODAL);
+			// dialogStage.initStyle(StageStyle.UTILITY);
+			dialogStage.initOwner(FwBoarding.stage);
+			dialogStage.setResizable(false);
 
-		Stage dialogStage = new Stage();
-		dialogStage.setTitle("Cadastro de Navios");
-		dialogStage.initModality(Modality.WINDOW_MODAL);
-		// dialogStage.initStyle(StageStyle.UTILITY);
-		dialogStage.initOwner(FwBoarding.stage);
-		dialogStage.setResizable(false);
-
-		// Define Palco deste Dialog
-		CadastroNavioController controller = loader.getController();
-		controller.setDialogStage(dialogStage);
+			// Define Palco deste Dialog
+			CadastroNavioController controller = loader.getController();
+			controller.setDialogStage(dialogStage);
 
 
-		if (CadastroNavioController.isAlterarNavio) {
-			dialogStage.setTitle("Alteração de Navio");
-			controller.setNavioAlterar(args);
+			if (CadastroNavioController.isAlterarNavio) {
+				dialogStage.setTitle("Alteração de Navio");
+				controller.setNavioAlterar(args);
+			}
+			
+			Scene scene = new Scene(page);
+			dialogStage.setScene(scene);
+			dialogStage.showAndWait();
+		}catch (Exception e) {
+			ConstruirDialog alert = new ConstruirDialog();
+			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Cad Navio", e.getMessage());
 		}
 		
-		Scene scene = new Scene(page);
-		dialogStage.setScene(scene);
-		dialogStage.showAndWait();
 
 	}
 

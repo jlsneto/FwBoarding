@@ -94,12 +94,11 @@ public class CadastroNavioController implements Initializable {
 				}
 			} else {
 				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
-				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
 				navioAlterar.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
-				//ConsultasNavioController.observableListNavio.contains(navioAlterar);
-				//navioDAO.alterar(navioAlterar);
+				ConsultasNavioController.observableListNavio.contains(navioAlterar);
+				dialogStage.close();
 			}
 
 		}
@@ -108,16 +107,11 @@ public class CadastroNavioController implements Initializable {
 
 	private boolean validarEntrada() {
 		String errorMessage = "";
-		
+
 		if (textFieldDescricao.getText() == null || textFieldDescricao.getText().length() == 0) {
 
 			errorMessage = "Descrição inválida ou nula!\n";
 			textFieldDescricao.requestFocus();
-		} else if (navioDAO.retornaDescricaoNavio(textFieldDescricao.getText()).equals(textFieldDescricao.getText()) && !textFieldDescricao.getText().equals(navioAlterar.getDescricaoNavio())) {
-
-			errorMessage = "Navio já existe!";
-			textFieldDescricao.requestFocus();
-
 		} else if (comboBoxPaisOrigem.getSelectionModel().getSelectedItem() == null) {
 
 			errorMessage = "Selecione o país!\n";
@@ -133,6 +127,18 @@ public class CadastroNavioController implements Initializable {
 
 			errorMessage = "Insira Capacidade !\n";
 			textFieldCapacidadePorao.requestFocus();
+
+		} else if (navioDAO.retornaDescricaoNavio(textFieldDescricao.getText()).equals(textFieldDescricao.getText())) {
+
+			// Caso não tenha este if da erro!
+			if (isAlterarNavio == true) {
+				if (!textFieldDescricao.getText().equals(navioAlterar.getDescricaoNavio())) {
+					errorMessage = "Navio já existe!";
+				}
+			} else {
+				errorMessage = "Navio já existe!";
+				textFieldDescricao.requestFocus();
+			}
 
 		}
 
