@@ -81,22 +81,20 @@ public class CadastroNavioController implements Initializable {
 				navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 				navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 				navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
-				try {
-					navioDAO.inserir(navio);
-					// Atualiza Tela de Consulta
-					ConsultasNavioController.observableListNavio
-							.add(new NavioVO(navio.getCodigoNavio(), navio.getDescricaoNavio(), navio.getPais()));
-					// fechar dialog
-					dialogStage.close();
-				} catch (SQLException e) {
-					// tratar!
-					e.printStackTrace();
+				navioDAO.inserir(navio);
+				// Atualiza Tela de Consulta
+				if(navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
+				ConsultasNavioController.observableListNavio
+						.add(new NavioVO(navio.getCodigoNavio(), navio.getDescricaoNavio(), navio.getPais()));
 				}
+				// fechar dialog
+				dialogStage.close();
 			} else {
 				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
 				navioAlterar.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+				navioDAO.alterar(navioAlterar);
 				ConsultasNavioController.observableListNavio.contains(navioAlterar);
 				dialogStage.close();
 			}

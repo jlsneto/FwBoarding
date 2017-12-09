@@ -28,7 +28,7 @@ public class NavioDAO {
 
 	}
 
-	public void inserir(NavioVO navio) throws SQLException {
+	public void inserir(NavioVO navio) {
 		String sql = "INSERT INTO CADNAVIO(DESCRICAO, QTDPORAO, CAPACIDADEPORAO, CODIGOPAISORIGEM) VALUES(?,?,?,?)";
 
 		try {
@@ -180,7 +180,7 @@ public class NavioDAO {
 	}
 
 	public void alterar(NavioVO navioAlterar) {
-		String sql = "UPDATE CADNAVIO SET DESCRICAO = ?, QTDPORAO = ?, CAPACIDADEPORAO = ? WHERE CODIGONAVIO = ?";
+		String sql = "UPDATE CADNAVIO SET DESCRICAO = ?, QTDPORAO = ?, CAPACIDADEPORAO = ?, CODIGOPAISORIGEM = ? WHERE CODIGONAVIO = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -188,6 +188,7 @@ public class NavioDAO {
 			stmt.setLong(2, navioAlterar.getQtdPorao());
 			stmt.setDouble(3, navioAlterar.getCapacidadePorao());
 			stmt.setLong(4, navioAlterar.getPais().getCodigoPais());
+			stmt.setLong(5, navioAlterar.getCodigoNavio());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
