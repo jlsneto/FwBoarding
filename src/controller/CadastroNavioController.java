@@ -95,7 +95,7 @@ public class CadastroNavioController implements Initializable {
 				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.alterar(navioAlterar);
-				ConsultasNavioController.observableListNavio.contains(navioAlterar);
+				ConsultasNavioController.observableListNavio.set(ConsultasNavioController.observableListNavio.indexOf(navioAlterar), navioAlterar);
 				dialogStage.close();
 			}
 
@@ -190,7 +190,8 @@ public class CadastroNavioController implements Initializable {
 		labelCodigo.setText(Long.toString(navioAlterar.getCodigoNavio()));
 		textFieldDescricao.setText(navioAlterar.getDescricaoNavio());
 		comboBoxPaisOrigem.getSelectionModel().select(navioAlterar.getPais());
-		comboBoxQuantidadePorao.getSelectionModel().select(navioAlterar.getQtdPorao());
+		comboBoxQuantidadePorao.getSelectionModel().select((Integer)navioAlterar.getQtdPorao());
+
 		textFieldCapacidadePorao.setText(Double.toString(navioAlterar.getCapacidadePorao()));
 		buttonCadastrar.setText("Aplicar");
 	}
