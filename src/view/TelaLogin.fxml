@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="388.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="360.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <StackPane layoutX="51.0" layoutY="179.0" prefHeight="109.0" prefWidth="199.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="51.0">
          <children>
@@ -29,18 +29,12 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label prefHeight="29.0" prefWidth="63.0" styleClass="login" stylesheets="@styles/styles.css" text="Usuário" />
-                  <Label prefHeight="19.0" prefWidth="47.0" styleClass="login" stylesheets="@styles/styles.css" text="Senha" GridPane.rowIndex="2">
-                     <GridPane.margin>
-                        <Insets />
-                     </GridPane.margin>
-                  </Label>
-                  <JFXTextField fx:id="textUsuarioLogin" GridPane.rowIndex="1">
+                  <JFXTextField fx:id="textUsuarioLogin" promptText="Usuário">
                      <padding>
                         <Insets bottom="1.0" />
                      </padding>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="textSenhaLogin" GridPane.rowIndex="3">
+                  <JFXPasswordField fx:id="textSenhaLogin" promptText="Senha" GridPane.rowIndex="2">
                      <padding>
                         <Insets bottom="1.0" />
                      </padding>
@@ -54,15 +48,15 @@
       </StackPane>
       <Label layoutX="83.0" layoutY="132.0" text="Acesso ao Sistema">
          <font>
-            <Font name="Century Gothic" size="15.0" />
+            <Font name="Arial Bold" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="buttonConectar" defaultButton="true" layoutX="79.0" layoutY="313.0" mnemonicParsing="false" onAction="#clickOnConectar" prefHeight="34.0" prefWidth="143.0" styleClass="confirm" stylesheets="@styles/styles.css" text="Conectar">
+      <JFXButton fx:id="buttonConectar" layoutX="79.0" layoutY="290.0" onAction="#clickOnConectar" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: #2c3e50;" styleClass="confirm" text="Conectar">
          <font>
-            <Font size="18.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
-      </Button>
-      <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="105.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      </JFXButton>
+      <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Icons/CadeadoLogin.png" />
          </image>
