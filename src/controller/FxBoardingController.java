@@ -50,6 +50,9 @@ public class FxBoardingController implements Initializable {
 		FwBoarding.carregarTelaNavioConsulta();
 
 	}
+	public void clickOnGrupoUsuario() {
+		
+	}
 
 	public void initialize(URL location, ResourceBundle resources) {
 		// Setup da telaFxBoarding

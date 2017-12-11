@@ -47,19 +47,24 @@ public class ConsultasNavioController implements Initializable {
 	private Button ButtonBarButtonIncluir;
 
 	@FXML
-	private TableView<NavioVO> TableColumnNavio;
-
+	//private TableView<NavioVO> TableColumnNavio;
+	private TableView<Object> TableColumnNavio;
+	
 	@FXML
-	private TableColumn<NavioVO, String> TableColumnNavioCodigo;
-
+	//private TableColumn<NavioVO, String> TableColumnNavioCodigo;
+	private TableColumn<Object, String> TableColumnNavioCodigo;
+	
 	@FXML
-	private TableColumn<NavioVO, String> TableColumnNavioDescricao;
-
+	//private TableColumn<NavioVO, String> TableColumnNavioDescricao;
+	private TableColumn<Object, String> TableColumnNavioDescricao;
+	
 	@FXML
-	private TableColumn<PaisVO, String> TableColumnNavioPais;
+	//private TableColumn<PaisVO, String> TableColumnNavioPais;
+	private TableColumn<Object, String> TableColumnNavioPais;
 
-	public static ObservableList<NavioVO> observableListNavio;
-
+	//public static ObservableList<NavioVO> observableListNavio;
+	public static ObservableList<Object> observableListNavio;
+	
 	private final NavioDAO navioDAO = new NavioDAO();
 
 	@Override
@@ -93,7 +98,7 @@ public class ConsultasNavioController implements Initializable {
 	public void clickOnAlterar() throws IOException {
 		
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
-		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+		NavioVO navio = (NavioVO) TableColumnNavio.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
 				CadastroNavioController.isAlterarNavio = true;
@@ -110,7 +115,7 @@ public class ConsultasNavioController implements Initializable {
 	public void clickOnExcluir() throws Exception {
 
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
-		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+		NavioVO navio = (NavioVO) TableColumnNavio.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
 			if (confirmouExcluisaoDoNavio(navio.getDescricaoNavio().toString())) {
@@ -135,6 +140,10 @@ public class ConsultasNavioController implements Initializable {
 		} else {
 			return false;
 		}
+	}
+	
+	public void defineConsulta() {
+		
 	}
 
 }
