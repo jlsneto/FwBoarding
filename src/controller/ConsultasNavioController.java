@@ -15,6 +15,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import model.dao.NavioDAO;
@@ -80,8 +82,15 @@ public class ConsultasNavioController implements Initializable {
 		TableColumnNavio.setItems(observableListNavio);
 
 	}
-
-
+	
+	@FXML
+	public void onMouseClicked(MouseEvent mouseEvent) throws IOException {
+		 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
+	            if(mouseEvent.getClickCount() == 2){
+	            	clickOnAlterar();
+	            }
+	        }
+	}
 	@FXML
 	public void clickOnIncluir() throws IOException {
 		
@@ -89,11 +98,13 @@ public class ConsultasNavioController implements Initializable {
 		FwBoarding.carregarTelaCadastroNavio();
 
 	}
-
+	
+	@FXML
 	public void clickOnAlterar() throws IOException {
 		
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
 		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+		
 
 		if (selectedIndex >= 0) {
 				CadastroNavioController.isAlterarNavio = true;
@@ -107,6 +118,7 @@ public class ConsultasNavioController implements Initializable {
 		
 	}
 
+	@FXML
 	public void clickOnExcluir() throws Exception {
 
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();

@@ -16,6 +16,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.NavioDAO;
@@ -83,9 +85,8 @@ public class CadastroNavioController implements Initializable {
 				navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
-				if(navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
-				ConsultasNavioController.observableListNavio
-						.add(new NavioVO(navio.getCodigoNavio(), navio.getDescricaoNavio(), navio.getPais()));
+				if (navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
+					ConsultasNavioController.observableListNavio.addAll(navio);
 				}
 				// fechar dialog
 				dialogStage.close();
@@ -95,19 +96,39 @@ public class CadastroNavioController implements Initializable {
 				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.alterar(navioAlterar);
-				ConsultasNavioController.observableListNavio.set(ConsultasNavioController.observableListNavio.indexOf(navioAlterar), navioAlterar);
+				ConsultasNavioController.observableListNavio
+						.set(ConsultasNavioController.observableListNavio.indexOf(navioAlterar), navioAlterar);
 				dialogStage.close();
 			}
 
 		}
 
 	}
+//	comboBoxPaisOrigem.addEventFilter(KeyEvent.KEY_PRESSED, (event) -> {
+	    // do stuff
+//	});
+	@FXML
+	public void onKeyPressed(KeyEvent event){
+		        if(event.getCode().equals(KeyCode.ENTER)) {
+		        	if(textFieldDescricao.isFocused()) {
+		        		comboBoxPaisOrigem.requestFocus();
+		        	}else if(comboBoxPaisOrigem.isFocused()) {
+		        		comboBoxQuantidadePorao.requestFocus();
+		        	}else if(comboBoxQuantidadePorao.isFocused()) {
+		        		textFieldCapacidadePorao.requestFocus();
+		        	}else if(textFieldCapacidadePorao.isFocused()){
+		        		buttonCadastrar.requestFocus();
+		        	}else if(buttonCadastrar.isFocused()) {
+		        		clickOnCadastrar();
+		        	}
+		        }
+	}
 
 	private boolean validarEntrada() {
 		String errorMessage = "";
 
 		if (textFieldDescricao.getText() == null || textFieldDescricao.getText().length() == 0) {
-
+			
 			errorMessage = "Descrição inválida ou nula!\n";
 			textFieldDescricao.requestFocus();
 		} else if (comboBoxPaisOrigem.getSelectionModel().getSelectedItem() == null) {
@@ -183,6 +204,8 @@ public class CadastroNavioController implements Initializable {
 
 		comboBoxPaisOrigem.setItems(observableListPais);
 		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		comboBoxQuantidadePorao.getSelectionModel().select(0);
+		
 	}
 
 	public void setNavioAlterar(NavioVO[] args) {
@@ -190,8 +213,8 @@ public class CadastroNavioController implements Initializable {
 		labelCodigo.setText(Long.toString(navioAlterar.getCodigoNavio()));
 		textFieldDescricao.setText(navioAlterar.getDescricaoNavio());
 		comboBoxPaisOrigem.getSelectionModel().select(navioAlterar.getPais());
-		comboBoxQuantidadePorao.getSelectionModel().select((Integer)navioAlterar.getQtdPorao());
-
+		//comboBoxQuantidadePorao.getSelectionModel().select((Integer) navioAlterar.getQtdPorao());
+		comboBoxQuantidadePorao.setValue(navioAlterar.getQtdPorao());
 		textFieldCapacidadePorao.setText(Double.toString(navioAlterar.getCapacidadePorao()));
 		buttonCadastrar.setText("Aplicar");
 	}
