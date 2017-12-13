@@ -79,52 +79,52 @@ public class CadastroGrupoController {
 		GrupoUsuarioVO grupoUsuarioDAO = new GrupoUsuarioVO();
 		grupoUsuarioDAO.setCodigoGrupo(Integer.valueOf(labelCodigoGrupo.getText()));
 		if (checkCadastrarNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertNavio('T');
+			grupoUsuarioDAO.setPermissaoInsertNavio("T");
 		}
 		if (checkAlterarNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterNavio('T');
+			grupoUsuarioDAO.setPermissaoAlterNavio("T");
 		}
 		if (checkExibirNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulNavio('T');
+			grupoUsuarioDAO.setPermissaoConsulNavio("T");
 		}
 		if (checkExcluirNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertNavio('T');
+			grupoUsuarioDAO.setPermissaoInsertNavio("T");
 		}
 		if (checkCadastrarUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertUser('T');
+			grupoUsuarioDAO.setPermissaoInsertUser("T");
 		}
 		if (checkAlterarUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterUser('T');
+			grupoUsuarioDAO.setPermissaoAlterUser("T");
 		}
 		if (checkExibirUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulUser('T');
+			grupoUsuarioDAO.setPermissaoConsulUser("T");
 		}
 		if (checkExcluirUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoDeletUser('T');
+			grupoUsuarioDAO.setPermissaoDeletUser("T");
 		}
 		if (checkIniciarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertMovimento('T');
+			grupoUsuarioDAO.setPermissaoInsertMovimento("T");
 		}
 		if (checkMonitorarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulMovimento('T');
+			grupoUsuarioDAO.setPermissaoConsulMovimento("T");
 		}
 		if (checkPausarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterMovimento('T');
+			grupoUsuarioDAO.setPermissaoAlterMovimento("T");
 		}
 		if (checkCancelarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoDeletMovimento('T');
+			grupoUsuarioDAO.setPermissaoDeletMovimento("T");
 		}
 		if (checkCadastrarEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertMovimento('T');
+			grupoUsuarioDAO.setPermissaoInsertMovimento("T");
 		}
 		if (checkAlterarEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterMovimento('T');
+			grupoUsuarioDAO.setPermissaoAlterMovimento("T");
 		}
 		if (checkExibirEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulMovimento('T');
+			grupoUsuarioDAO.setPermissaoConsulMovimento("T");
 		}
 		if (checkExcluirEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoDeletMovimento('T');
+			grupoUsuarioDAO.setPermissaoDeletMovimento("T");
 		}
 
 	}

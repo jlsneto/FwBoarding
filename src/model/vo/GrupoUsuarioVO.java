@@ -2,23 +2,6 @@ package model.vo;
 
 public class GrupoUsuarioVO {
 	private long codigoGrupo;
-	private String descricaoGrupo;
-	private char permissaoInsertNavio;
-	private char permissaoAlterNavio;
-	private char permissaoConsulNavio;
-	private char permissaoDeletNavio;
-	private char permissaoInsertUser;
-	private char permissaoAlterUser;
-	private char permissaoConsulUser;
-	private char permissaoDeletUser;
-	private char permissaoInsertMovimento;
-	private char permissaoAlterMovimento;
-	private char permissaoConsulMovimento;
-	private char permissaoDeletMovimento;
-	private char permissaoInsertEmbarque;
-	private char permissaoAlterEmbarque;
-	private char permissaoConsulEmbarque;
-	private char permissaoDeletEmbarque;
 
 	public long getCodigoGrupo() {
 		return codigoGrupo;
@@ -36,132 +19,150 @@ public class GrupoUsuarioVO {
 		this.descricaoGrupo = descricaoGrupo;
 	}
 
-	public char getPermissaoInsertNavio() {
+	public String getPermissaoInsertNavio() {
 		return permissaoInsertNavio;
 	}
 
-	public void setPermissaoInsertNavio(char permissaoInsertNavio) {
+	public void setPermissaoInsertNavio(String permissaoInsertNavio) {
 		this.permissaoInsertNavio = permissaoInsertNavio;
 	}
 
-	public char getPermissaoAlterNavio() {
+	public String getPermissaoAlterNavio() {
 		return permissaoAlterNavio;
 	}
 
-	public void setPermissaoAlterNavio(char permissaoAlterNavio) {
+	public void setPermissaoAlterNavio(String permissaoAlterNavio) {
 		this.permissaoAlterNavio = permissaoAlterNavio;
 	}
 
-	public char getPermissaoConsulNavio() {
+	public String getPermissaoConsulNavio() {
 		return permissaoConsulNavio;
 	}
 
-	public void setPermissaoConsulNavio(char permissaoConsulNavio) {
+	public void setPermissaoConsulNavio(String permissaoConsulNavio) {
 		this.permissaoConsulNavio = permissaoConsulNavio;
 	}
 
-	public char getPermissaoDeletNavio() {
+	public String getPermissaoDeletNavio() {
 		return permissaoDeletNavio;
 	}
 
-	public void setPermissaoDeletNavio(char permissaoDeletNavio) {
+	public void setPermissaoDeletNavio(String permissaoDeletNavio) {
 		this.permissaoDeletNavio = permissaoDeletNavio;
 	}
 
-	public char getPermissaoInsertUser() {
+	public String getPermissaoInsertUser() {
 		return permissaoInsertUser;
 	}
 
-	public void setPermissaoInsertUser(char permissaoInsertUser) {
+	public void setPermissaoInsertUser(String permissaoInsertUser) {
 		this.permissaoInsertUser = permissaoInsertUser;
 	}
 
-	public char getPermissaoAlterUser() {
+	public String getPermissaoAlterUser() {
 		return permissaoAlterUser;
 	}
 
-	public void setPermissaoAlterUser(char permissaoAlterUser) {
+	public void setPermissaoAlterUser(String permissaoAlterUser) {
 		this.permissaoAlterUser = permissaoAlterUser;
 	}
 
-	public char getPermissaoConsulUser() {
+	public String getPermissaoConsulUser() {
 		return permissaoConsulUser;
 	}
 
-	public void setPermissaoConsulUser(char permissaoConsulUser) {
+	public void setPermissaoConsulUser(String permissaoConsulUser) {
 		this.permissaoConsulUser = permissaoConsulUser;
 	}
 
-	public char getPermissaoDeletUser() {
+	public String getPermissaoDeletUser() {
 		return permissaoDeletUser;
 	}
 
-	public void setPermissaoDeletUser(char permissaoDeletUser) {
+	public void setPermissaoDeletUser(String permissaoDeletUser) {
 		this.permissaoDeletUser = permissaoDeletUser;
 	}
 
-	public char getPermissaoInsertMovimento() {
+	public String getPermissaoInsertMovimento() {
 		return permissaoInsertMovimento;
 	}
 
-	public void setPermissaoInsertMovimento(char permissaoInsertMovimento) {
+	public void setPermissaoInsertMovimento(String permissaoInsertMovimento) {
 		this.permissaoInsertMovimento = permissaoInsertMovimento;
 	}
 
-	public char getPermissaoAlterMovimento() {
+	public String getPermissaoAlterMovimento() {
 		return permissaoAlterMovimento;
 	}
 
-	public void setPermissaoAlterMovimento(char permissaoAlterMovimento) {
+	public void setPermissaoAlterMovimento(String permissaoAlterMovimento) {
 		this.permissaoAlterMovimento = permissaoAlterMovimento;
 	}
 
-	public char getPermissaoConsulMovimento() {
+	public String getPermissaoConsulMovimento() {
 		return permissaoConsulMovimento;
 	}
 
-	public void setPermissaoConsulMovimento(char permissaoConsulMovimento) {
+	public void setPermissaoConsulMovimento(String permissaoConsulMovimento) {
 		this.permissaoConsulMovimento = permissaoConsulMovimento;
 	}
 
-	public char getPermissaoDeletMovimento() {
+	public String getPermissaoDeletMovimento() {
 		return permissaoDeletMovimento;
 	}
 
-	public void setPermissaoDeletMovimento(char permissaoDeletMovimento) {
+	public void setPermissaoDeletMovimento(String permissaoDeletMovimento) {
 		this.permissaoDeletMovimento = permissaoDeletMovimento;
 	}
 
-	public char getPermissaoInsertEmbarque() {
+	public String getPermissaoInsertEmbarque() {
 		return permissaoInsertEmbarque;
 	}
 
-	public void setPermissaoInsertEmbarque(char permissaoInsertEmbarque) {
+	public void setPermissaoInsertEmbarque(String permissaoInsertEmbarque) {
 		this.permissaoInsertEmbarque = permissaoInsertEmbarque;
 	}
 
-	public char getPermissaoAlterEmbarque() {
+	public String getPermissaoAlterEmbarque() {
 		return permissaoAlterEmbarque;
 	}
 
-	public void setPermissaoAlterEmbarque(char permissaoAlterEmbarque) {
+	public void setPermissaoAlterEmbarque(String permissaoAlterEmbarque) {
 		this.permissaoAlterEmbarque = permissaoAlterEmbarque;
 	}
 
-	public char getPermissaoConsulEmbarque() {
+	public String getPermissaoConsulEmbarque() {
 		return permissaoConsulEmbarque;
 	}
 
-	public void setPermissaoConsulEmbarque(char permissaoConsulEmbarque) {
+	public void setPermissaoConsulEmbarque(String permissaoConsulEmbarque) {
 		this.permissaoConsulEmbarque = permissaoConsulEmbarque;
 	}
 
-	public char getPermissaoDeletEmbarque() {
+	public String getPermissaoDeletEmbarque() {
 		return permissaoDeletEmbarque;
 	}
 
-	public void setPermissaoDeletEmbarque(char permissaoDeletEmbarque) {
+	public void setPermissaoDeletEmbarque(String permissaoDeletEmbarque) {
 		this.permissaoDeletEmbarque = permissaoDeletEmbarque;
 	}
+
+	private String descricaoGrupo;
+	private String permissaoInsertNavio;
+	private String permissaoAlterNavio;
+	private String permissaoConsulNavio;
+	private String permissaoDeletNavio;
+	private String permissaoInsertUser;
+	private String permissaoAlterUser;
+	private String permissaoConsulUser;
+	private String permissaoDeletUser;
+	private String permissaoInsertMovimento;
+	private String permissaoAlterMovimento;
+	private String permissaoConsulMovimento;
+	private String permissaoDeletMovimento;
+	private String permissaoInsertEmbarque;
+	private String permissaoAlterEmbarque;
+	private String permissaoConsulEmbarque;
+	private String permissaoDeletEmbarque;
 
 }

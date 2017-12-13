@@ -18,34 +18,35 @@ public class GrupoUsuarioDAO {
 		conn = DatabaseFactory.getDatabase().getConection();
 	}
 
-	public void Inserir(GrupoUsuarioVO grupoUsuario) {
-		String sql = "INSERT INTO GRUPOUSUARIO (DESCRICAO, PERMISSAO_INSERT_NAVIO, PERMISSAO_ALTER_NAVIO,PERMISSAO_CONSUL_NAVIO, PERMISSAO_DELET_NAVIO, PERMISSAO_INSERT_USER,PERMISSAO_ALTER_USER,PERMISSAO_CONSUL_USER,PERMISSAO_DELET_USER,PERMISSAO_INSERT_MOVIMENTO, PERMISSAO_ALTER_MOVIMENTO,PERMISSAO_CONSUL_MOVIMENTO,PERMISSAO_DELET_MOVIMENTO,PERMISSAO_INSERT_EMBARQUE,PERMISSAO_ALTER_EMBARQUE,PERMISSAO_CONSUL_EMBARQUE, PERMISSAO_DELET_EMBARQUE) "
-				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+	public boolean Inserir(GrupoUsuarioVO grupoUsuario) {
+		String sql = "INSERT INTO GRUPOUSUARIO (codigogrupo,DESCRICAO, PERMISSAO_INSERT_NAVIO, PERMISSAO_ALTER_NAVIO,PERMISSAO_CONSUL_NAVIO, PERMISSAO_DELET_NAVIO, PERMISSAO_INSERT_USER,PERMISSAO_ALTER_USER,PERMISSAO_CONSUL_USER,PERMISSAO_DELET_USER,PERMISSAO_INSERT_MOVIMENTO, PERMISSAO_ALTER_MOVIMENTO,PERMISSAO_CONSUL_MOVIMENTO,PERMISSAO_DELET_MOVIMENTO,PERMISSAO_INSERT_EMBARQUE,PERMISSAO_ALTER_EMBARQUE,PERMISSAO_CONSUL_EMBARQUE, PERMISSAO_DELET_EMBARQUE) "
+				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-
-			stmt.setString(1, grupoUsuario.getDescricaoGrupo());
-			stmt.setLong(2, grupoUsuario.getPermissaoInsertNavio());
-			stmt.setLong(3, grupoUsuario.getPermissaoAlterNavio());
-			stmt.setLong(4, grupoUsuario.getPermissaoConsulNavio());
-			stmt.setLong(5, grupoUsuario.getPermissaoDeletNavio());
-			stmt.setLong(6, grupoUsuario.getPermissaoInsertUser());
-			stmt.setLong(7, grupoUsuario.getPermissaoAlterUser());
-			stmt.setLong(8, grupoUsuario.getPermissaoConsulUser());
-			stmt.setLong(9, grupoUsuario.getPermissaoDeletUser());
-			stmt.setLong(10, grupoUsuario.getPermissaoInsertMovimento());
-			stmt.setLong(11, grupoUsuario.getPermissaoAlterMovimento());
-			stmt.setLong(12, grupoUsuario.getPermissaoConsulMovimento());
-			stmt.setLong(13, grupoUsuario.getPermissaoDeletMovimento());
-			stmt.setLong(14, grupoUsuario.getPermissaoInsertEmbarque());
-			stmt.setLong(15, grupoUsuario.getPermissaoAlterEmbarque());
-			stmt.setLong(16, grupoUsuario.getPermissaoConsulEmbarque());
-			stmt.setLong(17, grupoUsuario.getPermissaoDeletEmbarque());
-
+			stmt.setLong(1, grupoUsuario.getCodigoGrupo());
+			stmt.setString(2, grupoUsuario.getDescricaoGrupo());
+			stmt.setString(3, grupoUsuario.getPermissaoInsertNavio());
+			stmt.setString(4, grupoUsuario.getPermissaoAlterNavio());
+			stmt.setString(5, grupoUsuario.getPermissaoConsulNavio());
+			stmt.setString(6, grupoUsuario.getPermissaoDeletNavio());
+			stmt.setString(7, grupoUsuario.getPermissaoInsertUser());
+			stmt.setString(8, grupoUsuario.getPermissaoAlterUser());
+			stmt.setString(9, grupoUsuario.getPermissaoConsulUser());
+			stmt.setString(10, grupoUsuario.getPermissaoDeletUser());
+			stmt.setString(11, grupoUsuario.getPermissaoInsertMovimento());
+			stmt.setString(12, grupoUsuario.getPermissaoAlterMovimento());
+			stmt.setString(13, grupoUsuario.getPermissaoConsulMovimento());
+			stmt.setString(14, grupoUsuario.getPermissaoDeletMovimento());
+			stmt.setString(15, grupoUsuario.getPermissaoInsertEmbarque());
+			stmt.setString(16, grupoUsuario.getPermissaoAlterEmbarque());
+			stmt.setString(17, grupoUsuario.getPermissaoConsulEmbarque());
+			stmt.setString(18, grupoUsuario.getPermissaoDeletEmbarque());
+			stmt.executeUpdate();
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("Cadastro Erro", "Erro ao tentar inserir os dados", e.getErrorCode(), e.getMessage(), sql);
+			return false;
 		}
-
+		return true;
 	}
 }
