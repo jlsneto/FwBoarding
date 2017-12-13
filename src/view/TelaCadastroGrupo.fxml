@@ -39,19 +39,19 @@
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <CheckBox fx:id="checkExibirNavio" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Exibir" />
+                              <CheckBox fx:id="checkExibirNavio" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Consultar" />
                               <CheckBox fx:id="checkCadastrarNavio" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
                               <CheckBox fx:id="checkAlterarNavio" layoutX="227.0" layoutY="14.0" mnemonicParsing="false" text="Alterar" />
-                              <CheckBox fx:id="checkEcluirNavio" layoutX="227.0" layoutY="54.0" mnemonicParsing="false" text="Excluir" />
+                              <CheckBox fx:id="checkExcluirNavio" layoutX="227.0" layoutY="54.0" mnemonicParsing="false" text="Excluir" />
                            </children></AnchorPane>
                   </content>
                 </TitledPane>
-                <TitledPane animated="false" prefHeight="150.0" prefWidth="299.0" text="Permissões de Cadastro de Usuário">
+                <TitledPane animated="false" prefHeight="150.0" prefWidth="299.0" text="Permissões de Cadastro de Usuario">
                   <content>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <CheckBox fx:id="checkCadastrarUsuario" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
-                              <CheckBox fx:id="checkExibirUsuario" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Exibir" />
+                              <CheckBox fx:id="checkExibirUsuario" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Consultar" />
                               <CheckBox fx:id="checkAlterarUsuario" layoutX="227.0" layoutY="14.0" mnemonicParsing="false" text="Alterar" />
                               <CheckBox fx:id="checkExcluirUsuario" layoutX="227.0" layoutY="54.0" mnemonicParsing="false" text="Excuir" />
                            </children></AnchorPane>
@@ -65,6 +65,18 @@
                               <CheckBox fx:id="checkMonitorarMovimento" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Monitorar" />
                               <CheckBox fx:id="checkPausarMovimento" layoutX="227.0" layoutY="14.0" mnemonicParsing="false" text="Pausar" />
                               <CheckBox fx:id="checkCancelarMovimento" layoutX="227.0" layoutY="54.0" mnemonicParsing="false" text="Cancelar" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </TitledPane>
+                  <TitledPane animated="false" layoutX="10.0" layoutY="10.0" prefHeight="150.0" prefWidth="383.0" text="Permissões de Cadastro de Embarque">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <CheckBox fx:id="checkExibirEmbarque" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="Consultar" />
+                              <CheckBox fx:id="checkCadastrarEmbarque" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" text="Cadastrar" />
+                              <CheckBox fx:id="checkAlterarEmbarque" layoutX="227.0" layoutY="14.0" mnemonicParsing="false" text="Alterar" />
+                              <CheckBox fx:id="checkExcluirEmbarque" layoutX="227.0" layoutY="54.0" mnemonicParsing="false" text="Excluir" />
                            </children>
                         </AnchorPane>
                      </content>
