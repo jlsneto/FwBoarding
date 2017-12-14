@@ -15,6 +15,8 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -82,40 +84,48 @@ public class ConsultasNavioController implements Initializable {
 		TableColumnNavio.setItems(observableListNavio);
 
 	}
-	
+
+	@FXML
+	public void onKeyPressed(KeyEvent event) throws IOException {
+		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
+		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >=0) {
+			clickOnAlterar();
+		}
+	}
+
 	@FXML
 	public void onMouseClicked(MouseEvent mouseEvent) throws IOException {
-		 if(mouseEvent.getButton().equals(MouseButton.PRIMARY)){
-	            if(mouseEvent.getClickCount() == 2){
-	            	clickOnAlterar();
-	            }
-	        }
+		if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+			if (mouseEvent.getClickCount() == 2) {
+				clickOnAlterar();
+			}
+		}
 	}
+
 	@FXML
 	public void clickOnIncluir() throws IOException {
-		
+
 		CadastroNavioController.isAlterarNavio = false;
 		FwBoarding.carregarTelaCadastroNavio();
 
 	}
-	
+
 	@FXML
 	public void clickOnAlterar() throws IOException {
-		
+
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
 		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
-		
 
 		if (selectedIndex >= 0) {
-				CadastroNavioController.isAlterarNavio = true;
-				FwBoarding.carregarTelaCadastroNavio(navio);
+			CadastroNavioController.isAlterarNavio = true;
+			FwBoarding.carregarTelaCadastroNavio(navio);
 
 		} else {
 			// Nada selecionado.
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
 		}
-		
+
 	}
 
 	@FXML

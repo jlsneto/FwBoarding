@@ -38,3 +38,47 @@
 .button.confirm:pressed{
 	-fx-background-color: #16a085;
 }
+
+/*#############################################*/
+
+.button.new {
+	-fx-background-color: #27ae60;
+	-fx-text-fill: white;
+	-fx-background-radius: 20;
+}
+
+.button.new:hover{
+	-fx-background-color: #2ecc71;
+}
+.button.new:pressed{
+	-fx-background-color: #27ae60;
+}
+/*#############################################*/
+
+.button.edit {
+	-fx-background-color: #f39c12;
+	-fx-text-fill: white;
+	-fx-background-radius: 20;
+}
+
+.button.edit:hover{
+	-fx-background-color: #f1c40f;
+}
+.button.edit:pressed{
+	-fx-background-color: #f39c12;
+}
+/*#############################################*/
+
+.button.cancel {
+	-fx-background-color: #c0392b;
+	-fx-text-fill: white;
+	-fx-background-radius: 20;
+}
+
+.button.cancel:hover{
+	-fx-background-color: #e74c3c;
+}
+.button.cancel:pressed{
+	-fx-background-color: #c0392b;
+}
+
