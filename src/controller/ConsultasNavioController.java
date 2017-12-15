@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -80,7 +82,6 @@ public class ConsultasNavioController implements Initializable {
 		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
 
 		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
-
 		TableColumnNavio.setItems(observableListNavio);
 
 	}
@@ -88,7 +89,7 @@ public class ConsultasNavioController implements Initializable {
 	@FXML
 	public void onKeyPressed(KeyEvent event) throws IOException {
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
-		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >=0) {
+		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
 			clickOnAlterar();
 		}
 	}
@@ -158,5 +159,16 @@ public class ConsultasNavioController implements Initializable {
 			return false;
 		}
 	}
-
+/*
+	private ObservableList<NavioVO> findItems() {
+		List<NavioVO> listItens = navioDAO.listar();
+		ObservableList<NavioVO> itensEncontrados = FXCollections.observableArrayList();
+		for (NavioVO itens : listItens) {
+			if (itens.getDescricaoNavio().contains("N")) {
+				itensEncontrados.add(itens);
+			}
+		}
+		return itensEncontrados;
+	}
+*/
 }
