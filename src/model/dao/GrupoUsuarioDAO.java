@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.GrupoUsuarioVO;
+import model.vo.NavioVO;
 import view.ConstruirDialog;
 
 public class GrupoUsuarioDAO {
@@ -53,7 +54,7 @@ public class GrupoUsuarioDAO {
 		}
 
 	}
-	
+
 	public String retornaDescricaoGrupoUsuario(String descricao) {
 		String sql = "SELECT DESCRICAO FROM GRUPOUSUARIO " + "WHERE DESCRICAO = ?";
 
@@ -75,4 +76,38 @@ public class GrupoUsuarioDAO {
 			return "";
 		}
 	}
+
+	public void alterar(GrupoUsuarioVO grupoUsuarioAlterar) {
+		String sql = "UPDATE GRUPOUSUARIO SET DESCRICAO = ?, PERMISSAO_INSERT_NAVIO = ?, PERMISSAO_ALTER_NAVIO = ?,PERMISSAO_CONSUL_NAVIO = ?, PERMISSAO_DELET_NAVIO = ?, PERMISSAO_INSERT_USER = ?,PERMISSAO_ALTER_USER = ?,PERMISSAO_CONSUL_USER = ?,PERMISSAO_DELET_USER = ?,PERMISSAO_INSERT_MOVIMENTO = ?, PERMISSAO_ALTER_MOVIMENTO = ?,PERMISSAO_CONSUL_MOVIMENTO = ?,PERMISSAO_DELET_MOVIMENTO = ?,PERMISSAO_INSERT_EMBARQUE = ?,PERMISSAO_ALTER_EMBARQUE = ?,PERMISSAO_CONSUL_EMBARQUE = ?, PERMISSAO_DELET_EMBARQUE = ? WHERE CODIGOGRUPO = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, grupoUsuarioAlterar.getCodigoGrupo());
+			stmt.setString(2, grupoUsuarioAlterar.getDescricaoGrupo());
+			stmt.setString(3, grupoUsuarioAlterar.getPermissaoInsertNavio());
+			stmt.setString(4, grupoUsuarioAlterar.getPermissaoAlterNavio());
+			stmt.setString(5, grupoUsuarioAlterar.getPermissaoConsulNavio());
+			stmt.setString(6, grupoUsuarioAlterar.getPermissaoDeletNavio());
+			stmt.setString(7, grupoUsuarioAlterar.getPermissaoInsertUser());
+			stmt.setString(8, grupoUsuarioAlterar.getPermissaoAlterUser());
+			stmt.setString(9, grupoUsuarioAlterar.getPermissaoConsulUser());
+			stmt.setString(10, grupoUsuarioAlterar.getPermissaoDeletUser());
+			stmt.setString(11, grupoUsuarioAlterar.getPermissaoInsertMovimento());
+			stmt.setString(12, grupoUsuarioAlterar.getPermissaoAlterMovimento());
+			stmt.setString(13, grupoUsuarioAlterar.getPermissaoConsulMovimento());
+			stmt.setString(14, grupoUsuarioAlterar.getPermissaoDeletMovimento());
+			stmt.setString(15, grupoUsuarioAlterar.getPermissaoInsertEmbarque());
+			stmt.setString(16, grupoUsuarioAlterar.getPermissaoAlterEmbarque());
+			stmt.setString(17, grupoUsuarioAlterar.getPermissaoConsulEmbarque());
+			stmt.setString(18, grupoUsuarioAlterar.getPermissaoDeletEmbarque());
+			stmt.executeUpdate();
+
+		} catch (SQLException e) {
+
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro ao Atualizar Navio", "Ocorreu um erro no banco de dados ao tentar alterar o Navio:"
+					+ grupoUsuarioAlterar.getDescricaoGrupo(), e.getErrorCode(), e.getMessage(), sql);
+
+		}
+	}
+
 }
