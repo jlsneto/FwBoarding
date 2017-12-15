@@ -10,7 +10,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.dao.GrupoUsuarioDAO;
 import model.vo.GrupoUsuarioVO;
+import view.ConstruirDialog;
 
 public class CadastroGrupoController {
 
@@ -73,60 +75,96 @@ public class CadastroGrupoController {
 
 	@FXML
 	private Button buttomCadastrar;
+	
+	private final GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
+	public static boolean isAlterarGrupo;
+	private GrupoUsuarioVO grupoUsuarioAlterar;
 
 	@FXML
 	void clickOnCadastrar(ActionEvent event) {
-		GrupoUsuarioVO grupoUsuarioDAO = new GrupoUsuarioVO();
-		grupoUsuarioDAO.setCodigoGrupo(Integer.valueOf(labelCodigoGrupo.getText()));
+		GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
+		grupoUsuario.setCodigoGrupo(Integer.valueOf(labelCodigoGrupo.getText()));
 		if (checkCadastrarNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertNavio("T");
+			grupoUsuario.setPermissaoInsertNavio("T");
+		}else {
+			grupoUsuario.setPermissaoInsertNavio("R");
 		}
 		if (checkAlterarNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterNavio("T");
+			grupoUsuario.setPermissaoAlterNavio("T");
+		}else {
+			grupoUsuario.setPermissaoAlterNavio("R");
 		}
 		if (checkExibirNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulNavio("T");
+			grupoUsuario.setPermissaoConsulNavio("T");
+		}else {
+			grupoUsuario.setPermissaoConsulNavio("R");
 		}
 		if (checkExcluirNavio.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertNavio("T");
+			grupoUsuario.setPermissaoInsertNavio("T");
+		}else {
+			grupoUsuario.setPermissaoInsertNavio("R");
 		}
 		if (checkCadastrarUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertUser("T");
+			grupoUsuario.setPermissaoInsertUser("T");
+		}else {
+			grupoUsuario.setPermissaoInsertUser("R");
 		}
 		if (checkAlterarUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterUser("T");
+			grupoUsuario.setPermissaoAlterUser("T");
+		}else {
+			grupoUsuario.setPermissaoAlterUser("R");
 		}
 		if (checkExibirUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulUser("T");
+			grupoUsuario.setPermissaoConsulUser("T");
+		}else {
+			grupoUsuario.setPermissaoConsulUser("R");
 		}
 		if (checkExcluirUsuario.isSelected()) {
-			grupoUsuarioDAO.setPermissaoDeletUser("T");
+			grupoUsuario.setPermissaoDeletUser("T");
+		}else {
+			grupoUsuario.setPermissaoDeletUser("R");
 		}
 		if (checkIniciarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertMovimento("T");
+			grupoUsuario.setPermissaoInsertMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoConsulMovimento("R");
 		}
 		if (checkMonitorarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulMovimento("T");
+			grupoUsuario.setPermissaoConsulMovimento("T");
+		}else {	
+			grupoUsuario.setPermissaoConsulMovimento("R");
 		}
 		if (checkPausarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterMovimento("T");
+			grupoUsuario.setPermissaoAlterMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoAlterMovimento("R");
 		}
 		if (checkCancelarMovimento.isSelected()) {
-			grupoUsuarioDAO.setPermissaoDeletMovimento("T");
+			grupoUsuario.setPermissaoDeletMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoDeletMovimento("R");
 		}
 		if (checkCadastrarEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoInsertMovimento("T");
+			grupoUsuario.setPermissaoInsertMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoAlterMovimento("R");
 		}
 		if (checkAlterarEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoAlterMovimento("T");
+			grupoUsuario.setPermissaoAlterMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoConsulMovimento("R");
 		}
 		if (checkExibirEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoConsulMovimento("T");
+			grupoUsuario.setPermissaoConsulMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoConsulMovimento("R");
 		}
 		if (checkExcluirEmbarque.isSelected()) {
-			grupoUsuarioDAO.setPermissaoDeletMovimento("T");
+			grupoUsuario.setPermissaoDeletMovimento("T");
+		}else {
+			grupoUsuario.setPermissaoDeletMovimento("R");
 		}
-
+		grupoUsuarioDAO.Inserir(grupoUsuario);
 	}
 
 	@FXML
@@ -135,6 +173,37 @@ public class CadastroGrupoController {
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {
+
+	}
+	private boolean validarEntrada() {
+		String errorMessage = "";
+
+		if (textFieldDescricao.getText() == null || textFieldDescricao.getText().length() == 0) {
+			
+			errorMessage = "Descrição inválida ou nula!\n";
+			textFieldDescricao.requestFocus();
+		
+		} else if (grupoUsuarioDAO.retornaDescricaoGrupoUsuario(textFieldDescricao.getText()).equals(textFieldDescricao.getText())) {
+
+			// Caso não tenha este if da erro!
+			if (isAlterarGrupo == true) {
+				if (!textFieldDescricao.getText().equals(grupoUsuarioAlterar.getDescricaoGrupo())) {
+					errorMessage = "Grupo de Usuário já existe!";
+				}
+			} else {
+				errorMessage = "Grupo de Usuário já existe!";
+				textFieldDescricao.requestFocus();
+			}
+
+		}
+
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			ConstruirDialog dialogErro = new ConstruirDialog();
+			dialogErro.DialogError("Erro cadastro do Grupo de Usuário", errorMessage, 0, "", errorMessage);
+			return false;
+		}
 
 	}
 }

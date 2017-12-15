@@ -62,7 +62,7 @@ public class NavioDAO {
 			}
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
-			erro.DialogError("Erro de Consulta", "Erro ao consultar o navio no banco de dados", e.getErrorCode(),
+			erro.DialogError("Erro de Consulta", "Erro ao consultar o grupo de usuário no banco de dados", e.getErrorCode(),
 					e.getMessage(), sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 			return "";
