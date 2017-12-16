@@ -90,7 +90,7 @@ public class CadastroGrupoController {
 		if (validarEntrada()) {
 			if (isAlterarGrupo == false) {
 				GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
-				grupoUsuario.setCodigoGrupo(Integer.valueOf(labelCodigoGrupo.getText()));
+				grupoUsuario.setCodigoGrupo(Long.valueOf(labelCodigoGrupo.getText()));
 				grupoUsuario.setDescricaoGrupo(textFieldDescricao.getText());
 				if (checkCadastrarNavio.isSelected()) {
 					grupoUsuario.setPermissaoInsertNavio("T");
@@ -272,6 +272,7 @@ public class CadastroGrupoController {
 
 	public void initialize(URL location, ResourceBundle resources) {
 
+		labelCodigoGrupo.setText(Long.toString(grupoUsuarioDAO.verificaUltimoCodigo() + 1));
 	}
 
 	private boolean validarEntrada() {

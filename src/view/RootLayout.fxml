@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FxBoardingController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FxBoardingController">
    <top>
       <AnchorPane prefHeight="99.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
          <children>
@@ -22,7 +22,7 @@
                     <MenuItem fx:id="menuItemGeralNavio" mnemonicParsing="false" onAction="#clickOnNavio" text="Navio" />
                         <Menu fx:id="menuGeralUsuarios" mnemonicParsing="false" text="Usuários">
                           <items>
-                              <MenuItem fx:id="menuItemUsuariosGrupoUsuarios" mnemonicParsing="false" text="Grupo de Usuários" />
+                              <MenuItem fx:id="menuItemUsuariosGrupoUsuarios" mnemonicParsing="false" onAction="#clickOnGrupoUsuario" text="Grupo de Usuários" />
                             <MenuItem fx:id="menuItemUsuariosUsuario" mnemonicParsing="false" text="Usuário" />
                               <MenuItem fx:id="menuItemUsuariosTrocarUsuario" mnemonicParsing="false" text="Trocar de Usuário" />
                           </items>

@@ -51,6 +51,11 @@ public class FxBoardingController implements Initializable {
 
 	}
 
+    @FXML
+    void clickOnGrupoUsuario(ActionEvent event){
+		FwBoarding.carregarTelaCadastroGrupoUsuario();
+	}
+
 	public void initialize(URL location, ResourceBundle resources) {
 		// Setup da telaFxBoarding
 		FwBoarding.stage.setOnCloseRequest(event -> {

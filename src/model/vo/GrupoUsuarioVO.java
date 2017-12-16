@@ -2,6 +2,23 @@ package model.vo;
 
 public class GrupoUsuarioVO {
 	private long codigoGrupo;
+	private String descricaoGrupo;
+	private String permissaoInsertNavio;
+	private String permissaoAlterNavio;
+	private String permissaoConsulNavio;
+	private String permissaoDeletNavio;
+	private String permissaoInsertUser;
+	private String permissaoAlterUser;
+	private String permissaoConsulUser;
+	private String permissaoDeletUser;
+	private String permissaoInsertMovimento;
+	private String permissaoAlterMovimento;
+	private String permissaoConsulMovimento;
+	private String permissaoDeletMovimento;
+	private String permissaoInsertEmbarque;
+	private String permissaoAlterEmbarque;
+	private String permissaoConsulEmbarque;
+	private String permissaoDeletEmbarque;
 
 	public long getCodigoGrupo() {
 		return codigoGrupo;
@@ -146,23 +163,5 @@ public class GrupoUsuarioVO {
 	public void setPermissaoDeletEmbarque(String permissaoDeletEmbarque) {
 		this.permissaoDeletEmbarque = permissaoDeletEmbarque;
 	}
-
-	private String descricaoGrupo;
-	private String permissaoInsertNavio;
-	private String permissaoAlterNavio;
-	private String permissaoConsulNavio;
-	private String permissaoDeletNavio;
-	private String permissaoInsertUser;
-	private String permissaoAlterUser;
-	private String permissaoConsulUser;
-	private String permissaoDeletUser;
-	private String permissaoInsertMovimento;
-	private String permissaoAlterMovimento;
-	private String permissaoConsulMovimento;
-	private String permissaoDeletMovimento;
-	private String permissaoInsertEmbarque;
-	private String permissaoAlterEmbarque;
-	private String permissaoConsulEmbarque;
-	private String permissaoDeletEmbarque;
 
 }

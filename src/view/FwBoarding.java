@@ -157,6 +157,22 @@ public class FwBoarding extends Application {
 			return false;
 		}
 	}
+	
+	public static void carregarTelaCadastroGrupoUsuario() {
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FwBoarding.class.getResource("/view/TelaCadastroGrupo.fxml"));
+			AnchorPane grupoUsuaio;
+			grupoUsuaio = (AnchorPane) loader.load();
+			// Define a TelaConsultas no centro do root layout.
+			FwBoarding.rootLayout.setCenter(grupoUsuaio);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 
 	public static void main(String[] args) {
 		launch(args);
