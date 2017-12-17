@@ -18,26 +18,54 @@
               <menus>
                 <Menu fx:id="menuGeral" mnemonicParsing="false" text="_Geral">
                   <items>
-                    <MenuItem fx:id="menuItemGeralNavio" mnemonicParsing="false" onAction="#clickOnNavio" text="Navio" />
+                    <MenuItem fx:id="menuItemGeralNavio" mnemonicParsing="false" onAction="#clickOnNavio" text="Navio">
+                           <graphic>
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/Icons/iconShip2.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic></MenuItem>
                         <Menu fx:id="menuGeralUsuarios" mnemonicParsing="false" text="Usuários">
                           <items>
-                              <MenuItem fx:id="menuItemUsuariosGrupoUsuarios" mnemonicParsing="false" text="Grupo de Usuários" />
-                            <MenuItem fx:id="menuItemUsuariosUsuario" mnemonicParsing="false" text="Usuário" />
-                              <MenuItem fx:id="menuItemUsuariosTrocarUsuario" mnemonicParsing="false" text="Trocar de Usuário" />
+                              <MenuItem fx:id="menuItemUsuariosGrupoUsuarios" mnemonicParsing="false" text="Grupo de Usuários">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/Icons/iconUser2.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></MenuItem>
+                            <MenuItem fx:id="menuItemUsuariosUsuario" mnemonicParsing="false" text="Usuário">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/Icons/iconUser3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></MenuItem>
+                              <MenuItem fx:id="menuItemUsuariosTrocarUsuario" mnemonicParsing="false" text="Trocar de Usuário">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@images/Icons/iconUser4.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></MenuItem>
                           </items>
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/Icons/iconAccountBlack.png" />
+                                    <Image url="@images/Icons/iconNetwork.png" />
                                  </image>
                               </ImageView>
                            </graphic>
                         </Menu>
                         <MenuItem fx:id="menuItemGeralSair" mnemonicParsing="false" onAction="#onExit" text="Sair">
                            <graphic>
-                              <ImageView fitHeight="20.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                              <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
-                                    <Image url="@images/Icons/iconExitBlack.png" />
+                                    <Image url="@images/Icons/iconExit.png" />
                                  </image>
                               </ImageView>
                            </graphic></MenuItem>

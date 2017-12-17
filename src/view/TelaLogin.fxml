@@ -18,9 +18,10 @@
    <children>
       <StackPane layoutX="51.0" layoutY="179.0" prefHeight="109.0" prefWidth="199.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="51.0">
          <children>
-            <GridPane prefHeight="137.0" prefWidth="201.0">
+            <GridPane prefHeight="109.0" prefWidth="0.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="178.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="29.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="204.0" minWidth="10.0" prefWidth="168.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -29,16 +30,26 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <JFXTextField fx:id="textUsuarioLogin" promptText="Usuário">
+                  <JFXTextField fx:id="textUsuarioLogin" promptText="Usuário" GridPane.columnIndex="1">
                      <padding>
                         <Insets bottom="1.0" />
                      </padding>
                   </JFXTextField>
-                  <JFXPasswordField fx:id="textSenhaLogin" promptText="Senha" GridPane.rowIndex="2">
+                  <JFXPasswordField fx:id="textSenhaLogin" promptText="Senha" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <padding>
                         <Insets bottom="1.0" />
                      </padding>
                   </JFXPasswordField>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/Icons/iconUser.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="2">
+                     <image>
+                        <Image url="@images/Icons/iconKey4.png" />
+                     </image>
+                  </ImageView>
                </children>
                <StackPane.margin>
                   <Insets />
@@ -46,9 +57,9 @@
             </GridPane>
          </children>
       </StackPane>
-      <Label layoutX="83.0" layoutY="132.0" text="Acesso ao Sistema">
+      <Label layoutX="68.0" layoutY="132.0" text="Acesso ao Sistema">
          <font>
-            <Font name="Arial Bold" size="15.0" />
+            <Font name="Arial Bold" size="18.0" />
          </font>
       </Label>
       <JFXButton fx:id="buttonConectar" layoutX="79.0" layoutY="290.0" onAction="#clickOnConectar" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: #2c3e50;" styleClass="confirm" text="Conectar">
