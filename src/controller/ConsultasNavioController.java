@@ -121,6 +121,7 @@ public class ConsultasNavioController implements Initializable {
 
 		CadastroNavioController.isAlterarNavio = false;
 		FwBoarding.carregarTelaCadastroNavio();
+		//Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
 	}
 
@@ -139,7 +140,8 @@ public class ConsultasNavioController implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
 		}
-
+		//Para Atualizar a ObservableList itensEncontrados
+		clickOnPesquisar();
 	}
 
 	@FXML
@@ -160,6 +162,7 @@ public class ConsultasNavioController implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
 		}
+		
 	}
 
 	public boolean confirmouExcluisaoDoNavio(String descricaoNavio) {
@@ -177,7 +180,7 @@ public class ConsultasNavioController implements Initializable {
 	private void clickOnPesquisar() {
 		itensEncontrados = FXCollections.observableArrayList();
 		for (NavioVO itens: observableListNavio) {
-			if (itens.getDescricaoNavio().contains(textFieldPesquisar.getText())) {
+			if (itens.getDescricaoNavio().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
 		}
