@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -52,7 +53,7 @@ public class FxBoardingController implements Initializable {
 	}
 
     @FXML
-    void clickOnGrupoUsuario(ActionEvent event){
+    void clickOnGrupoUsuario(ActionEvent event) throws IOException{
 		FwBoarding.carregarTelaCadastroGrupoUsuario();
 	}
 

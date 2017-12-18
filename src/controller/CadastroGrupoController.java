@@ -270,11 +270,6 @@ public class CadastroGrupoController {
 		}
 	}
 
-	public void initialize(URL location, ResourceBundle resources) {
-
-		labelCodigoGrupo.setText(Long.toString(grupoUsuarioDAO.verificaUltimoCodigo() + 1));
-	}
-
 	private boolean validarEntrada() {
 		String errorMessage = "";
 
@@ -317,5 +312,11 @@ public class CadastroGrupoController {
 		} else {
 			return false;
 		}
+	}
+
+	public void initialize(URL location, ResourceBundle resources) {
+
+		//BUG ESCROTO DO CARALHO 
+		labelCodigoGrupo.setText(Long.toString(grupoUsuarioDAO.verificaUltimoCodigo() + 1));
 	}
 }

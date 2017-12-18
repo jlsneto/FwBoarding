@@ -113,7 +113,7 @@ public class FwBoarding extends Application {
 	}
 
 	public static void carregarTelaCadastroNavio(NavioVO... args) {
-		
+
 		try {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(FwBoarding.class.getResource("/view/CadastroNavio.fxml"));
@@ -130,20 +130,18 @@ public class FwBoarding extends Application {
 			CadastroNavioController controller = loader.getController();
 			controller.setDialogStage(dialogStage);
 
-
 			if (CadastroNavioController.isAlterarNavio) {
 				dialogStage.setTitle("Alteração de Navio");
 				controller.setNavioAlterar(args);
 			}
-			
+
 			Scene scene = new Scene(page);
 			dialogStage.setScene(scene);
 			dialogStage.showAndWait();
-		}catch (Exception e) {
+		} catch (Exception e) {
 			ConstruirDialog alert = new ConstruirDialog();
 			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Cad Navio", e.getMessage());
 		}
-		
 
 	}
 
@@ -157,20 +155,23 @@ public class FwBoarding extends Application {
 			return false;
 		}
 	}
-	
-	public static void carregarTelaCadastroGrupoUsuario() {
 
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(FwBoarding.class.getResource("/view/TelaCadastroGrupo.fxml"));
-			AnchorPane grupoUsuaio;
-			grupoUsuaio = (AnchorPane) loader.load();
-			// Define a TelaConsultas no centro do root layout.
-			FwBoarding.rootLayout.setCenter(grupoUsuaio);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public static void carregarTelaCadastroGrupoUsuario() throws IOException {
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(FwBoarding.class.getResource("/view/TelaCadastroGrupo.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Cadastro Grupo de Usuario");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initOwner(stage);
+		dialogStage.setResizable(false);
+		
+		
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		dialogStage.showAndWait();
 
 	}
 
