@@ -107,7 +107,8 @@ public class FwBoarding extends Application {
 			FwBoarding.rootLayout.setCenter(navio);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			ConstruirDialog alert = new ConstruirDialog();
+			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Consulta de Navio", e.getMessage());
 		}
 
 	}

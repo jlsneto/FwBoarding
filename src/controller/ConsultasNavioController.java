@@ -16,6 +16,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -64,9 +65,17 @@ public class ConsultasNavioController implements Initializable {
 	@FXML
 	private TableColumn<PaisVO, String> TableColumnNavioPais;
 
+    @FXML
+    private TextField textFieldPesquisar;
+
+    @FXML
+    private Button buttonPesquisar;
+
 	public static ObservableList<NavioVO> observableListNavio;
 
 	private final NavioDAO navioDAO = new NavioDAO();
+
+	private ObservableList<NavioVO> itensEncontrados;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -92,6 +101,10 @@ public class ConsultasNavioController implements Initializable {
 		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
 			clickOnAlterar();
 		}
+		else if(event.getCode().isLetterKey() || event.getCode().isWhitespaceKey() || event.getCode().equals(KeyCode.BACK_SPACE) ) {
+			//System.out.println(event.getCode().getName());
+			clickOnPesquisar();
+		}
 	}
 
 	@FXML
@@ -108,7 +121,7 @@ public class ConsultasNavioController implements Initializable {
 
 		CadastroNavioController.isAlterarNavio = false;
 		FwBoarding.carregarTelaCadastroNavio();
-
+		clickOnPesquisar();
 	}
 
 	@FXML
@@ -159,16 +172,16 @@ public class ConsultasNavioController implements Initializable {
 			return false;
 		}
 	}
-/*
-	private ObservableList<NavioVO> findItems() {
-		List<NavioVO> listItens = navioDAO.listar();
-		ObservableList<NavioVO> itensEncontrados = FXCollections.observableArrayList();
-		for (NavioVO itens : listItens) {
-			if (itens.getDescricaoNavio().contains("N")) {
+
+	@FXML
+	private void clickOnPesquisar() {
+		itensEncontrados = FXCollections.observableArrayList();
+		for (NavioVO itens: observableListNavio) {
+			if (itens.getDescricaoNavio().contains(textFieldPesquisar.getText())) {
 				itensEncontrados.add(itens);
 			}
 		}
-		return itensEncontrados;
+		TableColumnNavio.setItems(itensEncontrados);
 	}
-*/
+
 }
