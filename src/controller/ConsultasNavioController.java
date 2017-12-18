@@ -154,7 +154,8 @@ public class ConsultasNavioController implements Initializable {
 			if (confirmouExcluisaoDoNavio(navio.getDescricaoNavio().toString())) {
 				navioDAO.deletar(navio.getCodigoNavio());
 				navioDAO.verificarSeFoiNavioExcluido(navio.getCodigoNavio());
-				TableColumnNavio.getItems().remove(selectedIndex);
+				//TableColumnNavio.getItems().remove(selectedIndex);
+				observableListNavio.remove(selectedIndex);
 			}
 
 		} else {
@@ -162,7 +163,8 @@ public class ConsultasNavioController implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
 		}
-		
+		//Para Atualizar a ObservableList itensEncontrados
+		clickOnPesquisar();
 	}
 
 	public boolean confirmouExcluisaoDoNavio(String descricaoNavio) {

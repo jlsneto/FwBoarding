@@ -31,7 +31,7 @@
             <Label text="Descrição" GridPane.rowIndex="1" />
             <Label text="Pais de Origem" GridPane.rowIndex="2" />
             <TextField fx:id="textFieldDescricao" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <ComboBox fx:id="comboBoxPaisOrigem" prefWidth="150.0" promptText="Selecionar Pais" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="comboBoxPaisOrigem" onKeyPressed="#KeyPressedComboBox" prefWidth="150.0" promptText="Selecionar Pais" GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Quantidade de Porão" GridPane.rowIndex="3" />
             <Label text="Capacidade do Porão" GridPane.rowIndex="4" />
             <TextField fx:id="textFieldCapacidadePorao" GridPane.columnIndex="1" GridPane.rowIndex="4" />

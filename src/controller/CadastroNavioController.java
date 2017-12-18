@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -58,10 +60,12 @@ public class CadastroNavioController implements Initializable {
 
 	private final PaisDAO paisDAO = new PaisDAO();
 	private final NavioDAO navioDAO = new NavioDAO();
+	private String comboBoxPesquisa;
 
 	// Usado para definir palco e poder utilizar seus métodos neste controller
 	private Stage dialogStage;
 	private NavioVO navioAlterar;
+
 	public static boolean isAlterarNavio;
 
 	@FXML
@@ -104,9 +108,24 @@ public class CadastroNavioController implements Initializable {
 		}
 
 	}
-//	comboBoxPaisOrigem.addEventFilter(KeyEvent.KEY_PRESSED, (event) -> {
-	    // do stuff
-//	});
+	@FXML
+	private void KeyPressedComboBox() {
+		
+		comboBoxPaisOrigem.addEventFilter(KeyEvent.KEY_PRESSED, (event) -> {
+
+			for(PaisVO pais: observableListPais) {
+				Integer i = 0;
+				if(pais.getNome().startsWith(event.getCode().getName())) {		
+						comboBoxPaisOrigem.getSelectionModel().select(pais);
+					   ComboBoxListViewSkin<?> skin = (ComboBoxListViewSkin<?>) comboBoxPaisOrigem.getSkin();
+					   skin.getListView().getFocusModel().focus(i);
+					   break;
+				}
+				i++;
+			}
+		});
+	}
+
 	@FXML
 	public void onKeyPressed(KeyEvent event){
 		        if(event.getCode().equals(KeyCode.ENTER)) {
