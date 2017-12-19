@@ -3,6 +3,7 @@ package view;
 import java.io.IOException;
 import java.util.Optional;
 
+import controller.CadastroGrupoController;
 import controller.CadastroNavioController;
 import controller.LoginController;
 import javafx.application.Application;
@@ -169,6 +170,8 @@ public class FwBoarding extends Application {
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
 		
+		CadastroGrupoController controller = loader.getController();
+		controller.setDialogStage(dialogStage);
 		
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);

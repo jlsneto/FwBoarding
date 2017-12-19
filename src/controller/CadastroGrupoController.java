@@ -1,12 +1,14 @@
 package controller;
 
 import java.net.URL;
+
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -17,7 +19,7 @@ import model.dao.GrupoUsuarioDAO;
 import model.vo.GrupoUsuarioVO;
 import view.ConstruirDialog;
 
-public class CadastroGrupoController {
+public class CadastroGrupoController implements Initializable {
 
 	@FXML
 	private Label labelCodigoGrupo;
@@ -95,82 +97,82 @@ public class CadastroGrupoController {
 				if (checkCadastrarNavio.isSelected()) {
 					grupoUsuario.setPermissaoInsertNavio("T");
 				} else {
-					grupoUsuario.setPermissaoInsertNavio("R");
+					grupoUsuario.setPermissaoInsertNavio("F");
 				}
 				if (checkAlterarNavio.isSelected()) {
 					grupoUsuario.setPermissaoAlterNavio("T");
 				} else {
-					grupoUsuario.setPermissaoAlterNavio("R");
+					grupoUsuario.setPermissaoAlterNavio("F");
 				}
 				if (checkExibirNavio.isSelected()) {
 					grupoUsuario.setPermissaoConsulNavio("T");
 				} else {
-					grupoUsuario.setPermissaoConsulNavio("R");
+					grupoUsuario.setPermissaoConsulNavio("F");
 				}
 				if (checkExcluirNavio.isSelected()) {
-					grupoUsuario.setPermissaoInsertNavio("T");
+					grupoUsuario.setPermissaoDeletNavio("T");
 				} else {
-					grupoUsuario.setPermissaoInsertNavio("R");
+					grupoUsuario.setPermissaoDeletNavio("F");
 				}
 				if (checkCadastrarUsuario.isSelected()) {
 					grupoUsuario.setPermissaoInsertUser("T");
 				} else {
-					grupoUsuario.setPermissaoInsertUser("R");
+					grupoUsuario.setPermissaoInsertUser("F");
 				}
 				if (checkAlterarUsuario.isSelected()) {
 					grupoUsuario.setPermissaoAlterUser("T");
 				} else {
-					grupoUsuario.setPermissaoAlterUser("R");
+					grupoUsuario.setPermissaoAlterUser("F");
 				}
 				if (checkExibirUsuario.isSelected()) {
 					grupoUsuario.setPermissaoConsulUser("T");
 				} else {
-					grupoUsuario.setPermissaoConsulUser("R");
+					grupoUsuario.setPermissaoConsulUser("F");
 				}
 				if (checkExcluirUsuario.isSelected()) {
 					grupoUsuario.setPermissaoDeletUser("T");
 				} else {
-					grupoUsuario.setPermissaoDeletUser("R");
+					grupoUsuario.setPermissaoDeletUser("F");
 				}
 				if (checkIniciarMovimento.isSelected()) {
 					grupoUsuario.setPermissaoInsertMovimento("T");
 				} else {
-					grupoUsuario.setPermissaoConsulMovimento("R");
+					grupoUsuario.setPermissaoInsertMovimento("F");
 				}
 				if (checkMonitorarMovimento.isSelected()) {
 					grupoUsuario.setPermissaoConsulMovimento("T");
 				} else {
-					grupoUsuario.setPermissaoConsulMovimento("R");
+					grupoUsuario.setPermissaoConsulMovimento("F");
 				}
 				if (checkPausarMovimento.isSelected()) {
 					grupoUsuario.setPermissaoAlterMovimento("T");
 				} else {
-					grupoUsuario.setPermissaoAlterMovimento("R");
+					grupoUsuario.setPermissaoAlterMovimento("F");
 				}
 				if (checkCancelarMovimento.isSelected()) {
 					grupoUsuario.setPermissaoDeletMovimento("T");
 				} else {
-					grupoUsuario.setPermissaoDeletMovimento("R");
+					grupoUsuario.setPermissaoDeletMovimento("F");
 				}
 				if (checkCadastrarEmbarque.isSelected()) {
-					grupoUsuario.setPermissaoInsertMovimento("T");
+					grupoUsuario.setPermissaoInsertEmbarque("T");
 				} else {
-					grupoUsuario.setPermissaoAlterMovimento("R");
+					grupoUsuario.setPermissaoInsertEmbarque("F");
 				}
 				if (checkAlterarEmbarque.isSelected()) {
-					grupoUsuario.setPermissaoAlterMovimento("T");
+					grupoUsuario.setPermissaoAlterEmbarque("T");
 				} else {
-					grupoUsuario.setPermissaoConsulMovimento("R");
+					grupoUsuario.setPermissaoAlterEmbarque("F");
 				}
 				if (checkExibirEmbarque.isSelected()) {
-					grupoUsuario.setPermissaoConsulMovimento("T");
+					grupoUsuario.setPermissaoConsulEmbarque("T");
 				} else {
-					grupoUsuario.setPermissaoConsulMovimento("R");
+					grupoUsuario.setPermissaoConsulEmbarque("F");
 				}
 				if (checkExcluirEmbarque.isSelected()) {
-					grupoUsuario.setPermissaoDeletMovimento("T");
+					grupoUsuario.setPermissaoDeletEmbarque("T");
 				} else {
-					grupoUsuario.setPermissaoDeletMovimento("R");
+					grupoUsuario.setPermissaoDeletEmbarque("F");
 				}
 				grupoUsuarioDAO.Inserir(grupoUsuario);
 				dialogStage.close();
@@ -179,82 +181,82 @@ public class CadastroGrupoController {
 				if (checkCadastrarNavio.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoInsertNavio("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoInsertNavio("R");
+					grupoUsuarioAlterar.setPermissaoInsertNavio("F");
 				}
 				if (checkAlterarNavio.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoAlterNavio("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoAlterNavio("R");
+					grupoUsuarioAlterar.setPermissaoAlterNavio("F");
 				}
 				if (checkExibirNavio.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoConsulNavio("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoConsulNavio("R");
+					grupoUsuarioAlterar.setPermissaoConsulNavio("F");
 				}
 				if (checkExcluirNavio.isSelected()) {
-					grupoUsuarioAlterar.setPermissaoInsertNavio("T");
+					grupoUsuarioAlterar.setPermissaoDeletNavio("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoInsertNavio("R");
+					grupoUsuarioAlterar.setPermissaoDeletNavio("F");
 				}
 				if (checkCadastrarUsuario.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoInsertUser("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoInsertUser("R");
+					grupoUsuarioAlterar.setPermissaoInsertUser("F");
 				}
 				if (checkAlterarUsuario.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoAlterUser("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoAlterUser("R");
+					grupoUsuarioAlterar.setPermissaoAlterUser("F");
 				}
 				if (checkExibirUsuario.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoConsulUser("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoConsulUser("R");
+					grupoUsuarioAlterar.setPermissaoConsulUser("F");
 				}
 				if (checkExcluirUsuario.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoDeletUser("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoDeletUser("R");
+					grupoUsuarioAlterar.setPermissaoDeletUser("F");
 				}
 				if (checkIniciarMovimento.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoInsertMovimento("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoConsulMovimento("R");
+					grupoUsuarioAlterar.setPermissaoInsertMovimento("F");
 				}
 				if (checkMonitorarMovimento.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoConsulMovimento("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoConsulMovimento("R");
+					grupoUsuarioAlterar.setPermissaoConsulMovimento("F");
 				}
 				if (checkPausarMovimento.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoAlterMovimento("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoAlterMovimento("R");
+					grupoUsuarioAlterar.setPermissaoAlterMovimento("F");
 				}
 				if (checkCancelarMovimento.isSelected()) {
 					grupoUsuarioAlterar.setPermissaoDeletMovimento("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoDeletMovimento("R");
+					grupoUsuarioAlterar.setPermissaoDeletMovimento("F");
 				}
 				if (checkCadastrarEmbarque.isSelected()) {
-					grupoUsuarioAlterar.setPermissaoInsertMovimento("T");
+					grupoUsuarioAlterar.setPermissaoInsertEmbarque("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoAlterMovimento("R");
+					grupoUsuarioAlterar.setPermissaoInsertEmbarque("F");
 				}
 				if (checkAlterarEmbarque.isSelected()) {
-					grupoUsuarioAlterar.setPermissaoAlterMovimento("T");
+					grupoUsuarioAlterar.setPermissaoAlterEmbarque("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoConsulMovimento("R");
+					grupoUsuarioAlterar.setPermissaoAlterEmbarque("F");
 				}
 				if (checkExibirEmbarque.isSelected()) {
-					grupoUsuarioAlterar.setPermissaoConsulMovimento("T");
+					grupoUsuarioAlterar.setPermissaoConsulEmbarque("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoConsulMovimento("R");
+					grupoUsuarioAlterar.setPermissaoConsulEmbarque("F");
 				}
 				if (checkExcluirEmbarque.isSelected()) {
-					grupoUsuarioAlterar.setPermissaoDeletMovimento("T");
+					grupoUsuarioAlterar.setPermissaoDeletEmbarque("T");
 				} else {
-					grupoUsuarioAlterar.setPermissaoDeletMovimento("R");
+					grupoUsuarioAlterar.setPermissaoDeletEmbarque("F");
 				}
 				grupoUsuarioDAO.Inserir(grupoUsuarioAlterar);
 				dialogStage.close();
@@ -314,9 +316,25 @@ public class CadastroGrupoController {
 		}
 	}
 
+	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		//BUG ESCROTO DO CARALHO 
+		// BUG ESCROTO DO CARALHO
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioDAO.verificaUltimoCodigo() + 1));
+
 	}
+	
+	public void setDialogStage(Stage dialogStage) {
+		this.dialogStage = dialogStage;
+		dialogStage.setOnCloseRequest(event -> {
+			if (confirmouCancelamentoOuFehamento()) {
+				// ... Usuário clicou ok
+				dialogStage.close();
+			} else {
+				event.consume();
+			}
+		});
+
+	}
+
 }
