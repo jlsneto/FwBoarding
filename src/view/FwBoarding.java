@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
 
 public class FwBoarding extends Application {
@@ -158,7 +159,7 @@ public class FwBoarding extends Application {
 		}
 	}
 
-	public static void carregarTelaCadastroGrupoUsuario() throws IOException {
+	public static void carregarTelaCadastroGrupoUsuario(GrupoUsuarioVO... args) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(FwBoarding.class.getResource("/view/TelaCadastroGrupo.fxml"));
