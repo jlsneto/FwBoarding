@@ -54,7 +54,7 @@ public class FxBoardingController implements Initializable {
 
     @FXML
     void clickOnGrupoUsuario(ActionEvent event) throws IOException{
-		FwBoarding.carregarTelaCadastroGrupoUsuario();
+		FwBoarding.carregarTelaGrupoConsulta();
 	}
 
 	public void initialize(URL location, ResourceBundle resources) {

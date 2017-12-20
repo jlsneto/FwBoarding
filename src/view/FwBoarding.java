@@ -170,13 +170,30 @@ public class FwBoarding extends Application {
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
-		
+
 		CadastroGrupoController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
-		
+
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
+
+	}
+
+	public static void carregarTelaGrupoConsulta() {
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FwBoarding.class.getResource("/view/TelaConsultaGrupo.fxml"));
+			AnchorPane grupoUsuario;
+			grupoUsuario = (AnchorPane) loader.load();
+			// Define a TelaConsultas no centro do root layout.
+			FwBoarding.rootLayout.setCenter(grupoUsuario);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			ConstruirDialog alert = new ConstruirDialog();
+			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Consulta  Grupo de Usuario", e.getMessage());
+		}
 
 	}
 

@@ -209,9 +209,10 @@ public class GrupoUsuarioDAO {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
 					sql);
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
+			Logger.getLogger(GrupoUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
+			return null;
 		}
-		return listaNavio;
+		return listaGrupo;
 	}
 
 }

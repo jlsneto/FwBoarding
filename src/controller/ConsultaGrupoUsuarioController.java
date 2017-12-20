@@ -34,13 +34,13 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	private Button ButtonExcluir;
 
 	@FXML
-	private TableView<?> TableGrupoUsuario;
+	private TableView<GrupoUsuarioVO> TableGrupoUsuario;
 
 	@FXML
-	private TableColumn<?, ?> TableColumnCodigoGrupo;
+	private TableColumn<GrupoUsuarioVO, String> TableColumnCodigoGrupo;
 
 	@FXML
-	private TableColumn<?, ?> TableColumnDescricaoGrupo;
+	private TableColumn<GrupoUsuarioVO, String> TableColumnDescricaoGrupo;
 
 	@FXML
 	private TextField textFieldPesquisar;
@@ -48,7 +48,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	@FXML
 	private Button ButtonPesquisar;
 
-	public static ObservableList<GrupoUsuarioVO> observableListGrupo;
+	private ObservableList<GrupoUsuarioVO> observableListGrupo;
 	private final GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
 	private ObservableList<GrupoUsuarioVO> itensEncontrados;
 
@@ -65,6 +65,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 
 		observableListGrupo = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
 		TableGrupoUsuario.setItems(observableListGrupo);
+
 	}
 
 	@FXML
