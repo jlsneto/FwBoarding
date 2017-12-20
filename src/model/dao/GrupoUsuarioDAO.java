@@ -102,6 +102,7 @@ public class GrupoUsuarioDAO {
 			stmt.setString(15, grupoUsuarioAlterar.getPermissaoAlterEmbarque());
 			stmt.setString(16, grupoUsuarioAlterar.getPermissaoConsulEmbarque());
 			stmt.setString(17, grupoUsuarioAlterar.getPermissaoDeletEmbarque());
+			stmt.setLong(18, grupoUsuarioAlterar.getCodigoGrupo());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {

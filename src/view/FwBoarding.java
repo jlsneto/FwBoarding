@@ -173,7 +173,12 @@ public class FwBoarding extends Application {
 
 		CadastroGrupoController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
-
+		
+		if (CadastroGrupoController.isAlterarGrupo) {
+			dialogStage.setTitle("Alteração Grupo de Usuario");
+			controller.setGrupoUsuarioAlterar(args);
+		}
+		
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();

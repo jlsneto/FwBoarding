@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -16,6 +17,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
 import view.ConstruirDialog;
@@ -48,7 +53,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	@FXML
 	private Button ButtonPesquisar;
 
-	private ObservableList<GrupoUsuarioVO> observableListGrupo;
+	public static ObservableList<GrupoUsuarioVO> observableListGrupo;
 	private final GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
 	private ObservableList<GrupoUsuarioVO> itensEncontrados;
 
@@ -69,10 +74,10 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	}
 
 	@FXML
-	void clickOnAlterar(ActionEvent event) throws IOException {
+	public void clickOnAlterar() throws IOException {
 
 		int selectedIndex = TableGrupoUsuario.getSelectionModel().getSelectedIndex();
-		GrupoUsuarioVO grupoUsuario = (GrupoUsuarioVO) TableGrupoUsuario.getSelectionModel().getSelectedItem();
+		GrupoUsuarioVO grupoUsuario = TableGrupoUsuario.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
 			CadastroGrupoController.isAlterarGrupo = true;
@@ -140,4 +145,26 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 			return false;
 		}
 	}
+	
+	@FXML
+    void onKeyPressed(KeyEvent event) throws IOException {
+		
+		int selectedIndex = TableGrupoUsuario.getSelectionModel().getSelectedIndex();
+		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
+			clickOnAlterar();
+		}
+		else if(event.getCode().isLetterKey() || event.getCode().isWhitespaceKey() || event.getCode().equals(KeyCode.BACK_SPACE) ) {
+			
+			clickOnPesquisar();
+		}
+    }
+
+    @FXML
+    void onMouseClicked(MouseEvent mouseEvent) throws IOException {
+    	if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+			if (mouseEvent.getClickCount() == 2) {
+				clickOnAlterar();
+			}
+		}
+    }
 }

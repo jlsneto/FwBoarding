@@ -17,6 +17,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import model.dao.GrupoUsuarioDAO;
 import model.vo.GrupoUsuarioVO;
+import model.vo.NavioVO;
 import view.ConstruirDialog;
 
 public class CadastroGrupoController implements Initializable {
@@ -175,6 +176,9 @@ public class CadastroGrupoController implements Initializable {
 					grupoUsuario.setPermissaoDeletEmbarque("F");
 				}
 				grupoUsuarioDAO.Inserir(grupoUsuario);
+				if (grupoUsuario.getDescricaoGrupo().equals(grupoUsuarioDAO.retornaDescricaoGrupoUsuario(grupoUsuario.getDescricaoGrupo()))) {
+					ConsultaGrupoUsuarioController.observableListGrupo.addAll(grupoUsuario);
+				}
 				dialogStage.close();
 			} else {
 				grupoUsuarioAlterar.setDescricaoGrupo(textFieldDescricao.getText());
@@ -258,7 +262,8 @@ public class CadastroGrupoController implements Initializable {
 				} else {
 					grupoUsuarioAlterar.setPermissaoDeletEmbarque("F");
 				}
-				grupoUsuarioDAO.Inserir(grupoUsuarioAlterar);
+				grupoUsuarioDAO.alterar(grupoUsuarioAlterar);
+				ConsultaGrupoUsuarioController.observableListGrupo.set(ConsultaGrupoUsuarioController.observableListGrupo.indexOf(grupoUsuarioAlterar), grupoUsuarioAlterar);
 				dialogStage.close();
 			}
 		}
@@ -334,7 +339,14 @@ public class CadastroGrupoController implements Initializable {
 				event.consume();
 			}
 		});
-
+	}
+	
+	public void setGrupoUsuarioAlterar(GrupoUsuarioVO[] args) {
+		this.grupoUsuarioAlterar = args[0];
+		labelCodigoGrupo.setText(Long.toString(grupoUsuarioAlterar.getCodigoGrupo()));
+		textFieldDescricao.setText(grupoUsuarioAlterar.getDescricaoGrupo());
+	
+		buttomCadastrar.setText("Aplicar");
 	}
 
 }

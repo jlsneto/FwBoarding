@@ -12,8 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/9"  fx:controller="controller.ConsultaGrupoUsuarioController">
+<AnchorPane xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ConsultaGrupoUsuarioController">
    <children>
       <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -30,7 +29,7 @@
             </Pane>
          </top>
          <center>
-            <TableView fx:id="TableGrupoUsuario" prefHeight="342.0" prefWidth="296.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="TableGrupoUsuario" onKeyPressed="#onKeyPressed" onMouseClicked="#onMouseClicked" prefHeight="342.0" prefWidth="296.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="TableColumnCodigoGrupo" prefWidth="132.0" text="Codigo" />
                 <TableColumn fx:id="TableColumnDescricaoGrupo" prefWidth="205.0" text="Descrição" />
