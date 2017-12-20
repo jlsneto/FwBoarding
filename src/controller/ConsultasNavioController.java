@@ -76,7 +76,7 @@ public class ConsultasNavioController implements Initializable {
 
 	private final NavioDAO navioDAO = new NavioDAO();
 
-	private ObservableList<NavioVO> itensEncontrados;
+	static ObservableList<NavioVO> itensEncontrados;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -93,6 +93,7 @@ public class ConsultasNavioController implements Initializable {
 
 		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
 		TableColumnNavio.setItems(observableListNavio);
+		clickOnPesquisar();
 
 	}
 

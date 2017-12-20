@@ -90,7 +90,7 @@ public class CadastroNavioController implements Initializable {
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
 				if (navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
-					ConsultasNavioController.observableListNavio.addAll(navio);
+					ConsultasNavioController.itensEncontrados.addAll(navio);
 				}
 				// fechar dialog
 				dialogStage.close();
@@ -100,8 +100,8 @@ public class CadastroNavioController implements Initializable {
 				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
 				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.alterar(navioAlterar);
-				ConsultasNavioController.observableListNavio
-						.set(ConsultasNavioController.observableListNavio.indexOf(navioAlterar), navioAlterar);
+				ConsultasNavioController.itensEncontrados
+						.set(ConsultasNavioController.itensEncontrados.indexOf(navioAlterar), navioAlterar);
 				dialogStage.close();
 			}
 
