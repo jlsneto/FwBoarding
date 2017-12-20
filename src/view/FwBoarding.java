@@ -16,6 +16,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
 
 public class FwBoarding extends Application {
@@ -158,7 +159,7 @@ public class FwBoarding extends Application {
 		}
 	}
 
-	public static void carregarTelaCadastroGrupoUsuario() throws IOException {
+	public static void carregarTelaCadastroGrupoUsuario(GrupoUsuarioVO... args) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(FwBoarding.class.getResource("/view/TelaCadastroGrupo.fxml"));
@@ -169,13 +170,35 @@ public class FwBoarding extends Application {
 		dialogStage.initModality(Modality.WINDOW_MODAL);
 		dialogStage.initOwner(stage);
 		dialogStage.setResizable(false);
-		
+
 		CadastroGrupoController controller = loader.getController();
 		controller.setDialogStage(dialogStage);
+		
+		if (CadastroGrupoController.isAlterarGrupo) {
+			dialogStage.setTitle("Alteração Grupo de Usuario");
+			controller.setGrupoUsuarioAlterar(args);
+		}
 		
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
+
+	}
+
+	public static void carregarTelaGrupoConsulta() {
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FwBoarding.class.getResource("/view/TelaConsultaGrupo.fxml"));
+			AnchorPane grupoUsuario;
+			grupoUsuario = (AnchorPane) loader.load();
+			// Define a TelaConsultas no centro do root layout.
+			FwBoarding.rootLayout.setCenter(grupoUsuario);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			ConstruirDialog alert = new ConstruirDialog();
+			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Consulta  Grupo de Usuario", e.getMessage());
+		}
 
 	}
 

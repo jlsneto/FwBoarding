@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +14,7 @@ import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
+import model.vo.PaisVO;
 import view.ConstruirDialog;
 
 public class GrupoUsuarioDAO {
@@ -99,6 +102,7 @@ public class GrupoUsuarioDAO {
 			stmt.setString(15, grupoUsuarioAlterar.getPermissaoAlterEmbarque());
 			stmt.setString(16, grupoUsuarioAlterar.getPermissaoConsulEmbarque());
 			stmt.setString(17, grupoUsuarioAlterar.getPermissaoDeletEmbarque());
+			stmt.setLong(18, grupoUsuarioAlterar.getCodigoGrupo());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -156,6 +160,60 @@ public class GrupoUsuarioDAO {
 		}
 		return 0;
 
+	}
+	
+	public void verificarSeGrupoFoiExcluido(long codigoGrupo) throws Exception {
+
+		String sql = "SELECT CODIGOGRUPO FROM GRUPOUSUARIO WHERE CODIGOGRUPO = ?";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, codigoGrupo);
+			ResultSet result = stmt.executeQuery();
+
+			if (result.next()) {
+				throw new Exception();
+			}
+
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+			Logger.getLogger(GrupoUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
+		}
+	}
+	
+	public List<GrupoUsuarioVO> listar() {
+
+		String sql = "SELECT * FROM GRUPOUSUARIO ORDER BY GRUPOUSUARIO.CODIGOGRUPO";
+
+		List<GrupoUsuarioVO> listaGrupo = new ArrayList<>();
+
+		try {
+
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet listaResultado = stmt.executeQuery();
+
+			while (listaResultado.next()) {
+
+				GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
+
+				grupoUsuario.setCodigoGrupo(listaResultado.getLong("CODIGOGRUPO"));
+				grupoUsuario.setDescricaoGrupo(listaResultado.getString("DESCRICAO"));
+				
+
+				
+				listaGrupo.add(grupoUsuario);
+			}
+
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+			Logger.getLogger(GrupoUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
+			return null;
+		}
+		return listaGrupo;
 	}
 
 }
