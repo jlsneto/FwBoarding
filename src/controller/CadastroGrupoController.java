@@ -353,7 +353,7 @@ public class CadastroGrupoController implements Initializable {
 		System.out.println(grupoUsuarioAlterar.getPermissaoAlterNavio());
 		System.out.println(grupoUsuarioAlterar.getPermissaoConsulNavio());
 		System.out.println(grupoUsuarioAlterar.getPermissaoDeletNavio());
-
+		String a = grupoUsuarioAlterar.getPermissaoInsertNavio();
 		if (grupoUsuarioAlterar.getPermissaoInsertNavio() == "T") {
 			checkCadastrarNavio.setSelected(true);
 		}
