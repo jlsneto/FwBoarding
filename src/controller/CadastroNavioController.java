@@ -90,7 +90,7 @@ public class CadastroNavioController implements Initializable {
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
 				if (navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
-					ConsultasNavioController.itensEncontrados.addAll(navio);
+					ConsultasNavioController.observableListNavio.addAll(navio);
 				}
 				// fechar dialog
 				dialogStage.close();
