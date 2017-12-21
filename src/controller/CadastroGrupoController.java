@@ -348,58 +348,53 @@ public class CadastroGrupoController implements Initializable {
 		this.grupoUsuarioAlterar = args[0];
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioAlterar.getCodigoGrupo()));
 		textFieldDescricao.setText(grupoUsuarioAlterar.getDescricaoGrupo());
-		///OLHAR ESSA PORRA
-		System.out.println(grupoUsuarioAlterar.getPermissaoInsertNavio());
-		System.out.println(grupoUsuarioAlterar.getPermissaoAlterNavio());
-		System.out.println(grupoUsuarioAlterar.getPermissaoConsulNavio());
-		System.out.println(grupoUsuarioAlterar.getPermissaoDeletNavio());
-		String a = grupoUsuarioAlterar.getPermissaoInsertNavio();
-		if (grupoUsuarioAlterar.getPermissaoInsertNavio() == "T") {
+		//CORRIGIDO
+		if (grupoUsuarioAlterar.getPermissaoInsertNavio().equals("T")) {
 			checkCadastrarNavio.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoAlterNavio() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoAlterNavio().equals("T")) {
 			checkAlterarNavio.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoConsulNavio() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoConsulNavio().equals("T")) {
 			checkExibirNavio.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoDeletNavio() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoDeletNavio().equals("T")) {
 			checkExcluirNavio.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoInsertUser() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoInsertUser().equals("T")) {
 			checkCadastrarUsuario.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoAlterUser() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoAlterUser().equals("T")) {
 			checkAlterarUsuario.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoConsulUser() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoConsulUser().equals("T")) {
 			checkExibirUsuario.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoDeletUser() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoDeletUser().equals("T")) {
 			checkExcluirUsuario.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoInsertMovimento() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoInsertMovimento().equals("T")) {
 			checkIniciarMovimento.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoAlterMovimento() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoAlterMovimento().equals("T")) {
 			checkPausarMovimento.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoConsulMovimento() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoConsulMovimento().equals("T")) {
 			checkMonitorarMovimento.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoDeletMovimento() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoDeletMovimento().equals("T")) {
 			checkCancelarMovimento.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoInsertEmbarque() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoInsertEmbarque().equals("T")) {
 			checkCadastrarEmbarque.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoAlterEmbarque() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoAlterEmbarque().equals("T")) {
 			checkAlterarEmbarque.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoConsulEmbarque() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoConsulEmbarque().equals("T")) {
 			checkExibirEmbarque.setSelected(true);
 		}
-		if (grupoUsuarioAlterar.getPermissaoDeletEmbarque() == "T") {
+		if (grupoUsuarioAlterar.getPermissaoDeletEmbarque().equals("T")) {
 			checkExcluirEmbarque.setSelected(true);
 		}
 
