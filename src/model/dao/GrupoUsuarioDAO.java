@@ -31,7 +31,7 @@ public class GrupoUsuarioDAO {
 				+ "VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			//stmt.setLong(1, grupoUsuario.getCodigoGrupo());
+			// stmt.setLong(1, grupoUsuario.getCodigoGrupo());
 			stmt.setString(1, grupoUsuario.getDescricaoGrupo());
 			stmt.setString(2, grupoUsuario.getPermissaoInsertNavio());
 			stmt.setString(3, grupoUsuario.getPermissaoAlterNavio());
@@ -84,7 +84,7 @@ public class GrupoUsuarioDAO {
 		String sql = "UPDATE GRUPOUSUARIO SET DESCRICAO = ?, PERMISSAO_INSERT_NAVIO = ?, PERMISSAO_ALTER_NAVIO = ?,PERMISSAO_CONSUL_NAVIO = ?, PERMISSAO_DELET_NAVIO = ?, PERMISSAO_INSERT_USER = ?,PERMISSAO_ALTER_USER = ?,PERMISSAO_CONSUL_USER = ?,PERMISSAO_DELET_USER = ?,PERMISSAO_INSERT_MOVIMENTO = ?, PERMISSAO_ALTER_MOVIMENTO = ?,PERMISSAO_CONSUL_MOVIMENTO = ?,PERMISSAO_DELET_MOVIMENTO = ?,PERMISSAO_INSERT_EMBARQUE = ?,PERMISSAO_ALTER_EMBARQUE = ?,PERMISSAO_CONSUL_EMBARQUE = ?, PERMISSAO_DELET_EMBARQUE = ? WHERE CODIGOGRUPO = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			//stmt.setLong(1, grupoUsuarioAlterar.getCodigoGrupo());
+			// stmt.setLong(1, grupoUsuarioAlterar.getCodigoGrupo());
 			stmt.setString(1, grupoUsuarioAlterar.getDescricaoGrupo());
 			stmt.setString(2, grupoUsuarioAlterar.getPermissaoInsertNavio());
 			stmt.setString(3, grupoUsuarioAlterar.getPermissaoAlterNavio());
@@ -161,7 +161,7 @@ public class GrupoUsuarioDAO {
 		return 0;
 
 	}
-	
+
 	public void verificarSeGrupoFoiExcluido(long codigoGrupo) throws Exception {
 
 		String sql = "SELECT CODIGOGRUPO FROM GRUPOUSUARIO WHERE CODIGOGRUPO = ?";
@@ -182,7 +182,7 @@ public class GrupoUsuarioDAO {
 			Logger.getLogger(GrupoUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
-	
+
 	public List<GrupoUsuarioVO> listar() {
 
 		String sql = "SELECT * FROM GRUPOUSUARIO ORDER BY GRUPOUSUARIO.CODIGOGRUPO";
@@ -200,9 +200,23 @@ public class GrupoUsuarioDAO {
 
 				grupoUsuario.setCodigoGrupo(listaResultado.getLong("CODIGOGRUPO"));
 				grupoUsuario.setDescricaoGrupo(listaResultado.getString("DESCRICAO"));
-				
+				grupoUsuario.setPermissaoInsertNavio(listaResultado.getString("PERMISSAO_INSERT_NAVIO"));
+				grupoUsuario.setPermissaoAlterNavio(listaResultado.getString("PERMISSAO_ALTER_NAVIO"));
+				grupoUsuario.setPermissaoConsulNavio(listaResultado.getString("PERMISSAO_CONSUL_NAVIO"));
+				grupoUsuario.setPermissaoDeletNavio(listaResultado.getString("PERMISSAO_DELET_NAVIO"));
+				grupoUsuario.setPermissaoInsertUser(listaResultado.getString("PERMISSAO_INSERT_USER"));
+				grupoUsuario.setPermissaoAlterUser(listaResultado.getString("PERMISSAO_ALTER_USER"));
+				grupoUsuario.setPermissaoConsulUser(listaResultado.getString("PERMISSAO_CONSUL_USER"));
+				grupoUsuario.setPermissaoDeletUser(listaResultado.getString("PERMISSAO_DELET_USER"));
+				grupoUsuario.setPermissaoInsertMovimento(listaResultado.getString("PERMISSAO_INSERT_MOVIMENTO"));
+				grupoUsuario.setPermissaoAlterMovimento(listaResultado.getString("PERMISSAO_ALTER_MOVIMENTO"));
+				grupoUsuario.setPermissaoConsulMovimento(listaResultado.getString("PERMISSAO_CONSUL_MOVIMENTO"));
+				grupoUsuario.setPermissaoDeletMovimento(listaResultado.getString("PERMISSAO_DELET_MOVIMENTO"));
+				grupoUsuario.setPermissaoInsertEmbarque(listaResultado.getString("PERMISSAO_INSERT_EMBARQUE"));
+				grupoUsuario.setPermissaoAlterEmbarque(listaResultado.getString("PERMISSAO_ALTER_EMBARQUE"));
+				grupoUsuario.setPermissaoConsulEmbarque(listaResultado.getString("PERMISSAO_CONSUL_EMBARQUE"));
+				grupoUsuario.setPermissaoDeletEmbarque(listaResultado.getString("PERMISSAO_DELET_EMBARQUE"));
 
-				
 				listaGrupo.add(grupoUsuario);
 			}
 

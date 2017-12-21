@@ -348,6 +348,12 @@ public class CadastroGrupoController implements Initializable {
 		this.grupoUsuarioAlterar = args[0];
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioAlterar.getCodigoGrupo()));
 		textFieldDescricao.setText(grupoUsuarioAlterar.getDescricaoGrupo());
+		///OLHAR ESSA PORRA
+		System.out.println(grupoUsuarioAlterar.getPermissaoInsertNavio());
+		System.out.println(grupoUsuarioAlterar.getPermissaoAlterNavio());
+		System.out.println(grupoUsuarioAlterar.getPermissaoConsulNavio());
+		System.out.println(grupoUsuarioAlterar.getPermissaoDeletNavio());
+
 		if (grupoUsuarioAlterar.getPermissaoInsertNavio() == "T") {
 			checkCadastrarNavio.setSelected(true);
 		}
