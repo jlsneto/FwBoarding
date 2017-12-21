@@ -1,3 +1,5 @@
 /Database.class
 /DatabaseFactory.class
 /DatabaseOracle.class
+/DatabaseParams.class
+/DatabasePostgresql.class
