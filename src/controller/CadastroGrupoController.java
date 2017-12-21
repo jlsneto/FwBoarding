@@ -176,7 +176,8 @@ public class CadastroGrupoController implements Initializable {
 					grupoUsuario.setPermissaoDeletEmbarque("F");
 				}
 				grupoUsuarioDAO.Inserir(grupoUsuario);
-				if (grupoUsuario.getDescricaoGrupo().equals(grupoUsuarioDAO.retornaDescricaoGrupoUsuario(grupoUsuario.getDescricaoGrupo()))) {
+				if (grupoUsuario.getDescricaoGrupo()
+						.equals(grupoUsuarioDAO.retornaDescricaoGrupoUsuario(grupoUsuario.getDescricaoGrupo()))) {
 					ConsultaGrupoUsuarioController.observableListGrupo.addAll(grupoUsuario);
 				}
 				dialogStage.close();
@@ -263,7 +264,9 @@ public class CadastroGrupoController implements Initializable {
 					grupoUsuarioAlterar.setPermissaoDeletEmbarque("F");
 				}
 				grupoUsuarioDAO.alterar(grupoUsuarioAlterar);
-				ConsultaGrupoUsuarioController.observableListGrupo.set(ConsultaGrupoUsuarioController.observableListGrupo.indexOf(grupoUsuarioAlterar), grupoUsuarioAlterar);
+				ConsultaGrupoUsuarioController.itensEncontrados.set(
+						ConsultaGrupoUsuarioController.itensEncontrados.indexOf(grupoUsuarioAlterar),
+						grupoUsuarioAlterar);
 				dialogStage.close();
 			}
 		}
@@ -328,7 +331,7 @@ public class CadastroGrupoController implements Initializable {
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioDAO.verificaUltimoCodigo() + 1));
 
 	}
-	
+
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 		dialogStage.setOnCloseRequest(event -> {
@@ -340,12 +343,60 @@ public class CadastroGrupoController implements Initializable {
 			}
 		});
 	}
-	
+
 	public void setGrupoUsuarioAlterar(GrupoUsuarioVO[] args) {
 		this.grupoUsuarioAlterar = args[0];
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioAlterar.getCodigoGrupo()));
 		textFieldDescricao.setText(grupoUsuarioAlterar.getDescricaoGrupo());
-	
+		if (grupoUsuarioAlterar.getPermissaoInsertNavio() == "T") {
+			checkCadastrarNavio.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoAlterNavio() == "T") {
+			checkAlterarNavio.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoConsulNavio() == "T") {
+			checkExibirNavio.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoDeletNavio() == "T") {
+			checkExcluirNavio.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoInsertUser() == "T") {
+			checkCadastrarUsuario.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoAlterUser() == "T") {
+			checkAlterarUsuario.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoConsulUser() == "T") {
+			checkExibirUsuario.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoDeletUser() == "T") {
+			checkExcluirUsuario.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoInsertMovimento() == "T") {
+			checkIniciarMovimento.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoAlterMovimento() == "T") {
+			checkPausarMovimento.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoConsulMovimento() == "T") {
+			checkMonitorarMovimento.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoDeletMovimento() == "T") {
+			checkCancelarMovimento.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoInsertEmbarque() == "T") {
+			checkCadastrarEmbarque.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoAlterEmbarque() == "T") {
+			checkAlterarEmbarque.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoConsulEmbarque() == "T") {
+			checkExibirEmbarque.setSelected(true);
+		}
+		if (grupoUsuarioAlterar.getPermissaoDeletEmbarque() == "T") {
+			checkExcluirEmbarque.setSelected(true);
+		}
+
 		buttomCadastrar.setText("Aplicar");
 	}
 

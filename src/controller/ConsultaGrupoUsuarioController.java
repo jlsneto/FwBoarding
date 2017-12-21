@@ -55,7 +55,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 
 	public static ObservableList<GrupoUsuarioVO> observableListGrupo;
 	private final GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
-	private ObservableList<GrupoUsuarioVO> itensEncontrados;
+	static ObservableList<GrupoUsuarioVO> itensEncontrados;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -70,6 +70,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 
 		observableListGrupo = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
 		TableGrupoUsuario.setItems(observableListGrupo);
+		clickOnPesquisar();
 
 	}
 
@@ -116,7 +117,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	}
 
 	@FXML
-	void clickOnIncluir(ActionEvent event) throws IOException {
+	void clickOnIncluir() throws IOException {
 
 		CadastroGrupoController.isAlterarGrupo = false;
 		FwBoarding.carregarTelaCadastroGrupoUsuario();

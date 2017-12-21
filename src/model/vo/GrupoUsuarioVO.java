@@ -4,7 +4,7 @@ public class GrupoUsuarioVO {
 	private long codigoGrupo;
 	private String descricaoGrupo;
 	private String permissaoInsertNavio;
-	private String permissaoAlterNavio;
+	public String permissaoAlterNavio;
 	private String permissaoConsulNavio;
 	private String permissaoDeletNavio;
 	private String permissaoInsertUser;
