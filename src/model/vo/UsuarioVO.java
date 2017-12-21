@@ -2,8 +2,9 @@ package model.vo;
 
 public class UsuarioVO {
 	private long codigoUsuario;
-	private String usuario;
+	private String nomeUsuario;
 	private String senha;
+	private GrupoUsuarioVO grupoUsuario;
 
 	public long getCodigoUsuario() {
 		return codigoUsuario;
@@ -13,12 +14,12 @@ public class UsuarioVO {
 		this.codigoUsuario = codigoUsuario;
 	}
 
-	public String getUsuario() {
-		return usuario;
+	public String getNomeUsuario() {
+		return nomeUsuario;
 	}
 
-	public void setUsuario(String usuario) {
-		this.usuario = usuario;
+	public void setNomeUsuario(String usuario) {
+		this.nomeUsuario = usuario;
 	}
 
 	public String getSenha() {
@@ -27,6 +28,14 @@ public class UsuarioVO {
 
 	public void setSenha(String senha) {
 		this.senha = senha;
+	}
+
+	public GrupoUsuarioVO getGrupoUsuario() {
+		return grupoUsuario;
+	}
+
+	public void setGrupoUsuario(GrupoUsuarioVO grupoUsuario) {
+		this.grupoUsuario = grupoUsuario;
 	}
 
 }
