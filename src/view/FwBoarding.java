@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import controller.CadastroGrupoController;
 import controller.CadastroNavioController;
+import controller.CadastroUsuarioController;
 import controller.LoginController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -18,6 +19,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
+import model.vo.UsuarioVO;
 
 public class FwBoarding extends Application {
 
@@ -201,7 +203,52 @@ public class FwBoarding extends Application {
 		}
 
 	}
+	
+	public static void carregarTelaUsuario() {
 
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FwBoarding.class.getResource("/view/TelaConsultaUsuario.fxml"));
+			AnchorPane consultaUsuario;
+			consultaUsuario = (AnchorPane) loader.load();
+			// Define a TelaConsultas no centro do root layout.
+			FwBoarding.rootLayout.setCenter(consultaUsuario);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			ConstruirDialog alert = new ConstruirDialog();
+			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Consulta Usuario", e.getMessage());
+		}
+
+	}
+	
+	public static void carregarTelaCadastroUsuario(UsuarioVO ... args) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(FwBoarding.class.getResource("/view/CadastroUsuario.fxml"));
+		AnchorPane page = (AnchorPane) loader.load();
+
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Cadastro de Usuarios");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		// dialogStage.initStyle(StageStyle.UNDECORATED);
+		// dialogStage.initStyle(StageStyle.UTILITY);
+		dialogStage.initOwner(stage);
+		dialogStage.setResizable(false);
+		dialogStage.getIcons()
+				.add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
+
+		CadastroUsuarioController controller = loader.getController();
+		controller.setDialogStage(dialogStage);
+		
+		if (CadastroUsuarioController.isAlterarUsuario) {
+			dialogStage.setTitle("Alteração de usuario");
+			controller.setUsuarioAlterar(args);
+		}
+
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		dialogStage.showAndWait();
+	}
 	public static void main(String[] args) {
 		launch(args);
 	}

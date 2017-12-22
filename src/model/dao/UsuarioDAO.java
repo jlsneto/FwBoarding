@@ -29,17 +29,16 @@ public class UsuarioDAO {
 
 	}
 
-	public void inserir(NavioVO navio) {
-		String sql = "INSERT INTO CADNAVIO(DESCRICAO, QTDPORAO, CAPACIDADEPORAO, CODIGOPAISORIGEM) VALUES(?,?,?,?)";
+	public void inserir(UsuarioVO usuario) {
+		String sql = "INSERT INTO CADNAVIO(NOME, SENHA, CODIGOGRUPO) VALUES(?,?,?)";
 
 		try {
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
-			stmt.setString(1, navio.getDescricaoNavio());
-			stmt.setLong(2, navio.getQtdPorao());
-			stmt.setDouble(3, navio.getCapacidadePorao());
-			stmt.setLong(4, navio.getPais().getCodigoPais());
+			stmt.setString(1, usuario.getNomeUsuario());
+			stmt.setString(2, usuario.getSenha());
+			stmt.setLong(3, usuario.getGrupoUsuario().getCodigoGrupo());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -48,50 +47,49 @@ public class UsuarioDAO {
 		}
 	}
 
-	public String retornaDescricaoNavio(String descricao) {
-		String sql = "SELECT DESCRICAO FROM CADNAVIO " + "WHERE DESCRICAO = ?";
+	public String retornaDescricaoUsuario(String nomeUsuario) {
+		String sql = "SELECT NOMEUSUARIO FROM CADUSUARIO " + "WHERE NOMEUSUARIO = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, descricao);
+			stmt.setString(1, nomeUsuario);
 			ResultSet listaResultado = stmt.executeQuery();
 
 			if (listaResultado.next()) {
-				return listaResultado.getString("DESCRICAO");
+				return listaResultado.getString("NOMEUSUARIO");
 			} else {
 				return "";
 			}
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
-			erro.DialogError("Erro de Consulta", "Erro ao consultar o grupo de usuário no banco de dados", e.getErrorCode(),
+			erro.DialogError("Erro de Consulta", "Erro ao consultar dados no banco de dados", e.getErrorCode(),
 					e.getMessage(), sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 			return "";
 		}
 	}
 
-	public void deletar(long codigoNavio) {
-		String sql = "DELETE FROM CADNAVIO" + " WHERE CODIGONAVIO = ?";
+	public void deletar(long codigoUsuario) {
+		String sql = "DELETE FROM CADUSUARIO" + " WHERE CODIGOUSUARIO = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setLong(1, codigoNavio);
+			stmt.setLong(1, codigoUsuario);
 			stmt.executeUpdate();
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
 					sql);
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 
-	public void verificarSeFoiNavioExcluido(long codigoNavio) throws Exception {
+	public void verificaSeUsuarioFoiExcluido(long codigoUsuario) throws Exception {
 
-		String sql = "SELECT CODIGONAVIO FROM CADNAVIO WHERE CODIGONAVIO = ?";
+		String sql = "SELECT CODIGOUSUARIO FROM CADUSUARIO WHERE CODIGOUSUARIO = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setLong(1, codigoNavio);
+			stmt.setLong(1, codigoUsuario);
 			ResultSet result = stmt.executeQuery();
 
 			if (result.next()) {
@@ -102,7 +100,6 @@ public class UsuarioDAO {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
 					sql);
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 

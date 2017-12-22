@@ -163,5 +163,11 @@ public class GrupoUsuarioVO {
 	public void setPermissaoDeletEmbarque(String permissaoDeletEmbarque) {
 		this.permissaoDeletEmbarque = permissaoDeletEmbarque;
 	}
+	
+	//Usado para exibir descrição do pais na combobox
+    @Override
+    public String toString() {
+        return this.getDescricaoGrupo();
+    }
 
 }

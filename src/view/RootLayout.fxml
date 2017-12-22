@@ -22,7 +22,7 @@
                         <Menu fx:id="menuGeralUsuarios" mnemonicParsing="false" text="Usuários">
                           <items>
                               <MenuItem fx:id="menuItemUsuariosGrupoUsuarios" mnemonicParsing="false" onAction="#clickOnGrupoUsuario" text="Grupo de Usuários" />
-                            <MenuItem fx:id="menuItemUsuariosUsuario" mnemonicParsing="false" text="Usuário" />
+                            <MenuItem fx:id="menuItemUsuariosUsuario" mnemonicParsing="false" onAction="#clickOnUsuario" text="Usuário" />
                               <MenuItem fx:id="menuItemUsuariosTrocarUsuario" mnemonicParsing="false" text="Trocar de Usuário" />
                           </items>
                         </Menu>
