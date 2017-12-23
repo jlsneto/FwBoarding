@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -35,7 +36,7 @@ public class CadastroUsuarioController implements Initializable {
     private PasswordField textFieldPassword;
 
     @FXML
-    private ComboBox<?> comboBoxGrupoUsuario;
+    private ComboBox<GrupoUsuarioDAO> comboBoxGrupoUsuario;
 
     @FXML
     private Label labelCodigo;
@@ -80,11 +81,10 @@ public class CadastroUsuarioController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		labelCodigo.setText(Integer.toString(usuarioDAO.verificaUltimoCodigo() + 1));
-		observableListGrupoUsuario = FXCollections.observableArrayList(grupoUsuarioDAO.listarGrupoUsuario());
+		observableListGrupoUsuario = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
 
-		comboBoxPaisOrigem.setItems(observableListPais);
-		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		comboBoxQuantidadePorao.getSelectionModel().select(0);
+		comboBoxGrupoUsuario.setItems((ObservableList<GrupoUsuarioDAO>) observableListGrupoUsuario);
+		
 		
 	}
 	
