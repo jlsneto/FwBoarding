@@ -20,6 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.GrupoUsuarioDAO;
 import model.dao.UsuarioDAO;
+import model.vo.GrupoUsuarioVO;
+import model.vo.NavioVO;
+import model.vo.PaisVO;
 import model.vo.UsuarioVO;
 import view.ConstruirDialog;
 
@@ -36,7 +39,7 @@ public class CadastroUsuarioController implements Initializable {
     private PasswordField textFieldPassword;
 
     @FXML
-    private ComboBox<GrupoUsuarioDAO> comboBoxGrupoUsuario;
+    private ComboBox<GrupoUsuarioVO> comboBoxGrupoUsuario;
 
     @FXML
     private Label labelCodigo;
@@ -51,7 +54,7 @@ public class CadastroUsuarioController implements Initializable {
 
 	private Stage dialogStage;
 
-	private Object observableListGrupoUsuario;
+	private ObservableList<GrupoUsuarioVO> observableListGrupoUsuario;
     
     public static boolean isAlterarUsuario;
     
@@ -81,9 +84,10 @@ public class CadastroUsuarioController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		labelCodigo.setText(Integer.toString(usuarioDAO.verificaUltimoCodigo() + 1));
+		
 		observableListGrupoUsuario = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
-
-		comboBoxGrupoUsuario.setItems((ObservableList<GrupoUsuarioDAO>) observableListGrupoUsuario);
+		
+		comboBoxGrupoUsuario.setItems(observableListGrupoUsuario);
 		
 		
 	}
@@ -109,7 +113,96 @@ public class CadastroUsuarioController implements Initializable {
 		});
 
 	}
+/**	
+	@FXML
+	public void clickOnCancelar() {
+		if (confirmouCancelamentoOuFehamento()) {
+			dialogStage.close();
 
+		}
+	}
+
+	@FXML
+	public void clickOnCadastrar() {
+
+		if (validarEntrada()) {
+			if (isAlterarNavio == false) {
+				NavioVO navio = new NavioVO();
+				navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
+				navio.setDescricaoNavio(textFieldDescricao.getText());
+				navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
+				navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
+				navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+				navioDAO.inserir(navio);
+				// Atualiza Tela de Consulta
+				if (navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
+					ConsultasNavioController.observableListNavio.addAll(navio);
+				}
+				// fechar dialog
+				dialogStage.close();
+			} else {
+				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
+				navioAlterar.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
+				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
+				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+				navioDAO.alterar(navioAlterar);
+				ConsultasNavioController.itensEncontrados
+						.set(ConsultasNavioController.itensEncontrados.indexOf(navioAlterar), navioAlterar);
+				dialogStage.close();
+			}
+
+		}
+
+	}
+	
+	private boolean validarEntrada() {
+		String errorMessage = "";
+
+		if (textFieldDescricao.getText() == null || textFieldDescricao.getText().length() == 0) {
+			
+			errorMessage = "Descrição inválida ou nula!\n";
+			textFieldDescricao.requestFocus();
+		} else if (comboBoxPaisOrigem.getSelectionModel().getSelectedItem() == null) {
+
+			errorMessage = "Selecione o país!\n";
+			comboBoxPaisOrigem.requestFocus();
+
+		} else if (comboBoxQuantidadePorao.getSelectionModel().getSelectedItem() == null) {
+
+			errorMessage = "Selecione a quantidade de Porão!\n";
+			comboBoxQuantidadePorao.requestFocus();
+
+		} else if (textFieldCapacidadePorao.getText() == null || textFieldCapacidadePorao.getText().length() == 0
+				|| Double.valueOf(textFieldCapacidadePorao.getText()) <= 0) {
+
+			errorMessage = "Insira Capacidade !\n";
+			textFieldCapacidadePorao.requestFocus();
+
+		} else if (navioDAO.retornaDescricaoNavio(textFieldDescricao.getText()).equals(textFieldDescricao.getText())) {
+
+			// Caso não tenha este if da erro!
+			if (isAlterarNavio == true) {
+				if (!textFieldDescricao.getText().equals(navioAlterar.getDescricaoNavio())) {
+					errorMessage = "Navio já existe!";
+				}
+			} else {
+				errorMessage = "Navio já existe!";
+				textFieldDescricao.requestFocus();
+			}
+
+		}
+
+		if (errorMessage.length() == 0) {
+			return true;
+		} else {
+			ConstruirDialog dialogErro = new ConstruirDialog();
+			dialogErro.DialogError("Erro cadastro do Navio", errorMessage, 0, "", errorMessage);
+			return false;
+		}
+
+	}
+	
+	**/
 	// Caso o usuário click em cancelar ou fechar
 	public boolean confirmouCancelamentoOuFehamento() {
 		ConstruirDialog confirmar = new ConstruirDialog();

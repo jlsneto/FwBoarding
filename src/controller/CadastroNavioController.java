@@ -60,14 +60,25 @@ public class CadastroNavioController implements Initializable {
 
 	private final PaisDAO paisDAO = new PaisDAO();
 	private final NavioDAO navioDAO = new NavioDAO();
-	private String comboBoxPesquisa;
 
 	// Usado para definir palco e poder utilizar seus métodos neste controller
 	private Stage dialogStage;
 	private NavioVO navioAlterar;
 
 	public static boolean isAlterarNavio;
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
 
+		labelCodigo.setText(Integer.toString(navioDAO.verificaUltimoCodigo() + 1));
+		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
+
+		comboBoxPaisOrigem.setItems(observableListPais);
+		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+		comboBoxQuantidadePorao.getSelectionModel().select(0);
+		
+	}
+	
 	@FXML
 	public void clickOnCancelar() {
 		if (confirmouCancelamentoOuFehamento()) {
@@ -213,18 +224,6 @@ public class CadastroNavioController implements Initializable {
 		} else {
 			return false;
 		}
-	}
-
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-
-		labelCodigo.setText(Integer.toString(navioDAO.verificaUltimoCodigo() + 1));
-		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
-
-		comboBoxPaisOrigem.setItems(observableListPais);
-		comboBoxQuantidadePorao.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
-		comboBoxQuantidadePorao.getSelectionModel().select(0);
-		
 	}
 
 	public void setNavioAlterar(NavioVO[] args) {
