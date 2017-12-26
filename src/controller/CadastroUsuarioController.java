@@ -61,25 +61,6 @@ public class CadastroUsuarioController implements Initializable {
 	private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 	private final GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
 
-    @FXML
-    void KeyPressedComboBox(KeyEvent event) {
-
-    }
-
-    @FXML
-    void clickOnCadastrar(ActionEvent event) {
-
-    }
-
-    @FXML
-    void clickOnCancelar(ActionEvent event) {
-
-    }
-
-    @FXML
-    void onKeyPressed(KeyEvent event) {
-
-    }
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -113,7 +94,7 @@ public class CadastroUsuarioController implements Initializable {
 		});
 
 	}
-/**	
+
 	@FXML
 	public void clickOnCancelar() {
 		if (confirmouCancelamentoOuFehamento()) {
@@ -126,13 +107,13 @@ public class CadastroUsuarioController implements Initializable {
 	public void clickOnCadastrar() {
 
 		if (validarEntrada()) {
-			if (isAlterarNavio == false) {
-				NavioVO navio = new NavioVO();
-				navio.setCodigoNavio(Integer.valueOf(labelCodigo.getText()));
-				navio.setDescricaoNavio(textFieldDescricao.getText());
-				navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
-				navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
-				navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
+			if (isAlterarUsuario == false) {
+				UsuarioVO usuario = new UsuarioVO();
+				usuario.setCodigoUsuario(Integer.valueOf(labelCodigo.getText()));
+				usuario.setNomeUsuario(textFieldUsuario.getText());
+				usuario.setGrupoUsuario(comboBoxGrupoUsuario.getSelectionModel().getSelectedItem());
+				usuario.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
+				usuario.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
 				if (navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
@@ -202,7 +183,6 @@ public class CadastroUsuarioController implements Initializable {
 
 	}
 	
-	**/
 	// Caso o usuário click em cancelar ou fechar
 	public boolean confirmouCancelamentoOuFehamento() {
 		ConstruirDialog confirmar = new ConstruirDialog();
