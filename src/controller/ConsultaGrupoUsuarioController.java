@@ -94,7 +94,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	}
 
 	@FXML
-	void clickOnExcluir(ActionEvent event) throws Exception {
+	public void clickOnExcluir() throws Exception {
 
 		int selectedIndex = TableGrupoUsuario.getSelectionModel().getSelectedIndex();
 		GrupoUsuarioVO grupoUsuario = (GrupoUsuarioVO) TableGrupoUsuario.getSelectionModel().getSelectedItem();
@@ -148,7 +148,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	}
 	
 	@FXML
-    void onKeyPressed(KeyEvent event) throws IOException {
+	void onKeyPressed(KeyEvent event) throws Exception {
 		
 		int selectedIndex = TableGrupoUsuario.getSelectionModel().getSelectedIndex();
 		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
@@ -157,6 +157,9 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 		else if(event.getCode().isLetterKey() || event.getCode().isWhitespaceKey() || event.getCode().equals(KeyCode.BACK_SPACE) ) {
 			
 			clickOnPesquisar();
+		}
+		if (event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
+			clickOnExcluir();
 		}
     }
 
