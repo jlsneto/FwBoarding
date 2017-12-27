@@ -121,7 +121,7 @@ public class CadastroNavioController implements Initializable {
 	}
 	@FXML
 	private void KeyPressedComboBox() {
-		
+		//FALTA IMPLEMENTAR
 		comboBoxPaisOrigem.addEventFilter(KeyEvent.KEY_PRESSED, (event) -> {
 
 			for(PaisVO pais: observableListPais) {

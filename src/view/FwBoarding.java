@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import controller.CadastroGrupoController;
 import controller.CadastroNavioController;
+import controller.CadastroSenhaController;
 import controller.CadastroUsuarioController;
 import controller.LoginController;
 import javafx.application.Application;
@@ -14,6 +15,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -248,6 +250,30 @@ public class FwBoarding extends Application {
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);
 		dialogStage.showAndWait();
+	}
+	
+	public static String carregarDialogCadastroSenha(Stage stage) throws IOException {
+
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(FwBoarding.class.getResource("/view/DialogCadastroSenha.fxml"));
+		VBox page = (VBox) loader.load();
+
+		Stage dialogStage = new Stage();
+		dialogStage.setTitle("Cadastrar Senha");
+		dialogStage.initModality(Modality.WINDOW_MODAL);
+		dialogStage.initOwner(stage);
+		dialogStage.setResizable(false);
+		dialogStage.getIcons()
+				.add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
+
+		CadastroSenhaController controller = loader.getController();
+		controller.setDialogStage(dialogStage);
+
+		Scene scene = new Scene(page);
+		dialogStage.setScene(scene);
+		dialogStage.showAndWait();
+		
+		return controller.getSenha();
 	}
 	public static void main(String[] args) {
 		launch(args);

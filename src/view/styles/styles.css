@@ -82,3 +82,21 @@
 .button.cancel:pressed{
 	-fx-background-color: #c0392b;
 }
+
+.toggle-button {
+  -fx-graphic: url('../images/Icons/ship-icon2.png');
+}
+
+.toggle-button:selected {
+  -fx-graphic: url('../images/Icons/ship-icon2.png');
+}
+
+.toggle-button2 {
+  -fx-background-image: url('http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Pizza-icon.png');
+  -fx-background-repeat: no-repeat;
+  -fx-background-position: center;
+}
+
+.toggle-button2:selected {
+  -fx-background-image: url('http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Piece-of-cake-icon.png');
+}

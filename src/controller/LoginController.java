@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import view.FwBoarding;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
@@ -55,17 +56,16 @@ public class LoginController implements Initializable {
 			textUsuarioLogin.requestFocus();
 		}
 
-		/*
-		 * CadastroAutenticacaoBO cadastroAutenticacao = new CadastroAutenticacaoBO();
-		 * 
-		 * byte[] plainText = textSenhaLogin.getText().getBytes(StandardCharsets.UTF_8);
-		 * byte[] cipherText = cadastroAutenticacao.encrypt(plainText); byte[]
-		 * decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
-		 * 
-		 * System.out.println(new String(plainText)); System.out.println(new
-		 * String(cipherText)); System.out.println(new String(decryptedCipherText));
-		 */
 
+	}
+	
+	private String decifrarSenha(byte[] cipherText) throws Exception {
+
+		CadastroAutenticacaoBO cadastroAutenticacao = new CadastroAutenticacaoBO();
+		
+		 byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
+
+		return new String(decryptedCipherText);
 	}
 
 }

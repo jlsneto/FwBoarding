@@ -17,7 +17,9 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -66,11 +68,11 @@ public class ConsultaUsuario implements Initializable {
 	@FXML
 	private TableColumn<UsuarioVO, String> columnButton;
 	
-	private ObservableList<UsuarioVO> observableListUsuario;
+	public static ObservableList<UsuarioVO> observableListUsuario;
 	
 	private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
-	private ObservableList<UsuarioVO> itensEncontrados;
+	public static ObservableList<UsuarioVO> itensEncontrados;
 
 	@FXML
 	public void clickOnIncluir() throws IOException {
@@ -88,13 +90,13 @@ public class ConsultaUsuario implements Initializable {
 		UsuarioVO usuario = TableView.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
-			CadastroNavioController.isAlterarNavio = true;
+			CadastroUsuarioController.isAlterarUsuario = true;
 			FwBoarding.carregarTelaCadastroUsuario(usuario);
 
 		} else {
 			// Nada selecionado.
 			ConstruirDialog alerta = new ConstruirDialog();
-			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
+			alerta.dialogAlert("Não há seleção", "Nenhum usuário selecionado", "Selecione um usuário!");
 		}
 		//Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
@@ -136,21 +138,34 @@ public class ConsultaUsuario implements Initializable {
 
 
 	@FXML
-	void onKeyPressed(KeyEvent event) {
-
+	private void onKeyPressed(KeyEvent event) throws Exception {
+		int selectedIndex = TableView.getSelectionModel().getSelectedIndex();
+		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
+			clickOnAlterar();
+		}
+		else if(event.getCode().isLetterKey() || event.getCode().isWhitespaceKey() || event.getCode().equals(KeyCode.BACK_SPACE) ) {
+			//System.out.println(event.getCode().getName());
+			clickOnPesquisar();
+		}else if(event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
+			clickOnExcluir();
+		}
 	}
 
 	@FXML
-	void onMouseClicked(MouseEvent event) {
-
+	void onMouseClicked(MouseEvent mouseEvent) throws IOException {
+		if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+			if (mouseEvent.getClickCount() == 2) {
+				clickOnAlterar();
+			}
+		}
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		TableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoNavio"));
-		TableColumnNome.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
-		TableColumnGrupo.setCellValueFactory(new PropertyValueFactory<>("pais"));
+		TableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoUsuario"));
+		TableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nomeUsuario"));
+		TableColumnGrupo.setCellValueFactory(new PropertyValueFactory<>("grupoUsuario"));
 
 		observableListUsuario= FXCollections.observableArrayList(usuarioDAO.listar());
 		TableView.setItems(observableListUsuario);

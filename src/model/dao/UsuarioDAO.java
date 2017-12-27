@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javafx.scene.control.TextField;
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.GrupoUsuarioVO;
@@ -30,7 +31,7 @@ public class UsuarioDAO {
 	}
 
 	public void inserir(UsuarioVO usuario) {
-		String sql = "INSERT INTO CADNAVIO(NOME, SENHA, CODIGOGRUPO) VALUES(?,?,?)";
+		String sql = "INSERT INTO CADUSUARIO(LOGIN, SENHA, CODIGOGRUPO) VALUES(?,?,?)";
 
 		try {
 
@@ -48,7 +49,7 @@ public class UsuarioDAO {
 	}
 
 	public String retornaDescricaoUsuario(String nomeUsuario) {
-		String sql = "SELECT NOMEUSUARIO FROM CADUSUARIO " + "WHERE NOMEUSUARIO = ?";
+		String sql = "SELECT LOGIN FROM CADUSUARIO " + "WHERE LOGIN = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -56,7 +57,7 @@ public class UsuarioDAO {
 			ResultSet listaResultado = stmt.executeQuery();
 
 			if (listaResultado.next()) {
-				return listaResultado.getString("NOMEUSUARIO");
+				return listaResultado.getString("LOGIN");
 			} else {
 				return "";
 			}
@@ -120,7 +121,7 @@ public class UsuarioDAO {
 				UsuarioVO usuario = new UsuarioVO();
 
 				usuario.setCodigoUsuario(listaResultado.getLong("CODIGOUSUARIO"));
-				usuario.setNomeUsuario(listaResultado.getString("NOMEUSUARIO"));
+				usuario.setNomeUsuario(listaResultado.getString("LOGIN"));
 
 				GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
 
@@ -172,7 +173,7 @@ public class UsuarioDAO {
 	}
 
 	public void alterar(UsuarioVO usuarioAlterar) {
-		String sql = "UPDATE CADUSUARIO SET NOMEUSUARIO = ?, CODIGOGRUPOUSUARIO = ? WHERE CODIGOUSUARIO = ?";
+		String sql = "UPDATE CADUSUARIO SET LOGIN = ?, CODIGOGRUPO = ? WHERE CODIGOUSUARIO = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			
@@ -191,5 +192,6 @@ public class UsuarioDAO {
 
 		}
 	}
+
 
 }

@@ -377,6 +377,13 @@ CREATE SEQUENCE SEQ_CODIGO_CADUSUARIO
     NOCYCLE
     NOCACHE
     ; 
+	
+CREATE OR REPLACE TRIGGER SEQ_CODIGO_CADUSUARIO
+    BEFORE INSERT ON CADUSUARIO FOR EACH ROW
+  WHEN (NEW.CODIGOUSUARIO IS NULL OR NEW.CODIGOUSUARIO = 0)
+  BEGIN
+    SELECT SEQ_CODIGO_CADUSUARIO.NEXTVAL INTO :NEW.CODIGOUSUARIO FROM dual;
+  END;
 /*
 ###########################################################################################################################################################
 															CRIAÇÃO DA TABELA EMBARQUE
