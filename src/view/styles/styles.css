@@ -5,11 +5,31 @@
 
 
 
-.login.anchorpane {
-  -fx-background-color: red;
+.anchorPane{
+	-fx-border-radius:  10 10 10 10;
+	-fx-effect: dropshadow(three-pass-box, rgba(0.0,0.0,0.0,0.8), 10.0, 0.0, 0.0, 0.0);
+	-fx-background-radius: 5;  
 }
 
+/*#############################################*/
 
+.tableView{
+   -fx-background-color: none;
+   
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#2980b9 50%, #2980b9 100%);
+    -fx-text-fill: white; 
+}
+
+.table-row-cell{
+    -fx-background-color: -fx-table-cell-border-color, #616161;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em; /* 0 */
+}
+
+/*#############################################*/
 .fieldText {
    	
 }
@@ -29,7 +49,7 @@
 .button.confirm {
 	-fx-background-color: #27ae60;
 	-fx-text-fill: white;
-	-fx-background-radius: 20;
+	-fx-background-radius: 20.0;
 }
 
 .button.confirm:hover{
@@ -42,24 +62,24 @@
 /*#############################################*/
 
 .button.new {
-	-fx-background-color: #27ae60;
+	-fx-background-color: #2980b9;
 	-fx-text-fill: white;
-	-fx-background-radius: 20;
+	-fx-background-radius: 20.0;
 	
 }
 
 .button.new:hover{
-	-fx-background-color: #2ecc71;
+	-fx-background-color: #3498db;
 }
 .button.new:pressed{
-	-fx-background-color: #27ae60;
+	-fx-background-color: #2980b9;
 }
 /*#############################################*/
 
 .button.edit {
 	-fx-background-color: #f39c12;
 	-fx-text-fill: white;
-	-fx-background-radius: 20;
+	-fx-background-radius: 20.0;
 }
 
 .button.edit:hover{
@@ -73,7 +93,7 @@
 .button.cancel {
 	-fx-background-color: #c0392b;
 	-fx-text-fill: white;
-	-fx-background-radius: 20;
+	-fx-background-radius: 20.0;
 }
 
 .button.cancel:hover{

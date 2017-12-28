@@ -5,8 +5,8 @@
 <?import com.jfoenix.controls.JFXDatePicker?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -15,14 +15,13 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane prefHeight="501.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.111">
+<AnchorPane prefHeight="501.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="200.0" prefWidth="600.0">
+      <AnchorPane layoutY="1.0" prefHeight="200.0" prefWidth="600.0" stylesheets="@styles/styles.css" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="300.0">
          <children>
-            <AnchorPane layoutX="10.0" layoutY="18.0" prefHeight="135.0" prefWidth="261.0" style="-fx-background-color: white;">
+            <AnchorPane layoutX="10.0" layoutY="18.0" prefHeight="155.0" prefWidth="306.0" style="-fx-background-color: white;" styleClass="anchorPane" AnchorPane.leftAnchor="0.0">
                <children>
-                  <GridPane alignment="TOP_CENTER" prefHeight="119.0" prefWidth="249.0">
+                  <GridPane alignment="TOP_CENTER" prefHeight="135.0" prefWidth="297.0">
                      <columnConstraints>
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="313.0" minWidth="10.0" prefWidth="238.0" />
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="10.0" prefWidth="153.0" />
@@ -35,77 +34,87 @@
                         <RowConstraints maxHeight="17.0" minHeight="0.0" prefHeight="17.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <JFXTextField prefHeight="25.0" prefWidth="70.0" promptText="Safra">
+                        <JFXTextField fx:id="textFieldPesquisaSafra" prefHeight="25.0" prefWidth="70.0" promptText="Safra">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField prefHeight="25.0" prefWidth="215.0" promptText="Código" GridPane.columnIndex="2">
+                        <JFXTextField fx:id="textFieldPesquisaCodigo" prefHeight="25.0" prefWidth="215.0" promptText="Código" GridPane.columnIndex="2">
                            <GridPane.margin>
                               <Insets />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXDatePicker promptText="Data Inicio" GridPane.rowIndex="1">
+                        <JFXDatePicker fx:id="dateFieldPesquisaInicio" promptText="Data Inicio" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXDatePicker promptText="Data Final" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <JFXButton contentDisplay="RIGHT" styleClass="confirm" stylesheets="@styles/styles.css" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                        <JFXDatePicker fx:id="dateFieldPesquisaFim" promptText="Data Final" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <JFXButton fx:id="buttonPesquisaPesquisar" contentDisplay="RIGHT" styleClass="confirm" stylesheets="@styles/styles.css" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                           <GridPane.margin>
+                              <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                           </GridPane.margin></JFXButton>
                      </children>
                   </GridPane>
                </children>
             </AnchorPane>
-            <TableView layoutX="279.0" layoutY="18.0" prefHeight="135.0" prefWidth="300.0" AnchorPane.rightAnchor="21.0">
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="337.0" layoutY="181.0" prefHeight="234.0" prefWidth="249.0" styleClass="anchorPane" stylesheets="@styles/styles.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+         <children>
+            <TableView fx:id="tableViewEmbarque" prefHeight="135.0" prefWidth="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="C1" />
-                <TableColumn prefWidth="75.0" text="C2" />
+                <TableColumn fx:id="columnCodigoEmbarque" prefWidth="125.0" styleClass="tableView" text="Código" />
+                <TableColumn fx:id="columnPaisDestion" prefWidth="91.0" styleClass="tableView" text="Pais Destino" />
               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutY="209.0" prefHeight="139.0" prefWidth="600.0">
+      <AnchorPane layoutX="7.0" layoutY="219.0" prefHeight="296.0" prefWidth="306.0" style="-fx-background-color: white;" styleClass="anchorPane" stylesheets="@styles/styles.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <children>
-            <AnchorPane layoutX="14.0" prefHeight="254.0" prefWidth="261.0" style="-fx-background-color: white;">
+            <VBox layoutX="14.0" layoutY="-14.0" prefHeight="268.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
                <children>
-                  <VBox layoutX="14.0" prefHeight="254.0" prefWidth="240.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <Label text="Cadastrar Navio">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label text="Código">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <JFXTextField promptText="Código Navio">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </JFXTextField>
-                        <JFXComboBox promptText="Pais Destino">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </JFXComboBox>
-                        <JFXTextField promptText="Qtd de açúcar a embarcar">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </JFXTextField>
-                        <JFXButton alignment="CENTER_RIGHT" contentDisplay="RIGHT" styleClass="confirm" stylesheets="@styles/styles.css" text="Cadastrar" textAlignment="CENTER">
-                           <VBox.margin>
-                              <Insets bottom="10.0" left="150.0" right="10.0" top="10.0" />
-                           </VBox.margin>
-                        </JFXButton>
-                     </children>
-                  </VBox>
+                  <Label fx:id="labelCadastrarEmbarque" text="Cadastrar Embarque">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <Label fx:id="labelCodigoEmbarque" text="Código">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Label>
+                  <JFXTextField fx:id="textFieldCodigoNavio" promptText="Código Navio">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <JFXComboBox fx:id="comboBoxPaisDestino" promptText="Pais Destino">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXComboBox>
+                  <JFXTextField fx:id="textFieldQuantidadeAcucar" promptText="Qtd de açúcar a embarcar">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </JFXTextField>
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" stylesheets="@styles/styles.css">
+                     <buttons>
+                        <JFXButton fx:id="buttonNovo" styleClass="new" stylesheets="@styles/styles.css" text="Novo" />
+                        <JFXButton fx:id="buttonEditar" styleClass="edit" text="Editar" />
+                        <JFXButton fx:id="buttonGravar" styleClass="confirm" text="Gravar" />
+                     </buttons>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />
+                     </VBox.margin>
+                  </ButtonBar>
                </children>
-            </AnchorPane>
+            </VBox>
          </children>
       </AnchorPane>
-      <Separator layoutX="14.0" layoutY="199.0" prefHeight="4.0" prefWidth="585.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

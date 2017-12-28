@@ -65,6 +65,9 @@ public class ConsultasNavioController implements Initializable {
 
 	@FXML
 	private TableColumn<PaisVO, String> TableColumnNavioPais;
+	
+	@FXML
+	private TableColumn<Button, String> columnButton;
 
     @FXML
     private TextField textFieldPesquisar;
@@ -93,6 +96,7 @@ public class ConsultasNavioController implements Initializable {
 
 		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
 		TableColumnNavio.setItems(observableListNavio);
+		
 		clickOnPesquisar();
 
 	}
@@ -189,8 +193,6 @@ public class ConsultasNavioController implements Initializable {
 			}
 		}
 		TableColumnNavio.setItems(itensEncontrados);
-	}
-	
-	
+	}	
 
 }
