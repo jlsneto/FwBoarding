@@ -29,9 +29,9 @@
                         <MenuItem fx:id="menuItemGeralSair" mnemonicParsing="false" onAction="#onExit" text="Sair" />
                   </items>
                 </Menu>
-                <Menu fx:id="menuEmbarques" mnemonicParsing="false" text="Embarques">
+                <Menu fx:id="menuEmbarques" mnemonicParsing="false" onAction="#clickOnEmbarque" text="Área de Embarques">
                   <items>
-                    <MenuItem fx:id="menuItemNovoEmbarque" mnemonicParsing="false" text="Novo Embarque" />
+                    <MenuItem fx:id="menuItemNovoEmbarque" mnemonicParsing="false" text="Embarques" />
                   </items>
                 </Menu>
                   <Menu fx:id="menuRelatorios" mnemonicParsing="false" text="Relatórios">

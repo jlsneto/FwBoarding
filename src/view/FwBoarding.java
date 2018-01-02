@@ -276,6 +276,24 @@ public class FwBoarding extends Application {
 		
 		return controller.getSenha();
 	}
+	
+	public static void carregarTelaEmbarque() {
+
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(FwBoarding.class.getResource("/view/TelaEmbarque.fxml"));
+			AnchorPane embarque;
+			embarque = (AnchorPane) loader.load();
+			// Define a TelaConsultas no centro do root layout.
+			FwBoarding.rootLayout.setCenter(embarque);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			ConstruirDialog alert = new ConstruirDialog();
+			alert.dialogAlert("Erro Janela", "Não Foi possível Iniciar Tela Embarque", e.getMessage());
+		}
+
+	}
+
 	public static void main(String[] args) {
 		launch(args);
 	}

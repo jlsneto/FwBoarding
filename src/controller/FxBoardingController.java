@@ -74,6 +74,11 @@ public class FxBoardingController implements Initializable {
 			}
 		});
 	}
+	
+	@FXML
+	public void clickOnEmbarque() {
+		FwBoarding.carregarTelaEmbarque();
+	}
 
 	@FXML
 	public void onExit() {
