@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import javax.swing.plaf.synth.SynthSeparatorUI;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -66,20 +68,22 @@ public class ConsultaUsuario implements Initializable {
 	private TableColumn<UsuarioVO, String> TableColumnGrupo;
 
 	@FXML
-	private TableColumn<UsuarioVO, String> columnButton;
-	
+	private TableColumn<UsuarioVO, Button> columnButton;
+
 	public static ObservableList<UsuarioVO> observableListUsuario;
-	
+
 	private final UsuarioDAO usuarioDAO = new UsuarioDAO();
 
 	public static ObservableList<UsuarioVO> itensEncontrados;
+
+	private Button btn;
 
 	@FXML
 	public void clickOnIncluir() throws IOException {
 
 		CadastroUsuarioController.isAlterarUsuario = false;
 		FwBoarding.carregarTelaCadastroUsuario();
-		//Para Atualizar a ObservableList itensEncontrados
+		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
 	}
 
@@ -98,22 +102,23 @@ public class ConsultaUsuario implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum usuário selecionado", "Selecione um usuário!");
 		}
-		//Para Atualizar a ObservableList itensEncontrados
+		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
 	}
 
 	@FXML
 	public void clickOnExcluir() throws Exception {
-
+		
 		int selectedIndex = TableView.getSelectionModel().getSelectedIndex();
+
 		UsuarioVO usuario = TableView.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
 			if (confirmouExcluisaoDoNavio(usuario.getNomeUsuario().toString())) {
 				usuarioDAO.deletar(usuario.getCodigoUsuario());
 				usuarioDAO.verificaSeUsuarioFoiExcluido(usuario.getCodigoUsuario());
-				//TableColumnNavio.getItems().remove(selectedIndex);
-				observableListUsuario.remove(selectedIndex);
+				// TableColumnNavio.getItems().remove(selectedIndex);
+				observableListUsuario.remove(usuario);
 			}
 
 		} else {
@@ -121,7 +126,7 @@ public class ConsultaUsuario implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum usuário selecionado", "Selecione um usuário!");
 		}
-		//Para Atualizar a ObservableList itensEncontrados
+		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
 	}
 
@@ -136,17 +141,16 @@ public class ConsultaUsuario implements Initializable {
 		}
 	}
 
-
 	@FXML
 	private void onKeyPressed(KeyEvent event) throws Exception {
 		int selectedIndex = TableView.getSelectionModel().getSelectedIndex();
 		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
 			clickOnAlterar();
-		}
-		else if(event.getCode().isLetterKey() || event.getCode().isWhitespaceKey() || event.getCode().equals(KeyCode.BACK_SPACE) ) {
-			//System.out.println(event.getCode().getName());
+		} else if (event.getCode().isLetterKey() || event.getCode().isWhitespaceKey()
+				|| event.getCode().equals(KeyCode.BACK_SPACE)) {
+			// System.out.println(event.getCode().getName());
 			clickOnPesquisar();
-		}else if(event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
+		} else if (event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
 			clickOnExcluir();
 		}
 	}
@@ -166,22 +170,48 @@ public class ConsultaUsuario implements Initializable {
 		TableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoUsuario"));
 		TableColumnNome.setCellValueFactory(new PropertyValueFactory<>("nomeUsuario"));
 		TableColumnGrupo.setCellValueFactory(new PropertyValueFactory<>("grupoUsuario"));
+		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
 
-		observableListUsuario= FXCollections.observableArrayList(usuarioDAO.listar());
+		observableListUsuario = FXCollections.observableArrayList(usuarioDAO.listar());
+
 		TableView.setItems(observableListUsuario);
 		clickOnPesquisar();
 	}
 
 	@FXML
 	private void clickOnPesquisar() {
+		
 		itensEncontrados = FXCollections.observableArrayList();
-		for (UsuarioVO itens: observableListUsuario) {
+		for (UsuarioVO itens : observableListUsuario) {
+			itens.setButtonBar(new ButtonBar());
+			ButtonBar btnBar = itens.getButtonBar();
+			Button buttonExcluir = new Button("Excluir");
+			buttonExcluir.setOnAction(event -> {
+				try {
+					TableView.getSelectionModel().select(itens);
+					clickOnExcluir();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+
+			Button buttonEdit = new Button("Editar");
+			buttonEdit.setOnAction(event -> {
+				try {
+					TableView.getSelectionModel().select(itens);
+					clickOnAlterar();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
 			if (itens.getNomeUsuario().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
 		}
 		TableView.setItems(itensEncontrados);
 	}
-	
 
 }

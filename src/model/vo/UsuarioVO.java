@@ -1,10 +1,20 @@
 package model.vo;
 
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.ButtonBar.ButtonData;
+
 public class UsuarioVO {
 	private long codigoUsuario;
 	private String nomeUsuario;
 	private String senha;
 	private GrupoUsuarioVO grupoUsuario;
+	private ButtonBar buttonBar;
+
+	public UsuarioVO() {
+
+
+	}
 
 	public long getCodigoUsuario() {
 		return codigoUsuario;
@@ -38,4 +48,11 @@ public class UsuarioVO {
 		this.grupoUsuario = grupoUsuario;
 	}
 
+	public void setButtonBar(ButtonBar buttonBar) {
+		this.buttonBar = buttonBar;
+	}
+
+	public ButtonBar getButtonBar() {
+		return this.buttonBar;
+	}
 }

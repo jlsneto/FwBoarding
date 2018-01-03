@@ -104,7 +104,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 				grupoUsuarioDAO.deletar(grupoUsuario.getCodigoGrupo());
 				grupoUsuarioDAO.verificarSeGrupoFoiExcluido(grupoUsuario.getCodigoGrupo());
 				// TableColumnNavio.getItems().remove(selectedIndex);
-				observableListGrupo.remove(selectedIndex);
+				observableListGrupo.remove(grupoUsuario);
 			}
 
 		} else {

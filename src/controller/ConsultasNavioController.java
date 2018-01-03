@@ -161,7 +161,7 @@ public class ConsultasNavioController implements Initializable {
 				navioDAO.deletar(navio.getCodigoNavio());
 				navioDAO.verificarSeFoiNavioExcluido(navio.getCodigoNavio());
 				//TableColumnNavio.getItems().remove(selectedIndex);
-				observableListNavio.remove(selectedIndex);
+				observableListNavio.remove(navio);
 			}
 
 		} else {
