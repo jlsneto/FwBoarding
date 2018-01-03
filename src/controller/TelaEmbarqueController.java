@@ -7,6 +7,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
+
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -38,7 +39,10 @@ public class TelaEmbarqueController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> columnPaisDestion;
-
+    
+    @FXML
+    TableColumn<?,?> columnButton;
+    
     @FXML
     private Label labelCadastrarEmbarque;
 
@@ -66,7 +70,7 @@ public class TelaEmbarqueController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

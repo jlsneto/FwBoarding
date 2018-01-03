@@ -30,27 +30,28 @@
                      <rowConstraints>
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="43.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="17.0" minHeight="0.0" prefHeight="17.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <JFXTextField fx:id="textFieldPesquisaSafra" prefHeight="25.0" prefWidth="70.0" promptText="Safra">
+                        <JFXTextField fx:id="textFieldPesquisaSafra" prefHeight="25.0" prefWidth="70.0" promptText="Safra" GridPane.rowIndex="1">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXTextField fx:id="textFieldPesquisaCodigo" prefHeight="25.0" prefWidth="215.0" promptText="Código" GridPane.columnIndex="2">
+                        <JFXTextField fx:id="textFieldPesquisaCodigo" prefHeight="25.0" prefWidth="215.0" promptText="Código">
                            <GridPane.margin>
-                              <Insets />
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                            </GridPane.margin>
                         </JFXTextField>
-                        <JFXDatePicker fx:id="dateFieldPesquisaInicio" promptText="Data Inicio" GridPane.rowIndex="1">
+                        <JFXDatePicker fx:id="dateFieldPesquisaInicio" promptText="Data Inicio" GridPane.rowIndex="2">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXDatePicker fx:id="dateFieldPesquisaFim" promptText="Data Final" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                        <JFXButton fx:id="buttonPesquisaPesquisar" contentDisplay="RIGHT" styleClass="confirm" stylesheets="@styles/styles.css" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="3">
+                        <JFXDatePicker fx:id="dateFieldPesquisaFim" promptText="Data Final" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <JFXButton fx:id="buttonPesquisaPesquisar" contentDisplay="RIGHT" styleClass="confirm" stylesheets="@styles/styles.css" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="4">
                            <GridPane.margin>
                               <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                            </GridPane.margin></JFXButton>
@@ -66,6 +67,7 @@
               <columns>
                 <TableColumn fx:id="columnCodigoEmbarque" prefWidth="125.0" styleClass="tableView" text="Código" />
                 <TableColumn fx:id="columnPaisDestion" prefWidth="91.0" styleClass="tableView" text="Pais Destino" />
+                  <TableColumn fx:id="columnButton" prefWidth="75.0" text="Action" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
