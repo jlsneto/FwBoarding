@@ -1,5 +1,7 @@
 package model.vo;
 
+import javafx.scene.control.ButtonBar;
+
 public class NavioVO {
 	
 	private long codigoNavio;
@@ -7,7 +9,8 @@ public class NavioVO {
 	private int qtdPorao;
 	private double capacidadePorao;
 	private PaisVO pais;
-	
+	private ButtonBar buttonBar;
+
 	public NavioVO() {
 		
 	}
@@ -55,6 +58,12 @@ public class NavioVO {
 
 	public void setCapacidadePorao(double capacidadePorao) {
 		this.capacidadePorao = capacidadePorao;
+	}
+	public ButtonBar getButtonBar() {
+		return buttonBar;
+	}
+	public void setButtonBar(ButtonBar buttonBar) {
+		this.buttonBar = buttonBar;
 	}
 
 }

@@ -93,6 +93,7 @@ public class ConsultasNavioController implements Initializable {
 		TableColumnNavioCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoNavio"));
 		TableColumnNavioDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
 		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
+		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
 
 		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
 		TableColumnNavio.setItems(observableListNavio);
@@ -188,6 +189,30 @@ public class ConsultasNavioController implements Initializable {
 	private void clickOnPesquisar() {
 		itensEncontrados = FXCollections.observableArrayList();
 		for (NavioVO itens: observableListNavio) {
+			itens.setButtonBar(new ButtonBar());
+			ButtonBar btnBar = itens.getButtonBar();
+			Button buttonExcluir = new Button("Excluir");
+			buttonExcluir.setOnAction(event -> {
+				try {
+					TableColumnNavio.getSelectionModel().select(itens);
+					clickOnExcluir();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+
+			Button buttonEdit = new Button("Editar");
+			buttonEdit.setOnAction(event -> {
+				try {
+					TableColumnNavio.getSelectionModel().select(itens);
+					clickOnAlterar();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
 			if (itens.getDescricaoNavio().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}

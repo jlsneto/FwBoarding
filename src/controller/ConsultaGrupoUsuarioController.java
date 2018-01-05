@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -46,6 +47,9 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 
 	@FXML
 	private TableColumn<GrupoUsuarioVO, String> TableColumnDescricaoGrupo;
+	
+    @FXML
+    private TableColumn<GrupoUsuarioVO, Button> columnButton;
 
 	@FXML
 	private TextField textFieldPesquisar;
@@ -67,6 +71,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	public void carregarTableViewGrupo() {
 		TableColumnCodigoGrupo.setCellValueFactory(new PropertyValueFactory<>("codigoGrupo"));
 		TableColumnDescricaoGrupo.setCellValueFactory(new PropertyValueFactory<>("descricaoGrupo"));
+		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
 
 		observableListGrupo = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
 		TableGrupoUsuario.setItems(observableListGrupo);
@@ -129,6 +134,30 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	void clickOnPesquisar() {
 		itensEncontrados = FXCollections.observableArrayList();
 		for (GrupoUsuarioVO itens : observableListGrupo) {
+			itens.setButtonBar(new ButtonBar());
+			ButtonBar btnBar = itens.getButtonBar();
+			Button buttonExcluir = new Button("Excluir");
+			buttonExcluir.setOnAction(event -> {
+				try {
+					TableGrupoUsuario.getSelectionModel().select(itens);
+					clickOnExcluir();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+
+			Button buttonEdit = new Button("Editar");
+			buttonEdit.setOnAction(event -> {
+				try {
+					TableGrupoUsuario.getSelectionModel().select(itens);
+					clickOnAlterar();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
 			if (itens.getDescricaoGrupo().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}

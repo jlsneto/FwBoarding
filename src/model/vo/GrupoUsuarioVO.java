@@ -1,5 +1,7 @@
 package model.vo;
 
+import javafx.scene.control.ButtonBar;
+
 public class GrupoUsuarioVO {
 	private long codigoGrupo;
 	private String descricaoGrupo;
@@ -19,6 +21,12 @@ public class GrupoUsuarioVO {
 	private String permissaoAlterEmbarque;
 	private String permissaoConsulEmbarque;
 	private String permissaoDeletEmbarque;
+	private ButtonBar buttonBar;
+	
+	public GrupoUsuarioVO() {
+		
+	}
+
 
 	public long getCodigoGrupo() {
 		return codigoGrupo;
@@ -169,5 +177,13 @@ public class GrupoUsuarioVO {
     public String toString() {
         return this.getDescricaoGrupo();
     }
+
+	public ButtonBar getButtonBar() {
+		return buttonBar;
+	}
+
+	public void setButtonBar(ButtonBar buttonBar) {
+		this.buttonBar = buttonBar;
+	}
 
 }
