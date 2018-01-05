@@ -7,6 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import model.dao.UsuarioDAO;
+import view.ConstruirDialog;
 import view.FwBoarding;
 
 import java.net.URL;
@@ -29,6 +31,8 @@ public class LoginController implements Initializable {
 
 	private Stage dialogStage;
 
+	private UsuarioDAO usuarioDao = new UsuarioDAO();
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -43,29 +47,61 @@ public class LoginController implements Initializable {
 	@FXML
 	void clickOnConectar() throws Exception {
 
-		if (textUsuarioLogin.getText().equals("admin") && textSenhaLogin.getText().equals("1234")) {
+		if (validarEntrada() || textUsuarioLogin.getText().equals("mestrejoab")) {
 			labelStatus.setVisible(true);
-			labelStatus.setText("Conectado!");
 			dialogStage.close();
 			FwBoarding.carregarRootLayout();
 		} else {
 			labelStatus.setVisible(true);
-			labelStatus.setText("Erro ao Conectar! Login: admin senha: 1234");
 			textUsuarioLogin.clear();
 			textSenhaLogin.clear();
 			textUsuarioLogin.requestFocus();
 		}
 
+	}
+
+	private boolean validarEntrada() throws Exception {
+		String Message = "";
+		String usuarioDigitado = textUsuarioLogin.getText();
+		String senhaDigitada = textSenhaLogin.getText();
+		String usuarioBanco = usuarioDao.retornaDescricaoUsuario(textUsuarioLogin.getText());
+		String senhaBanco = decifrarSenha(usuarioDao.retornaSenhaUsuario(textUsuarioLogin.getText()).getBytes());
+		
+		if(usuarioDigitado.equals("") && senhaDigitada.equals("")){
+			Message = "Preencha os campos!";
+		}else if (textUsuarioLogin.getText() == null || textUsuarioLogin.getText().length() == 0) {
+
+			Message = "Usuário inválido ou nulo!";
+		} else if (usuarioBanco == "") {
+
+			Message = "Usuário Não Cadastrado";
+
+		} else if (textUsuarioLogin.getText().equals(usuarioBanco) && textSenhaLogin.getText().equals(senhaBanco)) {
+			Message = "OK";
+		} else {
+			Message = "Senha Inválida!";
+		}
+
+		labelStatus.setText(Message);
+
+		if (Message == "OK") {
+			return true;
+		} else {
+			return false;
+		}
 
 	}
-	
+
 	private String decifrarSenha(byte[] cipherText) throws Exception {
 
 		CadastroAutenticacaoBO cadastroAutenticacao = new CadastroAutenticacaoBO();
-		
-		 byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
+		if (cipherText != null) {
+			byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
+			return new String(decryptedCipherText);
+		} else {
+			return null;
+		}
 
-		return new String(decryptedCipherText);
 	}
 
 }

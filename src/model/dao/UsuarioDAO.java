@@ -192,6 +192,25 @@ public class UsuarioDAO {
 
 		}
 	}
+	public String retornaSenhaUsuario(String nomeUsuario) {
+		String sql = "SELECT SENHA FROM CADUSUARIO WHERE LOGIN = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, nomeUsuario);
+			ResultSet senhaUsuario = stmt.executeQuery();
+			
+			if(senhaUsuario.next()) {
+				return senhaUsuario.getString("SENHA");
+			}else {
+				return "";
+			}
+			
+		} catch (SQLException e) {
+			ConstruirDialog aviso = new ConstruirDialog();
+			aviso.dialogAlert("Erro de Autenticação", "Usuário ou Senha Inválidos!", e.getMessage());
+		}
+		return "";
+	}
 
 
 }

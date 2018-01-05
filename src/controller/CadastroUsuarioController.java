@@ -117,8 +117,8 @@ public class CadastroUsuarioController implements Initializable {
 				usuario.setGrupoUsuario(comboBoxGrupoUsuario.getSelectionModel().getSelectedItem());
 				// carrega a tela para cadastrar a senha posteriormente cifra
 				String senha = FwBoarding.carregarDialogCadastroSenha(dialogStage);
-				cifrarSenha(senha);
-				usuario.setSenha(senha);
+				
+				usuario.setSenha(cifrarSenha(senha));
 				usuarioDAO.inserir(usuario);
 
 				// Atualiza Tela de Consulta
