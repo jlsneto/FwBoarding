@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="388.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+<AnchorPane prefHeight="388.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" stylesheets="@styles/styles.css" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
    <children>
       <GridPane layoutX="48.0" layoutY="163.0" prefHeight="118.0" prefWidth="207.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="47.0">
         <columnConstraints>
@@ -25,25 +25,28 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label styleClass="login" stylesheets="@styles/styles.css" text="Usuário" />
+            <Label styleClass="login" stylesheets="@styles/styles.css" text="Usuário" textFill="#33485d">
+               <font>
+                  <Font name="Futura Bk BT Book Italic" size="12.0" />
+               </font></Label>
             <Label styleClass="login" stylesheets="@styles/styles.css" text="Senha" GridPane.rowIndex="2" />
             <TextField fx:id="textUsuarioLogin" prefWidth="175.0" GridPane.rowIndex="1" />
             <PasswordField fx:id="textSenhaLogin" GridPane.rowIndex="3" />
          </children>
       </GridPane>
-      <Label layoutX="83.0" layoutY="132.0" text="Acesso ao Sistema">
+      <Label layoutX="88.0" layoutY="142.0" text="Acesso ao Sistema" textFill="#33485d">
          <font>
-            <Font name="Century Gothic" size="15.0" />
+            <Font name="Futura Bk BT Book" size="15.0" />
          </font>
       </Label>
-      <Button fx:id="buttonConectar" defaultButton="true" layoutX="79.0" layoutY="313.0" mnemonicParsing="false" onAction="#clickOnConectar" prefHeight="34.0" prefWidth="143.0" styleClass="confirm" stylesheets="@styles/styles.css" text="Conectar">
+      <Button fx:id="buttonConectar" defaultButton="true" layoutX="94.0" layoutY="315.0" mnemonicParsing="false" onAction="#clickOnConectar" prefHeight="39.0" prefWidth="114.0" style="-fx-background-color: #33485d;" styleClass="confirm" stylesheets="@styles/styles.css" text="ENTRAR">
          <font>
-            <Font size="18.0" />
+            <Font name="Futura Md BT Bold" size="18.0" />
          </font>
       </Button>
-      <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="105.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="57.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/Icons/CadeadoLogin.png" />
+            <Image url="@../../../../../Desktop/Lamen/logo%20fw%20boarding%202.png" />
          </image>
       </ImageView>
       <Label fx:id="labelStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="288.0" prefHeight="17.0" prefWidth="289.0" text="status " textAlignment="CENTER" visible="false" />
