@@ -10,11 +10,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FxBoardingController">
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FxBoardingController">
    <top>
       <AnchorPane prefHeight="99.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+            <MenuBar styleClass="login" stylesheets="@styles/styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
               <menus>
                 <Menu fx:id="menuGeral" mnemonicParsing="false" text="_Geral">
                   <items>
@@ -57,9 +57,9 @@
    <left>
    </left>
    <center>
-      <ImageView fitHeight="265.0" fitWidth="442.0" opacity="0.16" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fitHeight="441.0" fitWidth="395.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <image>
-            <Image url="@images/Icons/IconNavio%20-%20Cópia.png" />
+            <Image url="@../../../../../Pictures/fw.png" />
          </image>
       </ImageView>
    </center>

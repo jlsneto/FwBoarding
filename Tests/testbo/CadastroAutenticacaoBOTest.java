@@ -6,8 +6,8 @@ import java.nio.charset.StandardCharsets;
 
 import org.junit.Test;
 
-import controller.CadastroAutenticacaoBO;
 import junit.framework.TestCase;
+import usuario.CadastroAutenticacaoBO;
 
 public class CadastroAutenticacaoBOTest extends TestCase {
 	

@@ -1,41 +1,60 @@
-package view;
+package fwboarding;
 
 import java.io.IOException;
 
 import java.util.Optional;
 
-import controller.CadastroGrupoController;
-import controller.CadastroNavioController;
-import controller.CadastroSenhaController;
-import controller.CadastroUsuarioController;
-import controller.LoginController;
+import com.jfoenix.controls.JFXDecorator;
+
+import grupoUsuario.CadastroGrupoController;
+import helpers.Routes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Border;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import login.LoginController;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
 import model.vo.UsuarioVO;
+import navio.CadastroNavioController;
+import usuario.CadastroSenhaController;
+import usuario.CadastroUsuarioController;
+import view.ConstruirDialog;
 
 public class FwBoarding extends Application {
+
+	public class HomeViewController {
+
+	}
 
 	public static Stage stage;
 	public static BorderPane rootLayout;
 
 	@Override
-	public void start(Stage stage) throws IOException {
-		FwBoarding.stage = stage;
-		carregarTelaLogin();
-
-	}
-
+    public void start(Stage stage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
+        JFXDecorator decorator=new JFXDecorator(stage, root, false, false, true);
+        decorator.setCustomMaximize(true);
+        decorator.setBorder(Border.EMPTY);
+        stage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
+        
+        Scene scene = new Scene(decorator);
+        scene.getStylesheets().add(FwBoarding.class.getResource("../view/styles/styles.css").toExternalForm());
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        
+        stage.setIconified(false);
+        stage.show();
+    }
 	public static void carregarRootLayout() {
 		try {
 
@@ -96,7 +115,7 @@ public class FwBoarding extends Application {
 				.add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
 
 		LoginController controller = loader.getController();
-		controller.setDialogStage(dialogStage);
+		//controller.setDialogStage(dialogStage);
 
 		Scene scene = new Scene(page);
 		dialogStage.setScene(scene);

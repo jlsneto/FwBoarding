@@ -1,4 +1,4 @@
-package controller;
+package usuario;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,6 +6,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import fwboarding.FwBoarding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -25,7 +26,6 @@ import model.dao.UsuarioDAO;
 import model.vo.GrupoUsuarioVO;
 import model.vo.UsuarioVO;
 import view.ConstruirDialog;
-import view.FwBoarding;
 
 public class CadastroUsuarioController implements Initializable {
 

@@ -1,4 +1,4 @@
-package controller;
+package embarque;
 
 import java.io.IOException;
 import java.net.URL;

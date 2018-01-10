@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="500.0" prefWidth="750.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fwboarding.BemVindoController">
+         <children>
+            <VBox layoutX="20.0" layoutY="14.0" prefHeight="329.0" prefWidth="387.0" spacing="10.0" styleClass="card">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="206.0" styleClass="card-title" text="FwBoarding System" />
+                  <Separator prefHeight="2.0" prefWidth="384.0" />
+                  <Label prefHeight="107.0" prefWidth="370.0" text="Aqui vai ficar uma mensagem de boas vindas ou então alguma informação útil" textAlignment="CENTER" wrapText="true" />
+                  <Separator prefWidth="200.0" />
+                  <Label prefHeight="40.0" prefWidth="207.0" styleClass="card-title" text="Outras Informações" />
+                  <Separator prefWidth="200.0" />
+            <Label prefHeight="107.0" prefWidth="370.0" text="Espaço reservado para outras informações" textAlignment="CENTER" wrapText="true" />
+               </children>
+            </VBox>
+            <HBox fillHeight="false" layoutX="20.0" layoutY="372.0" prefHeight="127.0" prefWidth="649.0" spacing="30.0">
+               <children>
+                  <VBox prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: rgb(0, 192, 239);" styleClass="card">
+                     <children>
+                        <Label prefHeight="57.0" prefWidth="141.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 36;" text="24t" />
+                        <Label prefHeight="43.0" prefWidth="110.0" style="-fx-text-fill: white; -fx-font-family: roboto; -fx-font-weight: bold; -fx-font-size: 16;" text="A embarcar" />
+                     </children>
+                  </VBox>
+                  <VBox prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: rgb(221, 75, 57);" styleClass="card">
+                     <children>
+                        <Label prefHeight="57.0" prefWidth="141.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 36;" text="10h" />
+                        <Label prefHeight="36.0" prefWidth="110.0" style="-fx-text-fill: white; -fx-font-family: roboto; -fx-font-weight: bold; -fx-font-size: 16;" text="Pausado" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="182.0" layoutY="10.0" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: rgb(0, 166, 90);" styleClass="card">
+                     <children>
+                        <Label prefHeight="57.0" prefWidth="134.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 36;" text="80 %" />
+                        <Label prefHeight="36.0" prefWidth="110.0" style="-fx-text-fill: white; -fx-font-family: roboto; -fx-font-weight: bold; -fx-font-size: 16;" text="Algo mais" />
+                     </children>
+                  </VBox>
+                  <VBox layoutX="354.0" layoutY="10.0" prefHeight="124.0" prefWidth="142.0" style="-fx-background-color: rgb(243, 156, 18);" styleClass="card">
+                     <children>
+                        <Label prefHeight="57.0" prefWidth="134.0" style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 36;" text="100 %" />
+                        <Label prefHeight="36.0" prefWidth="110.0" style="-fx-text-fill: white; -fx-font-family: roboto; -fx-font-weight: bold; -fx-font-size: 16;" text="Algo mais" />
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </AnchorPane>

@@ -17,9 +17,9 @@
 
 <AnchorPane prefHeight="501.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.TelaEmbarqueController">
    <children>
-      <AnchorPane layoutY="1.0" prefHeight="200.0" prefWidth="600.0" stylesheets="@styles/styles.css" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="300.0">
+      <AnchorPane layoutY="1.0" prefHeight="200.0" prefWidth="600.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="300.0">
          <children>
-            <AnchorPane layoutX="10.0" layoutY="18.0" prefHeight="155.0" prefWidth="306.0" style="-fx-background-color: white;" styleClass="anchorPane" AnchorPane.leftAnchor="0.0">
+            <AnchorPane layoutX="10.0" layoutY="18.0" prefHeight="155.0" prefWidth="306.0" AnchorPane.leftAnchor="0.0">
                <children>
                   <GridPane alignment="TOP_CENTER" prefHeight="135.0" prefWidth="297.0">
                      <columnConstraints>
@@ -51,7 +51,11 @@
                            </GridPane.margin>
                         </JFXDatePicker>
                         <JFXDatePicker fx:id="dateFieldPesquisaFim" promptText="Data Final" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+<<<<<<< HEAD:src/view/TelaEmbarque.fxml
                         <JFXButton fx:id="buttonPesquisaPesquisar" contentDisplay="RIGHT" onAction="#clickOnPesquisar" styleClass="confirm" stylesheets="@styles/styles.css" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="4">
+=======
+                        <JFXButton fx:id="buttonPesquisaPesquisar" contentDisplay="RIGHT" styleClass="confirm" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="4">
+>>>>>>> 49d835e3deb9ed1d3f9ebf29f6f0ed8a43b1c389:src/embarque/EmbarqueView.fxml
                            <GridPane.margin>
                               <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                            </GridPane.margin></JFXButton>
@@ -61,7 +65,7 @@
             </AnchorPane>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="337.0" layoutY="181.0" prefHeight="234.0" prefWidth="249.0" styleClass="anchorPane" stylesheets="@styles/styles.css" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
+      <AnchorPane layoutX="337.0" layoutY="181.0" prefHeight="234.0" prefWidth="249.0" styleClass="anchorPane" AnchorPane.bottomAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0">
          <children>
             <TableView fx:id="tableViewEmbarque" prefHeight="135.0" prefWidth="261.0" AnchorPane.bottomAnchor="0.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
               <columns>
@@ -75,7 +79,7 @@
             </TableView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="7.0" layoutY="219.0" prefHeight="296.0" prefWidth="306.0" style="-fx-background-color: white;" styleClass="anchorPane" stylesheets="@styles/styles.css" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+      <AnchorPane layoutX="7.0" layoutY="219.0" prefHeight="296.0" prefWidth="306.0" style="-fx-background-color: white;" styleClass="anchorPane" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
          <children>
             <VBox layoutX="14.0" layoutY="-14.0" prefHeight="268.0" prefWidth="285.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="7.0" AnchorPane.topAnchor="0.0">
                <children>
@@ -104,9 +108,15 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </VBox.margin>
                   </JFXTextField>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0" stylesheets="@styles/styles.css">
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
                      <buttons>
+<<<<<<< HEAD:src/view/TelaEmbarque.fxml
                         <JFXButton fx:id="buttonGravar" onAction="#clickOnGravar" styleClass="confirm" text="Gravar" />
+=======
+                        <JFXButton fx:id="buttonNovo" text="Novo" />
+                        <JFXButton fx:id="buttonEditar" styleClass="edit" text="Editar" />
+                        <JFXButton fx:id="buttonGravar" styleClass="confirm" text="Gravar" />
+>>>>>>> 49d835e3deb9ed1d3f9ebf29f6f0ed8a43b1c389:src/embarque/EmbarqueView.fxml
                      </buttons>
                      <VBox.margin>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="30.0" />

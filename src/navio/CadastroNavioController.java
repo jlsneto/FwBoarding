@@ -1,4 +1,4 @@
-package controller;
+package navio;
 
 import java.net.URL;
 import java.sql.SQLException;
