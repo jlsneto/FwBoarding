@@ -1,4 +1,4 @@
-package controller;
+package grupoUsuario;
 
 import java.net.URL;
 

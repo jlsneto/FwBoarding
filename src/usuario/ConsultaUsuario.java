@@ -1,4 +1,4 @@
-package controller;
+package usuario;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import fwboarding.FwBoarding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -30,7 +31,6 @@ import model.dao.UsuarioDAO;
 import model.vo.NavioVO;
 import model.vo.UsuarioVO;
 import view.ConstruirDialog;
-import view.FwBoarding;
 
 public class ConsultaUsuario implements Initializable {
 

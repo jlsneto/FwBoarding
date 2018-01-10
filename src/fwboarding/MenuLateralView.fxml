@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="200.0" styleClass="card-unpadded" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fwboarding.MenuLateralController">
+   <children>
+      <ImageView fitHeight="204.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../view/images/Icons/IconNavio%20-%20Cópia.png" />
+         </image></ImageView>
+      <JFXButton fx:id="inicioBtn" accessibleText="inicioMenu" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Inicio">
+         <VBox.margin>
+            <Insets />
+         </VBox.margin></JFXButton>
+      <JFXButton fx:id="navioBtn" accessibleText="navioMenu" layoutX="10.0" layoutY="10.0" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Navio" />
+      <JFXButton fx:id="usuarioBtn" accessibleText="usuarioMenu" layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Usuario" />
+      <JFXButton fx:id="grupoUsuarioBtn" accessibleText="grupoUsuarioMenu" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Grupo de Usuarios" />
+      <JFXButton fx:id="embarqueBtn" accessibleText="embarqueMenu" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Embarque" />
+      <JFXButton fx:id="trocarUsuarioBtn" accessibleText="trocarUsuarioMenu" layoutX="10.0" layoutY="182.0" onAction="#trocarUsuario" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Trocar de Usuario" />
+      <JFXButton fx:id="sairBtn" accessibleText="sairMenu" layoutX="10.0" layoutY="182.0" onAction="#sair" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Exit" />
+   </children>
+</VBox>

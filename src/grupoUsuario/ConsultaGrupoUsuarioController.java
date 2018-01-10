@@ -1,4 +1,4 @@
-package controller;
+package grupoUsuario;
 
 import java.io.IOException;
 
@@ -6,6 +6,7 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import fwboarding.FwBoarding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +26,6 @@ import javafx.scene.input.MouseEvent;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
 import view.ConstruirDialog;
-import view.FwBoarding;
 import model.dao.GrupoUsuarioDAO;
 
 public class ConsultaGrupoUsuarioController implements Initializable {

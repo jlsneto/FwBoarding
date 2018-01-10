@@ -1,4 +1,4 @@
-package controller;
+package fwboarding;
 
 import java.io.IOException;
 import java.net.URL;
@@ -10,7 +10,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
-import view.FwBoarding;
 
 public class FxBoardingController implements Initializable {
 

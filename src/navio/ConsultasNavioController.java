@@ -1,58 +1,43 @@
-package controller;
+package navio;
 
 import java.io.IOException;
 
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXTabPane;
+import com.jfoenix.controls.JFXTextField;
+
+import fwboarding.FwBoarding;
+import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import model.dao.NavioDAO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
 import view.ConstruirDialog;
-import view.FwBoarding;
 
 public class ConsultasNavioController implements Initializable {
 
-	@FXML
-	private AnchorPane TelaConsultasAnchorPane;
-
-	@FXML
-	private BorderPane AnchorPaneBorderPane;
-
-	@FXML
-	private AnchorPane BorderPaneTopAnchorPane;
-
-	@FXML
-	private ButtonBar AnchorPaneButtonBar;
-
-	@FXML
-	private Button ButtonBarButtonExcluir;
-
-	@FXML
-	private Button ButtonBarButtonAlterar;
-
-	@FXML
-	private Button ButtonBarButtonIncluir;
 
 	@FXML
 	private TableView<NavioVO> TableColumnNavio;
@@ -68,12 +53,15 @@ public class ConsultasNavioController implements Initializable {
 	
 	@FXML
 	private TableColumn<Button, String> columnButton;
+    
+    @FXML
+    private JFXTextField textFieldPesquisar;
 
     @FXML
-    private TextField textFieldPesquisar;
-
+    private JFXButton buttonAdd;
+    
     @FXML
-    private Button buttonPesquisar;
+    private JFXTabPane tabPane;
 
 	public static ObservableList<NavioVO> observableListNavio;
 
@@ -94,6 +82,7 @@ public class ConsultasNavioController implements Initializable {
 		TableColumnNavioDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
 		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
 		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
+		
 
 		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
 		TableColumnNavio.setItems(observableListNavio);
@@ -127,9 +116,16 @@ public class ConsultasNavioController implements Initializable {
 	public void clickOnIncluir() throws IOException {
 
 		CadastroNavioController.isAlterarNavio = false;
-		FwBoarding.carregarTelaCadastroNavio();
+		
+		AnchorPane cadastroNavioPane = FXMLLoader.load(getClass().getResource(Routes.CADASTRONAVIOVIEW));
+
+		Tab tabCadastro = new Tab("Cadastro de Navio",cadastroNavioPane);
+		tabPane.getTabs().add(tabCadastro);
+		tabPane.getSelectionModel().selectNext();
+		
+		//FwBoarding.carregarTelaCadastroNavio();
 		//Para Atualizar a ObservableList itensEncontrados
-		clickOnPesquisar();
+		//clickOnPesquisar();
 	}
 
 	@FXML
@@ -188,10 +184,17 @@ public class ConsultasNavioController implements Initializable {
 	@FXML
 	private void clickOnPesquisar() {
 		itensEncontrados = FXCollections.observableArrayList();
+		//adicionar button para cada navio 
 		for (NavioVO itens: observableListNavio) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
-			Button buttonExcluir = new Button("Excluir");
+			btnBar.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
+			
+			Image excluirIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/excluirIcon.png"));
+			//button excluir
+			JFXButton buttonExcluir = new JFXButton();
+			buttonExcluir.setGraphic(new ImageView(excluirIcon));
+			
 			buttonExcluir.setOnAction(event -> {
 				try {
 					TableColumnNavio.getSelectionModel().select(itens);
@@ -201,8 +204,11 @@ public class ConsultasNavioController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-
-			Button buttonEdit = new Button("Editar");
+			
+			Image editarIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/editarIcon.png"));
+			//button editar
+			JFXButton buttonEdit = new JFXButton();
+			buttonEdit.setGraphic(new ImageView(editarIcon));
 			buttonEdit.setOnAction(event -> {
 				try {
 					TableColumnNavio.getSelectionModel().select(itens);
@@ -219,5 +225,4 @@ public class ConsultasNavioController implements Initializable {
 		}
 		TableColumnNavio.setItems(itensEncontrados);
 	}	
-
 }
