@@ -32,26 +32,25 @@ import view.ConstruirDialog;
 
 public class FwBoarding extends Application {
 
-	public class HomeViewController {
-
-	}
-
 	public static Stage stage;
 	public static BorderPane rootLayout;
 
 	@Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource(Routes.LOGINVIEW));
-        JFXDecorator decorator=new JFXDecorator(stage, root, false, false, true);
-        decorator.setCustomMaximize(true);
-        decorator.setBorder(Border.EMPTY);
-        stage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
+		//Carregar tela Login
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(Routes.LOGINVIEW));
+        Parent root = loader.load();
+
+        LoginController controller = loader.getController();
+        controller.setStage(stage);
         
-        Scene scene = new Scene(decorator);
+        Scene scene = new Scene(root);
         scene.getStylesheets().add(FwBoarding.class.getResource("../view/styles/styles.css").toExternalForm());
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.UTILITY);
+        stage.setResizable(false);
         stage.setScene(scene);
-        
+        stage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
         stage.setIconified(false);
         stage.show();
     }

@@ -41,7 +41,7 @@
          </image>
       </ImageView>
       <Label fx:id="labelStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="288.0" prefHeight="17.0" prefWidth="289.0" text="status " textAlignment="CENTER" visible="false" />
-      <JFXButton fx:id="buttonConectar" layoutX="101.0" layoutY="365.0" onAction="#clickOnConectar" prefHeight="30.0" prefWidth="98.0" styleClass="lgBtn" text="Entrar" textFill="WHITE">
+      <JFXButton fx:id="buttonConectar" defaultButton="true" layoutX="101.0" layoutY="365.0" onAction="#clickOnConectar" prefHeight="30.0" prefWidth="98.0" styleClass="lgBtn" text="Entrar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="12.0" />
          </font>

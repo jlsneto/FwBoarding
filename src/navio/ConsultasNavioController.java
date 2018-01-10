@@ -17,6 +17,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -31,6 +32,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.dao.NavioDAO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
@@ -117,11 +120,24 @@ public class ConsultasNavioController implements Initializable {
 
 		CadastroNavioController.isAlterarNavio = false;
 		
-		AnchorPane cadastroNavioPane = FXMLLoader.load(getClass().getResource(Routes.CADASTRONAVIOVIEW));
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource(Routes.CADASTRONAVIOVIEW));
+		AnchorPane cadastroNavio = loader.load();
+		
+		Stage stageCadastroNavio =  new Stage();
+		stageCadastroNavio.setTitle("Cadastro de Navio");
+		stageCadastroNavio.setResizable(false);
+		stageCadastroNavio.initStyle(StageStyle.UTILITY);
+		
+		Scene scene = new Scene(cadastroNavio);
+		
+		stageCadastroNavio.setScene(scene);
+		stageCadastroNavio.showAndWait();		
+		//Tab tabCadastro = new Tab("Cadastro de Navio",cadastroNavioPane);
+		//tabCadastro.setClosable(true);
+		//tabPane.getTabs().add(tabCadastro);
+		//tabPane.getSelectionModel().selectNext();
 
-		Tab tabCadastro = new Tab("Cadastro de Navio",cadastroNavioPane);
-		tabPane.getTabs().add(tabCadastro);
-		tabPane.getSelectionModel().selectNext();
 		
 		//FwBoarding.carregarTelaCadastroNavio();
 		//Para Atualizar a ObservableList itensEncontrados

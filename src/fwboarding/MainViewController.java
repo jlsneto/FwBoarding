@@ -20,6 +20,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
 public class MainViewController implements Initializable {
 
@@ -31,6 +32,8 @@ public class MainViewController implements Initializable {
     private JFXDrawer drawer;
     @FXML
     private Label txtCurrentWindow;
+    
+    private Stage stage;
 
     /**
      * Initializes the controller class.
@@ -100,9 +103,13 @@ public class MainViewController implements Initializable {
 
     }
 
-    private void setNode(Node node) {
+    public void setNode(Node node) {
         holderPane.getChildren().clear();
         holderPane.getChildren().add((Node) node);
+    }
+    
+    public void setStage(Stage stage) {
+    	this.stage = stage;
     }
 
 

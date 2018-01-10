@@ -30,6 +30,7 @@ import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 
 import fwboarding.FwBoarding;
+import fwboarding.MainViewController;
 import helpers.Routes;
 
 public class LoginController implements Initializable {
@@ -50,6 +51,8 @@ public class LoginController implements Initializable {
 
 	private UsuarioDAO usuarioDao = new UsuarioDAO();
 
+	private Stage stage;
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
@@ -63,7 +66,7 @@ public class LoginController implements Initializable {
     	labelStatus.setText("Verificando dados");
     	labelStatus.setVisible(true);
         PauseTransition pauseTransition = new PauseTransition();
-        pauseTransition.setDuration(Duration.millis(2000));
+        pauseTransition.setDuration(Duration.millis(1500));
         pauseTransition.setOnFinished(ev -> {
         	try {
 				completarLogin();
@@ -81,22 +84,28 @@ public class LoginController implements Initializable {
 			 try {
 		            UsuarioVO user=new UsuarioVO();
 		            user.setNomeUsuario(textUsuarioLogin.getText());
+		            
 		            Stage stage = new Stage();
-		            Parent root = FXMLLoader.load(getClass().getResource(Routes.MAINVIEW));
-		            JFXDecorator decorator = new JFXDecorator(stage, root, false, false, true);
-		            decorator.setCustomMaximize(false);
-		            decorator.setBorder(Border.EMPTY);
-
-		            Scene scene = new Scene(decorator);
-		            scene.getStylesheets().add(FwBoarding.class.getResource("../view/styles/styles.css").toExternalForm());
-		            stage.initStyle(StageStyle.UNDECORATED);
+		    		FXMLLoader loader = new FXMLLoader();
+		    		loader.setLocation(getClass().getResource(Routes.MAINVIEW));
+		            Parent root = loader.load();
+		            
+		            MainViewController controller = loader.getController();
+		            controller.setStage(stage);
+		            
+		            Scene scene = new Scene(root);
+		            scene.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
+		            //stage.initStyle(StageStyle.UNDECORATED);
+		            stage.setMaximized(false);
+		            stage.setResizable(false);
 		            stage.setScene(scene);
-
-		            stage.getIcons()
-					.add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
+		            stage.getIcons().add(new Image(getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
+		            stage.setIconified(false);
 		            stage.show();
-		            //Hide login window
-		           buttonConectar.getScene().getWindow().hide();
+		            
+		            //Fechar tela de Login
+		           this.stage.close();
+		           
 		        } catch (IOException ex) {
 		            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
 		        }
@@ -150,6 +159,12 @@ public class LoginController implements Initializable {
 			return null;
 		}
 
+	}
+
+
+	public void setStage(Stage stage) {
+		this.stage = stage;
+		
 	}
 
 }
