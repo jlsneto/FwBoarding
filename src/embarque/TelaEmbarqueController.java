@@ -33,7 +33,6 @@ import model.vo.EmbarqueVO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
 import view.ConstruirDialog;
-import view.FwBoarding;
 
 public class TelaEmbarqueController implements Initializable {
 
@@ -100,7 +99,7 @@ public class TelaEmbarqueController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		carregarTableViewEmbarque();
-		labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
+		//labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
 		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 		comboBoxPaisDestino.setItems(observableListPais);
 	}
