@@ -47,16 +47,16 @@
 
 
 .button.confirm {
-	-fx-background-color: #27ae60;
+	-fx-background-color: #33485d;
 	-fx-text-fill: white;
-	-fx-background-radius: 20.0;
+	-fx-font.font-family: Futura Md
 }
 
 .button.confirm:hover{
-	-fx-background-color: #1abc9c;
+	-fx-background-color: #2d4955;
 }
 .button.confirm:pressed{
-	-fx-background-color: #16a085;
+	-fx-background-color:  #2d4955;
 }
 
 
@@ -64,7 +64,7 @@
 .button.new {
 	-fx-background-color: #2980b9;
 	-fx-text-fill: white;
-	-fx-background-radius: 20.0;
+	-
 	
 }
 
@@ -79,7 +79,7 @@
 .button.edit {
 	-fx-background-color: #f39c12;
 	-fx-text-fill: white;
-	-fx-background-radius: 20.0;
+
 }
 
 .button.edit:hover{
@@ -93,7 +93,7 @@
 .button.cancel {
 	-fx-background-color: #c0392b;
 	-fx-text-fill: white;
-	-fx-background-radius: 20.0;
+	
 }
 
 .button.cancel:hover{
@@ -120,6 +120,7 @@
 .toggle-button2:selected {
   -fx-background-image: url('http://icons.iconarchive.com/icons/aha-soft/desktop-buffet/128/Piece-of-cake-icon.png');
 }
+<<<<<<< HEAD
 */
 .root{
     -fx-background-color: #ffffff;
