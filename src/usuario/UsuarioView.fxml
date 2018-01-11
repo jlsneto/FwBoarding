@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="TelaConsultasAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.ConsultaUsuario">
+<AnchorPane fx:id="TelaConsultasAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.ConsultaUsuario">
    <children>
       <BorderPane fx:id="AnchorPaneBorderPane" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -31,8 +31,6 @@
                   </GridPane>
                   <ButtonBar fx:id="AnchorPaneButtonBar" layoutX="310.0" layoutY="54.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="29.0" prefWidth="253.0">
                      <buttons>
-                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" onAction="#clickOnExcluir" styleClass="cancel" stylesheets="@styles/styles.css" text="Excluir" />
-                        <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" onAction="#clickOnAlterar" styleClass="edit" stylesheets="@styles/styles.css" text="Alterar" />
                       <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@styles/styles.css" text="Incluir" />
                      </buttons>
                   </ButtonBar>
@@ -45,10 +43,10 @@
          <center>
             <TableView fx:id="TableView" onKeyPressed="#onKeyPressed" onMouseClicked="#onMouseClicked" prefHeight="342.0" prefWidth="296.0" BorderPane.alignment="CENTER">
               <columns>
-                  <TableColumn fx:id="TableColumnCodigo" prefWidth="75.0" style="-fx-alignment: center;" text="Codigo" />
-                  <TableColumn fx:id="TableColumnNome" prefWidth="75.0" text="Descrição" />
-                  <TableColumn fx:id="TableColumnGrupo" prefWidth="75.0" style="-fx-alignment: center;" text="Pais de Origem" />
-                  <TableColumn fx:id="columnButton" prefWidth="75.0" text="action" />
+                  <TableColumn fx:id="TableColumnCodigo" prefWidth="110.0" style="-fx-alignment: center;" text="Codigo" />
+                  <TableColumn fx:id="TableColumnNome" prefWidth="124.0" text="Descrição" />
+                  <TableColumn fx:id="TableColumnGrupo" prefWidth="125.0" style="-fx-alignment: center;" text="Pais de Origem" />
+                  <TableColumn fx:id="columnButton" prefWidth="219.0" text="action" />
               </columns>
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

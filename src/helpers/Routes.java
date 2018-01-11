@@ -12,4 +12,5 @@ public class Routes {
     public static String BEMVINDOVIEW = "/fwboarding/BemVindoView.fxml";
     public static String CADASTRONAVIOVIEW = "/navio/CadastroNavioView.fxml";
     public static String CADASTROUSUARIOVIEW = "/usuario/CadastroUsuarioView.fxml";
+    public static String CADASTROGRUPOUSUARIOVIEW = "/grupoUsuario/CadastroGrupoView.fxml";
 }
