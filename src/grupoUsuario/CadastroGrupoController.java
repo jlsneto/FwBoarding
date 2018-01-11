@@ -1,14 +1,15 @@
 package grupoUsuario;
 
+import java.io.IOException;
 import java.net.URL;
-
 import java.util.Optional;
 import java.util.ResourceBundle;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
@@ -19,68 +20,80 @@ import model.dao.GrupoUsuarioDAO;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
 import view.ConstruirDialog;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXTextField;
+
+import helpers.Routes;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
 
 public class CadastroGrupoController implements Initializable {
 
-	@FXML
-	private Label labelCodigoGrupo;
 
-	@FXML
-	private TextField textFieldDescricao;
+    @FXML
+    private AnchorPane anchorPaneCadastroGrupo;
 
-	@FXML
-	private CheckBox checkExibirNavio;
+    @FXML
+    private Label labelCodigoGrupo;
 
-	@FXML
-	private CheckBox checkCadastrarNavio;
+    @FXML
+    private JFXTextField textFieldDescricao;
 
-	@FXML
-	private CheckBox checkAlterarNavio;
+    @FXML
+    private JFXCheckBox checkCadastrarNavio;
 
-	@FXML
-	private CheckBox checkExcluirNavio;
+    @FXML
+    private JFXCheckBox checkAlterarNavio;
 
-	@FXML
-	private CheckBox checkCadastrarUsuario;
+    @FXML
+    private JFXCheckBox checkExibirNavio;
 
-	@FXML
-	private CheckBox checkExibirUsuario;
+    @FXML
+    private JFXCheckBox checkExcluirNavio;
 
-	@FXML
-	private CheckBox checkAlterarUsuario;
+    @FXML
+    private JFXCheckBox checkCadastrarUsuario;
 
-	@FXML
-	private CheckBox checkExcluirUsuario;
+    @FXML
+    private JFXCheckBox checkExibirUsuario;
 
-	@FXML
-	private CheckBox checkIniciarMovimento;
+    @FXML
+    private JFXCheckBox checkAlterarUsuario;
 
-	@FXML
-	private CheckBox checkMonitorarMovimento;
+    @FXML
+    private JFXCheckBox checkExcluirUsuario;
 
-	@FXML
-	private CheckBox checkPausarMovimento;
+    @FXML
+    private JFXCheckBox checkIniciarMovimento;
 
-	@FXML
-	private CheckBox checkCancelarMovimento;
+    @FXML
+    private JFXCheckBox checkMonitorarMovimento;
 
-	@FXML
-	private CheckBox checkExibirEmbarque;
+    @FXML
+    private JFXCheckBox checkPausarMovimento;
 
-	@FXML
-	private CheckBox checkCadastrarEmbarque;
+    @FXML
+    private JFXCheckBox checkCancelarMovimento;
 
-	@FXML
-	private CheckBox checkAlterarEmbarque;
+    @FXML
+    private JFXCheckBox checkCadastrarEmbarque;
 
-	@FXML
-	private CheckBox checkExcluirEmbarque;
+    @FXML
+    private JFXCheckBox checkExibirEmbarque;
 
-	@FXML
-	private Button buttonCancelar;
+    @FXML
+    private JFXCheckBox checkAlterarEmbarque;
 
-	@FXML
-	private Button buttomCadastrar;
+    @FXML
+    private JFXCheckBox checkExcluirEmbarque;
+
+    @FXML
+    private JFXButton buttonCancelar;
+
+    @FXML
+    private JFXButton buttomCadastrar;
 
 	private final GrupoUsuarioDAO grupoUsuarioDAO = new GrupoUsuarioDAO();
 	public static boolean isAlterarGrupo;
@@ -180,7 +193,8 @@ public class CadastroGrupoController implements Initializable {
 						.equals(grupoUsuarioDAO.retornaDescricaoGrupoUsuario(grupoUsuario.getDescricaoGrupo()))) {
 					ConsultaGrupoUsuarioController.observableListGrupo.addAll(grupoUsuario);
 				}
-				dialogStage.close();
+				//dialogStage.close();
+				chamarConsultaGrupo();
 			} else {
 				grupoUsuarioAlterar.setDescricaoGrupo(textFieldDescricao.getText());
 				if (checkCadastrarNavio.isSelected()) {
@@ -267,7 +281,8 @@ public class CadastroGrupoController implements Initializable {
 				ConsultaGrupoUsuarioController.itensEncontrados.set(
 						ConsultaGrupoUsuarioController.itensEncontrados.indexOf(grupoUsuarioAlterar),
 						grupoUsuarioAlterar);
-				dialogStage.close();
+				//dialogStage.close();
+				chamarConsultaGrupo();
 			}
 		}
 	}
@@ -275,7 +290,7 @@ public class CadastroGrupoController implements Initializable {
 	@FXML
 	void clickOnCancelar(ActionEvent event) {
 		if (confirmouCancelamentoOuFehamento()) {
-			dialogStage.close();
+			chamarConsultaGrupo();
 
 		}
 	}
@@ -327,7 +342,6 @@ public class CadastroGrupoController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		// BUG ESCROTO DO CARALHO
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioDAO.verificaUltimoCodigo() + 1));
 
 	}
@@ -344,8 +358,8 @@ public class CadastroGrupoController implements Initializable {
 		});
 	}
 
-	public void setGrupoUsuarioAlterar(GrupoUsuarioVO[] args) {
-		this.grupoUsuarioAlterar = args[0];
+	public void setGrupoUsuarioAlterar(GrupoUsuarioVO grupoUsuario) {
+		this.grupoUsuarioAlterar = grupoUsuario;
 		labelCodigoGrupo.setText(Long.toString(grupoUsuarioAlterar.getCodigoGrupo()));
 		textFieldDescricao.setText(grupoUsuarioAlterar.getDescricaoGrupo());
 		//CORRIGIDO
@@ -399,6 +413,20 @@ public class CadastroGrupoController implements Initializable {
 		}
 
 		buttomCadastrar.setText("Aplicar");
+	}
+	
+	private void chamarConsultaGrupo() {
+		AnchorPane parent = (AnchorPane) anchorPaneCadastroGrupo.getParent();
+		parent.getChildren().clear();
+		AnchorPane telaGrupoUsuario;
+		try {
+			telaGrupoUsuario = FXMLLoader.load(getClass().getResource(Routes.GRUPOUSUARIOVIEW));
+			parent.getChildren().add((Node) telaGrupoUsuario);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

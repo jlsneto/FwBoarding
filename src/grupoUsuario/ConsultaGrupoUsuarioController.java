@@ -6,12 +6,17 @@ import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXButton;
+
 import fwboarding.FwBoarding;
+import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -19,17 +24,24 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import model.vo.GrupoUsuarioVO;
 import model.vo.NavioVO;
+import usuario.CadastroUsuarioController;
 import view.ConstruirDialog;
 import model.dao.GrupoUsuarioDAO;
 
 public class ConsultaGrupoUsuarioController implements Initializable {
 
+	@FXML
+	private AnchorPane anchorPaneGrupoUsuario;
+	
 	@FXML
 	private Button ButtonIncluir;
 
@@ -87,7 +99,13 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 
 		if (selectedIndex >= 0) {
 			CadastroGrupoController.isAlterarGrupo = true;
-			FwBoarding.carregarTelaCadastroGrupoUsuario(grupoUsuario);
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource(Routes.CADASTROGRUPOUSUARIOVIEW));
+			
+			AnchorPane cadastroGrupoUsuario = loader.load();
+			CadastroGrupoController controller = loader.getController();
+			controller.setGrupoUsuarioAlterar(grupoUsuario);
+			setNode(cadastroGrupoUsuario);
 
 		} else {
 			// Nada selecionado.
@@ -125,9 +143,10 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	void clickOnIncluir() throws IOException {
 
 		CadastroGrupoController.isAlterarGrupo = false;
-		FwBoarding.carregarTelaCadastroGrupoUsuario();
+		AnchorPane cadastroGrupoUsuario = FXMLLoader.load(getClass().getResource(Routes.CADASTROGRUPOUSUARIOVIEW));
+		setNode(cadastroGrupoUsuario);
 		// Para Atualizar a ObservableList itensEncontrados
-		clickOnPesquisar();
+		//clickOnPesquisar();
 	}
 
 	@FXML
@@ -136,7 +155,12 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 		for (GrupoUsuarioVO itens : observableListGrupo) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
-			Button buttonExcluir = new Button("Excluir");
+			btnBar.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
+			
+			Image excluirIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/excluirIcon.png"));
+			//button excluir
+			JFXButton buttonExcluir = new JFXButton();
+			buttonExcluir.setGraphic(new ImageView(excluirIcon));
 			buttonExcluir.setOnAction(event -> {
 				try {
 					TableGrupoUsuario.getSelectionModel().select(itens);
@@ -147,7 +171,10 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 				}
 			});
 
-			Button buttonEdit = new Button("Editar");
+			Image editarIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/editarIcon.png"));
+			//button editar
+			JFXButton buttonEdit = new JFXButton();
+			buttonEdit.setGraphic(new ImageView(editarIcon));
 			buttonEdit.setOnAction(event -> {
 				try {
 					TableGrupoUsuario.getSelectionModel().select(itens);
@@ -199,5 +226,10 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 				clickOnAlterar();
 			}
 		}
+    }
+    
+    public void setNode(Node node) {
+    	anchorPaneGrupoUsuario.getChildren().clear();
+    	anchorPaneGrupoUsuario.getChildren().add((Node) node);
     }
 }

@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grupoUsuario.ConsultaGrupoUsuarioController">
+<AnchorPane fx:id="anchorPaneGrupoUsuario" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="grupoUsuario.ConsultaGrupoUsuarioController">
    <children>
       <BorderPane layoutX="14.0" layoutY="14.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
@@ -21,8 +21,6 @@
                   <ButtonBar layoutX="310.0" layoutY="11.0" prefHeight="29.0" prefWidth="253.0">
                     <buttons>
                       <Button fx:id="ButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@styles/styles.css" text="Incluir" />
-                        <Button fx:id="ButtonAlterar" layoutX="135.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickOnAlterar" styleClass="edit" stylesheets="@styles/styles.css" text="Alterar" />
-                        <Button fx:id="ButtonExcluir" layoutX="50.0" layoutY="18.0" mnemonicParsing="false" onAction="#clickOnExcluir" styleClass="cancel" stylesheets="@styles/styles.css" text="Excluir" />
                     </buttons>
                   </ButtonBar>
                   <TextField fx:id="textFieldPesquisar" layoutX="6.0" layoutY="13.0" onKeyReleased="#onKeyPressed" prefHeight="25.0" prefWidth="177.0" promptText="Pesquisar" />
