@@ -1,5 +1,6 @@
 package navio;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.Optional;
@@ -7,12 +8,18 @@ import java.util.ResourceBundle;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXTextField;
 import com.sun.javafx.scene.control.skin.ComboBoxListViewSkin;
 
+import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
@@ -20,6 +27,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.NavioDAO;
@@ -34,28 +42,30 @@ public class CadastroNavioController implements Initializable {
 	private GridPane gridPane;
 
 	@FXML
-	private TextField textFieldCodigo;
+	private JFXTextField textFieldCodigo;
 
 	@FXML
 	private Label labelErro;
 	@FXML
-	private TextField textFieldDescricao;
+	private JFXTextField textFieldDescricao;
 
 	@FXML
 	private Label labelCodigo;
 
 	@FXML
-	private Button buttonCadastrar;
+	private JFXButton buttonGravar;
 
 	@FXML
-	private ComboBox<PaisVO> comboBoxPaisOrigem;
+	private JFXComboBox<PaisVO> comboBoxPaisOrigem;
 
 	@FXML
-	private ComboBox<Integer> comboBoxQuantidadePorao;
+	private JFXComboBox<Integer> comboBoxQuantidadePorao;
 
 	@FXML
-	private TextField textFieldCapacidadePorao;
-
+	private JFXTextField textFieldCapacidadePorao;
+	
+	@FXML
+	private AnchorPane anchorPaneCadastroNavio;
 	private ObservableList<PaisVO> observableListPais;
 
 	private final PaisDAO paisDAO = new PaisDAO();
@@ -82,9 +92,25 @@ public class CadastroNavioController implements Initializable {
 	@FXML
 	public void clickOnCancelar() {
 		if (confirmouCancelamentoOuFehamento()) {
-			dialogStage.close();
+			chamarConsultaNavio();
+			
 
 		}
+	}
+
+	private void chamarConsultaNavio() {
+		AnchorPane parent = (AnchorPane) anchorPaneCadastroNavio.getParent();
+		parent.getChildren().clear();
+		AnchorPane telaNavio;
+		try {
+			telaNavio = FXMLLoader.load(getClass().getResource(Routes.NAVIOVIEW));
+			parent.getChildren().add((Node) telaNavio);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 
 	@FXML
@@ -104,7 +130,7 @@ public class CadastroNavioController implements Initializable {
 					ConsultasNavioController.observableListNavio.addAll(navio);
 				}
 				// fechar dialog
-				dialogStage.close();
+				chamarConsultaNavio();
 			} else {
 				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
 				navioAlterar.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
@@ -113,7 +139,7 @@ public class CadastroNavioController implements Initializable {
 				navioDAO.alterar(navioAlterar);
 				ConsultasNavioController.itensEncontrados
 						.set(ConsultasNavioController.itensEncontrados.indexOf(navioAlterar), navioAlterar);
-				dialogStage.close();
+				chamarConsultaNavio();
 			}
 
 		}
@@ -147,8 +173,8 @@ public class CadastroNavioController implements Initializable {
 		        	}else if(comboBoxQuantidadePorao.isFocused()) {
 		        		textFieldCapacidadePorao.requestFocus();
 		        	}else if(textFieldCapacidadePorao.isFocused()){
-		        		buttonCadastrar.requestFocus();
-		        	}else if(buttonCadastrar.isFocused()) {
+		        		buttonGravar.requestFocus();
+		        	}else if(buttonGravar.isFocused()) {
 		        		clickOnCadastrar();
 		        	}
 		        }
@@ -226,15 +252,17 @@ public class CadastroNavioController implements Initializable {
 		}
 	}
 
-	public void setNavioAlterar(NavioVO[] args) {
-		this.navioAlterar = args[0];
-		labelCodigo.setText(Long.toString(navioAlterar.getCodigoNavio()));
-		textFieldDescricao.setText(navioAlterar.getDescricaoNavio());
-		comboBoxPaisOrigem.getSelectionModel().select(navioAlterar.getPais());
+	public void setNavioAlterar(NavioVO navio) {
+		this.navioAlterar = navio;
+
+		labelCodigo.setText(Long.toString(navio.getCodigoNavio()));
+		textFieldDescricao.setText(navio.getDescricaoNavio());
+		//consertar ComboBox
+		comboBoxPaisOrigem.getSelectionModel().select(navio.getPais());
 		//comboBoxQuantidadePorao.getSelectionModel().select((Integer) navioAlterar.getQtdPorao());
-		comboBoxQuantidadePorao.setValue(navioAlterar.getQtdPorao());
-		textFieldCapacidadePorao.setText(Double.toString(navioAlterar.getCapacidadePorao()));
-		buttonCadastrar.setText("Aplicar");
+		comboBoxQuantidadePorao.setValue(navio.getQtdPorao());
+		textFieldCapacidadePorao.setText(Double.toString(navio.getCapacidadePorao()));
+		buttonGravar.setText("Aplicar");
 	}
 
 }

@@ -11,12 +11,14 @@ import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
 import fwboarding.FwBoarding;
+import fwboarding.MainViewController;
 import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -32,6 +34,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.dao.NavioDAO;
@@ -65,6 +68,9 @@ public class ConsultasNavioController implements Initializable {
     
     @FXML
     private JFXTabPane tabPane;
+    
+    @FXML
+    private AnchorPane anchorPaneNavio;
 
 	public static ObservableList<NavioVO> observableListNavio;
 
@@ -74,7 +80,7 @@ public class ConsultasNavioController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		setNode(tabPane);
 		carregarTableViewNavio();
 
 	}
@@ -119,15 +125,19 @@ public class ConsultasNavioController implements Initializable {
 	public void clickOnIncluir() throws IOException {
 
 		CadastroNavioController.isAlterarNavio = false;
-		
+		AnchorPane cadastroNavio = FXMLLoader.load(getClass().getResource(Routes.CADASTRONAVIOVIEW));
+		setNode(cadastroNavio);
+		/*
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Routes.CADASTRONAVIOVIEW));
 		AnchorPane cadastroNavio = loader.load();
 		
 		Stage stageCadastroNavio =  new Stage();
 		stageCadastroNavio.setTitle("Cadastro de Navio");
+		stageCadastroNavio.initModality(Modality.WINDOW_MODAL);
+		stageCadastroNavio.initOwner(MainViewController.stage);
+		//stageCadastroNavio.initStyle(StageStyle.UTILITY);
 		stageCadastroNavio.setResizable(false);
-		stageCadastroNavio.initStyle(StageStyle.UTILITY);
 		
 		Scene scene = new Scene(cadastroNavio);
 		
@@ -142,6 +152,7 @@ public class ConsultasNavioController implements Initializable {
 		//FwBoarding.carregarTelaCadastroNavio();
 		//Para Atualizar a ObservableList itensEncontrados
 		//clickOnPesquisar();
+		 */
 	}
 
 	@FXML
@@ -151,8 +162,15 @@ public class ConsultasNavioController implements Initializable {
 		NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource(Routes.CADASTRONAVIOVIEW));
 			CadastroNavioController.isAlterarNavio = true;
-			FwBoarding.carregarTelaCadastroNavio(navio);
+			
+			
+			AnchorPane cadastroNavio = loader.load();
+			CadastroNavioController controller = loader.getController();
+			controller.setNavioAlterar(navio);
+			setNode(cadastroNavio);
 
 		} else {
 			// Nada selecionado.
@@ -241,4 +259,9 @@ public class ConsultasNavioController implements Initializable {
 		}
 		TableColumnNavio.setItems(itensEncontrados);
 	}	
+    public void setNode(Node node) {
+        anchorPaneNavio.getChildren().clear();
+        anchorPaneNavio.getChildren().add((Node) node);
+    }
+    
 }

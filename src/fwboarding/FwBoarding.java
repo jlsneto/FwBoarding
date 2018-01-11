@@ -158,7 +158,7 @@ public class FwBoarding extends Application {
 
 			if (CadastroNavioController.isAlterarNavio) {
 				dialogStage.setTitle("Alteração de Navio");
-				controller.setNavioAlterar(args);
+			//	controller.setNavioAlterar(args);
 			}
 
 			Scene scene = new Scene(page);

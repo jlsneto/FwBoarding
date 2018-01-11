@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
+import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 
 import helpers.Routes;
 import fwboarding.MainViewController;
@@ -33,7 +34,8 @@ public class MainViewController implements Initializable {
     @FXML
     private Label txtCurrentWindow;
     
-    private Stage stage;
+    private HamburgerBasicCloseTransition transitionHamburguer;
+    public static Stage stage;
 
     /**
      * Initializes the controller class.
@@ -44,19 +46,22 @@ public class MainViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        
-        HamburgerBackArrowBasicTransition transition = new HamburgerBackArrowBasicTransition(hamburger);
+    	final HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
         transition.setRate(-1);
+        
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
-            transition.setRate(transition.getRate() * -1);
-            transition.play();
-
-            if (drawer.isShown()) {
-                drawer.close();
-            } else {
-                drawer.open();
-            }
-
+        	if(e.getClickCount() == 1) {
+        		transition.setRate(transition.getRate() * -1);
+        		 //System.out.println(this.transitionHamburguer.getStatus());
+                transition.play();
+                if (drawer.isShown()) {
+                    drawer.close();
+                } else {
+                    drawer.open();
+                }
+        	}
         });
+        
         try {
             VBox sidePane = FXMLLoader.load(getClass().getResource(Routes.MENULATERALVIEW));
             AnchorPane navioPane = FXMLLoader.load(getClass().getResource(Routes.NAVIOVIEW));
@@ -70,13 +75,15 @@ public class MainViewController implements Initializable {
             for (Node node : sidePane.getChildren()) {
                 if (node.getAccessibleText() != null) {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
+                    	transition.setRate(transition.getRate()*(-1.0));
+                        transition.play();
                         switch (node.getAccessibleText()) {
                             case "inicioMenu":
                                 drawer.close();
                                 setNode(bemVindoPane);
                                 break;
                             case "navioMenu":
-                                drawer.close();                               
+                                drawer.close();
                                 setNode(navioPane);
                                 break;
                             case "usuarioMenu":
@@ -111,6 +118,9 @@ public class MainViewController implements Initializable {
     public void setStage(Stage stage) {
     	this.stage = stage;
     }
-
+    
+    public Stage getStage() {
+    	return this.stage;
+    }
 
 }
