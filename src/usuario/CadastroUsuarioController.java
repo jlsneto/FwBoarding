@@ -7,10 +7,12 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import fwboarding.FwBoarding;
+import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -19,6 +21,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import model.dao.GrupoUsuarioDAO;
@@ -46,6 +49,9 @@ public class CadastroUsuarioController implements Initializable {
 
 	@FXML
 	private Button buttonCadastrar;
+	
+    @FXML
+    private AnchorPane anchorPaneCadastroUsuario;
 
 	private UsuarioVO usuarioAlterar;
 
@@ -77,8 +83,8 @@ public class CadastroUsuarioController implements Initializable {
 	private void onKeyPressed(Event event) {
 	}
 
-	public void setUsuarioAlterar(UsuarioVO[] args) {
-		this.usuarioAlterar = args[0];
+	public void setUsuarioAlterar(UsuarioVO usuario) {
+		this.usuarioAlterar = usuario;
 		labelCodigo.setText(Long.toString(usuarioAlterar.getCodigoUsuario()));
 		textFieldUsuario.setText(usuarioAlterar.getNomeUsuario());
 		comboBoxGrupoUsuario.getSelectionModel().select(usuarioAlterar.getGrupoUsuario());
@@ -101,7 +107,7 @@ public class CadastroUsuarioController implements Initializable {
 	@FXML
 	public void clickOnCancelar() {
 		if (confirmouCancelamentoOuFehamento()) {
-			dialogStage.close();
+			chamarConsultaUsuario();
 
 		}
 	}
@@ -126,17 +132,20 @@ public class CadastroUsuarioController implements Initializable {
 					ConsultaUsuario.observableListUsuario.addAll(usuario);
 				}
 				// fechar dialog
-				dialogStage.close();
+				//dialogStage.close();
+				chamarConsultaUsuario();
 			} else {
 				usuarioAlterar.setNomeUsuario(textFieldUsuario.getText());
 				usuarioAlterar.setGrupoUsuario(comboBoxGrupoUsuario.getSelectionModel().getSelectedItem());
 				usuarioDAO.alterar(usuarioAlterar);
 				ConsultaUsuario.itensEncontrados.set(ConsultaUsuario.itensEncontrados.indexOf(usuarioAlterar),
 						usuarioAlterar);
-				dialogStage.close();
+				//dialogStage.close();
+				chamarConsultaUsuario();
 			}
 
 		}
+		chamarConsultaUsuario();
 
 	}
 
@@ -197,6 +206,20 @@ public class CadastroUsuarioController implements Initializable {
 		// byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
 
 		return new String(cipherText);
+	}
+	
+	private void chamarConsultaUsuario() {
+		AnchorPane parent = (AnchorPane) anchorPaneCadastroUsuario.getParent();
+		parent.getChildren().clear();
+		AnchorPane telaUsuario;
+		try {
+			telaUsuario = FXMLLoader.load(getClass().getResource(Routes.USUARIOVIEW));
+			parent.getChildren().add((Node) telaUsuario);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

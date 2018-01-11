@@ -7,12 +7,17 @@ import java.util.ResourceBundle;
 
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
+import com.jfoenix.controls.JFXButton;
+
 import fwboarding.FwBoarding;
+import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
@@ -20,6 +25,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
@@ -30,6 +37,7 @@ import model.dao.NavioDAO;
 import model.dao.UsuarioDAO;
 import model.vo.NavioVO;
 import model.vo.UsuarioVO;
+import navio.CadastroNavioController;
 import view.ConstruirDialog;
 
 public class ConsultaUsuario implements Initializable {
@@ -82,9 +90,10 @@ public class ConsultaUsuario implements Initializable {
 	public void clickOnIncluir() throws IOException {
 
 		CadastroUsuarioController.isAlterarUsuario = false;
-		FwBoarding.carregarTelaCadastroUsuario();
+		AnchorPane cadastroUsuario = FXMLLoader.load(getClass().getResource(Routes.CADASTROUSUARIOVIEW));
+		setNode(cadastroUsuario);
 		// Para Atualizar a ObservableList itensEncontrados
-		clickOnPesquisar();
+		//clickOnPesquisar();
 	}
 
 	@FXML
@@ -94,8 +103,14 @@ public class ConsultaUsuario implements Initializable {
 		UsuarioVO usuario = TableView.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource(Routes.CADASTROUSUARIOVIEW));
 			CadastroUsuarioController.isAlterarUsuario = true;
-			FwBoarding.carregarTelaCadastroUsuario(usuario);
+			
+			AnchorPane cadastroUsuario = loader.load();
+			CadastroUsuarioController controller = loader.getController();
+			controller.setUsuarioAlterar(usuario);
+			setNode(cadastroUsuario);
 
 		} else {
 			// Nada selecionado.
@@ -185,7 +200,12 @@ public class ConsultaUsuario implements Initializable {
 		for (UsuarioVO itens : observableListUsuario) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
-			Button buttonExcluir = new Button("Excluir");
+			btnBar.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
+			
+			Image excluirIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/excluirIcon.png"));
+			//button excluir
+			JFXButton buttonExcluir = new JFXButton();
+			buttonExcluir.setGraphic(new ImageView(excluirIcon));
 			buttonExcluir.setOnAction(event -> {
 				try {
 					TableView.getSelectionModel().select(itens);
@@ -196,7 +216,10 @@ public class ConsultaUsuario implements Initializable {
 				}
 			});
 
-			Button buttonEdit = new Button("Editar");
+			Image editarIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/editarIcon.png"));
+			//button editar
+			JFXButton buttonEdit = new JFXButton();
+			buttonEdit.setGraphic(new ImageView(editarIcon));
 			buttonEdit.setOnAction(event -> {
 				try {
 					TableView.getSelectionModel().select(itens);
@@ -213,5 +236,9 @@ public class ConsultaUsuario implements Initializable {
 		}
 		TableView.setItems(itensEncontrados);
 	}
-
+	public void setNode(Node node) {
+		TelaConsultasAnchorPane.getChildren().clear();
+		TelaConsultasAnchorPane.getChildren().add((Node) node);
+    }
+	
 }

@@ -98,10 +98,10 @@ public class TelaEmbarqueController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		carregarTableViewEmbarque();
+		//carregarTableViewEmbarque();
 		//labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
-		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
-		comboBoxPaisDestino.setItems(observableListPais);
+		//observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
+		//comboBoxPaisDestino.setItems(observableListPais);
 	}
 
 	public void carregarTableViewEmbarque() {

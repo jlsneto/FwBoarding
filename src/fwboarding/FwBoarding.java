@@ -263,7 +263,7 @@ public class FwBoarding extends Application {
 		
 		if (CadastroUsuarioController.isAlterarUsuario) {
 			dialogStage.setTitle("Alteração de usuario");
-			controller.setUsuarioAlterar(args);
+			//controller.setUsuarioAlterar(args);
 		}
 
 		Scene scene = new Scene(page);
@@ -274,7 +274,7 @@ public class FwBoarding extends Application {
 	public static String carregarDialogCadastroSenha(Stage stage) throws IOException {
 
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(FwBoarding.class.getResource("/view/DialogCadastroSenha.fxml"));
+		loader.setLocation(FwBoarding.class.getResource("/usuario/DialogCadastroSenha.fxml"));
 		VBox page = (VBox) loader.load();
 
 		Stage dialogStage = new Stage();
