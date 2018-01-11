@@ -44,7 +44,6 @@ import view.ConstruirDialog;
 
 public class ConsultasNavioController implements Initializable {
 
-
 	@FXML
 	private TableView<NavioVO> TableColumnNavio;
 
@@ -56,21 +55,21 @@ public class ConsultasNavioController implements Initializable {
 
 	@FXML
 	private TableColumn<PaisVO, String> TableColumnNavioPais;
-	
+
 	@FXML
 	private TableColumn<Button, String> columnButton;
-    
-    @FXML
-    private JFXTextField textFieldPesquisar;
 
-    @FXML
-    private JFXButton buttonAdd;
-    
-    @FXML
-    private JFXTabPane tabPane;
-    
-    @FXML
-    private AnchorPane anchorPaneNavio;
+	@FXML
+	private JFXTextField textFieldPesquisar;
+
+	@FXML
+	private JFXButton buttonAdd;
+
+	@FXML
+	private JFXTabPane tabPane;
+
+	@FXML
+	private AnchorPane anchorPaneNavio;
 
 	public static ObservableList<NavioVO> observableListNavio;
 
@@ -91,24 +90,25 @@ public class ConsultasNavioController implements Initializable {
 		TableColumnNavioDescricao.setCellValueFactory(new PropertyValueFactory<>("descricaoNavio"));
 		TableColumnNavioPais.setCellValueFactory(new PropertyValueFactory<>("pais"));
 		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
-		
 
 		observableListNavio = FXCollections.observableArrayList(navioDAO.listar());
 		TableColumnNavio.setItems(observableListNavio);
-		
+
 		clickOnPesquisar();
 
 	}
 
 	@FXML
-	public void onKeyPressed(KeyEvent event) throws IOException {
+	private void onKeyPressed(KeyEvent event) throws Exception {
 		int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
 		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
 			clickOnAlterar();
-		}
-		else if(event.getCode().isLetterKey() || event.getCode().isWhitespaceKey() || event.getCode().equals(KeyCode.BACK_SPACE) ) {
-			//System.out.println(event.getCode().getName());
+		} else if (event.getCode().isLetterKey() || event.getCode().isWhitespaceKey()
+				|| event.getCode().equals(KeyCode.BACK_SPACE)) {
+			// System.out.println(event.getCode().getName());
 			clickOnPesquisar();
+		} else if (event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
+			clickOnExcluir();
 		}
 	}
 
@@ -127,31 +127,30 @@ public class ConsultasNavioController implements Initializable {
 		CadastroNavioController.isAlterarNavio = false;
 		AnchorPane cadastroNavio = FXMLLoader.load(getClass().getResource(Routes.CADASTRONAVIOVIEW));
 		setNode(cadastroNavio);
+		clickOnPesquisar();
 		/*
-		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource(Routes.CADASTRONAVIOVIEW));
-		AnchorPane cadastroNavio = loader.load();
-		
-		Stage stageCadastroNavio =  new Stage();
-		stageCadastroNavio.setTitle("Cadastro de Navio");
-		stageCadastroNavio.initModality(Modality.WINDOW_MODAL);
-		stageCadastroNavio.initOwner(MainViewController.stage);
-		//stageCadastroNavio.initStyle(StageStyle.UTILITY);
-		stageCadastroNavio.setResizable(false);
-		
-		Scene scene = new Scene(cadastroNavio);
-		
-		stageCadastroNavio.setScene(scene);
-		stageCadastroNavio.showAndWait();		
-		//Tab tabCadastro = new Tab("Cadastro de Navio",cadastroNavioPane);
-		//tabCadastro.setClosable(true);
-		//tabPane.getTabs().add(tabCadastro);
-		//tabPane.getSelectionModel().selectNext();
-
-		
-		//FwBoarding.carregarTelaCadastroNavio();
-		//Para Atualizar a ObservableList itensEncontrados
-		//clickOnPesquisar();
+		 * FXMLLoader loader = new FXMLLoader();
+		 * loader.setLocation(getClass().getResource(Routes.CADASTRONAVIOVIEW));
+		 * AnchorPane cadastroNavio = loader.load();
+		 * 
+		 * Stage stageCadastroNavio = new Stage();
+		 * stageCadastroNavio.setTitle("Cadastro de Navio");
+		 * stageCadastroNavio.initModality(Modality.WINDOW_MODAL);
+		 * stageCadastroNavio.initOwner(MainViewController.stage);
+		 * //stageCadastroNavio.initStyle(StageStyle.UTILITY);
+		 * stageCadastroNavio.setResizable(false);
+		 * 
+		 * Scene scene = new Scene(cadastroNavio);
+		 * 
+		 * stageCadastroNavio.setScene(scene); stageCadastroNavio.showAndWait(); //Tab
+		 * tabCadastro = new Tab("Cadastro de Navio",cadastroNavioPane);
+		 * //tabCadastro.setClosable(true); //tabPane.getTabs().add(tabCadastro);
+		 * //tabPane.getSelectionModel().selectNext();
+		 * 
+		 * 
+		 * //FwBoarding.carregarTelaCadastroNavio(); //Para Atualizar a ObservableList
+		 * itensEncontrados
+		 * 
 		 */
 	}
 
@@ -165,8 +164,7 @@ public class ConsultasNavioController implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource(Routes.CADASTRONAVIOVIEW));
 			CadastroNavioController.isAlterarNavio = true;
-			
-			
+
 			AnchorPane cadastroNavio = loader.load();
 			CadastroNavioController controller = loader.getController();
 			controller.setNavioAlterar(navio);
@@ -177,7 +175,7 @@ public class ConsultasNavioController implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
 		}
-		//Para Atualizar a ObservableList itensEncontrados
+		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
 	}
 
@@ -191,7 +189,7 @@ public class ConsultasNavioController implements Initializable {
 			if (confirmouExcluisaoDoNavio(navio.getDescricaoNavio().toString())) {
 				navioDAO.deletar(navio.getCodigoNavio());
 				navioDAO.verificarSeFoiNavioExcluido(navio.getCodigoNavio());
-				//TableColumnNavio.getItems().remove(selectedIndex);
+				// TableColumnNavio.getItems().remove(selectedIndex);
 				observableListNavio.remove(navio);
 			}
 
@@ -200,7 +198,7 @@ public class ConsultasNavioController implements Initializable {
 			ConstruirDialog alerta = new ConstruirDialog();
 			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
 		}
-		//Para Atualizar a ObservableList itensEncontrados
+		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
 	}
 
@@ -218,17 +216,17 @@ public class ConsultasNavioController implements Initializable {
 	@FXML
 	private void clickOnPesquisar() {
 		itensEncontrados = FXCollections.observableArrayList();
-		//adicionar button para cada navio 
-		for (NavioVO itens: observableListNavio) {
+		// adicionar button para cada navio
+		for (NavioVO itens : observableListNavio) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
 			btnBar.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
-			
+
 			Image excluirIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/excluirIcon.png"));
-			//button excluir
+			// button excluir
 			JFXButton buttonExcluir = new JFXButton();
 			buttonExcluir.setGraphic(new ImageView(excluirIcon));
-			
+
 			buttonExcluir.setOnAction(event -> {
 				try {
 					TableColumnNavio.getSelectionModel().select(itens);
@@ -238,9 +236,9 @@ public class ConsultasNavioController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			
+
 			Image editarIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/editarIcon.png"));
-			//button editar
+			// button editar
 			JFXButton buttonEdit = new JFXButton();
 			buttonEdit.setGraphic(new ImageView(editarIcon));
 			buttonEdit.setOnAction(event -> {
@@ -258,10 +256,11 @@ public class ConsultasNavioController implements Initializable {
 			}
 		}
 		TableColumnNavio.setItems(itensEncontrados);
-	}	
-    public void setNode(Node node) {
-        anchorPaneNavio.getChildren().clear();
-        anchorPaneNavio.getChildren().add((Node) node);
-    }
-    
+	}
+
+	public void setNode(Node node) {
+		anchorPaneNavio.getChildren().clear();
+		anchorPaneNavio.getChildren().add((Node) node);
+	}
+
 }

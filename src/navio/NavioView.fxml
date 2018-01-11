@@ -27,8 +27,8 @@
                            <columns>
                               <TableColumn fx:id="TableColumnNavioCodigo" prefWidth="125.0" styleClass="tableView" text="Código" visible="false" />
                               <TableColumn fx:id="TableColumnNavioDescricao" prefWidth="91.0" styleClass="tableView" text="Descrição" />
-                              <TableColumn fx:id="TableColumnNavioPais" prefWidth="75.0" text="Pais" />
-                              <TableColumn fx:id="columnButton" prefWidth="75.0" text="Ação" />
+                              <TableColumn fx:id="TableColumnNavioPais" prefWidth="313.0" text="Pais" />
+                              <TableColumn fx:id="columnButton" editable="false" prefWidth="200.0" resizable="false" sortable="false" text="Ação" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -45,7 +45,7 @@
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                  </rowConstraints>
                                  <children>
-                                    <JFXTextField fx:id="textFieldPesquisar" onAction="#clickOnPesquisar" prefHeight="30.0" prefWidth="126.0" promptText="Pesquisar Navio" GridPane.columnIndex="1">
+                                    <JFXTextField fx:id="textFieldPesquisar" onKeyReleased="#onKeyPressed" prefHeight="30.0" prefWidth="126.0" promptText="Pesquisar Navio" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>

@@ -12,13 +12,20 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="TelaConsultasAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.ConsultaUsuario">
+<AnchorPane fx:id="TelaConsultasAnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.ConsultaUsuario">
    <children>
       <BorderPane fx:id="AnchorPaneBorderPane" layoutX="200.0" layoutY="100.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
          <top>
             <Pane prefHeight="91.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <GridPane layoutX="14.0" layoutY="54.0" prefHeight="30.0" prefWidth="188.0">
+                  <ButtonBar fx:id="AnchorPaneButtonBar" layoutX="310.0" layoutY="54.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="29.0" prefWidth="253.0">
+                     <buttons>
+                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" onAction="#clickOnExcluir" styleClass="cancel" stylesheets="@styles/styles.css" text="Excluir" />
+                        <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" onAction="#clickOnAlterar" styleClass="edit" stylesheets="@styles/styles.css" text="Alterar" />
+                      <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@styles/styles.css" text="Incluir" />
+                     </buttons>
+                  </ButtonBar>
+                  <GridPane layoutX="14.0" layoutY="33.0" prefHeight="51.0" prefWidth="188.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                     </columnConstraints>
@@ -29,13 +36,6 @@
                         <TextField fx:id="textFieldPesquisar" onKeyReleased="#onKeyPressed" prefHeight="25.0" prefWidth="177.0" promptText="Pesquisar" />
                      </children>
                   </GridPane>
-                  <ButtonBar fx:id="AnchorPaneButtonBar" layoutX="310.0" layoutY="54.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="29.0" prefWidth="253.0">
-                     <buttons>
-                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" onAction="#clickOnExcluir" styleClass="cancel" stylesheets="@styles/styles.css" text="Excluir" />
-                        <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" onAction="#clickOnAlterar" styleClass="edit" stylesheets="@styles/styles.css" text="Alterar" />
-                      <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@styles/styles.css" text="Incluir" />
-                     </buttons>
-                  </ButtonBar>
                </children>
             </Pane>
          </top>

@@ -93,7 +93,7 @@ public class ConsultaUsuario implements Initializable {
 		AnchorPane cadastroUsuario = FXMLLoader.load(getClass().getResource(Routes.CADASTROUSUARIOVIEW));
 		setNode(cadastroUsuario);
 		// Para Atualizar a ObservableList itensEncontrados
-		//clickOnPesquisar();
+		// clickOnPesquisar();
 	}
 
 	@FXML
@@ -106,7 +106,7 @@ public class ConsultaUsuario implements Initializable {
 			FXMLLoader loader = new FXMLLoader();
 			loader.setLocation(getClass().getResource(Routes.CADASTROUSUARIOVIEW));
 			CadastroUsuarioController.isAlterarUsuario = true;
-			
+
 			AnchorPane cadastroUsuario = loader.load();
 			CadastroUsuarioController controller = loader.getController();
 			controller.setUsuarioAlterar(usuario);
@@ -123,7 +123,7 @@ public class ConsultaUsuario implements Initializable {
 
 	@FXML
 	public void clickOnExcluir() throws Exception {
-		
+
 		int selectedIndex = TableView.getSelectionModel().getSelectedIndex();
 
 		UsuarioVO usuario = TableView.getSelectionModel().getSelectedItem();
@@ -195,15 +195,16 @@ public class ConsultaUsuario implements Initializable {
 
 	@FXML
 	private void clickOnPesquisar() {
-		
+
 		itensEncontrados = FXCollections.observableArrayList();
 		for (UsuarioVO itens : observableListUsuario) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
+			//btnBar.setNodeOrientation(orientation);
 			btnBar.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
-			
+
 			Image excluirIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/excluirIcon.png"));
-			//button excluir
+			// button excluir
 			JFXButton buttonExcluir = new JFXButton();
 			buttonExcluir.setGraphic(new ImageView(excluirIcon));
 			buttonExcluir.setOnAction(event -> {
@@ -217,7 +218,7 @@ public class ConsultaUsuario implements Initializable {
 			});
 
 			Image editarIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/editarIcon.png"));
-			//button editar
+			// button editar
 			JFXButton buttonEdit = new JFXButton();
 			buttonEdit.setGraphic(new ImageView(editarIcon));
 			buttonEdit.setOnAction(event -> {
@@ -236,9 +237,10 @@ public class ConsultaUsuario implements Initializable {
 		}
 		TableView.setItems(itensEncontrados);
 	}
+
 	public void setNode(Node node) {
 		TelaConsultasAnchorPane.getChildren().clear();
 		TelaConsultasAnchorPane.getChildren().add((Node) node);
-    }
-	
+	}
+
 }

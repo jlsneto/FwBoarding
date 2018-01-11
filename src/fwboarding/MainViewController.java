@@ -51,6 +51,10 @@ public class MainViewController implements Initializable {
         
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
         	if(e.getClickCount() == 1) {
+
+        		//reativa drawer
+        		drawer.setDisable(false);
+        		
         		transition.setRate(transition.getRate() * -1);
         		 //System.out.println(this.transitionHamburguer.getStatus());
                 transition.play();
@@ -77,6 +81,7 @@ public class MainViewController implements Initializable {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
                     	transition.setRate(transition.getRate()*(-1.0));
                         transition.play();
+                        drawer.setDisable(true);
                         switch (node.getAccessibleText()) {
                             case "inicioMenu":
                                 drawer.close();
