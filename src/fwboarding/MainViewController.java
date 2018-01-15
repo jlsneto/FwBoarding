@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.transitions.hamburger.HamburgerBackArrowBasicTransition;
 import com.jfoenix.transitions.hamburger.HamburgerBasicCloseTransition;
 
+import helpers.DialogMessage;
 import helpers.Routes;
 import fwboarding.MainViewController;
 import javafx.fxml.FXML;
@@ -45,7 +46,6 @@ public class MainViewController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
     	final HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
         transition.setRate(-1);
         
@@ -87,7 +87,7 @@ public class MainViewController implements Initializable {
                                 drawer.close();
                                 setNode(bemVindoPane);
                                 break;
-                            case "navioMenu":
+                            case "navioMenu":                          	
                                 drawer.close();
                                 setNode(navioPane);
                                 break;

@@ -122,7 +122,7 @@ public class CadastroUsuarioController implements Initializable {
 				usuario.setNomeUsuario(textFieldUsuario.getText());
 				usuario.setGrupoUsuario(comboBoxGrupoUsuario.getSelectionModel().getSelectedItem());
 				// carrega a tela para cadastrar a senha posteriormente cifra
-				String senha = FwBoarding.carregarDialogCadastroSenha(dialogStage);
+				String senha = "1234";
 				
 				usuario.setSenha(cifrarSenha(senha));
 				usuarioDAO.inserir(usuario);

@@ -1,29 +1,17 @@
 package testsdao;
 
-import static org.junit.Assert.*;
-
-import java.sql.Connection;
-import java.util.Scanner;
-
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import org.junit.Test;
 
 import model.dao.NavioDAO;
-import model.database.Database;
-import model.database.DatabaseFactory;
-import model.domain.Navio;
-import model.domain.Pais;
-import view.DialogErro;
+import model.vo.NavioVO;
 
 public class NavioDAOTest {
 
-	private final Database database = DatabaseFactory.getDatabase("oracle");
-	private final Connection conn = database.conectar();
+
 	private final NavioDAO dao = new NavioDAO();
 	
 	
-	
+	/*
 	@Test
 	public void testeInserir() {
 		
@@ -34,11 +22,10 @@ public class NavioDAOTest {
 		
 		pais.setCodigoPais(76);
 		boolean inserido = false;
-		
+		Scanner entrada = new Scanner(System.in);
 		
 		do {
 			System.out.println("Descricao do Navio: ");
-			Scanner entrada = new Scanner(System.in);
 			descricaoNavio = entrada.nextLine();
 			descricaoNavio = descricaoNavio.toUpperCase();
 			Navio navio = new Navio(35,3,5000,descricaoNavio,pais);
@@ -52,16 +39,14 @@ public class NavioDAOTest {
 			}
 		}while(inserido == false);
 		
-		
+		entrada.close();
 	}
-	
+	*/
 	@Test
 	public void testListar() {
 
-		dao.setConnection(conn);
-		
-		for(Navio i: dao.listar()){
-			
+
+		for(NavioVO i: dao.listar()){
 			System.out.println("Codigo do Navio: "+ 
 								i.getCodigoNavio()+
 								" Descrição: "+
@@ -69,6 +54,12 @@ public class NavioDAOTest {
 								" Pais de Origem: "+
 								i.getPais().getNome());
 		}
+	}
+	
+	@Test
+	public void testVerificaUltimoCodigo() {
+
+		System.out.println(dao.verificaUltimoCodigo());
 	}
 
 }

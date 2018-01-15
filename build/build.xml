@@ -20,8 +20,8 @@
 		<mkdir dir="externalLibs" />
 	
 		<copy todir="externalLibs">
-			<fileset dir="C:\Users\joab.neto\Documents\Projetos Git\FwBoarding\lib">
-				<filename name="ojdbc6.jar"/>
+			<fileset dir="C:\Users\joab.neto\git\FwBoarding\resources\lib">
+				<filename name="jfoenix.jar"/>
 			</fileset>
 		</copy>
 		<copy todir="externalLibs">
@@ -34,16 +34,31 @@
 				<filename name="junit.jar"/>
 			</fileset>
 		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\joab.neto\git\FwBoarding\resources\lib">
+				<filename name="ojdbc6.jar"/>
+			</fileset>
+		</copy>
+		<copy todir="externalLibs">
+			<fileset dir="C:\Users\joab.neto\git\FwBoarding\resources\lib">
+				<filename name="postgresql-42.1.4.jar"/>
+			</fileset>
+		</copy>
 	
 		<mkdir dir="project" />
 		<copy todir="project">
-			<fileset dir="C:\Users\joab.neto\Documents\Projetos Git\FwBoarding">
+			<fileset dir="C:\Users\joab.neto\git\FwBoarding">
+				<include name="Tests/**" />
+			</fileset>
+		</copy>
+		<copy todir="project">
+			<fileset dir="C:\Users\joab.neto\git\FwBoarding">
 				<include name="src/**" />
 			</fileset>
 		</copy>
 		<copy todir="project">
-			<fileset dir="C:\Users\joab.neto\Documents\Projetos Git\FwBoarding">
-				<include name="Tests/**" />
+			<fileset dir="C:\Users\joab.neto\git\FwBoarding">
+				<include name="resources/**" />
 			</fileset>
 		</copy>
 	
@@ -58,8 +73,10 @@
 		<!-- Copy project-libs references -->
 		<copy todir="build/libs">
 			<fileset dir="externalLibs">
+				<include name="postgresql-42.1.4.jar"/>
 				<include name="org.hamcrest.core_1.3.0.v201303031735.jar"/>
 				<include name="junit.jar"/>
+				<include name="jfoenix.jar"/>
 				<include name="ojdbc6.jar"/>
 			</fileset>
 		</copy>
@@ -69,6 +86,11 @@
 		<!-- Copy project sources itself -->
 		<copy todir="build/src">
 			<fileset dir="project/src">
+				<include name="**/*"/>
+			</fileset>
+		</copy>
+		<copy todir="build/src">
+			<fileset dir="project/resources">
 				<include name="**/*"/>
 			</fileset>
 		</copy>
@@ -89,6 +111,9 @@
 		<!-- Copy over none Java-Files -->
 		<copy todir="build/classes">
 		<fileset dir="project/src">
+			<exclude name="**/*.java"/>
+		</fileset>
+		<fileset dir="project/resources">
 			<exclude name="**/*.java"/>
 		</fileset>
 		<fileset dir="project/Tests">
@@ -118,8 +143,8 @@
 		</fx:resources>
 	
 		<fx:application id="fxApplication"
-			name=""
-			mainClass="fwboarding.ClassePrincipal"
+			name="FwBoarding"
+			mainClass="fwboarding.FwBoarding"
 		/>
 	
 		<mkdir dir="build/classes/META-INF" />
@@ -133,14 +158,31 @@
 			<fx:resources refid="appRes"/>
 	
 			<manifest>
-				<attribute name="Implementation-Vendor" value=""/>
-				<attribute name="Implementation-Title" value=""/>
-				<attribute name="Implementation-Version" value=""/>
+				<attribute name="Implementation-Vendor" value="FlowTeam"/>
+				<attribute name="Implementation-Title" value="FwBoarding"/>
+				<attribute name="Implementation-Version" value="v1.0"/>
 				<attribute name="JavaFX-Feature-Proxy" value="None"/>
 			</manifest>
 		</fx:jar>
 	
 	
+		<mkdir dir="deploy" />
+		<!-- Need to use ${basedir} because somehow the ant task is calculating the directory differently -->
+		<fx:deploy
+			embedJNLP="false"
+			extension="false"
+			includeDT="false"
+			offlineAllowed="true"
+			outdir="${basedir}/deploy"
+			outfile="FwBoarding" nativeBundles="exe"
+			updatemode="background" >
+	
+			<fx:platform basedir="${java.home}"/>
+			<fx:info title="FwBoarding" vendor="FlowTeam"/>
+	
+			<fx:application refId="fxApplication"/>
+			<fx:resources refid="appRes"/>
+		</fx:deploy>
 	
 	
 	</target>

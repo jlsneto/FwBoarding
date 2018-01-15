@@ -220,9 +220,9 @@ public class ConsultasNavioController implements Initializable {
 		for (NavioVO itens : observableListNavio) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
-			btnBar.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
+			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 
-			Image excluirIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/excluirIcon.png"));
+			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/excluirIcon.png"));
 			// button excluir
 			JFXButton buttonExcluir = new JFXButton();
 			buttonExcluir.setGraphic(new ImageView(excluirIcon));
@@ -237,7 +237,7 @@ public class ConsultasNavioController implements Initializable {
 				}
 			});
 
-			Image editarIcon = new Image(getClass().getResourceAsStream("../view/images/Icons/editarIcon.png"));
+			Image editarIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/editarIcon.png"));
 			// button editar
 			JFXButton buttonEdit = new JFXButton();
 			buttonEdit.setGraphic(new ImageView(editarIcon));

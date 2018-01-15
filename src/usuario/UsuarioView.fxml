@@ -21,9 +21,9 @@
                <children>
                   <ButtonBar fx:id="AnchorPaneButtonBar" layoutX="310.0" layoutY="54.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="29.0" prefWidth="253.0">
                      <buttons>
-                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" onAction="#clickOnExcluir" styleClass="cancel" stylesheets="@styles/styles.css" text="Excluir" />
-                        <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" onAction="#clickOnAlterar" styleClass="edit" stylesheets="@styles/styles.css" text="Alterar" />
-                      <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@styles/styles.css" text="Incluir" />
+                        <Button fx:id="ButtonBarButtonExcluir" mnemonicParsing="false" onAction="#clickOnExcluir" styleClass="cancel" stylesheets="@/view/styles/styles.css" text="Excluir" />
+                        <Button fx:id="ButtonBarButtonAlterar" mnemonicParsing="false" onAction="#clickOnAlterar" styleClass="edit" stylesheets="@/view/styles/styles.css" text="Alterar" />
+                      <Button fx:id="ButtonBarButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@/view/styles/styles.css" text="Incluir" />
                      </buttons>
                   </ButtonBar>
                   <GridPane layoutX="14.0" layoutY="33.0" prefHeight="51.0" prefWidth="188.0">

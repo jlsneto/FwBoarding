@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPaneNavio" prefHeight="501.0" prefWidth="600.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="navio.ConsultasNavioController">
+<AnchorPane fx:id="anchorPaneNavio" prefHeight="501.0" prefWidth="600.0" stylesheets="@/view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="navio.ConsultasNavioController">
    <children>
       <JFXTabPane fx:id="tabPane" prefHeight="0.0" prefWidth="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <tabs>
@@ -52,7 +52,7 @@
                                     </JFXTextField>
                                     <ImageView fitHeight="44.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
-                                          <Image url="@../view/images/Icons/buscarIcon.png" />
+                                          <Image url="@/view/images/Icons/buscarIcon.png" />
                                        </image>
                                     </ImageView>
                                  </children>

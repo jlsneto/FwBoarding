@@ -10,9 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Border;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import model.dao.UsuarioDAO;
 import model.vo.UsuarioVO;
@@ -24,12 +22,10 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import com.jfoenix.controls.JFXDecorator;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 
-import fwboarding.FwBoarding;
 import fwboarding.MainViewController;
 import helpers.Routes;
 
@@ -94,7 +90,7 @@ public class LoginController implements Initializable {
 		            controller.setStage(stage);
 		            
 		            Scene scene = new Scene(root);
-		            scene.getStylesheets().add(getClass().getResource("../view/styles/styles.css").toExternalForm());
+		            scene.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 		            //stage.initStyle(StageStyle.UNDECORATED);
 		            stage.setMaximized(false);
 		            stage.setResizable(false);

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="430.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginController">
+<AnchorPane prefHeight="430.0" prefWidth="300.0" style="-fx-background-color: white; -fx-border-color: #bdc3c7;" stylesheets="/view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="login.LoginController">
    <children>
       <GridPane layoutX="48.0" layoutY="163.0" prefHeight="118.0" prefWidth="207.0" AnchorPane.leftAnchor="48.0" AnchorPane.rightAnchor="47.0">
         <columnConstraints>
@@ -37,7 +37,7 @@
       </Label>
       <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../view/images/Icons/user.png" />
+            <Image url="/view/images/Icons/user.png" />
          </image>
       </ImageView>
       <Label fx:id="labelStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="288.0" prefHeight="17.0" prefWidth="289.0" text="status " textAlignment="CENTER" visible="false" />
@@ -48,7 +48,7 @@
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../view/images/Icons/lg2.png" />
+                  <Image url="/view/images/Icons/lg2.png" />
                </image>
             </ImageView>
          </graphic></JFXButton>
