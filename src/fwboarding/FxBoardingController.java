@@ -46,46 +46,16 @@ public class FxBoardingController implements Initializable {
 	@FXML
 	private Menu menuRelatorios;
 
-	public void clickOnNavio(ActionEvent event) {
-		FwBoarding.carregarTelaNavioConsulta();
-
-	}
-
-	@FXML
-	void clickOnGrupoUsuario(ActionEvent event) throws IOException {
-		FwBoarding.carregarTelaGrupoConsulta();
-	}
-
-	@FXML
-	public void clickOnUsuario() {
-		FwBoarding.carregarTelaUsuario();
-	}
-
 	public void initialize(URL location, ResourceBundle resources) {
 		// Setup da telaFxBoarding
-		FwBoarding.stage.setOnCloseRequest(event -> {
 
-			if (FwBoarding.confirmouCancelamentoOuFehamento()) {
-				// ... Usuário clicou ok
-				Platform.exit();
-			} else {
-				event.consume();
-			}
-		});
-	}
-	
-	@FXML
-	public void clickOnEmbarque() {
-		FwBoarding.carregarTelaEmbarque();
 	}
 
 	@FXML
 	public void onExit() {
 		// Sair
-		if (FwBoarding.confirmouCancelamentoOuFehamento()) {
-			// ... Usuário clicou ok
-			Platform.exit();
-		}
+		Platform.exit();
+
 	}
 
 }

@@ -45,7 +45,7 @@ public class MenuLateralController implements Initializable {
     @FXML
     private void trocarUsuario(ActionEvent event) {
         try {
-            Stage window=(Stage) sairBtn.getScene().getWindow();
+            Stage window=(Stage) trocarUsuarioBtn.getScene().getWindow();
             FwBoarding hospitalFX=new FwBoarding();
             hospitalFX.start(new Stage());
             window.close();

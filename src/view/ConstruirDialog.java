@@ -41,7 +41,7 @@ public class ConstruirDialog {
 		// Set expandable Exception into the dialog pane.
 		alert.getDialogPane().setExpandableContent(expContent);
 
-		alert.showAndWait();
+		alert.show();
 	}
 	
 	public void dialogAlert(String titulo, String header, String conteudo) {

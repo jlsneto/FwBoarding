@@ -13,8 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="279.0" prefWidth="487.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane fx:id="anchorPaneCadastroEmbarque" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="279.0" prefWidth="487.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="468.0" prefWidth="387.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -60,7 +59,7 @@
                   </JFXTextField>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="2" GridPane.rowIndex="5">
                      <buttons>
-                        <JFXButton style="-fx-background-color: red;" styleClass="blue-btn" text="Cancelar" />
+                        <JFXButton fx:id="buttonCancelar" onAction="#clickOnCancelar" style="-fx-background-color: red;" styleClass="blue-btn" text="Cancelar" />
                         <JFXButton fx:id="buttonGravar" onAction="#clickOnGravar" styleClass="blue-btn" text="Gravar">
                            <tooltip>
                               <Tooltip text="Cadastrar Navio" />
