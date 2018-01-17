@@ -3,48 +3,36 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.CadastroSenhaController">
+<VBox style="-fx-background-color: white;" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.CadastroSenhaController">
    <children>
-      <Label alignment="CENTER" contentDisplay="CENTER" prefWidth="281.0" styleClass="login" stylesheets="@styles/styles.css" text="Cadastrar Senha" textAlignment="CENTER">
+      <JFXPasswordField fx:id="fieldTextSenha" labelFloat="true" promptText="Senha">
          <VBox.margin>
-            <Insets bottom="10.0" top="20.0" />
+            <Insets left="10.0" right="10.0" top="20.0" />
          </VBox.margin>
-      </Label>
-      <Label prefHeight="17.0" prefWidth="50.0" styleClass="login" stylesheets="@styles/styles.css" text="Senha">
-         <VBox.margin>
-            <Insets bottom="10.0" left="10.0" top="10.0" />
-         </VBox.margin>
-      </Label>
-      <JFXPasswordField fx:id="fieldTextSenha">
-         <VBox.margin>
-            <Insets left="10.0" right="10.0" />
-         </VBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </JFXPasswordField>
-      <Label prefHeight="19.0" prefWidth="124.0" styleClass="login" stylesheets="@styles/styles.css" text="Digite Novamente">
+      <JFXPasswordField fx:id="fieldTextConfirmSenha" labelFloat="true" promptText="Confirmar Senha">
          <VBox.margin>
-            <Insets bottom="10.0" left="10.0" top="10.0" />
+            <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
          </VBox.margin>
-      </Label>
-      <JFXPasswordField fx:id="fieldTextConfirmSenha">
-         <VBox.margin>
-            <Insets bottom="20.0" left="10.0" right="10.0" />
-         </VBox.margin>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
       </JFXPasswordField>
-      <Pane>
-         <children>
-            <JFXButton fx:id="buttonConfirmar" alignment="CENTER" contentDisplay="CENTER" layoutX="92.0" onAction="#clickOnConfirm" prefHeight="38.0" prefWidth="98.0" styleClass="confirm" stylesheets="@styles/styles.css" text="Confirmar">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </JFXButton>
-         </children>
+      <JFXButton fx:id="buttonConfirmar" alignment="CENTER" contentDisplay="CENTER" onAction="#clickOnConfirm" prefHeight="18.0" prefWidth="203.0" style="-fx-background-color: grey;" text="Confirmar">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </JFXButton>
+      <Pane prefWidth="192.0">
          <VBox.margin>
-            <Insets bottom="30.0" top="10.0" />
+            <Insets bottom="30.0" right="10.0" top="10.0" />
          </VBox.margin>
          <opaqueInsets>
             <Insets />

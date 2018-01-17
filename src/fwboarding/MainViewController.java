@@ -81,25 +81,30 @@ public class MainViewController implements Initializable {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
                     	transition.setRate(transition.getRate()*(-1.0));
                         transition.play();
-                        drawer.setDisable(true);
+                        
                         switch (node.getAccessibleText()) {
                             case "inicioMenu":
+                            	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(bemVindoPane);
                                 break;
-                            case "navioMenu":                          	
+                            case "navioMenu":     
+                            	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(navioPane);
                                 break;
                             case "usuarioMenu":
+                            	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(usuarioview);
                                 break;
                             case "grupoUsuarioMenu":
+                            	drawer.setDisable(true);
                                 drawer.close();                                
                                 setNode(grupoUsuarioPane);
                                 break;
                             case "embarqueMenu":
+                            	drawer.setDisable(true);
                             	drawer.close();
                             	setNode(embarquePane);
                             	break;

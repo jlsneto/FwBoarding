@@ -4,8 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import javax.swing.JOptionPane;
-
 import helpers.Routes;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -28,19 +26,16 @@ public class FwBoarding extends Application {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setLocation(getClass().getResource(Routes.LOGINVIEW));
 		Parent root = loader.load();
-		JOptionPane.showMessageDialog(null,"Carregou tela de Login!");
 
 		LoginController controller = loader.getController();
 		controller.setStage(stage);
 
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(FwBoarding.class.getResource("/view/styles/styles.css").toExternalForm());
-		JOptionPane.showMessageDialog(null,"Carregou Styles.css");
 		stage.initStyle(StageStyle.UTILITY);
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
-		JOptionPane.showMessageDialog(null,"Carregou IconNavio.png");
 		stage.setIconified(false);
 		stage.show();
 	}
@@ -50,7 +45,6 @@ public class FwBoarding extends Application {
 		try {
 			launch(args);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, e.getMessage());
 			try {
 				PrintWriter pw = new PrintWriter(new File("somefilename.txt"));
 				e.printStackTrace(pw);

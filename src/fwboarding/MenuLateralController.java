@@ -46,8 +46,8 @@ public class MenuLateralController implements Initializable {
     private void trocarUsuario(ActionEvent event) {
         try {
             Stage window=(Stage) trocarUsuarioBtn.getScene().getWindow();
-            FwBoarding hospitalFX=new FwBoarding();
-            hospitalFX.start(new Stage());
+            FwBoarding fwboarding =new FwBoarding();
+            fwboarding.start(new Stage());
             window.close();
         } catch (Exception ex) {
             Logger.getLogger(MenuLateralController.class.getName()).log(Level.SEVERE, null, ex);
