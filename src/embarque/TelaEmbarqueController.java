@@ -86,6 +86,7 @@ public class TelaEmbarqueController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		carregarTableViewEmbarque();
 		// TODO Auto-generated method stub
 		// carregarTableViewEmbarque();
 		// labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo()
@@ -96,7 +97,7 @@ public class TelaEmbarqueController implements Initializable {
 
 	public void carregarTableViewEmbarque() {
 
-		columnCodigoEmbarque.setCellValueFactory(new PropertyValueFactory<>("codigoEmbarque	"));
+		columnCodigoEmbarque.setCellValueFactory(new PropertyValueFactory<>("codigoEmbarque"));
 		columnPaisDestion.setCellValueFactory(new PropertyValueFactory<>("paisDestino"));
 		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
 
@@ -151,9 +152,9 @@ public class TelaEmbarqueController implements Initializable {
 				}
 			});
 			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
-			if (itens.getCodigoEmbarque() == (Integer.valueOf(textFieldPesquisaCodigo.getText()))) {
+			//if (itens.getCodigoEmbarque() == (Integer.valueOf(textFieldPesquisaCodigo.getText()))) {
 				itensEncontrados.add(itens);
-			}
+			//}
 		}
 		tableViewEmbarque.setItems(itensEncontrados);
 	}

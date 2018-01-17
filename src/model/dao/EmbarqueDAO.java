@@ -37,7 +37,7 @@ public class EmbarqueDAO {
 			stmt.setLong(2, embarque.getPaisDestino().getCodigoPais());
 			stmt.setString(3, "I");
 			stmt.setFloat(4, embarque.getQuantidadeDeAcucar());
-			stmt.setLong(5, 17);
+			stmt.setLong(5, 1);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -54,8 +54,9 @@ public class EmbarqueDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setLong(1, embarqueAlterar.getCodigoNavio());
 			stmt.setLong(2, embarqueAlterar.getPaisDestino().getCodigoPais());
-			stmt.setString(3, embarqueAlterar.getStatus());
+			stmt.setString(3, "I");
 			stmt.setFloat(4, embarqueAlterar.getQuantidadeDeAcucar());
+			stmt.setLong(5, embarqueAlterar.getCodigoEmbarque());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -86,7 +87,7 @@ public class EmbarqueDAO {
 
 	public List<EmbarqueVO> listar() {
 
-		String sql = "SELECT * FROM EMBARQUE ORDER BY EMBARQUE.CODIGOEMBARQUE";
+		String sql = "SELECT * FROM EMBARQUE  INNER JOIN CADPAIS ON EMBARQUE.CODIGOPAISDESTINO = CADPAIS.CODIGOPAIS  ORDER BY EMBARQUE.CODIGOEMBARQUE";
 		List<EmbarqueVO> listaEmbarque = new ArrayList<>();
 
 		try {
@@ -137,7 +138,7 @@ public class EmbarqueDAO {
 			ResultSet listaResultado = stmt.executeQuery();
 
 			if (listaResultado.next()) {
-				return Integer.valueOf(listaResultado.getString("CODIGOEMBARQUE"));
+				return listaResultado.getLong("CODIGOEMBARQUE");
 			} else {
 				return 0;
 			}

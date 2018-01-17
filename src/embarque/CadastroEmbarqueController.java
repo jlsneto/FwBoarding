@@ -64,6 +64,7 @@ public class CadastroEmbarqueController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
+		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 		labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
 		comboBoxPaisDestino.setItems(observableListPais);
 	}
@@ -103,11 +104,9 @@ public class CadastroEmbarqueController implements Initializable {
 				embarqueDAO.Inserir(embarque);
 				// Atualiza Tela de Consulta
 				// olhar esse if
-				// if
-				// (embarque.getCodigoNavio().equals(embarqueDAO.retornaCodigoEmbarque(embarque.getCodigoNavio())))
-				// {
-				TelaEmbarqueController.observableListEmbarque.addAll(embarque);
-				// }
+				 if(embarque.getCodigoEmbarque() == (embarqueDAO.retornaCodigoEmbarque(Long.valueOf(embarque.getCodigoEmbarque())))){
+					 TelaEmbarqueController.observableListEmbarque.addAll(embarque);
+				 }
 				// fechar dialog
 				chamarConsultaEmbarque();
 			} else {
@@ -115,7 +114,7 @@ public class CadastroEmbarqueController implements Initializable {
 				embarqueAlterar.setCodigoEmbarque(Integer.valueOf(labelCodigoEmbarque.getText()));
 				embarqueAlterar.setCodigoNavio(Integer.valueOf(textFieldCodigoNavio.getText()));
 				embarqueAlterar.setPaisDestino(comboBoxPaisDestino.getSelectionModel().getSelectedItem());
-				embarqueAlterar.setQuantidadeDeAcucar(Long.valueOf(textFieldQuantidadeAcucar.getText()));
+				embarqueAlterar.setQuantidadeDeAcucar(Float.valueOf(textFieldQuantidadeAcucar.getText()));
 				embarqueDAO.alterar(embarqueAlterar);
 				TelaEmbarqueController.itensEncontrados
 						.set(TelaEmbarqueController.itensEncontrados.indexOf(embarqueAlterar), embarqueAlterar);
@@ -142,19 +141,12 @@ public class CadastroEmbarqueController implements Initializable {
 			errorMessage = "Insira Capacidade !\n";
 			textFieldQuantidadeAcucar.requestFocus();
 			//olhar esse else if
-		} else if (embarqueDAO.retornaCodigoEmbarque(Long.valueOf(textFieldCodigoNavio.getText()).equals(textFieldCodigoNavio.getText()))) {
+		} else if (embarqueDAO.retornaCodigoEmbarque(Long.valueOf(labelCodigoEmbarque.getText())) == (Long.valueOf(labelCodigoEmbarque.getText()))) {
 
 			// Caso não tenha este if da erro!
-			if (isAlterarEmbarque == true) {
-				if (!textFieldCodigoNavio.getText().equals(embarqueAlterar.getCodigoEmbarque())) {
-					errorMessage = "Embarque já existe!";
-				}
-			} else {
-				errorMessage = "Embarque já existe!";
-				textFieldCodigoNavio.requestFocus();
-			}
+	}
 
-		}
+		
 
 		if (errorMessage.length() == 0) {
 			return true;
@@ -192,7 +184,7 @@ public class CadastroEmbarqueController implements Initializable {
 	public void setEmbarqueAlterar(EmbarqueVO embarque) {
 		this.embarqueAlterar = embarque;
 
-		labelCodigoEmbarque.setText(Long.toString(embarque.getCodigoNavio()));
+		labelCodigoEmbarque.setText(Long.toString(embarque.getCodigoEmbarque()));
 		textFieldCodigoNavio.setText(Long.toString(embarque.getCodigoNavio()));
 		//consertar ComboBox
 		comboBoxPaisDestino.getSelectionModel().select(embarque.getPaisDestino());
