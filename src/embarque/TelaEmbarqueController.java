@@ -26,6 +26,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -75,6 +76,9 @@ public class TelaEmbarqueController implements Initializable {
 
 	@FXML
 	private JFXButton buttonAdd;
+	
+	@FXML
+    private MenuItem movimentarEmbarque;
 
 	public static ObservableList<EmbarqueVO> observableListEmbarque;
 	private final EmbarqueDAO embarqueDAO = new EmbarqueDAO();
@@ -94,7 +98,11 @@ public class TelaEmbarqueController implements Initializable {
 		// observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 		// comboBoxPaisDestino.setItems(observableListPais);
 	}
-
+	
+	@FXML
+	private void clickOnMovimentarEmbarque() {
+		//
+	}
 	public void carregarTableViewEmbarque() {
 
 		columnCodigoEmbarque.setCellValueFactory(new PropertyValueFactory<>("codigoEmbarque"));

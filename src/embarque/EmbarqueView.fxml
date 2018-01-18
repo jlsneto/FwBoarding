@@ -2,8 +2,9 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXDatePicker?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ContextMenu?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -11,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPaneEmbarque" prefHeight="439.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="embarque.TelaEmbarqueController">
+<AnchorPane fx:id="anchorPaneEmbarque" prefHeight="439.0" prefWidth="600.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="embarque.TelaEmbarqueController">
    <children>
       <AnchorPane layoutY="1.0" prefHeight="200.0" prefWidth="600.0">
          <children>
@@ -24,32 +25,19 @@
                         <ColumnConstraints hgrow="SOMETIMES" maxWidth="416.0" minWidth="0.0" prefWidth="231.0" />
                      </columnConstraints>
                      <rowConstraints>
-                        <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="51.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="41.0" minHeight="10.0" prefHeight="41.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="41.0" minHeight="0.0" prefHeight="41.0" vgrow="SOMETIMES" />
                         <RowConstraints maxHeight="43.0" minHeight="0.0" prefHeight="15.0" vgrow="SOMETIMES" />
-                        <RowConstraints maxHeight="17.0" minHeight="0.0" prefHeight="0.0" vgrow="SOMETIMES" />
                      </rowConstraints>
                      <children>
-                        <JFXTextField fx:id="textFieldPesquisaSafra" labelFloat="true" prefHeight="25.0" prefWidth="126.0" promptText="Safra" GridPane.rowIndex="1">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                        </JFXTextField>
-                        <JFXTextField fx:id="textFieldPesquisaCodigo" labelFloat="true" promptText="Código">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-                           </GridPane.margin>
-                        </JFXTextField>
-                        <JFXDatePicker fx:id="dateFieldPesquisaInicio" promptText="Data Inicio" GridPane.rowIndex="2">
+                        <JFXDatePicker fx:id="dateFieldPesquisaInicio" promptText="Data Inicio">
                            <GridPane.margin>
                               <Insets left="10.0" />
                            </GridPane.margin>
                         </JFXDatePicker>
-                        <JFXDatePicker fx:id="dateFieldPesquisaFim" promptText="Data Final" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                        <JFXButton fx:id="buttonPesquisaPesquisar" buttonType="RAISED" contentDisplay="RIGHT" styleClass="confirm" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="4">
+                        <JFXDatePicker fx:id="dateFieldPesquisaFim" promptText="Data Final" GridPane.columnIndex="2" />
+                        <JFXButton fx:id="buttonPesquisaPesquisar" contentDisplay="RIGHT" styleClass="blue-btn" text="Pesquisar" GridPane.columnIndex="2" GridPane.rowIndex="1">
                            <GridPane.margin>
-                              <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                              <Insets bottom="10.0" left="30.0" right="10.0" top="30.0" />
                            </GridPane.margin>
                         </JFXButton>
                      </children>
@@ -69,9 +57,16 @@
                <columnResizePolicy>
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
+               <contextMenu>
+                  <ContextMenu>
+                    <items>
+                      <MenuItem fx:id="movimentarEmbarque" mnemonicParsing="false" onAction="#clickOnMovimentarEmbarque" text="Movimentar Embarque" />
+                    </items>
+                  </ContextMenu>
+               </contextMenu>
             </TableView>
          </children>
       </AnchorPane>
-      <JFXButton fx:id="buttonAdd" layoutX="520.0" layoutY="386.0" onAction="#clickOnIncluir" styleClass="addButton" stylesheets="@../view/styles/styles.css" text="+" />
+      <JFXButton fx:id="buttonAdd" buttonType="RAISED" layoutX="520.0" layoutY="386.0" onAction="#clickOnIncluir" styleClass="addButton" stylesheets="@../view/styles/styles.css" text="+" />
    </children>
 </AnchorPane>
