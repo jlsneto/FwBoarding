@@ -101,7 +101,17 @@ public class TelaEmbarqueController implements Initializable {
 	
 	@FXML
 	private void clickOnMovimentarEmbarque() {
-		//
+
+		
+		try {
+			AnchorPane movimentoEmbarque = FXMLLoader.load(getClass().getResource(Routes.MOVIMENTOEMBARQUEVIEW));
+			setNode(movimentoEmbarque);
+			clickOnPesquisar();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	public void carregarTableViewEmbarque() {
 

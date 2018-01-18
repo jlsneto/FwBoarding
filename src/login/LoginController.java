@@ -45,7 +45,7 @@ public class LoginController implements Initializable {
 	@FXML
 	private Label labelStatus;
 
-	private UsuarioDAO usuarioDao = new UsuarioDAO();
+	UsuarioDAO usuarioDao;
 
 	private Stage stage;
 
@@ -58,6 +58,7 @@ public class LoginController implements Initializable {
 
 	@FXML
 	void clickOnConectar(ActionEvent event) throws Exception {
+		this.usuarioDao = new UsuarioDAO();
         loggingProgress.setVisible(true);
     	labelStatus.setText("Verificando dados");
     	labelStatus.setVisible(true);

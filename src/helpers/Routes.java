@@ -14,4 +14,5 @@ public class Routes {
     public static String CADASTROUSUARIOVIEW = "/usuario/CadastroUsuarioView.fxml";
     public static String CADASTROGRUPOUSUARIOVIEW = "/grupoUsuario/CadastroGrupoView.fxml";
     public static String CADASTROEMBARQUEVIEW = "/embarque/CadastroEmbarqueView.fxml";
+    public static String MOVIMENTOEMBARQUEVIEW = "/embarque/MovimentoEmbarqueView.fxml";
 }

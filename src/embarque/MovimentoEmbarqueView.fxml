@@ -1,8 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1">
-	<!-- TODO Add Nodes -->
-</AnchorPane>
-
+<AnchorPane accessibleText="movimentoEmbarque" prefHeight="500.0" prefWidth="750.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fwboarding.BemVindoController">
+         <children>
+            <VBox layoutX="342.0" layoutY="22.0" prefHeight="450.0" prefWidth="387.0" spacing="10.0" styleClass="card">
+               <children>
+                  <Label prefHeight="40.0" prefWidth="288.0" styleClass="card-title" text="Movimentação de Embarque" />
+                  <Separator prefHeight="2.0" prefWidth="384.0" />
+            <TableView fx:id="tableView" prefHeight="200.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="columnOperacao" prefWidth="112.0" text="Operação" />
+                <TableColumn fx:id="columnInicio" text="Inicio" />
+                  <TableColumn prefWidth="159.0" text="Opções" />
+              </columns>
+            </TableView>
+            <Label alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="40.0" prefWidth="372.0" styleClass="card-title" text="Operações de Embarque" />
+            <Separator prefHeight="2.0" prefWidth="384.0" />
+            <HBox prefHeight="37.0" prefWidth="319.0">
+               <children>
+                  <JFXButton fx:id="buttonIniciar" onAction="#clickOnIniciar" styleClass="green-btn" text="Iniciar">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonPausar" onAction="#clickOnPausar" style="-fx-background-color: orange;" styleClass="green-btn" text="Pausar">
+                     <HBox.margin>
+                        <Insets right="10.0" />
+                     </HBox.margin>
+                  </JFXButton>
+                  <JFXButton fx:id="buttonFinalizar" onAction="#clickOnFinalizar" style="-fx-background-color: red;" styleClass="green-btn" text="Finalizar" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+               </children>
+            </VBox>
+      <VBox layoutX="11.0" layoutY="22.0" prefHeight="346.0" prefWidth="303.0" styleClass="card">
+         <children>
+            <Label fx:id="labelNumeroEmbarqueDetalhe" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="40.0" prefWidth="372.0" styleClass="card-title" text="Detalhes Embarque Nº" />
+            <Separator prefHeight="2.0" prefWidth="384.0" />
+         </children>
+      </VBox>
+      <JFXButton fx:id="buttonVoltar" buttonType="RAISED" layoutX="77.0" layoutY="411.0" onAction="#clickOnVoltar" styleClass="addButton" text="&lt;">
+         <tooltip>
+            <Tooltip text="Voltar" />
+         </tooltip>
+      </JFXButton>
+         </children>
+      </AnchorPane>
