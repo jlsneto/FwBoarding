@@ -108,7 +108,7 @@ public class TelaEmbarqueController implements Initializable {
 	}
 
 	@FXML
-	void clickOnIncluir() throws IOException {
+	public void clickOnIncluir() throws IOException {
 		CadastroEmbarqueController.isAlterarEmbarque = false;
 		AnchorPane cadastroEmbarque = FXMLLoader.load(getClass().getResource(Routes.CADASTROEMBARQUEVIEW));
 		setNode(cadastroEmbarque);
