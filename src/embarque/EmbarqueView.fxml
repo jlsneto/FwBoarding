@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane fx:id="anchorPaneEmbarque" prefHeight="439.0" prefWidth="600.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="embarque.TelaEmbarqueController">
+<AnchorPane fx:id="anchorPaneEmbarque" accessibleText="embarqueConsulta" prefHeight="439.0" prefWidth="600.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="embarque.TelaEmbarqueController">
    <children>
       <AnchorPane layoutY="1.0" prefHeight="200.0" prefWidth="600.0">
          <children>

@@ -71,6 +71,7 @@ public class CadastroEmbarqueController implements Initializable {
 
 	@FXML
 	public void clickOnCancelar() {
+		System.out.println(anchorPaneCadastroEmbarque.getParent().getAccessibleText());
 		if (confirmouCancelamentoOuFehamento()) {
 			chamarConsultaEmbarque();
 

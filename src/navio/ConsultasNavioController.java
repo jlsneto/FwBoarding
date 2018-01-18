@@ -10,6 +10,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTabPane;
 import com.jfoenix.controls.JFXTextField;
 
+import embarque.CadastroEmbarqueController;
+import embarque.TelaEmbarqueController;
 import fwboarding.FwBoarding;
 import fwboarding.MainViewController;
 import helpers.Routes;
@@ -250,7 +252,24 @@ public class ConsultasNavioController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
+			//button cad embarque
+			TelaEmbarqueController embarque = new TelaEmbarqueController();
+			JFXButton buttonEmbarque = new JFXButton();
+			buttonEmbarque.setText("...");
+			buttonEmbarque.setOnAction(event ->{
+				try {
+					TableColumnNavio.getSelectionModel().select(itens);
+					//ação
+					CadastroEmbarqueController.isAlterarEmbarque = false;
+					AnchorPane cadastroEmbarque = FXMLLoader.load(getClass().getResource(Routes.CADASTROEMBARQUEVIEW));
+					setNode(cadastroEmbarque);
+					clickOnPesquisar();
+				}catch(IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			});
+			btnBar.getButtons().addAll(buttonExcluir, buttonEdit, buttonEmbarque);
 			if (itens.getDescricaoNavio().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
