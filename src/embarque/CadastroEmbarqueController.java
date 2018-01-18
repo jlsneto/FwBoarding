@@ -25,6 +25,7 @@ import model.dao.PaisDAO;
 import model.vo.EmbarqueVO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
+import navio.CadastroNavioController;
 import navio.ConsultasNavioController;
 import view.ConstruirDialog;
 
@@ -71,11 +72,30 @@ public class CadastroEmbarqueController implements Initializable {
 
 	@FXML
 	public void clickOnCancelar() {
-		System.out.println(anchorPaneCadastroEmbarque.getParent().getAccessibleText());
+		
 		if (confirmouCancelamentoOuFehamento()) {
-			chamarConsultaEmbarque();
-
+			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
+				chamarConsultaNavio();
+			}
+			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {
+				chamarConsultaEmbarque();
+			}
 		}
+
+	}
+
+	private void chamarConsultaNavio() {
+		AnchorPane parent = (AnchorPane) anchorPaneCadastroEmbarque.getParent();
+		parent.getChildren().clear();
+		AnchorPane telaNavio;
+		try {
+			telaNavio = FXMLLoader.load(getClass().getResource(Routes.NAVIOVIEW));
+			parent.getChildren().add((Node) telaNavio);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 
 	private void chamarConsultaEmbarque() {
@@ -105,11 +125,18 @@ public class CadastroEmbarqueController implements Initializable {
 				embarqueDAO.Inserir(embarque);
 				// Atualiza Tela de Consulta
 				// olhar esse if
-				 if(embarque.getCodigoEmbarque() == (embarqueDAO.retornaCodigoEmbarque(Long.valueOf(embarque.getCodigoEmbarque())))){
-					 TelaEmbarqueController.observableListEmbarque.addAll(embarque);
-				 }
+				if (embarque.getCodigoEmbarque() == (embarqueDAO
+						.retornaCodigoEmbarque(Long.valueOf(embarque.getCodigoEmbarque())))) {
+					TelaEmbarqueController.observableListEmbarque.addAll(embarque);
+				}
 				// fechar dialog
-				chamarConsultaEmbarque();
+				//chamarConsultaEmbarque();
+				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
+					chamarConsultaNavio();
+				}
+				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {
+					chamarConsultaEmbarque();
+				}
 			} else {
 
 				embarqueAlterar.setCodigoEmbarque(Integer.valueOf(labelCodigoEmbarque.getText()));
@@ -119,7 +146,13 @@ public class CadastroEmbarqueController implements Initializable {
 				embarqueDAO.alterar(embarqueAlterar);
 				TelaEmbarqueController.itensEncontrados
 						.set(TelaEmbarqueController.itensEncontrados.indexOf(embarqueAlterar), embarqueAlterar);
-				chamarConsultaEmbarque();
+				//chamarConsultaEmbarque();
+				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
+					chamarConsultaNavio();
+				}
+				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {
+					chamarConsultaEmbarque();
+				}
 			}
 		}
 	}
@@ -141,13 +174,12 @@ public class CadastroEmbarqueController implements Initializable {
 
 			errorMessage = "Insira Capacidade !\n";
 			textFieldQuantidadeAcucar.requestFocus();
-			//olhar esse else if
-		} else if (embarqueDAO.retornaCodigoEmbarque(Long.valueOf(labelCodigoEmbarque.getText())) == (Long.valueOf(labelCodigoEmbarque.getText()))) {
+			// olhar esse else if
+		} else if (embarqueDAO.retornaCodigoEmbarque(
+				Long.valueOf(labelCodigoEmbarque.getText())) == (Long.valueOf(labelCodigoEmbarque.getText()))) {
 
 			// Caso não tenha este if da erro!
-	}
-
-		
+		}
 
 		if (errorMessage.length() == 0) {
 			return true;
@@ -170,7 +202,7 @@ public class CadastroEmbarqueController implements Initializable {
 			}
 		});
 	}
-	
+
 	public boolean confirmouCancelamentoOuFehamento() {
 		ConstruirDialog confirmar = new ConstruirDialog();
 		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Cancelamento",
@@ -181,15 +213,16 @@ public class CadastroEmbarqueController implements Initializable {
 			return false;
 		}
 	}
-	
+
 	public void setEmbarqueAlterar(EmbarqueVO embarque) {
 		this.embarqueAlterar = embarque;
 
 		labelCodigoEmbarque.setText(Long.toString(embarque.getCodigoEmbarque()));
 		textFieldCodigoNavio.setText(Long.toString(embarque.getCodigoNavio()));
-		//consertar ComboBox
+		// consertar ComboBox
 		comboBoxPaisDestino.getSelectionModel().select(embarque.getPaisDestino());
-		//comboBoxQuantidadePorao.getSelectionModel().select((Integer) navioAlterar.getQtdPorao());
+		// comboBoxQuantidadePorao.getSelectionModel().select((Integer)
+		// navioAlterar.getQtdPorao());
 		textFieldQuantidadeAcucar.setText(Double.toString(embarque.getQuantidadeDeAcucar()));
 		buttonGravar.setText("Aplicar");
 	}
