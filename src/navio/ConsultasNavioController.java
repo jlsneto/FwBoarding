@@ -50,7 +50,7 @@ public class ConsultasNavioController implements Initializable {
 	private TableView<NavioVO> TableColumnNavio;
 
 	@FXML
-	private TableColumn<NavioVO, String> TableColumnNavioCodigo;
+	private TableColumn<NavioVO, Long> TableColumnNavioCodigo;
 
 	@FXML
 	private TableColumn<NavioVO, String> TableColumnNavioDescricao;
@@ -259,6 +259,10 @@ public class ConsultasNavioController implements Initializable {
 			buttonEmbarque.setOnAction(event ->{
 				try {
 					TableColumnNavio.getSelectionModel().select(itens);
+					//manda o codigo do navio pra o embarque
+					int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
+					NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
+					CadastroEmbarqueController.codigoNavio(navio);
 					//ação
 					CadastroEmbarqueController.isAlterarEmbarque = false;
 					AnchorPane cadastroEmbarque = FXMLLoader.load(getClass().getResource(Routes.CADASTROEMBARQUEVIEW));
