@@ -23,6 +23,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import login.UsuarioSessao;
 
 public class MainViewController implements Initializable {
 
@@ -34,6 +35,9 @@ public class MainViewController implements Initializable {
     private JFXDrawer drawer;
     @FXML
     private Label txtCurrentWindow;
+    
+    @FXML
+    private Label usuarioLogado;
     
     private HamburgerBasicCloseTransition transitionHamburguer;
     public static Stage stage;
@@ -48,7 +52,7 @@ public class MainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     	final HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
         transition.setRate(-1);
-        
+        usuarioLogado.setText(UsuarioSessao.getUsuarioAtivo().getNomeUsuario());
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
         	if(e.getClickCount() == 1) {
 

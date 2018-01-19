@@ -19,6 +19,9 @@
          <right>
             
          </right>
+         <bottom>
+            <Label fx:id="usuarioLogado" text="usuario" BorderPane.alignment="CENTER" />
+         </bottom>
       </JFXToolbar>
       <AnchorPane fx:id="holderPane" layoutX="86.0" layoutY="51.0" prefHeight="684.0" prefWidth="1105.0" />
           

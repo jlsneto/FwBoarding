@@ -79,8 +79,13 @@ public class LoginController implements Initializable {
 		if (validarEntrada() || textUsuarioLogin.getText().equals("mestrejoab")) {
 			labelStatus.setVisible(true);
 			 try {
+				 
+				 	//Falta Resgatar todos os dados do usuario no DAO
 		            UsuarioVO user=new UsuarioVO();
 		            user.setNomeUsuario(textUsuarioLogin.getText());
+		            
+		            //setar usuário logado
+		            UsuarioSessao.setUsuarioAtivo(user);
 		            
 		            Stage stage = new Stage();
 		    		FXMLLoader loader = new FXMLLoader();
