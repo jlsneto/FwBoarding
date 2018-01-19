@@ -74,7 +74,7 @@ public class CadastroEmbarqueController implements Initializable {
 	public void clickOnCancelar() {
 		
 		if (confirmouCancelamentoOuFehamento()) {
-			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
+			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {				
 				chamarConsultaNavio();
 			}
 			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {

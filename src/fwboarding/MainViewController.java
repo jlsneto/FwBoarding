@@ -68,12 +68,8 @@ public class MainViewController implements Initializable {
         
         try {
             VBox sidePane = FXMLLoader.load(getClass().getResource(Routes.MENULATERALVIEW));
-            AnchorPane navioPane = FXMLLoader.load(getClass().getResource(Routes.NAVIOVIEW));
-            AnchorPane embarquePane = FXMLLoader.load(getClass().getResource(Routes.EMBARQUEVIEW));
-            AnchorPane usuarioview = FXMLLoader.load(getClass().getResource(Routes.USUARIOVIEW));
-            AnchorPane grupoUsuarioPane = FXMLLoader.load(getClass().getResource(Routes.GRUPOUSUARIOVIEW));
-            AnchorPane bemVindoPane = FXMLLoader.load(getClass().getResource(Routes.BEMVINDOVIEW));
-            setNode(bemVindoPane);
+        	AnchorPane bemVindoPane = FXMLLoader.load(getClass().getResource(Routes.BEMVINDOVIEW));
+        	setNode(bemVindoPane);
             drawer.setSidePane(sidePane);
 
             for (Node node : sidePane.getChildren()) {
@@ -81,7 +77,7 @@ public class MainViewController implements Initializable {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
                     	transition.setRate(transition.getRate()*(-1.0));
                         transition.play();
-                        
+                        try {
                         switch (node.getAccessibleText()) {
                             case "inicioMenu":
                             	drawer.setDisable(true);
@@ -89,27 +85,33 @@ public class MainViewController implements Initializable {
                                 setNode(bemVindoPane);
                                 break;
                             case "navioMenu":     
+                            	AnchorPane navioPane = FXMLLoader.load(getClass().getResource(Routes.NAVIOVIEW));
                             	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(navioPane);
                                 break;
                             case "usuarioMenu":
+                            	AnchorPane usuarioview = FXMLLoader.load(getClass().getResource(Routes.USUARIOVIEW));
                             	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(usuarioview);
                                 break;
                             case "grupoUsuarioMenu":
+                            	AnchorPane grupoUsuarioPane = FXMLLoader.load(getClass().getResource(Routes.GRUPOUSUARIOVIEW));
                             	drawer.setDisable(true);
                                 drawer.close();                                
                                 setNode(grupoUsuarioPane);
                                 break;
                             case "embarqueMenu":
+								AnchorPane embarquePane = FXMLLoader.load(getClass().getResource(Routes.EMBARQUEVIEW));
                             	drawer.setDisable(true);
                             	drawer.close();
                             	setNode(embarquePane);
                             	break;
                         }
-                    });
+                    }catch (IOException e1) {
+                    	e1.printStackTrace();
+                    }});
                 }
 
             }
