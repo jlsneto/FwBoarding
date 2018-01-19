@@ -37,7 +37,7 @@ public class EmbarqueDAO {
 			stmt.setLong(2, embarque.getPaisDestino().getCodigoPais());
 			stmt.setString(3, "I");
 			stmt.setFloat(4, embarque.getQuantidadeDeAcucar());
-			stmt.setLong(5, 1);
+			stmt.setLong(5, 2);
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {

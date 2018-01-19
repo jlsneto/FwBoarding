@@ -66,7 +66,7 @@ public class CadastroUsuarioController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		labelCodigo.setText(Integer.toString(usuarioDAO.verificaUltimoCodigo() + 1));
+		labelCodigo.setText(Integer.toString(usuarioDAO.verificaUltimoCodigo()+1));
 
 		observableListGrupoUsuario = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
 
