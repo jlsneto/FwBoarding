@@ -61,6 +61,8 @@ public class CadastroEmbarqueController implements Initializable {
 	private EmbarqueVO embarqueAlterar;
 	public static boolean isAlterarEmbarque;
 	private Stage dialogStage;
+	private static NavioVO navioCod;
+	public static long CodigoNavio;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -68,19 +70,23 @@ public class CadastroEmbarqueController implements Initializable {
 		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 		labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
 		comboBoxPaisDestino.setItems(observableListPais);
+		if(CodigoNavio > 0) {
+			textFieldCodigoNavio.setText(String.valueOf(CodigoNavio));
+		}
 	}
 
 	@FXML
 	public void clickOnCancelar() {
 		
 		if (confirmouCancelamentoOuFehamento()) {
-			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {				
+			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
 				chamarConsultaNavio();
 			}
 			if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {
 				chamarConsultaEmbarque();
 			}
 		}
+		
 
 	}
 
@@ -95,6 +101,7 @@ public class CadastroEmbarqueController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		CodigoNavio = 0;
 
 	}
 
@@ -109,6 +116,14 @@ public class CadastroEmbarqueController implements Initializable {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		CodigoNavio = 0;
+	}
+	
+	public static void  codigoNavio (NavioVO navio) {
+		navioCod = navio;
+		//System.out.println(navio.getCodigoNavio());
+		CodigoNavio = navio.getCodigoNavio();
+		
 	}
 
 	@FXML
@@ -118,7 +133,12 @@ public class CadastroEmbarqueController implements Initializable {
 			if (isAlterarEmbarque == false) {
 				EmbarqueVO embarque = new EmbarqueVO();
 				embarque.setCodigoEmbarque(Integer.valueOf(labelCodigoEmbarque.getText()));
-				embarque.setCodigoNavio(Integer.valueOf(textFieldCodigoNavio.getText()));
+				if(CodigoNavio > 0) {
+					embarque.setCodigoNavio(CodigoNavio);
+					CodigoNavio = 0;
+				}else {
+					embarque.setCodigoNavio(Integer.valueOf(textFieldCodigoNavio.getText()));
+				}
 				embarque.setPaisDestino(comboBoxPaisDestino.getSelectionModel().getSelectedItem());
 				embarque.setQuantidadeDeAcucar(Long.valueOf(textFieldQuantidadeAcucar.getText()));
 
