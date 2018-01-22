@@ -52,7 +52,7 @@ public class MainViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
     	final HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
         transition.setRate(-1);
-        usuarioLogado.setText(UsuarioSessao.getUsuarioAtivo().getNomeUsuario());
+        //usuarioLogado.setText(UsuarioSessao.getUsuarioAtivo().getNomeUsuario());
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
         	if(e.getClickCount() == 1) {
 

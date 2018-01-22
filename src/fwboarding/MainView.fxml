@@ -14,14 +14,11 @@
             <JFXHamburger fx:id="hamburger" prefHeight="40.0" prefWidth="62.0" styleClass="jfx-hamburger" stylesheets="@../view/styles/styles.css" BorderPane.alignment="CENTER" />
          </left>
          <center>
-            <Label fx:id="txtCurrentWindow" prefHeight="40.0" prefWidth="199.0" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: bold;" styleClass="card-title" text="FwBoarding" BorderPane.alignment="CENTER" />
+            <Label fx:id="txtCurrentWindow" prefHeight="40.0" prefWidth="144.0" style="-fx-text-fill: white; -fx-text-alignment: center; -fx-font-weight: bold;" styleClass="card-title" text="FwBoarding" BorderPane.alignment="CENTER" />
          </center>
          <right>
             
          </right>
-         <bottom>
-            <Label fx:id="usuarioLogado" text="usuario" BorderPane.alignment="CENTER" />
-         </bottom>
       </JFXToolbar>
       <AnchorPane fx:id="holderPane" layoutX="86.0" layoutY="51.0" prefHeight="684.0" prefWidth="1105.0" />
           

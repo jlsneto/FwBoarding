@@ -10,7 +10,9 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.MenuButton;
 import javafx.stage.Stage;
+import login.UsuarioSessao;
 
 /**
  * FXML Controller class
@@ -19,6 +21,8 @@ import javafx.stage.Stage;
  */
 public class MenuLateralController implements Initializable {
 
+	@FXML
+	private MenuButton buttonUsuarioNome;
     @FXML
     private JFXButton inicioBtn;
     @FXML
@@ -40,6 +44,7 @@ public class MenuLateralController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    	buttonUsuarioNome.setText(UsuarioSessao.getUsuarioAtivo().getNomeUsuario());
     }    
 
     @FXML

@@ -2,16 +2,36 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="684.0" prefWidth="200.0" styleClass="card-unpadded" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fwboarding.MenuLateralController">
    <children>
-      <ImageView fitHeight="204.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../view/images/Icons/IconNavio%20-%20Cópia.png" />
-         </image></ImageView>
+      <HBox prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <ImageView fitHeight="84.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../view/images/Icons/user.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <MenuButton fx:id="buttonUsuarioNome" mnemonicParsing="false" style="-fx-background-color: none;" text="Empat">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Alterar Senha" />
+                <MenuItem mnemonicParsing="false" onAction="#trocarUsuario" text="Trocar Usuario" />
+              </items>
+               <HBox.margin>
+                  <Insets top="30.0" />
+               </HBox.margin>
+            </MenuButton>
+         </children>
+      </HBox>
       <JFXButton fx:id="inicioBtn" accessibleText="inicioMenu" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Inicio">
          <VBox.margin>
             <Insets />
