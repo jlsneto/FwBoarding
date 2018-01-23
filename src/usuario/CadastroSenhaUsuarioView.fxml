@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="224.0" prefWidth="237.0" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="usuario.CadastroSenhaController">
+   <children>
+      <VBox layoutX="10.0" layoutY="10.0" prefHeight="224.0" prefWidth="237.0" style="-fx-background-color: white;" stylesheets="@../view/styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <JFXPasswordField fx:id="fieldTextSenha" labelFloat="true" promptText="Senha">
+               <VBox.margin>
+                  <Insets left="10.0" right="10.0" top="20.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXPasswordField>
+            <JFXPasswordField fx:id="fieldTextConfirmSenha" labelFloat="true" promptText="Confirmar Senha">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </JFXPasswordField>
+            <JFXButton fx:id="buttonConfirmar" alignment="CENTER" contentDisplay="CENTER" onAction="#clickOnConfirm" prefHeight="18.0" prefWidth="203.0" style="-fx-background-color: grey;" text="Confirmar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="15.0" top="30.0" />
+               </VBox.margin>
+            </JFXButton>
+            <Pane prefWidth="192.0">
+               <VBox.margin>
+                  <Insets bottom="30.0" right="10.0" top="10.0" />
+               </VBox.margin>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </Pane>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

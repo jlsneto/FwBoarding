@@ -10,15 +10,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
+
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 import login.LoginController;
 
 public class FwBoarding extends Application {
-
-	public static Stage stage;
-	public static BorderPane rootLayout;
 
 	@Override
 	public void start(Stage stage) throws Exception {
@@ -32,14 +28,13 @@ public class FwBoarding extends Application {
 
 		Scene scene = new Scene(root);
 		scene.getStylesheets().add(FwBoarding.class.getResource("/view/styles/styles.css").toExternalForm());
-		stage.initStyle(StageStyle.UTILITY);
+		//stage.initStyle(StageStyle.UTILITY);
 		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.getIcons().add(new Image(FwBoarding.class.getResource("/view/images/Icons/IconNavio.png").toString()));
 		stage.setIconified(false);
 		stage.show();
 	}
-
 	public static void main(String[] args) {
 
 		try {

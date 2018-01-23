@@ -2,6 +2,9 @@ package fwboarding;
 
 import com.jfoenix.controls.JFXButton;
 import com.sun.java.swing.plaf.windows.resources.windows;
+
+import helpers.Routes;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -9,10 +12,16 @@ import java.util.logging.Logger;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.MenuButton;
+import javafx.scene.layout.AnchorPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import login.UsuarioSessao;
+import usuario.CadastroSenhaController;
 
 /**
  * FXML Controller class
@@ -59,7 +68,30 @@ public class MenuLateralController implements Initializable {
         }
         
     }
+    
+    @FXML
+    private void alterarSenha() {
+    	try {
+    		FXMLLoader loader = new FXMLLoader();
+    		loader.setLocation(getClass().getResource(Routes.CADASTROSENHAVIEW));
+    		AnchorPane cadastroSenhaView = loader.load();
+    		
 
+    		Stage stage = new Stage();
+    		stage.initOwner(MainViewController.stage);
+    		stage.setResizable(false);
+    		Scene scene = new Scene(cadastroSenhaView);
+    		
+    		CadastroSenhaController controller = loader.getController();
+    		controller.setDialogStage(stage);
+    		
+    		stage.setScene(scene);
+    		stage.showAndWait();
+    		
+    	}catch (Exception e) {
+			Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
+		}
+    }
     @FXML
     private void sair(ActionEvent event) {
         Platform.exit();

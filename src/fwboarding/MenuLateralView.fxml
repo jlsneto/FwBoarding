@@ -23,7 +23,7 @@
             </ImageView>
             <MenuButton fx:id="buttonUsuarioNome" mnemonicParsing="false" style="-fx-background-color: none;" text="Empat">
               <items>
-                <MenuItem mnemonicParsing="false" text="Alterar Senha" />
+                <MenuItem mnemonicParsing="false" onAction="#alterarSenha" text="Alterar Senha" />
                 <MenuItem mnemonicParsing="false" onAction="#trocarUsuario" text="Trocar Usuario" />
               </items>
                <HBox.margin>
