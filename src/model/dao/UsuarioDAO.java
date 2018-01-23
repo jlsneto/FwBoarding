@@ -30,6 +30,56 @@ public class UsuarioDAO {
 
 	}
 
+	public UsuarioVO retornarUsuario(String descricaoUsuario) {
+		String sql = "SELECT * FROM CADUSUARIO INNER JOIN GRUPOUSUARIO"
+				+ " ON CADUSUARIO.CODIGOGRUPO = GRUPOUSUARIO.CODIGOGRUPO WHERE CADUSUARIO.LOGIN = ?";
+		UsuarioVO usuario = new UsuarioVO();
+		try {
+			
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			stmt.setString(1, descricaoUsuario);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while(resultado.next()) {
+				
+				usuario.setCodigoUsuario(resultado.getLong("CODIGOUSUARIO"));
+				usuario.setNomeUsuario(resultado.getString("LOGIN"));
+				usuario.setSenha(resultado.getString("SENHA"));
+				
+				GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
+
+				grupoUsuario.setCodigoGrupo(resultado.getLong("CODIGOGRUPO"));
+				grupoUsuario.setDescricaoGrupo(resultado.getString("DESCRICAO"));
+				grupoUsuario.setPermissaoInsertNavio(resultado.getString("PERMISSAO_INSERT_NAVIO"));
+				grupoUsuario.setPermissaoAlterNavio(resultado.getString("PERMISSAO_ALTER_NAVIO"));
+				grupoUsuario.setPermissaoConsulNavio(resultado.getString("PERMISSAO_CONSUL_NAVIO"));
+				grupoUsuario.setPermissaoDeletNavio(resultado.getString("PERMISSAO_DELET_NAVIO"));
+				grupoUsuario.setPermissaoInsertUser(resultado.getString("PERMISSAO_INSERT_USER"));
+				grupoUsuario.setPermissaoAlterUser(resultado.getString("PERMISSAO_ALTER_USER"));
+				grupoUsuario.setPermissaoConsulUser(resultado.getString("PERMISSAO_CONSUL_USER"));
+				grupoUsuario.setPermissaoDeletUser(resultado.getString("PERMISSAO_DELET_USER"));
+				grupoUsuario.setPermissaoInsertMovimento(resultado.getString("PERMISSAO_INSERT_MOVIMENTO"));
+				grupoUsuario.setPermissaoAlterMovimento(resultado.getString("PERMISSAO_ALTER_MOVIMENTO"));
+				grupoUsuario.setPermissaoConsulMovimento(resultado.getString("PERMISSAO_CONSUL_MOVIMENTO"));
+				grupoUsuario.setPermissaoDeletMovimento(resultado.getString("PERMISSAO_DELET_MOVIMENTO"));
+				grupoUsuario.setPermissaoInsertEmbarque(resultado.getString("PERMISSAO_INSERT_EMBARQUE"));
+				grupoUsuario.setPermissaoAlterEmbarque(resultado.getString("PERMISSAO_ALTER_EMBARQUE"));
+				grupoUsuario.setPermissaoConsulEmbarque(resultado.getString("PERMISSAO_CONSUL_EMBARQUE"));
+				grupoUsuario.setPermissaoDeletEmbarque(resultado.getString("PERMISSAO_DELET_EMBARQUE"));
+
+				
+				usuario.setGrupoUsuario(grupoUsuario);
+			}
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+		}
+		return usuario;
+	}
+
 	public void inserir(UsuarioVO usuario) {
 		String sql = "INSERT INTO CADUSUARIO(LOGIN, SENHA, CODIGOGRUPO) VALUES(?,?,?)";
 
@@ -128,7 +178,6 @@ public class UsuarioDAO {
 				grupoUsuario.setCodigoGrupo(listaResultado.getInt("CODIGOGRUPO"));
 				grupoUsuario.setDescricaoGrupo(listaResultado.getString("DESCRICAO"));
 
-
 				usuario.setGrupoUsuario(grupoUsuario);
 
 				listaUsuario.add(usuario);
@@ -176,11 +225,11 @@ public class UsuarioDAO {
 		String sql = "UPDATE CADUSUARIO SET LOGIN = ?, CODIGOGRUPO = ? WHERE CODIGOUSUARIO = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			
+
 			stmt.setString(1, usuarioAlterar.getNomeUsuario());
 			stmt.setLong(2, usuarioAlterar.getGrupoUsuario().getCodigoGrupo());
 			stmt.setLong(3, usuarioAlterar.getCodigoUsuario());
-			
+
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -192,25 +241,25 @@ public class UsuarioDAO {
 
 		}
 	}
+
 	public String retornaSenhaUsuario(String nomeUsuario) {
 		String sql = "SELECT SENHA FROM CADUSUARIO WHERE LOGIN = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setString(1, nomeUsuario);
 			ResultSet senhaUsuario = stmt.executeQuery();
-			
-			if(senhaUsuario.next()) {
+
+			if (senhaUsuario.next()) {
 				return senhaUsuario.getString("SENHA");
-			}else {
+			} else {
 				return "";
 			}
-			
+
 		} catch (SQLException e) {
 			ConstruirDialog aviso = new ConstruirDialog();
 			aviso.dialogAlert("Erro de Autenticação", "Usuário ou Senha Inválidos!", e.getMessage());
 		}
 		return "";
 	}
-
 
 }

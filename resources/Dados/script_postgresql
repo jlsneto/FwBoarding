@@ -1,4 +1,92 @@
 /*
+	CRIAR SCHEMA AUDIT PARA AUDITORIA DE TUDO QUE É INSERIDO, DELETADO E ALTERADO NO SISTEMA
+*/	
+CREATE schema audit;
+REVOKE CREATE ON schema audit FROM public;
+ 
+CREATE TABLE audit.logged_actions (
+    schema_name text NOT NULL,
+    TABLE_NAME text NOT NULL,
+    user_name text,
+    action_tstamp TIMESTAMP WITH TIME zone NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    action TEXT NOT NULL CHECK (action IN ('I','D','U')),
+    original_data text,
+    new_data text,
+    query text
+) WITH (fillfactor=100);
+ 
+REVOKE ALL ON audit.logged_actions FROM public;
+ 
+-- You may wish to use different permissions; this lets anybody
+-- see the full audit data. In Pg 9.0 and above you can use column
+-- permissions for fine-grained control.
+GRANT SELECT ON audit.logged_actions TO public;
+ 
+CREATE INDEX logged_actions_schema_table_idx 
+ON audit.logged_actions(((schema_name||'.'||TABLE_NAME)::TEXT));
+ 
+CREATE INDEX logged_actions_action_tstamp_idx 
+ON audit.logged_actions(action_tstamp);
+ 
+CREATE INDEX logged_actions_action_idx 
+ON audit.logged_actions(action);
+ 
+--
+-- Now, define the actual trigger function:
+--
+CREATE OR REPLACE FUNCTION audit.if_modified_func() RETURNS TRIGGER AS $body$
+DECLARE
+    v_old_data TEXT;
+    v_new_data TEXT;
+BEGIN
+    /*  If this actually for real auditing (where you need to log EVERY action),
+        then you would need to use something like dblink or plperl that could log outside the transaction,
+        regardless of whether the transaction committed or rolled back.
+    */
+ 
+    /* This dance with casting the NEW and OLD values to a ROW is not necessary in pg 9.0+ */
+ 
+    IF (TG_OP = 'UPDATE') THEN
+        v_old_data := ROW(OLD.*);
+        v_new_data := ROW(NEW.*);
+        INSERT INTO audit.logged_actions (schema_name,table_name,user_name,action,original_data,new_data,query) 
+        VALUES (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_old_data,v_new_data, current_query());
+        RETURN NEW;
+    ELSIF (TG_OP = 'DELETE') THEN
+        v_old_data := ROW(OLD.*);
+        INSERT INTO audit.logged_actions (schema_name,table_name,user_name,action,original_data,query)
+        VALUES (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_old_data, current_query());
+        RETURN OLD;
+    ELSIF (TG_OP = 'INSERT') THEN
+        v_new_data := ROW(NEW.*);
+        INSERT INTO audit.logged_actions (schema_name,table_name,user_name,action,new_data,query)
+        VALUES (TG_TABLE_SCHEMA::TEXT,TG_TABLE_NAME::TEXT,session_user::TEXT,substring(TG_OP,1,1),v_new_data, current_query());
+        RETURN NEW;
+    ELSE
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - Other action occurred: %, at %',TG_OP,now();
+        RETURN NULL;
+    END IF;
+ 
+EXCEPTION
+    WHEN data_exception THEN
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - UDF ERROR [DATA EXCEPTION] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+    WHEN unique_violation THEN
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - UDF ERROR [UNIQUE] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+    WHEN OTHERS THEN
+        RAISE WARNING '[AUDIT.IF_MODIFIED_FUNC] - UDF ERROR [OTHER] - SQLSTATE: %, SQLERRM: %',SQLSTATE,SQLERRM;
+        RETURN NULL;
+END;
+$body$
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = pg_catalog, audit;
+
+-- Nessessário criar para cada tabela uma trigger
+
+
+/*
 ###########################################################################################################################################################
 															CRIAÇÃO DA TABELA CADPAIS
 ###########################################################################################################################################################
@@ -290,6 +378,11 @@ CREATE SEQUENCE SEQ_CODIGO_CADNAVIO
     START WITH 1
     INCREMENT BY 1
     ; 
+
+-- Trigger para gravar log	
+CREATE TRIGGER cadnavio_audit
+AFTER INSERT OR UPDATE OR DELETE ON cadnavio
+FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();
     
 COMMENT ON TABLE CADNAVIO IS 'TABELA DESTINADA AO CADASTRO DOS NAVIOS';
 COMMENT ON COLUMN CADNAVIO.CODIGONAVIO IS 'CODIGO DE IDENTIFICAÇÃO DO NAVIO (PRIMARY KEY)';
@@ -326,6 +419,13 @@ CREATE TABLE GRUPOUSUARIO (
 	CONSTRAINT UN_GRUPOUSUARIO_DESCRICAO UNIQUE(DESCRICAO)
 	
 );
+
+
+CREATE TRIGGER grupousuario_audit
+AFTER INSERT OR UPDATE OR DELETE ON grupousuario
+FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();
+
+
 COMMENT ON TABLE GRUPOUSUARIO IS 'TABELA QUE DEFINE O NÍVEL DE PERMISSÃO DE CADA USUÁRIO';
 COMMENT ON COLUMN GRUPOUSUARIO.PERMISSAO IS 'ADM - ADMINISTRADOR, DIR - DIRETOR,SUP - SUPERVISOR, OPR - OPERARIO';
 CREATE SEQUENCE SEQ_CODIGO_GRUPOUSUARIO
@@ -354,6 +454,11 @@ CREATE SEQUENCE SEQ_CODIGO_CADUSUARIO
     START WITH 1
     INCREMENT BY 1
     ; 
+	
+CREATE TRIGGER cadusuario_audit
+AFTER INSERT OR UPDATE OR DELETE ON cadusuario
+FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();	
+
 /*
 ###########################################################################################################################################################
 															CRIAÇÃO DA TABELA EMBARQUE
@@ -381,6 +486,12 @@ CREATE SEQUENCE EMBARQUE_CODIGOEMBARQUE_SEQ
     START WITH 1
     INCREMENT BY 1
 	;
+	
+CREATE TRIGGER embarque_audit
+AFTER INSERT OR UPDATE OR DELETE ON embarque
+FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();
+
+	
 COMMENT ON TABLE EMBARQUE IS 'TABELA PRINCIPAL DO SISTEMA, ONDE SÃO REGISTRADOS TODOS OS EMBARQUES';
 COMMENT ON COLUMN EMBARQUE.STATUS IS 'I - INICIADO, P - PAUSADO, F - FINALIZADO, C - CANCELADO';
 
@@ -419,5 +530,6 @@ CREATE SEQUENCE SEQ_CODIGO_MOVIMENTOEMBARQUE
 	START WITH 1
 	INCREMENT BY 1
 	;
-
-	
+CREATE TRIGGER movembarque_audit
+AFTER INSERT OR UPDATE OR DELETE ON movembarque
+FOR EACH ROW EXECUTE PROCEDURE audit.if_modified_func();

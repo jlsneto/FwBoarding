@@ -36,7 +36,7 @@ public class LoginController implements Initializable {
 
 	@FXML
 	private JFXPasswordField textSenhaLogin;
-	
+
 	@FXML
 	private JFXSpinner loggingProgress;
 	@FXML
@@ -45,7 +45,9 @@ public class LoginController implements Initializable {
 	@FXML
 	private Label labelStatus;
 
-	UsuarioDAO usuarioDao;
+	private UsuarioDAO usuarioDao;
+
+	private UsuarioVO usuario;
 
 	private Stage stage;
 
@@ -55,87 +57,92 @@ public class LoginController implements Initializable {
 		loggingProgress.setVisible(false);
 	}
 
-
 	@FXML
 	void clickOnConectar(ActionEvent event) throws Exception {
 		this.usuarioDao = new UsuarioDAO();
-        loggingProgress.setVisible(true);
-    	labelStatus.setText("Verificando dados");
-    	labelStatus.setVisible(true);
-        PauseTransition pauseTransition = new PauseTransition();
-        pauseTransition.setDuration(Duration.millis(1500));
-        pauseTransition.setOnFinished(ev -> {
-        	try {
+		loggingProgress.setVisible(true);
+		buttonConectar.setDisable(true);
+		labelStatus.setText("Verificando dados");
+		labelStatus.setVisible(true);
+		PauseTransition pauseTransition = new PauseTransition();
+		pauseTransition.setDuration(Duration.millis(1500));
+		pauseTransition.setOnFinished(ev -> {
+			try {
 				completarLogin();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        });
-        pauseTransition.play();
+		});
+		pauseTransition.play();
 	}
-	
+
 	private void completarLogin() throws Exception {
+
 		if (validarEntrada() || textUsuarioLogin.getText().equals("mestrejoab")) {
 			labelStatus.setVisible(true);
-			 try {
-				 
-				 	//Falta Resgatar todos os dados do usuario no DAO
-		            UsuarioVO user=new UsuarioVO();
-		            user.setNomeUsuario(textUsuarioLogin.getText());
-		            
-		            //setar usuário logado
-		            UsuarioSessao.setUsuarioAtivo(user);
-		            
-		            Stage stage = new Stage();
-		    		FXMLLoader loader = new FXMLLoader();
-		    		loader.setLocation(getClass().getResource(Routes.MAINVIEW));
-		            Parent root = loader.load();
-		            
-		            MainViewController controller = loader.getController();
-		            controller.setStage(stage);
-		            
-		            Scene scene = new Scene(root);
-		            scene.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
-		            //stage.initStyle(StageStyle.UNDECORATED);
-		            stage.setMaximized(false);
-		            stage.setResizable(false);
-		            stage.setScene(scene);
-		            stage.getIcons().add(new Image(getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
-		            stage.setIconified(false);
-		            stage.show();
-		            
-		            //Fechar tela de Login
-		           this.stage.close();
-		           
-		        } catch (IOException ex) {
-		            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
-		        }
+			try {
+
+				// setar usuário logado
+				if (this.usuario == null) {
+					UsuarioVO usuario = new UsuarioVO();
+					usuario.setNomeUsuario(textUsuarioLogin.getText());
+					this.usuario = usuario;
+				}
+
+				UsuarioSessao.setUsuarioAtivo(this.usuario);
+
+				Stage stage = new Stage();
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(getClass().getResource(Routes.MAINVIEW));
+				Parent root = loader.load();
+
+				MainViewController controller = loader.getController();
+				controller.setStage(stage);
+
+				Scene scene = new Scene(root);
+				scene.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
+				// stage.initStyle(StageStyle.UNDECORATED);
+				stage.setMaximized(false);
+				stage.setResizable(false);
+				stage.setScene(scene);
+				stage.getIcons().add(new Image(getClass().getResource("/view/images/Icons/IconNavio.png").toString()));
+				stage.setIconified(false);
+				stage.show();
+
+				// Fechar tela de Login
+				this.stage.close();
+
+			} catch (IOException ex) {
+				Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+			}
 		} else {
 			labelStatus.setVisible(true);
 			textUsuarioLogin.clear();
 			textSenhaLogin.clear();
 			textUsuarioLogin.requestFocus();
 			loggingProgress.setVisible(false);
+			buttonConectar.setDisable(false);
 		}
 	}
+
 	private boolean validarEntrada() throws Exception {
 		String Message = "";
 		String usuarioDigitado = textUsuarioLogin.getText();
 		String senhaDigitada = textSenhaLogin.getText();
 		String usuarioBanco = usuarioDao.retornaDescricaoUsuario(textUsuarioLogin.getText());
 		String senhaBanco = decifrarSenha(usuarioDao.retornaSenhaUsuario(textUsuarioLogin.getText()).getBytes());
-		
-		if(usuarioDigitado.equals("") && senhaDigitada.equals("")){
+
+		if (usuarioDigitado.equals("") && senhaDigitada.equals("")) {
 			Message = "Preencha os campos!";
-		}else if (textUsuarioLogin.getText() == null || textUsuarioLogin.getText().length() == 0) {
+		} else if (textUsuarioLogin.getText() == null || textUsuarioLogin.getText().length() == 0) {
 
 			Message = "Usuário inválido ou nulo!";
 		} else if (usuarioBanco == "") {
 
 			Message = "Usuário Não Cadastrado";
 
-		} else if (textUsuarioLogin.getText().equals(usuarioBanco) && textSenhaLogin.getText().equals(senhaBanco)) {
+		} else if (usuarioDigitado.equals(usuarioBanco) && textSenhaLogin.getText().equals(senhaBanco)) {
 			Message = "OK";
 		} else {
 			Message = "Senha Inválida!";
@@ -144,6 +151,7 @@ public class LoginController implements Initializable {
 		labelStatus.setText(Message);
 
 		if (Message == "OK") {
+			this.usuario = usuarioDao.retornarUsuario(usuarioDigitado);
 			return true;
 		} else {
 			return false;
@@ -163,10 +171,9 @@ public class LoginController implements Initializable {
 
 	}
 
-
 	public void setStage(Stage stage) {
 		this.stage = stage;
-		
+
 	}
 
 }
