@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -18,11 +17,6 @@
          <top>
             <Pane prefHeight="51.0" prefWidth="600.0" BorderPane.alignment="CENTER">
                <children>
-                  <ButtonBar layoutX="310.0" layoutY="11.0" prefHeight="29.0" prefWidth="253.0">
-                    <buttons>
-                      <Button fx:id="ButtonIncluir" mnemonicParsing="false" onAction="#clickOnIncluir" styleClass="new" stylesheets="@styles/styles.css" text="Incluir" />
-                    </buttons>
-                  </ButtonBar>
                   <TextField fx:id="textFieldPesquisar" layoutX="6.0" layoutY="13.0" onKeyReleased="#onKeyPressed" prefHeight="25.0" prefWidth="177.0" promptText="Pesquisar" />
                </children>
             </Pane>
@@ -51,6 +45,7 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                   </GridPane>
+                  <JFXButton fx:id="buttonAdd" layoutX="523.0" layoutY="10.0" onAction="#clickOnIncluir" styleClass="addButton" stylesheets="@../view/styles/styles.css" text="+" />
                </children>
             </Pane>
          </bottom>
