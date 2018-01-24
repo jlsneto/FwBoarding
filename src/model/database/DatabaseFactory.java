@@ -6,11 +6,12 @@ import java.util.Properties;
 import view.ConstruirDialog;
 
 public class DatabaseFactory {
-	private static Properties props = DatabaseParams.getProp();
-	private static String base = props.getProperty("database");
+	private static Properties props;
+	private static String base;
 
 	public static Database getDatabase() {
-
+		DatabaseFactory.props = DatabaseParams.getProp();
+		DatabaseFactory.base = props.getProperty("database");
 		if (base.equals("oracle")) {
 			try {
 				return DatabaseOracle.getDatabase();

@@ -4,6 +4,7 @@
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import com.jfoenix.controls.JFXSpinner?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -37,7 +38,7 @@
       </Label>
       <ImageView fitHeight="118.0" fitWidth="200.0" layoutX="92.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="/view/images/Icons/user.png" />
+            <Image url="@../view/images/Icons/user.png" />
          </image>
       </ImageView>
       <Label fx:id="labelStatus" alignment="CENTER" contentDisplay="CENTER" layoutX="5.0" layoutY="288.0" prefHeight="17.0" prefWidth="289.0" text="status " textAlignment="CENTER" visible="false" />
@@ -48,10 +49,11 @@
          <graphic>
             <ImageView fitHeight="23.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="/view/images/Icons/lg2.png" />
+                  <Image url="@../view/images/Icons/lg2.png" />
                </image>
             </ImageView>
          </graphic></JFXButton>
       <JFXSpinner fx:id="loggingProgress" layoutX="125.0" layoutY="308.0" progress="0.0" />
+      <Hyperlink fx:id="hiperLinkConfiguracaoDatabase" layoutX="7.0" layoutY="3.0" onAction="#clickOnConfiguracaoDatabase" text="Configurações" />
    </children>
 </AnchorPane>

@@ -77,6 +77,11 @@ public class LoginController implements Initializable {
 		});
 		pauseTransition.play();
 	}
+    @FXML
+    void clickOnConfiguracaoDatabase(ActionEvent event) throws IOException {
+    	ProcessBuilder pb = new ProcessBuilder("Notepad.exe", "resources/config/database.properties");
+    	pb.start();
+    }
 
 	private void completarLogin() throws Exception {
 
@@ -115,6 +120,7 @@ public class LoginController implements Initializable {
 				this.stage.close();
 
 			} catch (IOException ex) {
+				labelStatus.setVisible(false);
 	            Stage window = this.stage;
 	            FwBoarding fwboarding =new FwBoarding();
 	            fwboarding.start(new Stage());
