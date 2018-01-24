@@ -42,14 +42,8 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 	@FXML
 	private AnchorPane anchorPaneGrupoUsuario;
 	
-	@FXML
-	private Button ButtonIncluir;
-
-	@FXML
-	private Button ButtonAlterar;
-
-	@FXML
-	private Button ButtonExcluir;
+    @FXML
+    private JFXButton buttonAdd;
 
 	@FXML
 	private TableView<GrupoUsuarioVO> TableGrupoUsuario;

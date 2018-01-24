@@ -55,13 +55,7 @@ public class ConsultaUsuario implements Initializable {
 	private ButtonBar AnchorPaneButtonBar;
 
 	@FXML
-	private Button ButtonBarButtonExcluir;
-
-	@FXML
-	private Button ButtonBarButtonAlterar;
-
-	@FXML
-	private Button ButtonBarButtonIncluir;
+    private JFXButton buttonAdd;
 
 	@FXML
 	private TableView<UsuarioVO> TableView;
