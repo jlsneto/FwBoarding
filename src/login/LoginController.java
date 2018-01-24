@@ -26,6 +26,7 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
 import com.jfoenix.controls.JFXTextField;
 
+import fwboarding.FwBoarding;
 import fwboarding.MainViewController;
 import helpers.Routes;
 
@@ -114,7 +115,10 @@ public class LoginController implements Initializable {
 				this.stage.close();
 
 			} catch (IOException ex) {
-				Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+	            Stage window = this.stage;
+	            FwBoarding fwboarding =new FwBoarding();
+	            fwboarding.start(new Stage());
+	            window.close();
 			}
 		} else {
 			labelStatus.setVisible(true);
@@ -126,7 +130,8 @@ public class LoginController implements Initializable {
 		}
 	}
 
-	private boolean validarEntrada() throws Exception {
+	private boolean validarEntrada() {
+		try {
 		String Message = "";
 		String usuarioDigitado = textUsuarioLogin.getText();
 		String senhaDigitada = textSenhaLogin.getText();
@@ -157,7 +162,10 @@ public class LoginController implements Initializable {
 			return false;
 		}
 
+	}catch (Exception e) {
+		// TODO: handle exception
 	}
+		return false;}
 
 	private String decifrarSenha(byte[] cipherText) throws Exception {
 

@@ -27,6 +27,7 @@ public class UsuarioDAO {
 
 	public UsuarioDAO() {
 		conn = DatabaseFactory.getDatabase().getConection();
+		
 
 	}
 
