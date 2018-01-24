@@ -11,7 +11,7 @@ import usuario.CadastroAutenticacaoBO;
 
 public class CadastroAutenticacaoBOTest extends TestCase {
 	
-	private byte[] plainText = "teste".getBytes(StandardCharsets.UTF_8);
+	private byte[] plainText = "".getBytes(StandardCharsets.UTF_8);
 	private byte[] cipherText;
 	
 	@Test
@@ -21,7 +21,7 @@ public class CadastroAutenticacaoBOTest extends TestCase {
 
 		this.cipherText = criptografia.encrypt(plainText);
 		
-		assertEquals("çX`ä×~=føo?,Jx",new String(cipherText));
+		assertEquals("ËÇg‡c08Ë¢¼GE",new String(cipherText));
 	}
 
 }

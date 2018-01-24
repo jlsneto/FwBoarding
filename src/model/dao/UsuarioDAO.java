@@ -223,13 +223,14 @@ public class UsuarioDAO {
 	}
 
 	public void alterar(UsuarioVO usuarioAlterar) {
-		String sql = "UPDATE CADUSUARIO SET LOGIN = ?, CODIGOGRUPO = ? WHERE CODIGOUSUARIO = ?";
+		String sql = "UPDATE CADUSUARIO SET LOGIN = ?, CODIGOGRUPO = ?, SENHA = ? WHERE CODIGOUSUARIO = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, usuarioAlterar.getNomeUsuario());
 			stmt.setLong(2, usuarioAlterar.getGrupoUsuario().getCodigoGrupo());
-			stmt.setLong(3, usuarioAlterar.getCodigoUsuario());
+			stmt.setString(3, usuarioAlterar.getSenha());
+			stmt.setLong(4, usuarioAlterar.getCodigoUsuario());
 
 			stmt.executeUpdate();
 

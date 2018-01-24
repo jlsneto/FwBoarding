@@ -3,9 +3,11 @@ package fwboarding;
 import com.jfoenix.controls.JFXButton;
 import com.sun.java.swing.plaf.windows.resources.windows;
 
+import helpers.DialogUsuarioSenha;
 import helpers.Routes;
 
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,6 +23,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import login.UsuarioSessao;
+import model.dao.UsuarioDAO;
+import usuario.CadastroAutenticacaoBO;
 import usuario.CadastroSenhaController;
 
 /**
@@ -70,28 +74,24 @@ public class MenuLateralController implements Initializable {
     }
     
     @FXML
-    private void alterarSenha() {
-    	try {
-    		FXMLLoader loader = new FXMLLoader();
-    		loader.setLocation(getClass().getResource(Routes.CADASTROSENHAVIEW));
-    		AnchorPane cadastroSenhaView = loader.load();
-    		
-
-    		Stage stage = new Stage();
-    		stage.initOwner(MainViewController.stage);
-    		stage.setResizable(false);
-    		Scene scene = new Scene(cadastroSenhaView);
-    		
-    		CadastroSenhaController controller = loader.getController();
-    		controller.setDialogStage(stage);
-    		
-    		stage.setScene(scene);
-    		stage.showAndWait();
-    		
-    	}catch (Exception e) {
-			Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, e);
-		}
+    private void alterarSenha() throws Exception {
+    	String senha = cifrarSenha(new DialogUsuarioSenha().getSenha());
+    	UsuarioSessao.getUsuarioAtivo().setSenha(senha);
+    	UsuarioDAO usuarioDao = new UsuarioDAO();
+    	usuarioDao.alterar(UsuarioSessao.getUsuarioAtivo());
     }
+    
+	private String cifrarSenha(String textSenha) throws Exception {
+
+		CadastroAutenticacaoBO cadastroAutenticacao = new CadastroAutenticacaoBO();
+
+		byte[] plainText = textSenha.getBytes(StandardCharsets.UTF_8);
+		byte[] cipherText = cadastroAutenticacao.encrypt(plainText);
+		// byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
+
+		return new String(cipherText);
+	}
+	
     @FXML
     private void sair(ActionEvent event) {
         Platform.exit();

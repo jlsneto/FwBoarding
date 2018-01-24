@@ -143,7 +143,6 @@ public class LoginController implements Initializable {
 		String senhaDigitada = textSenhaLogin.getText();
 		String usuarioBanco = usuarioDao.retornaDescricaoUsuario(textUsuarioLogin.getText());
 		String senhaBanco = decifrarSenha(usuarioDao.retornaSenhaUsuario(textUsuarioLogin.getText()).getBytes());
-
 		if (usuarioDigitado.equals("") && senhaDigitada.equals("")) {
 			Message = "Preencha os campos!";
 		} else if (textUsuarioLogin.getText() == null || textUsuarioLogin.getText().length() == 0) {
@@ -169,7 +168,7 @@ public class LoginController implements Initializable {
 		}
 
 	}catch (Exception e) {
-		// TODO: handle exception
+		System.out.println(e.getMessage());
 	}
 		return false;}
 

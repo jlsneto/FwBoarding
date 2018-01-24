@@ -22,17 +22,14 @@ public class CadastroSenhaController implements Initializable{
 	private JFXButton buttonConfirmar;
 
 	private Stage dialogStage;
+	
+	public static String senha;
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 		dialogStage.setOnCloseRequest(event -> {
-				event.consume();
+				dialogStage.close();
 		});
-	}
-
-	private boolean confirmouFehamento() {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@FXML
@@ -47,7 +44,7 @@ public class CadastroSenhaController implements Initializable{
 	}
 
 	public String getSenha() {
-		return fieldTextSenha.getText();
+		return senha;
 	}
 
 	private boolean validarEntrada() {
@@ -66,6 +63,7 @@ public class CadastroSenhaController implements Initializable{
 		}
 
 		if (errorMessage.length() == 0) {
+			senha = fieldTextSenha.getText();
 			return true;
 		} else {
 			ConstruirDialog dialogErro = new ConstruirDialog();
