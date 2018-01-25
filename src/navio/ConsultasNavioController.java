@@ -224,9 +224,10 @@ public class ConsultasNavioController implements Initializable {
 			ButtonBar btnBar = itens.getButtonBar();
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 
-			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/excluirIcon.png"));
+			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
 			// button excluir
 			JFXButton buttonExcluir = new JFXButton();
+			buttonExcluir.getStyleClass().add("buttonTable");
 			buttonExcluir.setGraphic(new ImageView(excluirIcon));
 
 			buttonExcluir.setOnAction(event -> {

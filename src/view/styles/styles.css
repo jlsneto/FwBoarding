@@ -448,3 +448,11 @@ search field
 .blue-titledPane> .title> .arrow-button .arrow{
     -fx-background-color: white;
 }
+
+.buttonTable{
+	-fx-graphic: url('../images/Icons/deletar.png');
+	
+}
+.buttonTable:hover{
+	-fx-graphic: url('../images/Icons/deletar-hover.png');
+}

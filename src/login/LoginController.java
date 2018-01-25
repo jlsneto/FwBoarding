@@ -56,6 +56,7 @@ public class LoginController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		loggingProgress.setVisible(false);
+		labelStatus.setVisible(false);
 	}
 
 	@FXML

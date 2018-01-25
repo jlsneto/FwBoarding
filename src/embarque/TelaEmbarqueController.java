@@ -141,11 +141,12 @@ public class TelaEmbarqueController implements Initializable {
 			ButtonBar btnBar = itens.getButtonBar();
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 
-			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/excluirIcon.png"));
+			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
 			// button excluir
 			JFXButton buttonExcluir = new JFXButton();
 			buttonExcluir.setGraphic(new ImageView(excluirIcon));
-
+			buttonExcluir.getStyleClass().add("buttonTable");
+			
 			buttonExcluir.setOnAction(event -> {
 				try {
 					tableViewEmbarque.getSelectionModel().select(itens);
