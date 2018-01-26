@@ -7,6 +7,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import view.ConstruirDialog;
 
@@ -20,15 +22,27 @@ public class CadastroSenhaController implements Initializable{
 
 	@FXML
 	private JFXButton buttonConfirmar;
-
+	
+	@FXML
+	private Label statusVerifica;
+	
 	private Stage dialogStage;
+
+	static boolean isAlterar = false;
 	
 	public static String senha;
 
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 		dialogStage.setOnCloseRequest(event -> {
-				dialogStage.close();
+				if(isAlterar) {
+					dialogStage.close();
+				}else {
+					statusVerifica.setText("Atenção: obrigatório cadastrar a senha antes de sair.");
+					statusVerifica.setVisible(true);
+					event.consume();
+				}
+				
 		});
 	}
 
@@ -49,12 +63,17 @@ public class CadastroSenhaController implements Initializable{
 
 	private boolean validarEntrada() {
 		String errorMessage = "";
-
+		statusVerifica.setText("Validando dados!");
+		statusVerifica.setVisible(true);
 		if (fieldTextSenha.getText() == null || fieldTextSenha.getText().length() == 0) {
 
 			errorMessage = "Senha invalida ou nula!\n";
 			fieldTextSenha.requestFocus();
-		} else if (fieldTextConfirmSenha.getText() == null || fieldTextConfirmSenha.getText().length() == 0) {
+		}else if(fieldTextSenha.getText().length() < 6 ) {
+			errorMessage = "Sua senha deve conter pelo menos 06 dígitos!";
+			fieldTextSenha.requestFocus();
+		}
+		else if (fieldTextConfirmSenha.getText() == null || fieldTextConfirmSenha.getText().length() == 0) {
 
 			errorMessage = "Senha invalida ou nula!\n";
 			fieldTextConfirmSenha.requestFocus();
@@ -64,18 +83,25 @@ public class CadastroSenhaController implements Initializable{
 
 		if (errorMessage.length() == 0) {
 			senha = fieldTextSenha.getText();
+			statusVerifica.setText("Senha cadastrada com Sucesso!");
 			return true;
 		} else {
-			ConstruirDialog dialogErro = new ConstruirDialog();
-			dialogErro.DialogError("Erro cadastro de Usuário", errorMessage, 0, "", errorMessage);
+			statusVerifica.setText(errorMessage);
 			return false;
 		}
 
+	}
+	@FXML
+	public void keyPressed(){
+		if(statusVerifica.isVisible()) {
+			statusVerifica.setVisible(false);
+		}
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		statusVerifica.setVisible(false);
 		
 	}
 

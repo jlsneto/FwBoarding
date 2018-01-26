@@ -48,6 +48,7 @@ public class UsuarioDAO {
 				usuario.setCodigoUsuario(resultado.getLong("CODIGOUSUARIO"));
 				usuario.setNomeUsuario(resultado.getString("LOGIN"));
 				usuario.setSenha(resultado.getString("SENHA"));
+				usuario.setAlteraSenha(resultado.getString("ALTERASENHA"));
 				
 				GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
 
@@ -82,7 +83,7 @@ public class UsuarioDAO {
 	}
 
 	public void inserir(UsuarioVO usuario) {
-		String sql = "INSERT INTO CADUSUARIO(LOGIN, SENHA, CODIGOGRUPO) VALUES(?,?,?)";
+		String sql = "INSERT INTO CADUSUARIO(LOGIN, SENHA, CODIGOGRUPO, ALTERASENHA) VALUES(?,?,?,?)";
 
 		try {
 
@@ -91,6 +92,7 @@ public class UsuarioDAO {
 			stmt.setString(1, usuario.getNomeUsuario());
 			stmt.setString(2, usuario.getSenha());
 			stmt.setLong(3, usuario.getGrupoUsuario().getCodigoGrupo());
+			stmt.setString(4, usuario.getAlteraSenha());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -223,14 +225,15 @@ public class UsuarioDAO {
 	}
 
 	public void alterar(UsuarioVO usuarioAlterar) {
-		String sql = "UPDATE CADUSUARIO SET LOGIN = ?, CODIGOGRUPO = ?, SENHA = ? WHERE CODIGOUSUARIO = ?";
+		String sql = "UPDATE CADUSUARIO SET LOGIN = ?, CODIGOGRUPO = ?, SENHA = ?, ALTERASENHA = ? WHERE CODIGOUSUARIO = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, usuarioAlterar.getNomeUsuario());
 			stmt.setLong(2, usuarioAlterar.getGrupoUsuario().getCodigoGrupo());
 			stmt.setString(3, usuarioAlterar.getSenha());
-			stmt.setLong(4, usuarioAlterar.getCodigoUsuario());
+			stmt.setString(4, usuarioAlterar.getAlteraSenha());
+			stmt.setLong(5, usuarioAlterar.getCodigoUsuario());
 
 			stmt.executeUpdate();
 

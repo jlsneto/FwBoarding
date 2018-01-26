@@ -3,6 +3,7 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
@@ -11,7 +12,7 @@
    <children>
       <VBox layoutX="10.0" layoutY="10.0" prefHeight="224.0" prefWidth="292.0" style="-fx-background-color: white;" styleClass="card" stylesheets="@../view/styles/styles.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <JFXPasswordField fx:id="fieldTextSenha" labelFloat="true" prefHeight="9.0" prefWidth="253.0" promptText="Senha">
+            <JFXPasswordField fx:id="fieldTextSenha" labelFloat="true" onKeyPressed="#keyPressed" prefHeight="9.0" prefWidth="253.0" promptText="Senha">
                <VBox.margin>
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
@@ -22,7 +23,7 @@
                   <Font size="14.0" />
                </font>
             </JFXPasswordField>
-            <JFXPasswordField fx:id="fieldTextConfirmSenha" labelFloat="true" prefHeight="15.0" prefWidth="253.0" promptText="Confirmar Senha">
+            <JFXPasswordField fx:id="fieldTextConfirmSenha" labelFloat="true" onKeyPressed="#keyPressed" prefHeight="15.0" prefWidth="253.0" promptText="Confirmar Senha">
                <VBox.margin>
                   <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
@@ -33,12 +34,17 @@
                   <Font size="14.0" />
                </font>
             </JFXPasswordField>
+            <Label fx:id="statusVerifica" text="Status" textFill="#cd0a0a">
+               <VBox.margin>
+                  <Insets left="10.0" />
+               </VBox.margin>
+            </Label>
             <JFXButton fx:id="buttonConfirmar" alignment="CENTER" contentDisplay="CENTER" defaultButton="true" onAction="#clickOnConfirm" prefHeight="30.0" prefWidth="269.0" styleClass="blue-btn" text="Confirmar">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
                <VBox.margin>
-                  <Insets top="20.0" />
+                  <Insets top="5.0" />
                </VBox.margin>
             </JFXButton>
          </children>

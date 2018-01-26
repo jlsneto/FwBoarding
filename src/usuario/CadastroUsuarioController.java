@@ -6,7 +6,10 @@ import java.nio.charset.StandardCharsets;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
+import com.jfoenix.controls.JFXCheckBox;
+
 import fwboarding.FwBoarding;
+import helpers.DialogUsuarioSenha;
 import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -43,7 +46,10 @@ public class CadastroUsuarioController implements Initializable {
 
 	@FXML
 	private Label labelCodigo;
-
+	
+    @FXML
+    private JFXCheckBox alteraSenha;
+    
 	@FXML
 	private Button buttonCancelar;
 
@@ -88,6 +94,12 @@ public class CadastroUsuarioController implements Initializable {
 		labelCodigo.setText(Long.toString(usuarioAlterar.getCodigoUsuario()));
 		textFieldUsuario.setText(usuarioAlterar.getNomeUsuario());
 		comboBoxGrupoUsuario.getSelectionModel().select(usuarioAlterar.getGrupoUsuario());
+		if(usuarioAlterar.getAlteraSenha().equals("T")) {
+			alteraSenha.setSelected(true);
+		}else {
+			alteraSenha.setSelected(false);
+		}
+		
 		buttonCadastrar.setText("Aplicar");
 	}
 
@@ -118,13 +130,16 @@ public class CadastroUsuarioController implements Initializable {
 		if (validarEntrada()) {
 			if (isAlterarUsuario == false) {
 				UsuarioVO usuario = new UsuarioVO();
+				if(alteraSenha.isSelected()) {
+					usuario.setAlteraSenha("T");
+				}else {
+					usuario.setAlteraSenha("F");
+				}
 				usuario.setCodigoUsuario(Integer.valueOf(labelCodigo.getText()));
 				usuario.setNomeUsuario(textFieldUsuario.getText());
 				usuario.setGrupoUsuario(comboBoxGrupoUsuario.getSelectionModel().getSelectedItem());
 				// carrega a tela para cadastrar a senha posteriormente cifra
-				String senha = "1234";
-				
-				usuario.setSenha(cifrarSenha(senha));
+				usuario.setSenha(cifrarSenha(new DialogUsuarioSenha().getSenha()));
 				usuarioDAO.inserir(usuario);
 
 				// Atualiza Tela de Consulta
@@ -137,6 +152,11 @@ public class CadastroUsuarioController implements Initializable {
 			} else {
 				usuarioAlterar.setNomeUsuario(textFieldUsuario.getText());
 				usuarioAlterar.setGrupoUsuario(comboBoxGrupoUsuario.getSelectionModel().getSelectedItem());
+				if(alteraSenha.isSelected()) {
+					usuarioAlterar.setAlteraSenha("T");
+				}else {
+					usuarioAlterar.setAlteraSenha("F");
+				}
 				usuarioDAO.alterar(usuarioAlterar);
 				ConsultaUsuario.itensEncontrados.set(ConsultaUsuario.itensEncontrados.indexOf(usuarioAlterar),
 						usuarioAlterar);
@@ -145,7 +165,6 @@ public class CadastroUsuarioController implements Initializable {
 			}
 
 		}
-		chamarConsultaUsuario();
 
 	}
 
