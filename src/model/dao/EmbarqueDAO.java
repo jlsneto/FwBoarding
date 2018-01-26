@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import login.UsuarioSessao;
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.EmbarqueVO;
@@ -37,7 +38,7 @@ public class EmbarqueDAO {
 			stmt.setLong(2, embarque.getPaisDestino().getCodigoPais());
 			stmt.setString(3, "I");
 			stmt.setFloat(4, embarque.getQuantidadeDeAcucar());
-			stmt.setLong(5, 5);
+			stmt.setLong(5, UsuarioSessao.getUsuarioAtivo().getCodigoUsuario());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -48,13 +49,12 @@ public class EmbarqueDAO {
 	}
 
 	public void alterar(EmbarqueVO embarqueAlterar) {
-		String sql = "UPDATE EMBARQUE SET CODIGONAVIO = ?, CODIGOPAISDESTINO = ?, STATUS = ?, QTDAEMBARCAR = ? WHERE CODIGOEMBARQUE = ?";
+		String sql = "UPDATE EMBARQUE SET CODIGONAVIO = ?, CODIGOPAISDESTINO = ?, QTDAEMBARCAR = ? WHERE CODIGOEMBARQUE = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setLong(1, embarqueAlterar.getCodigoNavio());
 			stmt.setLong(2, embarqueAlterar.getPaisDestino().getCodigoPais());
-			stmt.setString(3, "I");
 			stmt.setFloat(4, embarqueAlterar.getQuantidadeDeAcucar());
 			stmt.setLong(5, embarqueAlterar.getCodigoEmbarque());
 			stmt.executeUpdate();
