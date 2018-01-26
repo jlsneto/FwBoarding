@@ -10,7 +10,6 @@ import model.vo.NavioVO;
 
 public class NavioTest {
 
-
 	@Test
 	public void testSetCodigo() {
 
