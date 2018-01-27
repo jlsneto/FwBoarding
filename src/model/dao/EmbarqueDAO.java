@@ -55,8 +55,8 @@ public class EmbarqueDAO {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 			stmt.setLong(1, embarqueAlterar.getCodigoNavio());
 			stmt.setLong(2, embarqueAlterar.getPaisDestino().getCodigoPais());
-			stmt.setFloat(4, embarqueAlterar.getQuantidadeDeAcucar());
-			stmt.setLong(5, embarqueAlterar.getCodigoEmbarque());
+			stmt.setFloat(3, embarqueAlterar.getQuantidadeDeAcucar());
+			stmt.setLong(4, embarqueAlterar.getCodigoEmbarque());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
