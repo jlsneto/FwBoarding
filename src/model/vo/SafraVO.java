@@ -1,11 +1,13 @@
 package model.vo;
 
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.CheckBox;
 
 public class SafraVO {
 	private long codigoSafra;
 	private String anoSafra;
 	private CheckBox checkBox;
+	private ButtonBar buttonBar;
 
 	public long getCodigoSafra() {
 		return codigoSafra;
@@ -29,5 +31,13 @@ public class SafraVO {
 
 	public void setCheckBox(CheckBox checkBox) {
 		this.checkBox = checkBox;
+	}
+	
+	public void setButtonBar(ButtonBar buttonBar) {
+		this.buttonBar = buttonBar;
+	}
+
+	public ButtonBar getButtonBar() {
+		return this.buttonBar;
 	}
 }

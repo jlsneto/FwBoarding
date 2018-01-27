@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+
+<AnchorPane fx:id="TelaSafra" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="0.0">
+         <top>
+            <Pane prefHeight="91.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <children>
+                  <GridPane layoutX="14.0" layoutY="33.0" prefHeight="51.0" prefWidth="188.0">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <TextField fx:id="textFieldPesquisar" prefHeight="25.0" prefWidth="177.0" promptText="Pesquisar" />
+                     </children>
+                  </GridPane>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <TableView fx:id="TableView" prefHeight="342.0" prefWidth="296.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn fx:id="TableColumnCodigo" prefWidth="75.0" text="Codigo" />
+                <TableColumn fx:id="TableColumnAnoSafra" prefWidth="109.0" text="Ano da Safra" />
+                  <TableColumn fx:id="TableColumnSetSafra" prefWidth="183.0" text="Selecionar como Safra Padrão" />
+                  <TableColumn fx:id="columnButton" prefWidth="212.0" text="Action" />
+              </columns>
+            </TableView>
+         </center>
+         <bottom>
+            <Pane prefHeight="69.0" prefWidth="295.0" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton fx:id="buttonAdd" layoutX="514.0" layoutY="22.0" onAction="#clickOnIncluir" styleClass="addButton" stylesheets="@../view/styles/styles.css" text="+" />
+               </children>
+            </Pane>
+         </bottom>
+      </BorderPane>
+   </children>
+</AnchorPane>
