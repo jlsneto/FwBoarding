@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXCheckBox;
+import com.jfoenix.controls.JFXComboBox;
 
 import fwboarding.FwBoarding;
 import helpers.DialogUsuarioSenha;
@@ -42,7 +43,7 @@ public class CadastroUsuarioController implements Initializable {
 	private TextField textFieldUsuario;
 
 	@FXML
-	private ComboBox<GrupoUsuarioVO> comboBoxGrupoUsuario;
+	private JFXComboBox<GrupoUsuarioVO> comboBoxGrupoUsuario;
 
 	@FXML
 	private Label labelCodigo;
@@ -75,7 +76,6 @@ public class CadastroUsuarioController implements Initializable {
 		labelCodigo.setText(Integer.toString(usuarioDAO.verificaUltimoCodigo()+1));
 
 		observableListGrupoUsuario = FXCollections.observableArrayList(grupoUsuarioDAO.listar());
-
 		comboBoxGrupoUsuario.setItems(observableListGrupoUsuario);
 
 	}

@@ -175,11 +175,29 @@ public class UsuarioDAO {
 
 				usuario.setCodigoUsuario(listaResultado.getLong("CODIGOUSUARIO"));
 				usuario.setNomeUsuario(listaResultado.getString("LOGIN"));
-
+				usuario.setSenha(listaResultado.getString("SENHA"));
+				usuario.setAlteraSenha(listaResultado.getString("ALTERASENHA"));
+				
 				GrupoUsuarioVO grupoUsuario = new GrupoUsuarioVO();
 
-				grupoUsuario.setCodigoGrupo(listaResultado.getInt("CODIGOGRUPO"));
+				grupoUsuario.setCodigoGrupo(listaResultado.getLong("CODIGOGRUPO"));
 				grupoUsuario.setDescricaoGrupo(listaResultado.getString("DESCRICAO"));
+				grupoUsuario.setPermissaoInsertNavio(listaResultado.getString("PERMISSAO_INSERT_NAVIO"));
+				grupoUsuario.setPermissaoAlterNavio(listaResultado.getString("PERMISSAO_ALTER_NAVIO"));
+				grupoUsuario.setPermissaoConsulNavio(listaResultado.getString("PERMISSAO_CONSUL_NAVIO"));
+				grupoUsuario.setPermissaoDeletNavio(listaResultado.getString("PERMISSAO_DELET_NAVIO"));
+				grupoUsuario.setPermissaoInsertUser(listaResultado.getString("PERMISSAO_INSERT_USER"));
+				grupoUsuario.setPermissaoAlterUser(listaResultado.getString("PERMISSAO_ALTER_USER"));
+				grupoUsuario.setPermissaoConsulUser(listaResultado.getString("PERMISSAO_CONSUL_USER"));
+				grupoUsuario.setPermissaoDeletUser(listaResultado.getString("PERMISSAO_DELET_USER"));
+				grupoUsuario.setPermissaoInsertMovimento(listaResultado.getString("PERMISSAO_INSERT_MOVIMENTO"));
+				grupoUsuario.setPermissaoAlterMovimento(listaResultado.getString("PERMISSAO_ALTER_MOVIMENTO"));
+				grupoUsuario.setPermissaoConsulMovimento(listaResultado.getString("PERMISSAO_CONSUL_MOVIMENTO"));
+				grupoUsuario.setPermissaoDeletMovimento(listaResultado.getString("PERMISSAO_DELET_MOVIMENTO"));
+				grupoUsuario.setPermissaoInsertEmbarque(listaResultado.getString("PERMISSAO_INSERT_EMBARQUE"));
+				grupoUsuario.setPermissaoAlterEmbarque(listaResultado.getString("PERMISSAO_ALTER_EMBARQUE"));
+				grupoUsuario.setPermissaoConsulEmbarque(listaResultado.getString("PERMISSAO_CONSUL_EMBARQUE"));
+				grupoUsuario.setPermissaoDeletEmbarque(listaResultado.getString("PERMISSAO_DELET_EMBARQUE"));
 
 				usuario.setGrupoUsuario(grupoUsuario);
 

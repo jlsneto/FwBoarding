@@ -1,6 +1,6 @@
 package model.vo;
 
-import javafx.scene.control.ButtonBar;
+import javafx.scene.layout.HBox;
 
 public class UsuarioVO {
 	private long codigoUsuario;
@@ -8,7 +8,7 @@ public class UsuarioVO {
 	private String senha;
 	private GrupoUsuarioVO grupoUsuario;
 	private String alteraSenha;
-	private ButtonBar buttonBar;
+	private HBox buttonBar;
 
 
 	public UsuarioVO() {
@@ -48,11 +48,11 @@ public class UsuarioVO {
 		this.grupoUsuario = grupoUsuario;
 	}
 
-	public void setButtonBar(ButtonBar buttonBar) {
+	public void setButtonBar(HBox buttonBar) {
 		this.buttonBar = buttonBar;
 	}
 
-	public ButtonBar getButtonBar() {
+	public HBox getButtonBar() {
 		return this.buttonBar;
 	}
 

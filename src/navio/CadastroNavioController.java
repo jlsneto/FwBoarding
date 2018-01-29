@@ -257,11 +257,9 @@ public class CadastroNavioController implements Initializable {
 
 		labelCodigo.setText(Long.toString(navio.getCodigoNavio()));
 		textFieldDescricao.setText(navio.getDescricaoNavio());
-		//consertar ComboBox
 		comboBoxPaisOrigem.getSelectionModel().select(navio.getPais());
 		//comboBoxQuantidadePorao.getSelectionModel().select((Integer) navioAlterar.getQtdPorao());
 		comboBoxQuantidadePorao.setValue(navio.getQtdPorao());
-		textFieldCapacidadePorao.setText(Double.toString(navio.getCapacidadePorao()));
 		buttonGravar.setText("Aplicar");
 	}
 

@@ -17,6 +17,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -33,6 +34,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import model.dao.NavioDAO;
 import model.dao.UsuarioDAO;
 import model.vo.NavioVO;
@@ -192,9 +194,9 @@ public class ConsultaUsuario implements Initializable {
 
 		itensEncontrados = FXCollections.observableArrayList();
 		for (UsuarioVO itens : observableListUsuario) {
-			itens.setButtonBar(new ButtonBar());
-			ButtonBar btnBar = itens.getButtonBar();
-			//btnBar.setNodeOrientation(orientation);
+			itens.setButtonBar(new HBox());
+			HBox btnBar = itens.getButtonBar();
+			btnBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 
 			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
@@ -225,7 +227,7 @@ public class ConsultaUsuario implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
+			btnBar.getChildren().addAll(buttonExcluir, buttonEdit);
 			if (itens.getNomeUsuario().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}

@@ -20,6 +20,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -36,12 +37,16 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import model.dao.NavioDAO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
+import sun.security.provider.certpath.OCSP.RevocationStatus.CertStatus;
 import view.ConstruirDialog;
 
 public class ConsultasNavioController implements Initializable {
@@ -68,9 +73,6 @@ public class ConsultasNavioController implements Initializable {
 	private JFXButton buttonAdd;
 
 	@FXML
-	private JFXTabPane tabPane;
-
-	@FXML
 	private AnchorPane anchorPaneNavio;
 
 	public static ObservableList<NavioVO> observableListNavio;
@@ -81,7 +83,6 @@ public class ConsultasNavioController implements Initializable {
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		setNode(tabPane);
 		carregarTableViewNavio();
 
 	}
@@ -220,8 +221,9 @@ public class ConsultasNavioController implements Initializable {
 		itensEncontrados = FXCollections.observableArrayList();
 		// adicionar button para cada navio
 		for (NavioVO itens : observableListNavio) {
-			itens.setButtonBar(new ButtonBar());
-			ButtonBar btnBar = itens.getButtonBar();
+			itens.setButtonBar(new HBox());
+			HBox btnBar = itens.getButtonBar();
+			btnBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 
 			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
@@ -274,7 +276,7 @@ public class ConsultasNavioController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			btnBar.getButtons().addAll(buttonExcluir, buttonEdit, buttonEmbarque);
+			btnBar.getChildren().addAll(buttonExcluir, buttonEdit, buttonEmbarque);
 			if (itens.getDescricaoNavio().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
