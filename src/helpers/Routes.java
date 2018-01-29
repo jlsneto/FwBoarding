@@ -26,6 +26,10 @@ public class Routes {
     public static String CADASTROEMBARQUEVIEW = "/embarque/CadastroEmbarqueView.fxml";
     public static String MOVIMENTOEMBARQUEVIEW = "/embarque/MovimentoEmbarqueView.fxml";
     
+    //safra
+    public static String SAFRAVIEW = "/safra/SafraView.fxml";
+    public static String CADASTROSAFRAVIEW ="/safra/CadastroSafraView.fxml";
+    
 
 
 }
