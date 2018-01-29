@@ -11,6 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javafx.application.Platform;
+import login.UsuarioSessao;
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.NavioVO;
@@ -180,8 +181,10 @@ public class NavioDAO {
 	}
 
 	public void alterar(NavioVO navioAlterar) {
+		
 		String sql = "UPDATE CADNAVIO SET DESCRICAO = ?, QTDPORAO = ?, CAPACIDADEPORAO = ?, CODIGOPAISORIGEM = ? WHERE CODIGONAVIO = ?";
 		try {
+			
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, navioAlterar.getDescricaoNavio());

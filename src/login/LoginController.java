@@ -19,8 +19,6 @@ import usuario.CadastroAutenticacaoBO;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXSpinner;
@@ -72,7 +70,6 @@ public class LoginController implements Initializable {
 			try {
 				completarLogin();
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});

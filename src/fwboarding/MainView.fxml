@@ -20,9 +20,9 @@
             
          </right>
       </JFXToolbar>
-      <AnchorPane fx:id="holderPane" layoutX="86.0" layoutY="51.0" prefHeight="684.0" prefWidth="1105.0" />
+      <AnchorPane fx:id="holderPane" layoutX="86.0" layoutY="51.0" onMouseClicked="#clicouForaTeste" prefHeight="684.0" prefWidth="1105.0" />
           
         
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutX="-1.0" layoutY="46.0" prefHeight="678.0" prefWidth="150.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutX="-1.0" layoutY="46.0" onMouseExited="#clicouForaTeste" prefHeight="678.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

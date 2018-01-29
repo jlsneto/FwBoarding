@@ -1,6 +1,10 @@
 package helpers;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import fwboarding.MainViewController;
+import fwboarding.MenuLateralController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -31,7 +35,7 @@ public class DialogUsuarioSenha {
 			stage.showAndWait();
 			this.senha = controller.getSenha();
 		} catch (Exception e) {
-			System.out.println("ERRO!");
+			Logger.getLogger(MenuLateralController.class.getName()).log(Level.SEVERE, null, e);
 		}
 	}
 

@@ -9,7 +9,7 @@ public class DatabaseOracle implements Database {
 	private static DatabaseOracle instance;
 
 	private static Connection conn;
-
+	private static boolean conexaoInvalida;
 	private Properties props = DatabaseParams.getProp();
 
 	private String host = props.getProperty("database.oracle.host");
@@ -27,7 +27,7 @@ public class DatabaseOracle implements Database {
 			// Abrir conexão com DB
 			DatabaseOracle.conn = DriverManager.getConnection(url, user, password);
 		} catch (SQLException e) {
-
+			conexaoInvalida = true;
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("Erro de Conexão", "A conexão com o banco de dados falhou!", e.getErrorCode(),
 					e.getMessage(), "Possíveis Causas:\n" + "Endereço do Servidor\n" + "Serviços do Banco de Dados");
@@ -36,7 +36,8 @@ public class DatabaseOracle implements Database {
 	}
 
 	public synchronized static DatabaseOracle getDatabase() throws SQLException {
-		if (instance == null) {
+		if (instance == null || conexaoInvalida == true) {
+			conexaoInvalida = false;
 			instance = new DatabaseOracle();
 		}else if(conn.isClosed()) {
 			instance = new DatabaseOracle();

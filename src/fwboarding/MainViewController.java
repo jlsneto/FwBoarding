@@ -42,28 +42,25 @@ public class MainViewController implements Initializable {
     private HamburgerBasicCloseTransition transitionHamburguer;
     public static Stage stage;
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
+ 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
     	final HamburgerBasicCloseTransition transition = new HamburgerBasicCloseTransition(hamburger);
-        transition.setRate(-1);
+       
+        transitionHamburguer = transition;
         //usuarioLogado.setText(UsuarioSessao.getUsuarioAtivo().getNomeUsuario());
         hamburger.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent e) -> {
         	if(e.getClickCount() == 1) {
-
+        		 //transition.setRate(-1);
         		//reativa drawer
         		drawer.setDisable(false);
         		
         		transition.setRate(transition.getRate() * -1);
         		 //System.out.println(this.transitionHamburguer.getStatus());
                 transition.play();
-                if (drawer.isShown()) {
+                if (drawer.isShown()) {            
                     drawer.close();
+                    transition.setRate(-1);
                 } else {
                     drawer.open();
                 }
@@ -79,19 +76,22 @@ public class MainViewController implements Initializable {
             for (Node node : sidePane.getChildren()) {
                 if (node.getAccessibleText() != null) {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {
-                    	transition.setRate(transition.getRate()*(-1.0));
-                        transition.play();
+                        transition.setRate(-1);
+
+                        
                         try {
                         switch (node.getAccessibleText()) {
                             case "inicioMenu":
                             	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(bemVindoPane);
+                                transition.play();
                                 break;
                             case "navioMenu":     
                             	AnchorPane navioPane = FXMLLoader.load(getClass().getResource(Routes.NAVIOVIEW));
                             	drawer.setDisable(true);
                                 drawer.close();
+                                transition.play();
                                 setNode(navioPane);
                                 break;
                             case "usuarioMenu":
@@ -99,18 +99,21 @@ public class MainViewController implements Initializable {
                             	drawer.setDisable(true);
                                 drawer.close();
                                 setNode(usuarioview);
+                                transition.play();
                                 break;
                             case "grupoUsuarioMenu":
                             	AnchorPane grupoUsuarioPane = FXMLLoader.load(getClass().getResource(Routes.GRUPOUSUARIOVIEW));
                             	drawer.setDisable(true);
                                 drawer.close();                                
                                 setNode(grupoUsuarioPane);
+                                transition.play();
                                 break;
                             case "embarqueMenu":
 								AnchorPane embarquePane = FXMLLoader.load(getClass().getResource(Routes.EMBARQUEVIEW));
                             	drawer.setDisable(true);
                             	drawer.close();
                             	setNode(embarquePane);
+                            	transition.play();
                             	break;
                         }
                     }catch (IOException e1) {
@@ -137,6 +140,17 @@ public class MainViewController implements Initializable {
     
     public Stage getStage() {
     	return this.stage;
+    }
+    @FXML
+    public void clicouForaTeste () {
+    	transitionHamburguer.setRate(-1);
+    	
+        if (drawer.isShown()) {
+        	transitionHamburguer.play();
+            drawer.close();
+            drawer.setDisable(true);
+
+        }
     }
 
 }
