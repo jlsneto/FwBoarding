@@ -91,7 +91,7 @@ public class SafraViewController implements Initializable {
 
 			AnchorPane cadastroSafra = loader.load();
 			CadastroSafraController controller = loader.getController();
-			controller.setUsuarioAlterar(safra);
+			controller.setSafraAlterar(safra);
 			setNode(cadastroSafra);
 
 		} else {

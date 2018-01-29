@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
@@ -119,6 +121,28 @@ public class SafraDAO {
 					sql);
 		}
 		return listaUsuario;
+	}
+	
+	public String retornaAnoSafra(String anoSafra) {
+		String sql = "SELECT ANOSAFRA FROM SAFRA WHERE ANOSAFRA = ?";
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setString(1, anoSafra);
+			ResultSet listaResultado = stmt.executeQuery();
+
+			if (listaResultado.next()) {
+				return listaResultado.getString("ANOSAFRA");
+			} else {
+				return "";
+			}
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro de Consulta", "Erro ao consultar dados no banco de dados", e.getErrorCode(),
+					e.getMessage(), sql);
+			Logger.getLogger(SafraDAO.class.getName()).log(Level.SEVERE, null, e);
+			return "";
+		}
 	}
 
 }
