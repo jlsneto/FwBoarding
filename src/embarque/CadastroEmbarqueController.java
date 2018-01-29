@@ -151,7 +151,7 @@ public class CadastroEmbarqueController implements Initializable {
 				}
 				// fechar dialog
 				//chamarConsultaEmbarque();
-				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
+				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("anchorPaneNavio")) {
 					chamarConsultaNavio();
 				}
 				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {
@@ -167,7 +167,7 @@ public class CadastroEmbarqueController implements Initializable {
 				TelaEmbarqueController.itensEncontrados
 						.set(TelaEmbarqueController.itensEncontrados.indexOf(embarqueAlterar), embarqueAlterar);
 				//chamarConsultaEmbarque();
-				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("navioConsulta")) {
+				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("anchorPaneNavio")) {
 					chamarConsultaNavio();
 				}
 				if (anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("embarqueConsulta")) {
@@ -241,8 +241,11 @@ public class CadastroEmbarqueController implements Initializable {
 		textFieldCodigoNavio.setText(Long.toString(embarque.getCodigoNavio()));
 		// consertar ComboBox
 		comboBoxPaisDestino.getSelectionModel().select(embarque.getPaisDestino());
-		// comboBoxQuantidadePorao.getSelectionModel().select((Integer)
-		// navioAlterar.getQtdPorao());
+		comboBoxPaisDestino.getItems().forEach(pais->{
+			if(pais.getNome().equals(embarque.getPaisDestino().getNome())) {
+				comboBoxPaisDestino.getSelectionModel().select(pais);
+			}
+		});
 		textFieldQuantidadeAcucar.setText(Double.toString(embarque.getQuantidadeDeAcucar()));
 		buttonGravar.setText("Aplicar");
 	}

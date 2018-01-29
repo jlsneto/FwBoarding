@@ -9,7 +9,6 @@ import java.util.ResourceBundle;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
 
-import fwboarding.FwBoarding;
 import helpers.DialogUsuarioSenha;
 import helpers.Routes;
 import javafx.collections.FXCollections;
@@ -21,9 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
@@ -90,10 +87,16 @@ public class CadastroUsuarioController implements Initializable {
 	}
 
 	public void setUsuarioAlterar(UsuarioVO usuario) {
-		this.usuarioAlterar = usuario;
+		usuarioAlterar = usuario;
 		labelCodigo.setText(Long.toString(usuarioAlterar.getCodigoUsuario()));
 		textFieldUsuario.setText(usuarioAlterar.getNomeUsuario());
-		comboBoxGrupoUsuario.getSelectionModel().select(usuarioAlterar.getGrupoUsuario());
+		comboBoxGrupoUsuario.getItems().forEach(grupoUsuario -> {
+			if(grupoUsuario.getDescricaoGrupo().equals(usuarioAlterar.getGrupoUsuario().getDescricaoGrupo())) {
+				comboBoxGrupoUsuario.getSelectionModel().select(grupoUsuario);
+				
+			}
+		}
+		);
 		if(usuarioAlterar.getAlteraSenha().equals("T")) {
 			alteraSenha.setSelected(true);
 		}else {

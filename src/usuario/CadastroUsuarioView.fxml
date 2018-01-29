@@ -52,7 +52,7 @@
                   <Font size="14.0" />
                </font>
             </JFXTextField>
-            <JFXComboBox fx:id="comboBoxGrupoUsuario" editable="true" prefHeight="40.0" prefWidth="116.0" promptText="Grupo de Usuário" GridPane.rowIndex="3">
+            <JFXComboBox fx:id="comboBoxGrupoUsuario" prefHeight="40.0" prefWidth="160.0" promptText="Grupo de Usuário" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="10.0" />
                </GridPane.margin>
