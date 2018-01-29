@@ -72,7 +72,7 @@ public class MainViewController implements Initializable {
         	AnchorPane bemVindoPane = FXMLLoader.load(getClass().getResource(Routes.BEMVINDOVIEW));
         	setNode(bemVindoPane);
             drawer.setSidePane(sidePane);
-
+          
             for (Node node : sidePane.getChildren()) {
                 if (node.getAccessibleText() != null) {
                     node.addEventHandler(MouseEvent.MOUSE_PRESSED, (MouseEvent ev) -> {

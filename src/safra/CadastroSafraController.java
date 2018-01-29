@@ -8,7 +8,11 @@ import com.jfoenix.controls.JFXTextField;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.stage.Stage;
+import model.dao.SafraDAO;
 import model.vo.SafraVO;
+import usuario.ConsultaUsuario;
 
 public class CadastroSafraController implements Initializable {
 
@@ -93,12 +97,6 @@ public class CadastroSafraController implements Initializable {
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	public void setSafraAlterar(SafraVO safra) {
 		// TODO Auto-generated method stub
 		
 	}
