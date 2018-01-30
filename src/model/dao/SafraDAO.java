@@ -144,5 +144,35 @@ public class SafraDAO {
 			return "";
 		}
 	}
+	
+	public int verificaUltimoCodigo() {
+
+		String sql;
+
+		if (this.base.equals("oracle")) {
+			sql = "SELECT (LAST_NUMBER-1) as LAST_NUMBER FROM USER_SEQUENCES WHERE SEQUENCE_NAME = 'SEQ_CODIGO_SAFRA'";
+		} else {
+			sql = "SELECT LAST_VALUE AS LAST_NUMBER FROM CADSAFRA_CODIGOGRUPO_SEQ";
+		}
+
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet resultado = stmt.executeQuery();
+			if (resultado.next()) {
+				return resultado.getInt("LAST_NUMBER");
+			} else {
+				return 0;
+			}
+
+		} catch (SQLException e) {
+
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+
+		}
+		return 0;
+
+	}
 
 }

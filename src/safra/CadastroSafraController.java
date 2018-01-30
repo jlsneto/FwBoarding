@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.dao.SafraDAO;
 import model.vo.SafraVO;
@@ -21,6 +22,9 @@ public class CadastroSafraController implements Initializable {
 
 	@FXML
 	private JFXButton buttonConfirmar;
+	
+	@FXML
+    private Label labelCodigoSafra;
 	
 
 	private Stage dialogStage;
@@ -40,6 +44,7 @@ public class CadastroSafraController implements Initializable {
 		if (validarEntrada()) {
 			if (isAlterarSafra == false) { 
 			SafraVO safra = new SafraVO();
+			safra.setCodigoSafra(Long.valueOf(labelCodigoSafra.getText()));
 			safra.setAnoSafra(fieldTextAnoSafra.getText());
 			safraDAO.inserir(safra);
 			if (safra.getAnoSafra().equals(safraDAO.retornaAnoSafra(safra.getAnoSafra()))) {
@@ -91,6 +96,7 @@ public class CadastroSafraController implements Initializable {
 	
 	public void setSafraAlterar(SafraVO safra) {
 		this.safraAlterar = safra;
+		labelCodigoSafra.setText(Long.toString(safraAlterar.getCodigoSafra()));
 		fieldTextAnoSafra.setText(safraAlterar.getAnoSafra());
 		buttonConfirmar.setText("Aplicar");
 	}
@@ -98,6 +104,7 @@ public class CadastroSafraController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		labelCodigoSafra.setText(Long.toString(safraDAO.verificaUltimoCodigo() + 1));
 		
 	}
 

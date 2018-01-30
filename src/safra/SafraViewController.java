@@ -89,13 +89,14 @@ public class SafraViewController implements Initializable {
 		SafraVO safra = TableView.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
+			CadastroSafraController.isAlterarSafra = true;
 			String novoAnoSafra = new DialogCadastroSafra().getAnoSafra();
 			safra.setAnoSafra(novoAnoSafra);
 			safraDAO.alterar(safra);
 		} else {
 			// Nada selecionado.
 			ConstruirDialog alerta = new ConstruirDialog();
-			alerta.dialogAlert("Não há seleção", "Nenhum usuário selecionado", "Selecione um usuário!");
+			alerta.dialogAlert("Não há seleção", "Nenhuma safra selecionado", "Selecione uma safra!");
 		}
 		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();
@@ -171,7 +172,7 @@ public class SafraViewController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 
-		TableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoUsuario"));
+		TableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoSafra"));
 		TableColumnAnoSafra.setCellValueFactory(new PropertyValueFactory<>("anoSafra"));
 		TableColumnSetSafra.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
