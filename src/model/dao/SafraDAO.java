@@ -27,7 +27,7 @@ public class SafraDAO {
 	}
 	
 	public void inserir(SafraVO safra) {
-		String sql = "INSERT INTO SAFRA(ANOSAFRA) VALUES(?)";
+		String sql = "INSERT INTO CADSAFRA(PERIODOSAFRA) VALUES(?)";
 
 		try {
 
@@ -43,7 +43,7 @@ public class SafraDAO {
 	}
 	
 	public void alterar(SafraVO safraAlterar) {
-		String sql = "UPDATE CADUSUARIO SET ANOSAFRA = ? WHERE CODIGOSAFRA = ?";
+		String sql = "UPDATE CADSAFRA SET PERIODOSAFRA = ? WHERE CODIGOSAFRA = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
@@ -55,14 +55,14 @@ public class SafraDAO {
 		} catch (SQLException e) {
 
 			ConstruirDialog erro = new ConstruirDialog();
-			erro.DialogError("Erro ao Atualizar Navio",
-					"Ocorreu um erro no banco de dados ao tentar alterar o Navio:" + safraAlterar.getAnoSafra(),
+			erro.DialogError("Erro ao Atualizar Safra",
+					"Ocorreu um erro no banco de dados ao tentar alterar o Safra:" + safraAlterar.getAnoSafra(),
 					e.getErrorCode(), e.getMessage(), sql);
 			}
 	}
 	
 	public void deletar(long codigoSafra) {
-		String sql = "DELETE FROM SAFRA" + " WHERE CODIGOSAFRA = ?";
+		String sql = "DELETE FROM CADSAFRA" + " WHERE CODIGOSAFRA = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -77,7 +77,7 @@ public class SafraDAO {
 	
 	public void verificaSeUsuarioFoiExcluido(long codigoSafra) throws Exception {
 
-		String sql = "SELECT CODIGOSAFRA FROM SAFRA WHERE CODIGOSAFRA = ?";
+		String sql = "SELECT CODIGOSAFRA FROM CADSAFRA WHERE CODIGOSAFRA = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -97,7 +97,7 @@ public class SafraDAO {
 	
 	public List<SafraVO> listar() {
 
-		String sql = "SELECT * FROM SAFRA ORDER BY SAFRA.CODIGOSAFRA";
+		String sql = "SELECT * FROM CADSAFRA ORDER BY CODIGOSAFRA";
 
 		List<SafraVO> listaUsuario = new ArrayList<>();
 
@@ -111,7 +111,7 @@ public class SafraDAO {
 				SafraVO safra = new SafraVO();
 
 				safra.setCodigoSafra(listaResultado.getLong("CODIGOSAFRA"));
-				safra.setAnoSafra(listaResultado.getString("ANOSAFRA"));
+				safra.setAnoSafra(listaResultado.getString("PERIODOSAFRA"));
 				listaUsuario.add(safra);
 			}
 
@@ -124,7 +124,7 @@ public class SafraDAO {
 	}
 	
 	public String retornaAnoSafra(String anoSafra) {
-		String sql = "SELECT ANOSAFRA FROM SAFRA WHERE ANOSAFRA = ?";
+		String sql = "SELECT PERIODOSAFRA FROM CADSAFRA WHERE PERIODOSAFRA = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -132,7 +132,7 @@ public class SafraDAO {
 			ResultSet listaResultado = stmt.executeQuery();
 
 			if (listaResultado.next()) {
-				return listaResultado.getString("ANOSAFRA");
+				return listaResultado.getString("PERIODOSAFRA");
 			} else {
 				return "";
 			}

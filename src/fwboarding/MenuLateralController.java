@@ -47,7 +47,7 @@ public class MenuLateralController implements Initializable {
     @FXML
     private JFXButton embarqueBtn;
     @FXML
-    private JFXButton trocarUsuarioBtn;
+    private JFXButton safraBtn;
     @FXML
     private JFXButton sairBtn;
 
@@ -63,7 +63,7 @@ public class MenuLateralController implements Initializable {
     @FXML
     private void trocarUsuario(ActionEvent event) {
         try {
-            Stage window=(Stage) trocarUsuarioBtn.getScene().getWindow();
+            Stage window=(Stage) embarqueBtn.getScene().getWindow();
             FwBoarding fwboarding =new FwBoarding();
             fwboarding.start(new Stage());
             window.close();
@@ -72,7 +72,7 @@ public class MenuLateralController implements Initializable {
         }
         
     }
-    
+
     @FXML
     private void alterarSenha() throws Exception {
     	String senha = cifrarSenha(new DialogUsuarioSenha().getSenha());

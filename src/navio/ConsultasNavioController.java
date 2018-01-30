@@ -263,7 +263,7 @@ public class ConsultasNavioController implements Initializable {
 				try {
 					TableColumnNavio.getSelectionModel().select(itens);
 					//manda o codigo do navio pra o embarque
-					int selectedIndex = TableColumnNavio.getSelectionModel().getSelectedIndex();
+					
 					NavioVO navio = TableColumnNavio.getSelectionModel().getSelectedItem();
 					CadastroEmbarqueController.codigoNavio(navio);
 					//ação

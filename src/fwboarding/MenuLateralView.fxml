@@ -40,7 +40,7 @@
       <JFXButton fx:id="usuarioBtn" accessibleText="usuarioMenu" layoutX="10.0" layoutY="53.0" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Usuario" />
       <JFXButton fx:id="grupoUsuarioBtn" accessibleText="grupoUsuarioMenu" layoutX="10.0" layoutY="96.0" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Grupo de Usuarios" />
       <JFXButton fx:id="embarqueBtn" accessibleText="embarqueMenu" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Embarque" />
-      <JFXButton fx:id="trocarUsuarioBtn" accessibleText="trocarUsuarioMenu" layoutX="10.0" layoutY="182.0" onAction="#trocarUsuario" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Trocar de Usuario" />
+      <JFXButton fx:id="safraBtn" accessibleText="safraMenu" layoutX="10.0" layoutY="182.0" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Safra" />
       <JFXButton fx:id="sairBtn" accessibleText="sairMenu" layoutX="10.0" layoutY="182.0" onAction="#sair" prefHeight="43.0" prefWidth="200.0" styleClass="drawer-buttons" text="Exit" />
    </children>
 </VBox>

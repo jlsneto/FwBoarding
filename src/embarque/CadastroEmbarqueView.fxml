@@ -32,7 +32,7 @@
                   <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="labelCadastrarEmbarque" text="Cadastrar Embarque">
+                  <Label fx:id="labelCadastrarEmbarque" text="Cadastro de Embarque Ref.:">
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
@@ -70,6 +70,8 @@
                         <Insets right="10.0" />
                      </GridPane.margin>
                   </ButtonBar>
+                  <Label alignment="CENTER" prefHeight="20.0" prefWidth="57.0" text="Safra" GridPane.columnIndex="1" />
+                  <Label fx:id="numeroSafra" text="Numero Safra" GridPane.columnIndex="2" />
                </children>
             </GridPane>
          </children>

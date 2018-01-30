@@ -15,7 +15,7 @@ public class DialogCadastroSafra {
 	public DialogCadastroSafra() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(DialogUsuarioSenha.class.getResource(Routes.CADASTROSENHAVIEW));
+			loader.setLocation(DialogUsuarioSenha.class.getResource(Routes.CADASTROSAFRAVIEW));
 			AnchorPane cadastroSenhaView = loader.load();
 
 			Stage stage = new Stage();

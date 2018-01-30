@@ -115,6 +115,13 @@ public class MainViewController implements Initializable {
                             	setNode(embarquePane);
                             	transition.play();
                             	break;
+                            case "safraMenu":
+                            	AnchorPane safraView = FXMLLoader.load(getClass().getResource(Routes.SAFRAVIEW));
+                            	drawer.setDisable(true);
+                            	drawer.close();
+                            	setNode(safraView);
+                            	transition.play();
+                            	break;
                         }
                     }catch (IOException e1) {
                     	e1.printStackTrace();

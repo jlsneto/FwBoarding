@@ -29,7 +29,6 @@ public class Routes {
     //safra
     public static String SAFRAVIEW = "/safra/SafraView.fxml";
     public static String CADASTROSAFRAVIEW ="/safra/CadastroSafraView.fxml";
-    
 
 
 }

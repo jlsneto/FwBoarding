@@ -7,6 +7,8 @@ import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 
+import helpers.DialogCadastroSafra;
+import helpers.DialogUsuarioSenha;
 import helpers.Routes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,10 +75,12 @@ public class SafraViewController implements Initializable {
 
 	@FXML
 	void clickOnIncluir() throws IOException {
-
-		CadastroUsuarioController.isAlterarUsuario = false;
-		AnchorPane cadastroSafra = FXMLLoader.load(getClass().getResource(Routes.CADASTROSAFRAVIEW));
-		setNode(cadastroSafra);
+		
+		String anoSafra = new DialogCadastroSafra().getAnoSafra();
+		SafraVO safra = new SafraVO();
+		safra.setAnoSafra(anoSafra);
+		safraDAO.inserir(safra);
+		
 	}
 
 	@FXML
@@ -85,15 +89,9 @@ public class SafraViewController implements Initializable {
 		SafraVO safra = TableView.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource(Routes.CADASTROSAFRAVIEW));
-			CadastroUsuarioController.isAlterarUsuario = true;
-
-			AnchorPane cadastroSafra = loader.load();
-			CadastroSafraController controller = loader.getController();
-			controller.setSafraAlterar(safra);
-			setNode(cadastroSafra);
-
+			String novoAnoSafra = new DialogCadastroSafra().getAnoSafra();
+			safra.setAnoSafra(novoAnoSafra);
+			safraDAO.alterar(safra);
 		} else {
 			// Nada selecionado.
 			ConstruirDialog alerta = new ConstruirDialog();
