@@ -6,12 +6,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.vo.SafraVO;
 import safra.CadastroSafraController;
 import usuario.CadastroSenhaController;
 
 public class DialogCadastroSafra {
 	private String anoSafra;
-	
+	public static SafraVO safraAlterar;
 	public DialogCadastroSafra() {
 		try {
 			FXMLLoader loader = new FXMLLoader();
@@ -26,12 +27,14 @@ public class DialogCadastroSafra {
 
 			CadastroSafraController controller = loader.getController();
 			controller.setDialogStage(stage);
+			controller.setSafraAlterar(safraAlterar);
+			
 
 			stage.setScene(scene);
 			stage.showAndWait();
 			this.anoSafra = controller.getAnoSafra();
 		} catch (Exception e) {
-			System.out.println("ERRO!");
+			e.printStackTrace();
 		}
 	}
 

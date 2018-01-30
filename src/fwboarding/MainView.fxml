@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fwboarding.MainViewController">
+<AnchorPane id="AnchorPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="850.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fwboarding.MainViewController">
    <children>
       <JFXToolbar layoutY="-1.0" prefHeight="47.0" prefWidth="1200.0" styleClass="jfx-toolbar" stylesheets="@../view/styles/styles.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
          <left>
@@ -20,9 +20,9 @@
             
          </right>
       </JFXToolbar>
-      <AnchorPane fx:id="holderPane" layoutX="86.0" layoutY="51.0" onMouseClicked="#clicouForaTeste" prefHeight="684.0" prefWidth="1105.0" />
+      <AnchorPane fx:id="holderPane" layoutX="86.0" layoutY="51.0" onMouseClicked="#clicouForaTeste" onMouseEntered="#clicouForaTeste" prefHeight="684.0" prefWidth="1105.0" />
           
         
-      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutX="-1.0" layoutY="46.0" onMouseExited="#clicouForaTeste" prefHeight="678.0" prefWidth="150.0" />
+      <JFXDrawer fx:id="drawer" defaultDrawerSize="200.0" layoutX="-1.0" layoutY="46.0" prefHeight="678.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

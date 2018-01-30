@@ -127,7 +127,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 		} else {
 			// Nada selecionado.
 			ConstruirDialog alerta = new ConstruirDialog();
-			alerta.dialogAlert("Não há seleção", "Nenhum navio selecionado", "Selecione um navio!");
+			alerta.dialogAlert("Não há seleção", "Nenhum Grupo selecionado", "Selecione um Grupo!");
 		}
 		// Para Atualizar a ObservableList itensEncontrados
 		clickOnPesquisar();

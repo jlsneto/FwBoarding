@@ -76,23 +76,19 @@ public class SafraViewController implements Initializable {
 	@FXML
 	void clickOnIncluir() throws IOException {
 		
-		String anoSafra = new DialogCadastroSafra().getAnoSafra();
-		SafraVO safra = new SafraVO();
-		safra.setAnoSafra(anoSafra);
-		safraDAO.inserir(safra);
-		
+		new DialogCadastroSafra();
+		clickOnPesquisar();
 	}
 
 	@FXML
 	public void clickOnAlterar() throws IOException {
 		int selectedIndex = TableView.getSelectionModel().getSelectedIndex();
-		SafraVO safra = TableView.getSelectionModel().getSelectedItem();
+		SafraVO safraAlterar = TableView.getSelectionModel().getSelectedItem();
 
 		if (selectedIndex >= 0) {
 			CadastroSafraController.isAlterarSafra = true;
-			String novoAnoSafra = new DialogCadastroSafra().getAnoSafra();
-			safra.setAnoSafra(novoAnoSafra);
-			safraDAO.alterar(safra);
+			DialogCadastroSafra.safraAlterar = safraAlterar;
+			new DialogCadastroSafra();
 		} else {
 			// Nada selecionado.
 			ConstruirDialog alerta = new ConstruirDialog();

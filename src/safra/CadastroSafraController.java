@@ -49,12 +49,13 @@ public class CadastroSafraController implements Initializable {
 			safraDAO.inserir(safra);
 			if (safra.getAnoSafra().equals(safraDAO.retornaAnoSafra(safra.getAnoSafra()))) {
 				SafraViewController.observableListSafra.addAll(safra);
+				
 			}
 			dialogStage.close();
 		} else {
 			safraAlterar.setAnoSafra(fieldTextAnoSafra.getText());
 			safraDAO.alterar(safraAlterar);
-			SafraViewController.itensEncontrados.set(ConsultaUsuario.itensEncontrados.indexOf(safraAlterar),
+			SafraViewController.itensEncontrados.set(SafraViewController.itensEncontrados.indexOf(safraAlterar),
 					safraAlterar);
 			dialogStage.close();
 		}
@@ -104,8 +105,9 @@ public class CadastroSafraController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		if(isAlterarSafra == false) {
 		labelCodigoSafra.setText(Long.toString(safraDAO.verificaUltimoCodigo() + 1));
-		
+		}
 	}
 
 }
