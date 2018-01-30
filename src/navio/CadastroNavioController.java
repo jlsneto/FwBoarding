@@ -123,7 +123,6 @@ public class CadastroNavioController implements Initializable {
 				navio.setDescricaoNavio(textFieldDescricao.getText());
 				navio.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 				navio.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
-				navio.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.inserir(navio);
 				// Atualiza Tela de Consulta
 				if (navio.getDescricaoNavio().equals(navioDAO.retornaDescricaoNavio(navio.getDescricaoNavio()))) {
@@ -135,7 +134,6 @@ public class CadastroNavioController implements Initializable {
 				navioAlterar.setDescricaoNavio(textFieldDescricao.getText());
 				navioAlterar.setPais(comboBoxPaisOrigem.getSelectionModel().getSelectedItem());
 				navioAlterar.setQtdPorao(comboBoxQuantidadePorao.getSelectionModel().getSelectedItem());
-				navioAlterar.setCapacidadePorao(Double.valueOf(textFieldCapacidadePorao.getText()));
 				navioDAO.alterar(navioAlterar);
 				ConsultasNavioController.itensEncontrados
 						.set(ConsultasNavioController.itensEncontrados.indexOf(navioAlterar), navioAlterar);
@@ -196,12 +194,6 @@ public class CadastroNavioController implements Initializable {
 
 			errorMessage = "Selecione a quantidade de Porão!\n";
 			comboBoxQuantidadePorao.requestFocus();
-
-		} else if (textFieldCapacidadePorao.getText() == null || textFieldCapacidadePorao.getText().length() == 0
-				|| Double.valueOf(textFieldCapacidadePorao.getText()) <= 0) {
-
-			errorMessage = "Insira Capacidade !\n";
-			textFieldCapacidadePorao.requestFocus();
 
 		} else if (navioDAO.retornaDescricaoNavio(textFieldDescricao.getText()).equals(textFieldDescricao.getText())) {
 
