@@ -14,28 +14,56 @@ public class DialogCadastroSafra {
 	private String anoSafra;
 	public static SafraVO safraAlterar;
 	public DialogCadastroSafra() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(DialogUsuarioSenha.class.getResource(Routes.CADASTROSAFRAVIEW));
-			AnchorPane cadastroSenhaView = loader.load();
+		if(CadastroSafraController.isAlterarSafra == true){
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(DialogUsuarioSenha.class.getResource(Routes.CADASTROSAFRAVIEW));
+				AnchorPane cadastroSafraView = loader.load();
 
-			Stage stage = new Stage();
-			stage.initOwner(MainViewController.stage);
-			stage.initModality(Modality.WINDOW_MODAL);
-			stage.setResizable(false);
-			Scene scene = new Scene(cadastroSenhaView);
+				Stage stage = new Stage();
+				stage.initOwner(MainViewController.stage);
+				stage.initModality(Modality.WINDOW_MODAL);
+				stage.setResizable(false);
+				Scene scene = new Scene(cadastroSafraView);
 
-			CadastroSafraController controller = loader.getController();
-			controller.setDialogStage(stage);
-			controller.setSafraAlterar(safraAlterar);
-			
+				CadastroSafraController controller = loader.getController();
+				controller.setDialogStage(stage);
+				controller.setSafraAlterar(safraAlterar);
+				
 
-			stage.setScene(scene);
-			stage.showAndWait();
-			this.anoSafra = controller.getAnoSafra();
-		} catch (Exception e) {
-			e.printStackTrace();
+				stage.setScene(scene);
+				stage.showAndWait();
+				this.anoSafra = controller.getAnoSafra();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setLocation(DialogUsuarioSenha.class.getResource(Routes.CADASTROSAFRAVIEW));
+				AnchorPane cadastroSafraView = loader.load();
+
+				Stage stage = new Stage();
+				stage.initOwner(MainViewController.stage);
+				stage.initModality(Modality.WINDOW_MODAL);
+				stage.setResizable(false);
+				Scene scene = new Scene(cadastroSafraView);
+
+				CadastroSafraController controller = loader.getController();
+				controller.setDialogStage(stage);
+				//controller.setSafraAlterar(safraAlterar);
+				
+
+				stage.setScene(scene);
+				stage.showAndWait();
+				this.anoSafra = controller.getAnoSafra();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 	public String getAnoSafra() {

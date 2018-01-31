@@ -76,6 +76,7 @@ public class SafraViewController implements Initializable {
 	@FXML
 	void clickOnIncluir() throws IOException {
 		
+		CadastroSafraController.isAlterarSafra = false;
 		new DialogCadastroSafra();
 		clickOnPesquisar();
 	}

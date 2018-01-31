@@ -1,6 +1,7 @@
 package safra;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -9,11 +10,13 @@ import com.jfoenix.controls.JFXTextField;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import model.dao.SafraDAO;
 import model.vo.SafraVO;
 import usuario.ConsultaUsuario;
+import view.ConstruirDialog;
 
 public class CadastroSafraController implements Initializable {
 
@@ -29,7 +32,7 @@ public class CadastroSafraController implements Initializable {
 
 	private Stage dialogStage;
 
-	static boolean isAlterarSafra = false;
+	public static boolean isAlterarSafra = false;
 
 	public static String anoSafra;
 	
@@ -65,13 +68,25 @@ public class CadastroSafraController implements Initializable {
 	public void setDialogStage(Stage dialogStage) {
 		this.dialogStage = dialogStage;
 		dialogStage.setOnCloseRequest(event -> {
-			if (isAlterarSafra) {
+			if (confirmouCancelamentoOuFehamento()) {
+				// ... Usuário clicou ok
 				dialogStage.close();
 			} else {
 				event.consume();
 			}
 
 		});
+	}
+	
+	public boolean confirmouCancelamentoOuFehamento() {
+		ConstruirDialog confirmar = new ConstruirDialog();
+		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Cancelamento",
+				"Atenção, se continuar seus dados serão perdidos!", "Deseja cancelar?");
+		if (result.get() == ButtonType.OK) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public String getAnoSafra() {
