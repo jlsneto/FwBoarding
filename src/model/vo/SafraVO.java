@@ -1,12 +1,14 @@
 package model.vo;
 
+import com.jfoenix.controls.JFXCheckBox;
+
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.CheckBox;
 
 public class SafraVO {
 	private long codigoSafra;
 	private String anoSafra;
-	private CheckBox checkBox;
+	//private JFXCheckBox checkBox;
 	private ButtonBar buttonBar;
 
 	public long getCodigoSafra() {
@@ -25,13 +27,13 @@ public class SafraVO {
 		this.anoSafra = anoSafra;
 	}
 
-	public CheckBox getCheckBox() {
-		return checkBox;
+	/*public JFXCheckBox getCheckBox() {
+		return this.checkBox;
 	}
 
-	public void setCheckBox(CheckBox checkBox) {
+	public void setCheckBox(JFXCheckBox checkBox) {
 		this.checkBox = checkBox;
-	}
+	}*/
 	
 	public void setButtonBar(ButtonBar buttonBar) {
 		this.buttonBar = buttonBar;

@@ -25,6 +25,7 @@ import model.dao.PaisDAO;
 import model.vo.EmbarqueVO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
+import model.vo.SafraVO;
 import navio.CadastroNavioController;
 import navio.ConsultasNavioController;
 import view.ConstruirDialog;
@@ -54,6 +55,9 @@ public class CadastroEmbarqueController implements Initializable {
 
 	@FXML
 	private JFXButton buttonCancelar;
+	
+	 @FXML
+	 private Label numeroSafra;
 
 	private ObservableList<PaisVO> observableListPais;
 	private final EmbarqueDAO embarqueDAO = new EmbarqueDAO();
@@ -62,7 +66,9 @@ public class CadastroEmbarqueController implements Initializable {
 	public static boolean isAlterarEmbarque;
 	private Stage dialogStage;
 	private static NavioVO navioCod;
+	private static SafraVO safraCod;
 	public static long CodigoNavio;
+	public static String CodigoSafra;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -70,6 +76,7 @@ public class CadastroEmbarqueController implements Initializable {
 		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 		labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
 		comboBoxPaisDestino.setItems(observableListPais);
+		numeroSafra.setText(CodigoSafra);
 		if(CodigoNavio > 0) {
 			textFieldCodigoNavio.setText(String.valueOf(CodigoNavio));
 		}
@@ -123,6 +130,13 @@ public class CadastroEmbarqueController implements Initializable {
 		navioCod = navio;
 		//System.out.println(navio.getCodigoNavio());
 		CodigoNavio = navio.getCodigoNavio();
+		
+	}
+	
+	public static void  codigoSafra (SafraVO safra) {
+		safraCod = safra;
+		//System.out.println(navio.getCodigoNavio());
+		CodigoSafra = safra.getAnoSafra();
 		
 	}
 

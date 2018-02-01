@@ -6,7 +6,10 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 
+import embarque.CadastroEmbarqueController;
+import embarque.TelaEmbarqueController;
 import helpers.DialogCadastroSafra;
 import helpers.DialogUsuarioSenha;
 import helpers.Routes;
@@ -36,6 +39,7 @@ import javafx.scene.layout.HBox;
 import model.dao.SafraDAO;
 import model.dao.UsuarioDAO;
 import model.vo.GrupoUsuarioVO;
+import model.vo.NavioVO;
 import model.vo.SafraVO;
 import model.vo.UsuarioVO;
 import usuario.CadastroUsuarioController;
@@ -57,9 +61,6 @@ public class SafraViewController implements Initializable {
 
 	@FXML
 	private TableColumn<SafraVO, String> TableColumnAnoSafra;
-
-	@FXML
-	private TableColumn<SafraVO, CheckBox> TableColumnSetSafra;
 
 	@FXML
 	private TableColumn<SafraVO, Button> columnButton;
@@ -127,6 +128,7 @@ public class SafraViewController implements Initializable {
 		itensEncontrados = FXCollections.observableArrayList();
 		for (SafraVO itens : observableListSafra) {
 			itens.setButtonBar(new ButtonBar());
+			
 			ButtonBar btnBar = itens.getButtonBar();
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 			
@@ -158,7 +160,23 @@ public class SafraViewController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
+			
+			//button definir safra
+			
+			JFXButton buttonDefinir = new JFXButton();
+			buttonDefinir.setText("Definir");
+			buttonDefinir.setOnAction(event ->{
+				TableView.getSelectionModel().select(itens);	
+				SafraVO safra = TableView.getSelectionModel().getSelectedItem();
+				if(confirmaSafraPadrao(safra.getAnoSafra())) {
+					CadastroEmbarqueController.codigoSafra(safra);
+				}
+					
+				
+			});
+			
+			
+			btnBar.getButtons().addAll(buttonExcluir, buttonEdit, buttonDefinir);
 			if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
@@ -171,7 +189,6 @@ public class SafraViewController implements Initializable {
 
 		TableColumnCodigo.setCellValueFactory(new PropertyValueFactory<>("codigoSafra"));
 		TableColumnAnoSafra.setCellValueFactory(new PropertyValueFactory<>("anoSafra"));
-		TableColumnSetSafra.setCellValueFactory(new PropertyValueFactory<>("checkBox"));
 		columnButton.setCellValueFactory(new PropertyValueFactory<>("buttonBar"));
 
 		observableListSafra = FXCollections.observableArrayList(safraDAO.listar());
@@ -183,6 +200,17 @@ public class SafraViewController implements Initializable {
 	public void setNode(Node node) {
 		TelaSafra.getChildren().clear();
 		TelaSafra.getChildren().add((Node) node);
+	}
+	
+	public boolean confirmaSafraPadrao(String anoSafra) {
+		ConstruirDialog confirmar = new ConstruirDialog();
+		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Safra Padrão",
+				"A safra " + anoSafra + " será definida como Safra Padrão para os cadastros de Embarque", "Deseja confirmar? Pressione OK para concluir!");
+		if (result.get() == ButtonType.OK) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 	
 	public boolean confirmouExcluisaoDaSafra(String anoSafra) {
