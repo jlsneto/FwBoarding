@@ -155,6 +155,7 @@ public class CadastroEmbarqueController implements Initializable {
 				}
 				embarque.setPaisDestino(comboBoxPaisDestino.getSelectionModel().getSelectedItem());
 				embarque.setQuantidadeDeAcucar(Long.valueOf(textFieldQuantidadeAcucar.getText()));
+				embarque.setAnoSafra(numeroSafra.getText());
 
 				embarqueDAO.Inserir(embarque);
 				// Atualiza Tela de Consulta
@@ -261,6 +262,8 @@ public class CadastroEmbarqueController implements Initializable {
 			}
 		});
 		textFieldQuantidadeAcucar.setText(Double.toString(embarque.getQuantidadeDeAcucar()));
+		numeroSafra.setText(embarque.getAnoSafra());
+		System.out.println(embarque.getAnoSafra());
 		buttonGravar.setText("Aplicar");
 	}
 }

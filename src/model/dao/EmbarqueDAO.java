@@ -30,7 +30,7 @@ public class EmbarqueDAO {
 
 	public void Inserir(EmbarqueVO embarque) {
 
-		String sql = "INSERT INTO EMBARQUE(CODIGONAVIO, CODIGOPAISDESTINO, STATUS, QTDAEMBARCAR, CODIGOUSUARIO)" + "VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO EMBARQUE(CODIGONAVIO, CODIGOPAISDESTINO, STATUS, QTDAEMBARCAR, CODIGOUSUARIO, PERIODOSAFRA)" + "VALUES (?,?,?,?,?,?)";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -39,6 +39,7 @@ public class EmbarqueDAO {
 			stmt.setString(3, "I");
 			stmt.setFloat(4, embarque.getQuantidadeDeAcucar());
 			stmt.setLong(5, UsuarioSessao.getUsuarioAtivo().getCodigoUsuario());
+			stmt.setString(6,embarque.getAnoSafra());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -104,6 +105,7 @@ public class EmbarqueDAO {
 				embarque.setCodigoNavio(listaResultado.getLong("CODIGONAVIO"));
 				embarque.setStatus(listaResultado.getString("STATUS"));
 				embarque.setQuantidadeDeAcucar(listaResultado.getFloat("QTDAEMBARCAR"));
+				embarque.setAnoSafra(listaResultado.getString("PERIODOSAFRA"));
 
 				PaisVO pais = new PaisVO();
 

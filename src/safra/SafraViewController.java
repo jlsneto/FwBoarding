@@ -161,7 +161,7 @@ public class SafraViewController implements Initializable {
 				}
 			});
 			
-			//button definir safra
+			//check box
 			
 			JFXButton buttonDefinir = new JFXButton();
 			buttonDefinir.setText("Definir");

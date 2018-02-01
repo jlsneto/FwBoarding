@@ -10,6 +10,7 @@ public class EmbarqueVO {
 	private PaisVO PaisDestino;
 	private String status;
 	private float quantidadeDeAcucar;
+	private String anoSafra;
 	private ButtonBar buttonBar;
 
 	public EmbarqueVO(PaisVO pais) {
@@ -73,5 +74,12 @@ public class EmbarqueVO {
 	public void setButtonBar(ButtonBar buttonBar) {
 		this.buttonBar = buttonBar;
 	}
-
+	
+	public String getAnoSafra() {
+		return anoSafra;
+	}
+	
+	public void setAnoSafra(String anoSafra) {
+		this.anoSafra = anoSafra;
+	}
 }
