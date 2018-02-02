@@ -18,6 +18,7 @@ import usuario.CadastroAutenticacaoBO;
 
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXPasswordField;
@@ -26,6 +27,7 @@ import com.jfoenix.controls.JFXTextField;
 
 import fwboarding.FwBoarding;
 import fwboarding.MainViewController;
+import helpers.DialogUsuarioSenha;
 import helpers.Routes;
 
 public class LoginController implements Initializable {
@@ -93,7 +95,11 @@ public class LoginController implements Initializable {
 					usuario.setNomeUsuario(textUsuarioLogin.getText());
 					this.usuario = usuario;
 				}
-
+				
+				if(this.usuario.getAlteraSenha().equals("T")) {
+					//terminar
+					//String senha = cifrarSenha(new DialogUsuarioSenha().getSenha());
+				}
 				UsuarioSessao.setUsuarioAtivo(this.usuario);
 
 				Stage stage = new Stage();
@@ -140,7 +146,8 @@ public class LoginController implements Initializable {
 		String usuarioDigitado = textUsuarioLogin.getText();
 		String senhaDigitada = textSenhaLogin.getText();
 		String usuarioBanco = usuarioDao.retornaDescricaoUsuario(textUsuarioLogin.getText());
-		String senhaBanco = decifrarSenha(usuarioDao.retornaSenhaUsuario(textUsuarioLogin.getText()).getBytes());
+		String senhaBanco = usuarioDao.retornaSenhaUsuario(textUsuarioLogin.getText());
+		
 		if (usuarioDigitado.equals("") && senhaDigitada.equals("")) {
 			Message = "Preencha os campos!";
 		} else if (textUsuarioLogin.getText() == null || textUsuarioLogin.getText().length() == 0) {
@@ -150,7 +157,7 @@ public class LoginController implements Initializable {
 
 			Message = "Usuário Não Cadastrado";
 
-		} else if (usuarioDigitado.equals(usuarioBanco) && textSenhaLogin.getText().equals(senhaBanco)) {
+		} else if (usuarioDigitado.equals(usuarioBanco) && cifrarSenha(senhaDigitada).equals(senhaBanco)) {
 			Message = "OK";
 		} else {
 			Message = "Senha Inválida!";
@@ -170,16 +177,15 @@ public class LoginController implements Initializable {
 	}
 		return false;}
 
-	private String decifrarSenha(byte[] cipherText) throws Exception {
+	private String cifrarSenha(String textSenha) throws Exception {
 
 		CadastroAutenticacaoBO cadastroAutenticacao = new CadastroAutenticacaoBO();
-		if (cipherText != null) {
-			byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
-			return new String(decryptedCipherText);
-		} else {
-			return null;
-		}
 
+		byte[] plainText = textSenha.getBytes(StandardCharsets.UTF_8);
+		byte[] cipherText = cadastroAutenticacao.encrypt(plainText);
+		// byte[] decryptedCipherText = cadastroAutenticacao.decrypt(cipherText);
+
+		return new String(cipherText);
 	}
 
 	public void setStage(Stage stage) {

@@ -69,9 +69,6 @@ public class CadastroSenhaController implements Initializable{
 
 			errorMessage = "Senha invalida ou nula!\n";
 			fieldTextSenha.requestFocus();
-		}else if(fieldTextSenha.getText().length() < 6 ) {
-			errorMessage = "Sua senha deve conter pelo menos 06 dígitos!";
-			fieldTextSenha.requestFocus();
 		}
 		else if (fieldTextConfirmSenha.getText() == null || fieldTextConfirmSenha.getText().length() == 0) {
 
