@@ -159,9 +159,9 @@ public class CadastroEmbarqueController implements Initializable {
 
 				embarqueDAO.Inserir(embarque);
 				// Atualiza Tela de Consulta
-				// olhar esse if
+				// olhar esse if ---> olhado kkk :)
 				if (embarque.getCodigoEmbarque() == (embarqueDAO
-						.retornaCodigoEmbarque(Long.valueOf(embarque.getCodigoEmbarque())))) {
+						.retornaCodigoEmbarque(Long.valueOf(embarque.getCodigoEmbarque()))) && !anchorPaneCadastroEmbarque.getParent().getAccessibleText().equals("anchorPaneNavio")) {
 					TelaEmbarqueController.observableListEmbarque.addAll(embarque);
 				}
 				// fechar dialog
