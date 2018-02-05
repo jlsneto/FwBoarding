@@ -25,14 +25,14 @@
                       <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                      <children>
-                        <TextField fx:id="textFieldPesquisar" prefHeight="25.0" prefWidth="177.0" promptText="Pesquisar" />
+                        <TextField fx:id="textFieldPesquisar" onKeyReleased="#onKeyPressed" prefHeight="25.0" prefWidth="177.0" promptText="Pesquisar" />
                      </children>
                   </GridPane>
                </children>
             </Pane>
          </top>
          <center>
-            <TableView fx:id="TableView" prefHeight="342.0" prefWidth="296.0" BorderPane.alignment="CENTER">
+            <TableView fx:id="TableView" onKeyPressed="#onKeyPressed" onMouseClicked="#onMouseClicked" prefHeight="342.0" prefWidth="296.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="TableColumnCodigo" prefWidth="75.0" text="Codigo" />
                 <TableColumn fx:id="TableColumnAnoSafra" prefWidth="194.0" text="Ano da Safra" />

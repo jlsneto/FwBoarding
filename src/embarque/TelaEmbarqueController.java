@@ -33,6 +33,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.dao.EmbarqueDAO;
 import model.dao.NavioDAO;
@@ -173,7 +177,7 @@ public class TelaEmbarqueController implements Initializable {
 				}
 			});
 			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
-			if (itens.getAnoSafra().contains(String.valueOf(textFieldPesquisaSafra.getText()))) {
+			if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisaSafra.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
 		}
@@ -241,6 +245,28 @@ public class TelaEmbarqueController implements Initializable {
 	public void setNode(Node node) {
 		anchorPaneEmbarque.getChildren().clear();
 		anchorPaneEmbarque.getChildren().add((Node) node);
+	}
+	
+	@FXML
+	private void onKeyPressed(KeyEvent event) throws Exception {
+		int selectedIndex = tableViewEmbarque.getSelectionModel().getSelectedIndex();
+		if (event.getCode().equals(KeyCode.ENTER) && selectedIndex >= 0) {
+			clickOnAlterar();
+		} else if (event.getCode().isLetterKey() || event.getCode().isWhitespaceKey()
+				|| event.getCode().equals(KeyCode.BACK_SPACE)) {
+			clickOnPesquisar();
+		} else if (event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
+			clickOnExcluir();
+		}
+	}
+
+	@FXML
+	void onMouseClicked(MouseEvent mouseEvent) throws IOException {
+		if (mouseEvent.getButton().equals(MouseButton.PRIMARY)) {
+			if (mouseEvent.getClickCount() == 2) {
+				clickOnAlterar();
+			}
+		}
 	}
 
 }

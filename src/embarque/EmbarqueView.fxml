@@ -43,7 +43,7 @@
                               <Insets bottom="10.0" left="30.0" right="10.0" top="30.0" />
                            </GridPane.margin>
                         </JFXButton>
-                        <JFXTextField fx:id="textFieldPesquisaSafra" prefHeight="30.0" prefWidth="126.0" promptText="Safra" GridPane.columnIndex="4">
+                        <JFXTextField fx:id="textFieldPesquisaSafra" onKeyReleased="#onKeyPressed" prefHeight="30.0" prefWidth="126.0" promptText="Safra" GridPane.columnIndex="4">
                            <GridPane.margin>
                               <Insets left="10.0" right="70.0" />
                            </GridPane.margin>
@@ -56,7 +56,7 @@
       </AnchorPane>
       <AnchorPane layoutX="10.0" layoutY="208.0" prefHeight="170.0" prefWidth="570.0" styleClass="anchorPane" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
          <children>
-            <TableView fx:id="tableViewEmbarque" prefHeight="346.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <TableView fx:id="tableViewEmbarque" onKeyPressed="#onKeyPressed" onMouseClicked="#onMouseClicked" prefHeight="346.0" prefWidth="604.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <columns>
                 <TableColumn fx:id="columnCodigoEmbarque" prefWidth="125.0" styleClass="tableView" text="Código" />
                 <TableColumn fx:id="columnPaisDestion" prefWidth="91.0" styleClass="tableView" text="Pais Destino" />

@@ -177,7 +177,7 @@ public class SafraViewController implements Initializable {
 			
 			
 			btnBar.getButtons().addAll(buttonExcluir, buttonEdit, buttonDefinir);
-			if (itens.getAnoSafra().contains(String.valueOf(textFieldPesquisar.getText()))) {
+			if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
 		}
@@ -231,7 +231,6 @@ public class SafraViewController implements Initializable {
 			clickOnAlterar();
 		} else if (event.getCode().isLetterKey() || event.getCode().isWhitespaceKey()
 				|| event.getCode().equals(KeyCode.BACK_SPACE)) {
-			// System.out.println(event.getCode().getName());
 			clickOnPesquisar();
 		} else if (event.getCode().equals(KeyCode.DELETE) && selectedIndex >= 0) {
 			clickOnExcluir();
