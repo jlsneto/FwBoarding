@@ -21,6 +21,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -139,6 +140,7 @@ public class TelaEmbarqueController implements Initializable {
 		for (EmbarqueVO itens : observableListEmbarque) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
+			btnBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 
 			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
@@ -171,9 +173,9 @@ public class TelaEmbarqueController implements Initializable {
 				}
 			});
 			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
-			//if (itens.getCodigoEmbarque() == (Integer.valueOf(textFieldPesquisaCodigo.getText()))) {
+			if (itens.getAnoSafra().contains(String.valueOf(textFieldPesquisaSafra.getText()))) {
 				itensEncontrados.add(itens);
-			//}
+			}
 		}
 		tableViewEmbarque.setItems(itensEncontrados);
 	}

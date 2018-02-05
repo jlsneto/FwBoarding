@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.NodeOrientation;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
@@ -149,6 +150,7 @@ public class ConsultaGrupoUsuarioController implements Initializable {
 		for (GrupoUsuarioVO itens : observableListGrupo) {
 			itens.setButtonBar(new ButtonBar());
 			ButtonBar btnBar = itens.getButtonBar();
+			btnBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 			
 			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));

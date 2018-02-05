@@ -36,7 +36,7 @@
               <columns>
                 <TableColumn fx:id="TableColumnCodigo" prefWidth="75.0" text="Codigo" />
                 <TableColumn fx:id="TableColumnAnoSafra" prefWidth="194.0" text="Ano da Safra" />
-                  <TableColumn fx:id="columnButton" prefWidth="310.0" text="Action" />
+                  <TableColumn fx:id="columnButton" prefWidth="310.0" text="Definir como Padrão/Alterar/Excluir" />
               </columns>
             </TableView>
          </center>

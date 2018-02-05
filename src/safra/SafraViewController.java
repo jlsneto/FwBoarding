@@ -128,8 +128,8 @@ public class SafraViewController implements Initializable {
 		itensEncontrados = FXCollections.observableArrayList();
 		for (SafraVO itens : observableListSafra) {
 			itens.setButtonBar(new ButtonBar());
-			
 			ButtonBar btnBar = itens.getButtonBar();
+			btnBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
 			
 			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
@@ -177,7 +177,7 @@ public class SafraViewController implements Initializable {
 			
 			
 			btnBar.getButtons().addAll(buttonExcluir, buttonEdit, buttonDefinir);
-			if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
+			if (itens.getAnoSafra().contains(String.valueOf(textFieldPesquisar.getText()))) {
 				itensEncontrados.add(itens);
 			}
 		}
