@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPaneMovimentoEmbarque" accessibleText="movimentoEmbarque" prefHeight="500.0" prefWidth="750.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="embarque.MovimentoEmbarqueController">
+<AnchorPane fx:id="anchorPaneMovimentoEmbarque" accessibleText="movimentoEmbarque" prefHeight="500.0" prefWidth="850.0" stylesheets="@../view/styles/styles.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="embarque.MovimentoEmbarqueController">
          <children>
-            <VBox layoutX="342.0" layoutY="22.0" prefHeight="450.0" prefWidth="387.0" spacing="10.0" styleClass="card">
+            <VBox layoutX="342.0" layoutY="22.0" prefHeight="450.0" prefWidth="387.0" spacing="10.0" styleClass="card" AnchorPane.rightAnchor="121.0">
                <children>
                   <Label prefHeight="40.0" prefWidth="288.0" styleClass="card-title" text="Movimentação de Embarque" />
                   <Separator prefHeight="2.0" prefWidth="384.0" />
@@ -48,7 +48,7 @@
             </VBox>
       <VBox layoutX="11.0" layoutY="22.0" prefHeight="346.0" prefWidth="303.0" styleClass="card">
          <children>
-            <Label fx:id="labelNumeroEmbarqueDetalhe" alignment="TOP_LEFT" contentDisplay="CENTER" prefHeight="40.0" prefWidth="372.0" styleClass="card-title" text="Detalhes Embarque Nº" />
+            <Label fx:id="labelNumeroEmbarqueDetalhe" alignment="TOP_CENTER" contentDisplay="CENTER" prefHeight="76.0" prefWidth="271.0" styleClass="card-title" text="Detalhes Embarque" />
             <Separator prefHeight="2.0" prefWidth="384.0" />
          </children>
       </VBox>

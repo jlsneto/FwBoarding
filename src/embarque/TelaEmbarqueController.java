@@ -2,16 +2,10 @@ package embarque;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTextField;
 
@@ -26,7 +20,6 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,12 +32,7 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import model.dao.EmbarqueDAO;
-import model.dao.NavioDAO;
-import model.dao.PaisDAO;
 import model.vo.EmbarqueVO;
-import model.vo.NavioVO;
-import model.vo.PaisVO;
-import navio.CadastroNavioController;
 import view.ConstruirDialog;
 
 public class TelaEmbarqueController implements Initializable {
@@ -87,11 +75,8 @@ public class TelaEmbarqueController implements Initializable {
 
 	public static ObservableList<EmbarqueVO> observableListEmbarque;
 	private final EmbarqueDAO embarqueDAO = new EmbarqueDAO();
-	private EmbarqueVO embarqueAlterar;
 	static ObservableList<EmbarqueVO> itensEncontrados;
 	public static boolean isAlterarEmbarque;
-	private ObservableList<PaisVO> observableListPais;
-	private final PaisDAO paisDAO = new PaisDAO();
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

@@ -62,7 +62,7 @@ public class CadastroSafraController implements Initializable {
 				safra.setCodigoSafra(Long.valueOf(labelCodigoSafra.getText()));
 				safra.setAnoSafra(fieldTextAnoSafra.getText());
 				safraDAO.inserir(safra);
-				if (safra.getAnoSafra().equals(safraDAO.retornaAnoSafra(safra.getAnoSafra()))) {
+				if (safra.getAnoSafra().equals(safraDAO.retornaAnoSafra(safra.getCodigoSafra()))) {
 					SafraViewController.observableListSafra.addAll(safra);
 
 				}

@@ -11,6 +11,15 @@ public class SafraVO {
 	//private JFXCheckBox checkBox;
 	private ButtonBar buttonBar;
 	private String safraPadrao;
+	private long safraOrdem;
+
+	public long getSafraOrdem() {
+		return safraOrdem;
+	}
+
+	public void setSafraOrdem(long safraOrdem) {
+		this.safraOrdem = safraOrdem;
+	}
 
 	public String getSafraPadrao() {
 		return safraPadrao;

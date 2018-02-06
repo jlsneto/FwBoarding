@@ -22,6 +22,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import model.dao.EmbarqueDAO;
 import model.dao.PaisDAO;
+import model.dao.SafraDAO;
 import model.vo.EmbarqueVO;
 import model.vo.NavioVO;
 import model.vo.PaisVO;
@@ -62,13 +63,13 @@ public class CadastroEmbarqueController implements Initializable {
 	private ObservableList<PaisVO> observableListPais;
 	private final EmbarqueDAO embarqueDAO = new EmbarqueDAO();
 	private final PaisDAO paisDAO = new PaisDAO();
+	private final SafraDAO safraDAO = new SafraDAO();
 	private EmbarqueVO embarqueAlterar;
 	public static boolean isAlterarEmbarque;
 	private Stage dialogStage;
 	private static NavioVO navioCod;
-	private static SafraVO safraCod;
+	private SafraVO safra;
 	public static long CodigoNavio;
-	public static String CodigoSafra;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -76,7 +77,10 @@ public class CadastroEmbarqueController implements Initializable {
 		observableListPais = FXCollections.observableArrayList(paisDAO.listarPais());
 		labelCodigoEmbarque.setText(Integer.toString(embarqueDAO.verificaUltimoCodigo() + 1));
 		comboBoxPaisDestino.setItems(observableListPais);
-		numeroSafra.setText(CodigoSafra);
+		if(isAlterarEmbarque == false) {
+			safra = safraDAO.retornaSafraPadrao();
+			numeroSafra.setText(safraDAO.retornaAnoSafra(safra.getCodigoSafra()));
+		}
 		if(CodigoNavio > 0) {
 			textFieldCodigoNavio.setText(String.valueOf(CodigoNavio));
 		}
@@ -133,12 +137,6 @@ public class CadastroEmbarqueController implements Initializable {
 		
 	}
 	
-	public static void  codigoSafra (SafraVO safra) {
-		safraCod = safra;
-		//System.out.println(navio.getCodigoNavio());
-		CodigoSafra = safra.getAnoSafra();
-		
-	}
 
 	@FXML
 	void clickOnGravar() {
@@ -155,9 +153,12 @@ public class CadastroEmbarqueController implements Initializable {
 				}
 				embarque.setPaisDestino(comboBoxPaisDestino.getSelectionModel().getSelectedItem());
 				embarque.setQuantidadeDeAcucar(Long.valueOf(textFieldQuantidadeAcucar.getText()));
-				embarque.setAnoSafra(numeroSafra.getText());
+				embarque.setSafra(safra);
 
 				embarqueDAO.Inserir(embarque);
+				//atualizarOrdem da safra
+				safraDAO.atualizaOrdem(safra.getCodigoSafra());
+				
 				// Atualiza Tela de Consulta
 				// olhar esse if ---> olhado kkk :)
 				if (embarque.getCodigoEmbarque() == (embarqueDAO
@@ -262,8 +263,7 @@ public class CadastroEmbarqueController implements Initializable {
 			}
 		});
 		textFieldQuantidadeAcucar.setText(Double.toString(embarque.getQuantidadeDeAcucar()));
-		numeroSafra.setText(embarque.getAnoSafra());
-		System.out.println(embarque.getAnoSafra());
+		numeroSafra.setText(embarque.getSafra().getAnoSafra()+" Código "+embarque.getSafra().getSafraOrdem());
 		buttonGravar.setText("Aplicar");
 	}
 }

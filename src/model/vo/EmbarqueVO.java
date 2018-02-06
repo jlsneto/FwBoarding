@@ -10,15 +10,26 @@ public class EmbarqueVO {
 	private PaisVO PaisDestino;
 	private String status;
 	private float quantidadeDeAcucar;
-	private String anoSafra;
+	private SafraVO safra;
+
+	public SafraVO getSafra() {
+		return safra;
+	}
+
+	public void setSafra(SafraVO safra) {
+		this.safra = safra;
+	}
+
 	private ButtonBar buttonBar;
 
 	public EmbarqueVO(PaisVO pais) {
-		this.PaisDestino = pais; 
+		this.PaisDestino = pais;
 	}
+
 	public EmbarqueVO() {
 		// TODO Auto-generated constructor stub
 	}
+
 	public long getCodigoEmbarque() {
 		return codigoEmbarque;
 	}
@@ -73,13 +84,5 @@ public class EmbarqueVO {
 
 	public void setButtonBar(ButtonBar buttonBar) {
 		this.buttonBar = buttonBar;
-	}
-	
-	public String getAnoSafra() {
-		return anoSafra;
-	}
-	
-	public void setAnoSafra(String anoSafra) {
-		this.anoSafra = anoSafra;
 	}
 }

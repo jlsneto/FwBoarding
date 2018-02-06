@@ -126,12 +126,12 @@ public class SafraDAO {
 		return listaUsuario;
 	}
 	
-	public String retornaAnoSafra(String anoSafra) {
-		String sql = "SELECT PERIODOSAFRA FROM CADSAFRA WHERE PERIODOSAFRA = ?";
+	public String retornaAnoSafra(Long codigoSafra) {
+		String sql = "SELECT PERIODOSAFRA FROM CADSAFRA WHERE CODIGOSAFRA = ?";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setString(1, anoSafra);
+			stmt.setLong(1, codigoSafra);
 			ResultSet listaResultado = stmt.executeQuery();
 
 			if (listaResultado.next()) {
@@ -207,6 +207,47 @@ public class SafraDAO {
 			erro.DialogError("Erro AlterarPadrão", "Erro ao tentar alterar tabela", e.getErrorCode(), e.getMessage(),
 					sql);
 		}
+	}
+
+	public SafraVO retornaSafraPadrao() {
+		String sql = "SELECT * FROM CADSAFRA WHERE SAFRAPADRAO = 'T'";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			
+			ResultSet resultado = stmt.executeQuery();
+			
+			while(resultado.next()) {
+				SafraVO safra = new SafraVO();
+				
+				safra.setCodigoSafra(resultado.getLong("CODIGOSAFRA"));
+				safra.setAnoSafra(resultado.getString("PERIODOSAFRA"));
+				safra.setSafraPadrao(resultado.getString("SAFRAPADRAO"));
+				safra.setSafraOrdem(resultado.getLong("ORDEM"));
+				
+				return safra;
+			}
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro retornaSafraPadrao", "Erro ao consultar banco de dados", e.getErrorCode(), e.getMessage(),
+					sql);
+		}
+		
+		return null;
+	}
+
+	public void atualizaOrdem(long codigoSafra) {
+		String sql = "UPDATE CADSAFRA SET ORDEM = ORDEM+1 WHERE CODIGOSAFRA = ?";
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setLong(1, codigoSafra);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro AtualizaOrdem", "Erro ao Atualizar o ordem da Safra Atual", e.getErrorCode(), e.getMessage(),
+					sql);
+		}
+		
+		
 	}
 
 }

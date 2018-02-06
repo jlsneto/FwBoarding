@@ -88,7 +88,7 @@ public class MovimentoEmbarqueController implements Initializable {
 
 	public void setEmbarque(EmbarqueVO embarque) {
 		this.embarque = embarque;
-		labelNumeroEmbarqueDetalhe.setText(labelNumeroEmbarqueDetalhe.getText()+this.embarque.getAnoSafra());
+		labelNumeroEmbarqueDetalhe.setText(labelNumeroEmbarqueDetalhe.getText()+"\n"+this.embarque.getSafra().getAnoSafra()+" Código "+this.embarque.getSafra().getSafraOrdem());
 		
 	}
 

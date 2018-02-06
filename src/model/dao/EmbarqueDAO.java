@@ -16,6 +16,7 @@ import model.database.DatabaseParams;
 import model.vo.EmbarqueVO;
 import model.vo.GrupoUsuarioVO;
 import model.vo.PaisVO;
+import model.vo.SafraVO;
 import view.ConstruirDialog;
 
 public class EmbarqueDAO {
@@ -30,7 +31,7 @@ public class EmbarqueDAO {
 
 	public void Inserir(EmbarqueVO embarque) {
 
-		String sql = "INSERT INTO EMBARQUE(CODIGONAVIO, CODIGOPAISDESTINO, QTDAEMBARCAR, CODIGOUSUARIO, PERIODOSAFRA)" + "VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO EMBARQUE(CODIGONAVIO, CODIGOPAISDESTINO, QTDAEMBARCAR, CODIGOUSUARIO,CODIGOSAFRA)" + "VALUES (?,?,?,?,?)";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -38,7 +39,7 @@ public class EmbarqueDAO {
 			stmt.setLong(2, embarque.getPaisDestino().getCodigoPais());
 			stmt.setFloat(3, embarque.getQuantidadeDeAcucar());
 			stmt.setLong(4, UsuarioSessao.getUsuarioAtivo().getCodigoUsuario());
-			stmt.setString(5,embarque.getAnoSafra());
+			stmt.setLong(5, embarque.getSafra().getCodigoSafra());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -87,7 +88,7 @@ public class EmbarqueDAO {
 
 	public List<EmbarqueVO> listar() {
 
-		String sql = "SELECT * FROM EMBARQUE  INNER JOIN CADPAIS ON EMBARQUE.CODIGOPAISDESTINO = CADPAIS.CODIGOPAIS  ORDER BY EMBARQUE.CODIGOEMBARQUE";
+		String sql = "SELECT * FROM EMBARQUE INNER JOIN CADPAIS ON EMBARQUE.CODIGOPAISDESTINO = CADPAIS.CODIGOPAIS INNER JOIN CADSAFRA ON EMBARQUE.CODIGOSAFRA = CADSAFRA.CODIGOSAFRA ORDER BY EMBARQUE.CODIGOEMBARQUE";
 		List<EmbarqueVO> listaEmbarque = new ArrayList<>();
 
 		try {
@@ -104,7 +105,14 @@ public class EmbarqueDAO {
 				embarque.setCodigoNavio(listaResultado.getLong("CODIGONAVIO"));
 				embarque.setStatus(listaResultado.getString("STATUS"));
 				embarque.setQuantidadeDeAcucar(listaResultado.getFloat("QTDAEMBARCAR"));
-				embarque.setAnoSafra(listaResultado.getString("PERIODOSAFRA"));
+				
+				SafraVO safra = new SafraVO();
+				safra.setCodigoSafra(listaResultado.getLong("CODIGOSAFRA"));
+				safra.setAnoSafra(listaResultado.getString("PERIODOSAFRA"));
+				safra.setSafraOrdem(listaResultado.getLong("ORDEM"));
+				safra.setSafraPadrao(listaResultado.getString("SAFRAPADRAO"));
+				
+				embarque.setSafra(safra);
 
 				PaisVO pais = new PaisVO();
 
