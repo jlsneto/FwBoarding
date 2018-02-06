@@ -25,6 +25,7 @@ import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -76,7 +77,7 @@ public class SafraViewController implements Initializable {
 
 	@FXML
 	void clickOnIncluir() throws IOException {
-		
+
 		CadastroSafraController.isAlterarSafra = false;
 		new DialogCadastroSafra();
 		clickOnPesquisar();
@@ -131,9 +132,9 @@ public class SafraViewController implements Initializable {
 			ButtonBar btnBar = itens.getButtonBar();
 			btnBar.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
 			btnBar.getStylesheets().add(getClass().getResource("/view/styles/styles.css").toExternalForm());
-			
+
 			Image excluirIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/deletar.png"));
-			//button excluir
+			// button excluir
 			JFXButton buttonExcluir = new JFXButton();
 			buttonExcluir.getStyleClass().add("buttonTable");
 			buttonExcluir.setGraphic(new ImageView(excluirIcon));
@@ -148,7 +149,7 @@ public class SafraViewController implements Initializable {
 			});
 
 			Image editarIcon = new Image(getClass().getResourceAsStream("/view/images/Icons/editarIcon.png"));
-			//button editar
+			// button editar
 			JFXButton buttonEdit = new JFXButton();
 			buttonEdit.setGraphic(new ImageView(editarIcon));
 			buttonEdit.setOnAction(event -> {
@@ -160,23 +161,8 @@ public class SafraViewController implements Initializable {
 					e.printStackTrace();
 				}
 			});
-			
-			//check box
-			
-			JFXButton buttonDefinir = new JFXButton();
-			buttonDefinir.setText("Definir");
-			buttonDefinir.setOnAction(event ->{
-				TableView.getSelectionModel().select(itens);	
-				SafraVO safra = TableView.getSelectionModel().getSelectedItem();
-				if(confirmaSafraPadrao(safra.getAnoSafra())) {
-					CadastroEmbarqueController.codigoSafra(safra);
-				}
-					
-				
-			});
-			
-			
-			btnBar.getButtons().addAll(buttonExcluir, buttonEdit, buttonDefinir);
+
+			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
 			if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisar.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
 			}
@@ -194,6 +180,28 @@ public class SafraViewController implements Initializable {
 		observableListSafra = FXCollections.observableArrayList(safraDAO.listar());
 
 		TableView.setItems(observableListSafra);
+		TableView.setRowFactory(tv -> {
+            return new TableRow<SafraVO>() {
+                @Override
+                public void updateItem(SafraVO item, boolean empty) {
+                    super.updateItem(item, empty) ;
+                    if (item == null) {
+                        setStyle("");
+                    } else if (item.getSafraPadrao().equals("T")) {
+                        setStyle("-fx-text-background-color: #192a56;-fx-font-weight: bold;");
+                        itensEncontrados.forEach(i->{
+                        	if(i.getSafraPadrao().equals("T") && i != item) {
+                        		//necessário para alterar a cor
+                        		i.setSafraPadrao("F");
+                        	}
+                        });
+                        //setStyle("-fx-background-color: #0080FF;");
+                    } else {
+                        //setStyle("-fx-background-color: #0080FF;");
+                    }
+                }
+            };
+		   });
 		clickOnPesquisar();
 	}
 
@@ -201,18 +209,7 @@ public class SafraViewController implements Initializable {
 		TelaSafra.getChildren().clear();
 		TelaSafra.getChildren().add((Node) node);
 	}
-	
-	public boolean confirmaSafraPadrao(String anoSafra) {
-		ConstruirDialog confirmar = new ConstruirDialog();
-		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Safra Padrão",
-				"A safra " + anoSafra + " será definida como Safra Padrão para os cadastros de Embarque", "Deseja confirmar? Pressione OK para concluir!");
-		if (result.get() == ButtonType.OK) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
+
 	public boolean confirmouExcluisaoDaSafra(String anoSafra) {
 		ConstruirDialog confirmar = new ConstruirDialog();
 		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Exclusão",
@@ -223,7 +220,7 @@ public class SafraViewController implements Initializable {
 			return false;
 		}
 	}
-	
+
 	@FXML
 	private void onKeyPressed(KeyEvent event) throws Exception {
 		int selectedIndex = TableView.getSelectionModel().getSelectedIndex();

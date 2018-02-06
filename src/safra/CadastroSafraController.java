@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXTextField;
 
 import javafx.collections.ObservableList;
@@ -25,43 +26,62 @@ public class CadastroSafraController implements Initializable {
 
 	@FXML
 	private JFXButton buttonConfirmar;
-	
+
 	@FXML
-    private Label labelCodigoSafra;
-	
+	private Label labelStatus;
+
+	@FXML
+	private Label labelCodigoSafra;
+
+	@FXML
+	private JFXCheckBox checkBoxSafraPadrao;
 
 	private Stage dialogStage;
 
 	public static boolean isAlterarSafra = false;
 
 	public static String anoSafra;
-	
+
 	private final SafraDAO safraDAO = new SafraDAO();
-	
+
 	private SafraVO safraAlterar;
-	
+
 	private ObservableList<SafraVO> observableListSafra;
 
 	@FXML
 	void clickOnConfirm() {
 		if (validarEntrada()) {
-			if (isAlterarSafra == false) { 
-			SafraVO safra = new SafraVO();
-			safra.setCodigoSafra(Long.valueOf(labelCodigoSafra.getText()));
-			safra.setAnoSafra(fieldTextAnoSafra.getText());
-			safraDAO.inserir(safra);
-			if (safra.getAnoSafra().equals(safraDAO.retornaAnoSafra(safra.getAnoSafra()))) {
-				SafraViewController.observableListSafra.addAll(safra);
-				
+			if (isAlterarSafra == false) {
+				SafraVO safra = new SafraVO();			
+				if(checkBoxSafraPadrao.isSelected()) {
+					safra.setSafraPadrao("T");
+					safraDAO.removerPadrao();
+				}else {
+					safra.setSafraPadrao("F");
+				}
+				safra.setCodigoSafra(Long.valueOf(labelCodigoSafra.getText()));
+				safra.setAnoSafra(fieldTextAnoSafra.getText());
+				safraDAO.inserir(safra);
+				if (safra.getAnoSafra().equals(safraDAO.retornaAnoSafra(safra.getAnoSafra()))) {
+					SafraViewController.observableListSafra.addAll(safra);
+
+				}
+				dialogStage.close();
+			} else {
+				if(checkBoxSafraPadrao.isSelected()) {
+					safraAlterar.setSafraPadrao("T");
+					safraDAO.removerPadrao();
+				}else {
+					safraAlterar.setSafraPadrao("F");
+				}
+				safraAlterar.setAnoSafra(fieldTextAnoSafra.getText());
+				safraDAO.alterar(safraAlterar);
+				SafraViewController.itensEncontrados.set(SafraViewController.itensEncontrados.indexOf(safraAlterar),
+						safraAlterar);
+				dialogStage.close();
 			}
-			dialogStage.close();
-		} else {
-			safraAlterar.setAnoSafra(fieldTextAnoSafra.getText());
-			safraDAO.alterar(safraAlterar);
-			SafraViewController.itensEncontrados.set(SafraViewController.itensEncontrados.indexOf(safraAlterar),
-					safraAlterar);
-			dialogStage.close();
-		}
+		}else {
+			labelStatus.setVisible(true);
 		}
 	}
 
@@ -77,7 +97,7 @@ public class CadastroSafraController implements Initializable {
 
 		});
 	}
-	
+
 	public boolean confirmouCancelamentoOuFehamento() {
 		ConstruirDialog confirmar = new ConstruirDialog();
 		Optional<ButtonType> result = confirmar.DialogConfirm("Confirmar Cancelamento",
@@ -88,11 +108,11 @@ public class CadastroSafraController implements Initializable {
 			return false;
 		}
 	}
-	
+
 	public String getAnoSafra() {
 		return anoSafra;
 	}
-	
+
 	private boolean validarEntrada() {
 		String errorMessage = "";
 		if (fieldTextAnoSafra.getText() == null || fieldTextAnoSafra.getText().length() == 0) {
@@ -101,28 +121,47 @@ public class CadastroSafraController implements Initializable {
 			fieldTextAnoSafra.requestFocus();
 		}
 		if (errorMessage.length() == 0) {
-			anoSafra = fieldTextAnoSafra.getText();	
+			anoSafra = fieldTextAnoSafra.getText();
+			labelStatus.setVisible(false);
 			return true;
 		} else {
-			errorMessage = "Ano de Safra invalido !\n";
+			labelStatus.setText(errorMessage);
 			return false;
 		}
 
 	}
-	
+
 	public void setSafraAlterar(SafraVO safra) {
 		this.safraAlterar = safra;
 		labelCodigoSafra.setText(Long.toString(safraAlterar.getCodigoSafra()));
 		fieldTextAnoSafra.setText(safraAlterar.getAnoSafra());
+		if(safra.getSafraPadrao().equalsIgnoreCase("T")) {
+			checkBoxSafraPadrao.setSelected(true);
+		}
 		buttonConfirmar.setText("Aplicar");
 	}
-	
+
+	@FXML
+	void marcouSafraPadrao() {
+		if (checkBoxSafraPadrao.isSelected()) {
+			confirmaSafraPadrao(labelCodigoSafra.getText());
+		}
+	}
+
+	public void confirmaSafraPadrao(String anoSafra) {
+		ConstruirDialog notifica = new ConstruirDialog();
+		notifica.dialogAlert("Definir Safra Padrão",
+				"A safra " + anoSafra + " será definida como Safra Padrão para os cadastros de Embarque",
+				"Para reverter, desmarque a flag");
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
-		if(isAlterarSafra == false) {
-		labelCodigoSafra.setText(Long.toString(safraDAO.verificaUltimoCodigo() + 1));
+		if (isAlterarSafra == false) {
+			labelCodigoSafra.setText(Long.toString(safraDAO.verificaUltimoCodigo() + 1));
 		}
+		labelStatus.setVisible(false);
 	}
 
 }

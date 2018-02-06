@@ -10,6 +10,15 @@ public class SafraVO {
 	private String anoSafra;
 	//private JFXCheckBox checkBox;
 	private ButtonBar buttonBar;
+	private String safraPadrao;
+
+	public String getSafraPadrao() {
+		return safraPadrao;
+	}
+
+	public void setSafraPadrao(String safraPadrao) {
+		this.safraPadrao = safraPadrao;
+	}
 
 	public long getCodigoSafra() {
 		return codigoSafra;

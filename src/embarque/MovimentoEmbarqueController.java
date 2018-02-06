@@ -16,6 +16,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.AnchorPane;
+import model.vo.EmbarqueVO;
 
 public class MovimentoEmbarqueController implements Initializable {
 	
@@ -44,6 +45,7 @@ public class MovimentoEmbarqueController implements Initializable {
 
     @FXML
     private JFXButton buttonVoltar;
+	private EmbarqueVO embarque;
 
     @FXML
     void clickOnFinalizar(ActionEvent event) {
@@ -81,6 +83,12 @@ public class MovimentoEmbarqueController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
+		
+	}
+
+	public void setEmbarque(EmbarqueVO embarque) {
+		this.embarque = embarque;
+		labelNumeroEmbarqueDetalhe.setText(labelNumeroEmbarqueDetalhe.getText()+this.embarque.getAnoSafra());
 		
 	}
 

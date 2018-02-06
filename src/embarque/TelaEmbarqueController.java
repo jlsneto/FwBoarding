@@ -109,7 +109,12 @@ public class TelaEmbarqueController implements Initializable {
 
 		
 		try {
-			AnchorPane movimentoEmbarque = FXMLLoader.load(getClass().getResource(Routes.MOVIMENTOEMBARQUEVIEW));
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource(Routes.MOVIMENTOEMBARQUEVIEW));
+			AnchorPane movimentoEmbarque = loader.load();
+			//Controller
+			MovimentoEmbarqueController controller = loader.getController();
+			controller.setEmbarque(tableViewEmbarque.getSelectionModel().getSelectedItem());
 			setNode(movimentoEmbarque);
 			clickOnPesquisar();
 		} catch (IOException e) {
@@ -177,9 +182,9 @@ public class TelaEmbarqueController implements Initializable {
 				}
 			});
 			btnBar.getButtons().addAll(buttonExcluir, buttonEdit);
-			if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisaSafra.getText().toLowerCase())) {
+			//if (itens.getAnoSafra().toLowerCase().contains(textFieldPesquisaSafra.getText().toLowerCase())) {
 				itensEncontrados.add(itens);
-			}
+			//}
 		}
 		tableViewEmbarque.setItems(itensEncontrados);
 	}

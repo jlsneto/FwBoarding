@@ -27,13 +27,14 @@ public class SafraDAO {
 	}
 	
 	public void inserir(SafraVO safra) {
-		String sql = "INSERT INTO CADSAFRA(PERIODOSAFRA) VALUES(?)";
-
+		String sql = "INSERT INTO CADSAFRA(PERIODOSAFRA,SAFRAPADRAO) VALUES(?,?)";
+		
 		try {
 
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, safra.getAnoSafra());
+			stmt.setString(2, safra.getSafraPadrao());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -43,12 +44,13 @@ public class SafraDAO {
 	}
 	
 	public void alterar(SafraVO safraAlterar) {
-		String sql = "UPDATE CADSAFRA SET PERIODOSAFRA = ? WHERE CODIGOSAFRA = ?";
+		String sql = "UPDATE CADSAFRA SET PERIODOSAFRA = ?, SAFRAPADRAO = ? WHERE CODIGOSAFRA = ?";
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
 
 			stmt.setString(1, safraAlterar.getAnoSafra());
-			stmt.setLong(2, safraAlterar.getCodigoSafra());
+			stmt.setString(2, safraAlterar.getSafraPadrao());
+			stmt.setLong(3, safraAlterar.getCodigoSafra());
 
 			stmt.executeUpdate();
 
@@ -112,6 +114,7 @@ public class SafraDAO {
 
 				safra.setCodigoSafra(listaResultado.getLong("CODIGOSAFRA"));
 				safra.setAnoSafra(listaResultado.getString("PERIODOSAFRA"));
+				safra.setSafraPadrao(listaResultado.getString("SAFRAPADRAO"));
 				listaUsuario.add(safra);
 			}
 
@@ -173,6 +176,37 @@ public class SafraDAO {
 		}
 		return 0;
 
+	}
+
+	public void definirPadrao(SafraVO safra) {
+		removerPadrao();
+		String sql = "UPDATE CADSAFRA SET SAFRAPADRAO = ? WHERE CODIGOSAFRA = ?";
+		PreparedStatement stmt;
+		try {
+			stmt = conn.prepareStatement(sql);
+			stmt.setString(1, safra.getSafraPadrao());
+			stmt.setLong(2, safra.getCodigoSafra());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro AlterarPadrão", "Erro ao tentar alterar tabela", e.getErrorCode(), e.getMessage(),
+					sql);
+		}
+
+		
+	}
+	
+	public void removerPadrao() {
+		String sql = "UPDATE CADSAFRA SET SAFRAPADRAO = 'F' WHERE SAFRAPADRAO = 'T'";
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			ConstruirDialog erro = new ConstruirDialog();
+			erro.DialogError("Erro AlterarPadrão", "Erro ao tentar alterar tabela", e.getErrorCode(), e.getMessage(),
+					sql);
+		}
 	}
 
 }
