@@ -1,21 +1,21 @@
 package model.vo;
 
 public class MovimentoEmbarqueVO {
-	long codigoEmbarque;
+	long codigoMovimentoEmbarque;
 	EmbarqueVO embarque;
 	UsuarioVO usuario;
-	long codigoPausa;
+	PausaVO pausa;
 	String dataMovimento;
 	String comentarioPausa;
 	String cancelado;
 	String tipoMovimento;
 
-	public long getCodigoEmbarque() {
-		return codigoEmbarque;
+	public long getCodigoMovimentoEmbarque() {
+		return codigoMovimentoEmbarque;
 	}
 
-	public void setCodigoEmbarque(long codigoEmbarque) {
-		this.codigoEmbarque = codigoEmbarque;
+	public void setCodigoMovimentoEmbarque(long codigoEmbarque) {
+		this.codigoMovimentoEmbarque = codigoEmbarque;
 	}
 
 	public EmbarqueVO getEmbarque() {
@@ -34,12 +34,12 @@ public class MovimentoEmbarqueVO {
 		this.usuario = usuario;
 	}
 
-	public long getCodigoPausa() {
-		return codigoPausa;
+	public PausaVO getPausa() {
+		return pausa;
 	}
 
-	public void setCodigoPausa(long codigoPausa) {
-		this.codigoPausa = codigoPausa;
+	public void setPausa(PausaVO pausa) {
+		this.pausa = pausa;
 	}
 
 	public String getDataMovimento() {

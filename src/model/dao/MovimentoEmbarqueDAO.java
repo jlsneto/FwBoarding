@@ -14,38 +14,38 @@ import login.UsuarioSessao;
 import model.database.DatabaseFactory;
 import model.database.DatabaseParams;
 import model.vo.EmbarqueVO;
-import model.vo.GrupoUsuarioVO;
+import model.vo.MovimentoEmbarqueVO;
 import model.vo.PaisVO;
+import model.vo.PausaVO;
 import model.vo.SafraVO;
+import model.vo.UsuarioVO;
 import view.ConstruirDialog;
 
-public class EmbarqueDAO {
-
+public class MovimentoEmbarqueDAO {
+	
 	private Properties props = DatabaseParams.getProp();
 	private String base = props.getProperty("database");
 	private Connection conn;
 
-	public EmbarqueDAO() {
+	public MovimentoEmbarqueDAO() {
 		conn = DatabaseFactory.getDatabase().getConection();
 	}
 
-	public void Inserir(EmbarqueVO embarque) {
+	public void Inserir(MovimentoEmbarqueVO movimentoEmbarque) {
 
-		String sql = "INSERT INTO EMBARQUE(CODIGONAVIO, CODIGOPAISDESTINO, QTDAEMBARCAR, CODIGOUSUARIO,CODIGOSAFRA)"
-				+ "VALUES (?,?,?,?,?)";
+		String sql = "INSERT INTO MOVIMENTOEMBARQUE(CODIGOEMBARQUE, CODIGOUSUARIO, COMENTARIOPAUSA, TIPOMOVIMENTO)" + "VALUES (?,?,?,?)";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setLong(1, embarque.getCodigoNavio());
-			stmt.setLong(2, embarque.getPaisDestino().getCodigoPais());
-			stmt.setFloat(3, embarque.getQuantidadeDeAcucar());
-			stmt.setLong(4, UsuarioSessao.getUsuarioAtivo().getCodigoUsuario());
-			stmt.setLong(5, embarque.getSafra().getCodigoSafra());
+			stmt.setLong(1, movimentoEmbarque.getEmbarque().getCodigoEmbarque());
+			stmt.setLong(2, movimentoEmbarque.getUsuario().getCodigoUsuario());
+			stmt.setString(3, movimentoEmbarque.getComentarioPausa());
+			stmt.setString(4, movimentoEmbarque.getTipoMovimento());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
-			erro.DialogError("Cadastro Erro", "Erro ao tentar inserir os dados", e.getErrorCode(), e.getMessage(), sql);
+			erro.DialogError("Erro", "Erro ao tentar inserir os dados", e.getErrorCode(), e.getMessage(), sql);
 
 		}
 	}
@@ -87,10 +87,26 @@ public class EmbarqueDAO {
 		}
 	}
 
-	public List<EmbarqueVO> listar() {
+	public List<MovimentoEmbarqueVO> listar() throws Exception {
 
-		String sql = "SELECT * FROM EMBARQUE INNER JOIN CADPAIS ON EMBARQUE.CODIGOPAISDESTINO = CADPAIS.CODIGOPAIS INNER JOIN CADSAFRA ON EMBARQUE.CODIGOSAFRA = CADSAFRA.CODIGOSAFRA ORDER BY EMBARQUE.CODIGOEMBARQUE";
-		List<EmbarqueVO> listaEmbarque = new ArrayList<>();
+		String sql = "SELECT "
+				+ "MOVIMENTOEMBARQUE.CODIGOMOVIMENTOEMBARQUE,"
+				+ "MOVIMENTOEMBARQUE.CODIGOEMBARQUE,"
+				+ "CADUSUARIO.LOGIN,"
+				+ "MOVIMENTOEMBARQUE.CODIGOPAUSA,"
+				+ "MOVIMENTOEMBARQUE.CANCELADO,"
+				+ "MOVIMENTOEMBARQUE.DATAMOVIMENTO,"
+				+ "MOVIMENTOEMBARQUE.TIPOMOVIMENTO,"
+				+ "MOVIMENTOEMBARQUE.COMENTARIOPAUSA"
+				+ " FROM MOVIMENTOEMBARQUE "
+				+"INNER JOIN EMBARQUE "
+				+"ON MOVIMENTOEMBARQUE.CODIGOEMBARQUE = EMBARQUE.CODIGOEMBARQUE "
+				+"INNER JOIN CADUSUARIO "
+				+"ON MOVIMENTOEMBARQUE.CODIGOUSUARIO = CADUSUARIO.CODIGOUSUARIO "
+				+"LEFT OUTER JOIN CADPAUSA "
+				+"ON MOVIMENTOEMBARQUE.CODIGOPAUSA = CADPAUSA.CODIGOPAUSA "
+				+"WHERE MOVIMENTOEMBARQUE.CANCELADO <> 'T'";
+		List<MovimentoEmbarqueVO> listaMovimentoEmbarque = new ArrayList<>();
 
 		try {
 
@@ -98,35 +114,27 @@ public class EmbarqueDAO {
 			ResultSet listaResultado = stmt.executeQuery();
 
 			while (listaResultado.next()) {
-
-				EmbarqueVO embarque = new EmbarqueVO();
-
-				embarque.setCodigoEmbarque(listaResultado.getLong("CODIGOEMBARQUE"));
-				embarque.setCodigoUsuario(listaResultado.getLong("CODIGOUSUARIO"));
-				embarque.setCodigoNavio(listaResultado.getLong("CODIGONAVIO"));
-				embarque.setStatus(listaResultado.getString("STATUS"));
-				embarque.setQuantidadeDeAcucar(listaResultado.getFloat("QTDAEMBARCAR"));
-
-				SafraVO safra = new SafraVO();
-				safra.setCodigoSafra(listaResultado.getLong("CODIGOSAFRA"));
-				safra.setAnoSafra(listaResultado.getString("PERIODOSAFRA"));
-				safra.setSafraOrdem(listaResultado.getLong("ORDEM"));
-				safra.setSafraPadrao(listaResultado.getString("SAFRAPADRAO"));
-
-				embarque.setSafra(safra);
-
-				PaisVO pais = new PaisVO();
-
-				pais.setCodigoPais(listaResultado.getInt("CODIGOPAIS"));
-				pais.setNome(listaResultado.getString("NOME"));
-				pais.setNomeFormal(listaResultado.getString("NOMEFORMAL"));
-				pais.setDdi(listaResultado.getString("DDI"));
-				pais.setIso(listaResultado.getString("ISO"));
-				pais.setIso3(listaResultado.getString("ISO3"));
-
-				embarque.setPaisDestino(pais);
-
-				listaEmbarque.add(embarque);
+				
+				MovimentoEmbarqueVO movimentoEmbarque = new MovimentoEmbarqueVO();
+				movimentoEmbarque.setCodigoMovimentoEmbarque(listaResultado.getLong("CODIGOMOVIMENTOEMBARQUE"));
+				
+				EmbarqueDAO embarqueDAO = new EmbarqueDAO();
+				EmbarqueVO embarque = embarqueDAO.retornaEmbarque(listaResultado.getLong("CODIGOEMBARQUE"));
+				movimentoEmbarque.setEmbarque(embarque);
+				
+				UsuarioDAO usuarioDAO = new UsuarioDAO();
+				UsuarioVO usuario = usuarioDAO.retornarUsuario(listaResultado.getString("LOGIN"));				
+				movimentoEmbarque.setUsuario(usuario);
+				
+				
+				movimentoEmbarque.setCancelado(listaResultado.getString("CANCELADO"));
+				movimentoEmbarque.setDataMovimento(listaResultado.getTimestamp("DATAMOVIMENTO").toString());
+				movimentoEmbarque.setTipoMovimento(listaResultado.getString("TIPOMOVIMENTO"));
+				movimentoEmbarque.setComentarioPausa(listaResultado.getString("COMENTARIOPAUSA"));
+				
+				listaMovimentoEmbarque.add(movimentoEmbarque);
+							
+				
 			}
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
@@ -135,12 +143,12 @@ public class EmbarqueDAO {
 			Logger.getLogger(GrupoUsuarioDAO.class.getName()).log(Level.SEVERE, null, e);
 			return null;
 		}
-		return listaEmbarque;
+		return listaMovimentoEmbarque;
 
 	}
 
-	public long retornaCodigoEmbarque(long codigoEmbarque) {
-		String sql = "SELECT CODIGOEMBARQUE FROM EMBARQUE WHERE CODIGOEMBARQUE = ?";
+	public String retornaUltimoMovimento(long codigoEmbarque) {
+		String sql = "SELECT TIPOMOVIMENTO FROM MOVIMENTOEMBARQUE where rownum=1 AND CODIGOEMBARQUE = ? ORDER BY CODIGOMOVIMENTOEMBARQUE DESC";
 
 		try {
 			PreparedStatement stmt = conn.prepareStatement(sql);
@@ -148,16 +156,16 @@ public class EmbarqueDAO {
 			ResultSet listaResultado = stmt.executeQuery();
 
 			if (listaResultado.next()) {
-				return listaResultado.getLong("CODIGOEMBARQUE");
+				return listaResultado.getString("TIPOMOVIMENTO");
 			} else {
-				return 0;
+				return null;
 			}
 		} catch (SQLException e) {
 			ConstruirDialog erro = new ConstruirDialog();
 			erro.DialogError("Erro de Consulta", "Erro ao consultar o grupo de usuário no banco de dados",
 					e.getErrorCode(), e.getMessage(), sql);
 			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
-			return 0;
+			return null;
 		}
 	}
 
@@ -210,56 +218,6 @@ public class EmbarqueDAO {
 		}
 		return 0;
 
-	}
-
-	public EmbarqueVO retornaEmbarque(long codigoEmbarque) throws Exception {
-
-		String sql = "SELECT * FROM EMBARQUE INNER JOIN CADPAIS ON EMBARQUE.CODIGOPAISDESTINO = CADPAIS.CODIGOPAIS INNER JOIN CADSAFRA ON EMBARQUE.CODIGOSAFRA = CADSAFRA.CODIGOSAFRA WHERE CODIGOEMBARQUE = ?";
-
-		try {
-			PreparedStatement stmt = conn.prepareStatement(sql);
-			stmt.setLong(1, codigoEmbarque);
-			ResultSet result = stmt.executeQuery();
-
-			if (result.next()) {
-				
-				EmbarqueVO embarque = new EmbarqueVO();
-
-				embarque.setCodigoEmbarque(result.getLong("CODIGOEMBARQUE"));
-				embarque.setCodigoUsuario(result.getLong("CODIGOUSUARIO"));
-				embarque.setCodigoNavio(result.getLong("CODIGONAVIO"));
-				embarque.setStatus(result.getString("STATUS"));
-				embarque.setQuantidadeDeAcucar(result.getFloat("QTDAEMBARCAR"));
-
-				SafraVO safra = new SafraVO();
-				safra.setCodigoSafra(result.getLong("CODIGOSAFRA"));
-				safra.setAnoSafra(result.getString("PERIODOSAFRA"));
-				safra.setSafraOrdem(result.getLong("ORDEM"));
-				safra.setSafraPadrao(result.getString("SAFRAPADRAO"));
-
-				embarque.setSafra(safra);
-
-				PaisVO pais = new PaisVO();
-
-				pais.setCodigoPais(result.getInt("CODIGOPAIS"));
-				pais.setNome(result.getString("NOME"));
-				pais.setNomeFormal(result.getString("NOMEFORMAL"));
-				pais.setDdi(result.getString("DDI"));
-				pais.setIso(result.getString("ISO"));
-				pais.setIso3(result.getString("ISO3"));
-
-				embarque.setPaisDestino(pais);
-				
-				return embarque;
-			}
-
-		} catch (SQLException e) {
-			ConstruirDialog erro = new ConstruirDialog();
-			erro.DialogError("SQLException", "Erro ao consultar o banco de dados", e.getErrorCode(), e.getMessage(),
-					sql);
-			Logger.getLogger(NavioDAO.class.getName()).log(Level.SEVERE, null, e);
-		}
-		return null;
 	}
 
 }
